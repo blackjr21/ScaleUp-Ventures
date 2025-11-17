@@ -36,7 +36,7 @@ Claritev/
 
 ### 1. Todo Format (REQUIRED)
 
-**ALWAYS use this exact format for todos:**
+**ALWAYS use this exact format for todos in MASTER-TODOS.md:**
 
 ```markdown
 ### [Program/Project] Task description
@@ -44,7 +44,15 @@ Claritev/
 - **Priority:** High/Medium/Low
 - **Status:** Not Started/In Progress/Blocked/Completed
 - **Notes:** Additional context
+- **Source:** [Path/To/Source/File.md](Path/To/Source/File.md)
 ```
+
+**Required Fields:**
+- **Due:** Always include (use "TBD" if unknown)
+- **Priority:** High/Medium/Low
+- **Status:** Not Started/In Progress/Blocked/Completed
+- **Notes:** Context, blockers, or details
+- **Source:** Clickable link to source file (meeting, status report, project todos, etc.)
 
 **Todo Sections (in order):**
 1. Due This Week
@@ -62,7 +70,16 @@ Claritev/
 - **Priority:** High
 - **Status:** In Progress
 - **Notes:** Waiting on vendor documentation
+- **Source:** [Meetings/1-on-1/2025-11-20-Vendor-Sync.md](Meetings/1-on-1/2025-11-20-Vendor-Sync.md)
 ```
+
+**Source Field Guidelines:**
+- Use relative paths from repository root
+- Format: `[Path/To/File.md](Path/To/File.md)`
+- Creates clickable link to jump back to original context
+- For todos from meetings: Link to meeting file
+- For todos rolled up from projects: Link to project todos.md
+- This allows easy navigation back to full context
 
 ### 2. MASTER-TODOS.md is the Single Source of Truth
 
