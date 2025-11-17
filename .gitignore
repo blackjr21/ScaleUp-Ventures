@@ -1,5 +1,6 @@
-# Claude Code
-.claude/
+# Claude Code (ignore internal agent data, but keep instructions)
+.claude/agents/
+.claude/**/agents/
 
 # OS Files
 .DS_Store
