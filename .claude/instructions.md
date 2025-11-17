@@ -40,11 +40,12 @@ Claritev/
 
 ```markdown
 ### [Program/Project] Task description
-- **Due:** YYYY-MM-DD
+- **Due:** YYYY-MM-DD (or TBD)
 - **Priority:** High/Medium/Low
 - **Status:** Not Started/In Progress/Blocked/Completed
 - **Notes:** Additional context
 - **Source:** [Path/To/Source/File.md](Path/To/Source/File.md)
+- **Created:** YYYY-MM-DD
 ```
 
 **Required Fields:**
@@ -53,6 +54,11 @@ Claritev/
 - **Status:** Not Started/In Progress/Blocked/Completed
 - **Notes:** Context, blockers, or details
 - **Source:** Clickable link to source file (meeting, status report, project todos, etc.)
+- **Created:** Date when task was added to MASTER-TODOS.md (YYYY-MM-DD format)
+
+**Escalation Rule:**
+- Tasks with "Due: TBD" that are 3+ days old (based on Created date) should be escalated
+- Flag these as needing immediate attention to assign due dates
 
 **Todo Sections (in order):**
 1. Due This Week
@@ -71,6 +77,7 @@ Claritev/
 - **Status:** In Progress
 - **Notes:** Waiting on vendor documentation
 - **Source:** [Meetings/1-on-1/2025-11-20-Vendor-Sync.md](Meetings/1-on-1/2025-11-20-Vendor-Sync.md)
+- **Created:** 2025-11-20
 ```
 
 **Source Field Guidelines:**
