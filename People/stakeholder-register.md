@@ -101,7 +101,6 @@
 
 ### **Week 1 Priorities (2025-11-18 to 2025-11-22)**
 - [x] Nitin: Attend stand-up, 1:1 to align expectations (2025-11-18)
-- [ ] Sletvana: Daily end-of-day updates via Slack (2025-11-18 to 2025-11-22)
 - [ ] John Smith: Send Slack requesting buddy relationship (2025-11-18)
 - [ ] Abrar: Connect for JIRA onboarding (2025-11-19)
 - [ ] Madhu: Schedule first meeting to discuss boundaries (2025-11-22)
