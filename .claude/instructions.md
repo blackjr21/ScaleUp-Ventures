@@ -9,8 +9,8 @@ This repository is a comprehensive personal data management system for tracking 
 ```
 Personal/
 ├── README.md                          # Main documentation
-├── HEALTH-GOALS.md                    # Health goals and action items
 ├── Health/                            # Health data tracking
+│   ├── HEALTH-GOALS.md               # Health goals and action items
 │   ├── Input/
 │   │   ├── Labs/                     # NEW lab PDFs to process (*.pdf)
 │   │   └── Pre-Processing/           # Individual lab results by date

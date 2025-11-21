@@ -976,6 +976,47 @@
             return `${months[date.getMonth()]} ${date.getDate()} (${days[date.getDay()]})`;
         }
 
+        // Update Forecast Subtitle with dynamic date range
+        function updateForecastSubtitle() {
+            if (transactions.length === 0) return;
+
+            // Get first and last transaction dates
+            const firstDate = new Date(transactions[0].date + 'T12:00:00');
+            const lastDate = new Date(transactions[transactions.length - 1].date + 'T12:00:00');
+
+            // Calculate total days
+            const totalDays = transactions.length;
+
+            // Format dates as "Nov 22 - Dec 31, 2025"
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const firstMonth = months[firstDate.getMonth()];
+            const firstDay = firstDate.getDate();
+            const lastMonth = months[lastDate.getMonth()];
+            const lastDay = lastDate.getDate();
+            const year = lastDate.getFullYear();
+
+            const dateRange = `${firstMonth} ${firstDay} - ${lastMonth} ${lastDay}, ${year}`;
+            const subtitle = `${totalDays}-Day Forecast | ${dateRange}`;
+
+            // Update the subtitle element
+            const subtitleElement = document.querySelector('.header .subtitle');
+            if (subtitleElement) {
+                subtitleElement.textContent = subtitle;
+            }
+        }
+
+        // Update Glance Alert Count with actual flagged transactions
+        function updateGlanceAlertCount() {
+            // Count transactions with NEG or LOW flags
+            const alertCount = transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW').length;
+
+            // Update the alert count element
+            const alertCountElement = document.getElementById('alertCount');
+            if (alertCountElement) {
+                alertCountElement.textContent = alertCount;
+            }
+        }
+
         // Emergency Banner
         function checkEmergencyStatus() {
             const today = new Date();
@@ -1320,6 +1361,8 @@
         });
 
         // Initialize all features
+        updateForecastSubtitle();
+        updateGlanceAlertCount();
         checkEmergencyStatus();
         updateAlertBadges();
         generateRecommendedAction();
