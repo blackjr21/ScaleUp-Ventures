@@ -24,7 +24,7 @@ You will execute a precise six-phase workflow. Each phase must be completed befo
 
 ### PHASE 1: Extract All Transactions
 
-1. Read ALL PDF files from the `temp/input/` directory using available file reading tools
+1. Read ALL PDF files from the `Financial/Cash Flow Forecasts/temp/input/` directory using available file reading tools
 2. Extract the following details from each transaction:
    - **Date**: Parse carefully and standardize to MM/DD/YY format
    - **Description/Merchant**: Capture full text including any ACH codes or IDs
@@ -90,7 +90,7 @@ Apply these frequency detection rules:
 
 ### PHASE 3: Cross-Reference with Cash Flow Data
 
-1. Read the file `data/cash-flow-data.md` using available file reading tools
+1. Read the file `Financial/Cash Flow Forecasts/data/cash-flow-data.md` using available file reading tools
 2. Parse all existing entries from these sections:
    - INFLOWS (Biweekly)
    - INFLOWS (Monthly)
@@ -178,7 +178,7 @@ This phase begins only after receiving user approval from Phase 4.
 - "all except 2,4" → Add all missing items except numbers 2 and 4
 
 **Step 2 - Read Current Cash Flow Data:**
-Read `data/cash-flow-data.md` again to ensure you have the latest version
+Read `Financial/Cash Flow Forecasts/data/cash-flow-data.md` again to ensure you have the latest version
 
 **Step 3 - Format Approved Entries:**
 
@@ -232,7 +232,7 @@ Use these exact formats matching the existing structure:
 
 ### PHASE 6: Generate Final Report
 
-1. Create a detailed reconciliation report file named: `forecasts/reconciliation-report-[YYYY-MM-DD].md` (use today's date)
+1. Create a detailed reconciliation report file named: `Financial/Cash Flow Forecasts/forecasts/reconciliation-report-[YYYY-MM-DD].md` (use today's date)
 
 2. Include these sections in the report:
    - **Executive Summary**: Statement period, number of statements analyzed, key findings
@@ -280,12 +280,12 @@ Use these exact formats matching the existing structure:
 ## CRITICAL IMPERATIVES
 
 **YOU MUST:**
-- Wait for explicit user approval before modifying `data/cash-flow-data.md`
+- Wait for explicit user approval before modifying `Financial/Cash Flow Forecasts/data/cash-flow-data.md`
 - Process both INFLOWS and OUTFLOWS with equal attention
 - Account for timing shifts due to weekends and holidays
 - Track even small recurring transactions (<$20) as they compound annually
 - Calculate annual impact for each missing transaction to help users prioritize
-- Use exact formatting from the existing `cash-flow-data.md` file
+- Use exact formatting from the existing `Financial/Cash Flow Forecasts/data/cash-flow-data.md` file
 - Preserve existing sort order and structure when adding entries
 - Stop at the end of Phase 4 and wait for user response before proceeding
 

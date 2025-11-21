@@ -1,6 +1,6 @@
-# Personal Health Tracker - Claude Code Instructions
+# Personal AI Enablement - Claude Code Instructions
 
-This repository is a personal health data management system for tracking medical lab results, health metrics, and wellness goals. Follow these rules and conventions when working in this repository.
+This repository is a comprehensive personal data management system for tracking health, financial, family, and shopping information. Follow these rules and conventions when working in this repository.
 
 ---
 
@@ -10,18 +10,27 @@ This repository is a personal health data management system for tracking medical
 Personal/
 ├── README.md                          # Main documentation
 ├── HEALTH-GOALS.md                    # Health goals and action items
-├── Health/                            # All health data
+├── Health/                            # Health data tracking
 │   ├── Input/
 │   │   ├── Labs/                     # NEW lab PDFs to process (*.pdf)
 │   │   └── Pre-Processing/           # Individual lab results by date
 │   │       └── YYYY-MM-DD-Test-Name.md  # Structured lab data
 │   ├── Reports/                      # Consolidated health summaries
-│   │   ├── Medical-Lab-Summary-KISS.html  # Master HTML summary (UPDATE THIS)
+│   │   ├── Medical-Lab-Summary-KISS.html  # Master HTML summary
 │   │   └── YYYY-MM-DD-Summary.md    # Other summary reports
-│   ├── Visualizations/               # Charts, graphs, HTML reports
-│   │   └── *.png, *.html            # Visual data representations
-│   └── Scripts/                      # Automation scripts
-│       └── *.py                      # Data processing scripts
+│   └── Visualizations/               # Charts, graphs, HTML reports
+├── Financial/                         # Financial management
+│   ├── Cash Flow Forecasts/          # Cash flow forecasting system
+│   │   ├── data/cash-flow-data.md   # Transaction rules database
+│   │   ├── forecasts/               # Generated forecasts and dashboard
+│   │   ├── src/                     # JavaScript utilities
+│   │   ├── docs/                    # Documentation
+│   │   └── temp/input/              # Bank statement PDFs
+│   └── (future financial domains)
+├── Family/                            # Family planning and activities
+│   └── C3/                           # Custodial account research
+├── Shopping/                          # Shopping research and comparisons
+│   └── Random/                       # Product comparisons
 └── .claude/                           # Claude Code configuration
     ├── instructions.md                # This file
     └── agents/                        # Custom agent prompts
@@ -458,4 +467,105 @@ When in doubt, suggest consulting with healthcare provider.
 
 ---
 
-**Last Updated:** November 19, 2025
+## Financial Domain - Cash Flow Forecasting
+
+### Overview
+
+The Financial/Cash Flow Forecasts/ system provides automated cash flow projection and bill management using specialized AI agents.
+
+### Agent System
+
+**6 Specialized Agents** (located in `.claude/agents/`):
+1. `cash-flow-forecaster.md` - Main orchestrator agent
+2. `bill-confirmation-agent.md` - Confirms bill payment status
+3. `forecast-calculator.md` - Pure calculation engine
+4. `report-formatter.md` - Generates markdown reports
+5. `dashboard-updater.md` - Updates HTML dashboard
+6. `bank-reconciler.md` - Reconciles bank statements
+
+### Critical Path Conventions
+
+**All file paths are absolute from repository root:**
+- Data file: `Financial/Cash Flow Forecasts/data/cash-flow-data.md`
+- Dashboard: `Financial/Cash Flow Forecasts/forecasts/dashboard.html`
+- Bank PDFs: `Financial/Cash Flow Forecasts/temp/input/`
+- Reports: `Financial/Cash Flow Forecasts/forecasts/`
+
+**NEVER use relative paths** like `data/cash-flow-data.md` in agent configurations.
+
+### Key Features
+
+- **60-day cash flow projections** with day-by-day balance tracking
+- **Interactive HTML dashboard** with dark mode support
+- **Bill payment confirmation** workflow with user interaction
+- **Bank statement reconciliation** for missing recurring transactions
+- **Alert system** for negative and low balance days
+- **Actionable suggestions** for payment timing optimization
+
+### Working with Cash Flow System
+
+**To generate a forecast:**
+- Provide: Today's date (YYYY-MM-DD) and current balance
+- Agent will confirm bills paid month-to-date
+- System calculates rest of month + next full month
+- Outputs markdown report + updates dashboard
+
+**To reconcile bank statements:**
+- Place PDF statements in `Financial/Cash Flow Forecasts/temp/input/`
+- Invoke bank-reconciler agent
+- Review missing recurring transactions
+- Approve additions to tracking file
+
+### Privacy & Security
+
+- Financial data contains sensitive banking information
+- Keep `Financial/Cash Flow Forecasts/data/cash-flow-data.md` private
+- Do NOT commit actual account numbers or routing info
+- Dashboard is local HTML - safe for personal use
+
+---
+
+## Family & Shopping Domains
+
+### Family Planning
+- **C3 subfolder:** Custodial account (UTMA/UGMA) research and comparisons
+- **Planning docs:** Activities like swim lessons, education planning
+- Privacy: May contain children's information - treat with care
+
+### Shopping Research
+- **Random subfolder:** Product comparisons and purchase research
+- Format: Markdown comparison tables with pros/cons
+- No sensitive data typically
+
+---
+
+## Multi-Domain Principles
+
+### When to Use Which Domain
+
+**Health:** Medical labs, test results, health goals, provider visits
+**Financial:** Cash flow, bill tracking, bank reconciliation, forecasts
+**Family:** Child-related planning, education, activities, custodial accounts
+**Shopping:** Product research, price comparisons, purchase decisions
+
+### Adding New Domains
+
+To add a new domain (e.g., Investments, Taxes):
+1. Create top-level folder: `New-Domain/`
+2. Add README.md with structure and purpose
+3. Update this instructions file with domain-specific rules
+4. Create agents if automation needed (in `.claude/agents/`)
+5. Use absolute paths from repository root
+
+### Cross-Domain Data
+
+Some information may span domains:
+- Health insurance premiums → Health + Financial
+- 529 education savings → Family + Financial
+- Medical equipment purchases → Health + Shopping
+
+Document cross-references in relevant READMEs.
+
+---
+
+**Last Updated:** November 21, 2025

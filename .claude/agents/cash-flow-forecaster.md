@@ -35,7 +35,7 @@ Invoke the `bill-confirmation-agent` using the Task tool:
 ```
 Task(
   subagent_type: "bill-confirmation-agent",
-  prompt: "Confirm bill payments for period from start of current month through today.\n\nToday's date: {USER_PROVIDED_DATE}\nUser's stated balance: {USER_PROVIDED_BALANCE}\nTransaction data path: data/cash-flow-data.md\n\nReturn JSON with: adjustedBalance, confirmedBills, unpaidBills, rescheduledBills, discrepancy info"
+  prompt: "Confirm bill payments for period from start of current month through today.\n\nToday's date: {USER_PROVIDED_DATE}\nUser's stated balance: {USER_PROVIDED_BALANCE}\nTransaction data path: Financial/Cash Flow Forecasts/data/cash-flow-data.md\n\nReturn JSON with: adjustedBalance, confirmedBills, unpaidBills, rescheduledBills, discrepancy info"
 )
 ```
 
@@ -55,7 +55,7 @@ Invoke the `forecast-calculator-agent` using the Task tool with data from Phase 
 ```
 Task(
   subagent_type: "forecast-calculator-agent",
-  prompt: "Calculate cash flow forecast using confirmed bill data.\n\nInput data:\n- Today's date: {USER_PROVIDED_DATE}\n- Adjusted starting balance: {FROM_PHASE_1.adjustedBalance}\n- Unpaid bills: {JSON.stringify(FROM_PHASE_1.unpaidBills)}\n- Rescheduled bills: {JSON.stringify(FROM_PHASE_1.rescheduledBills)}\n- User overrides: {USER_PROVIDED_OVERRIDES}\n- Transaction data path: data/cash-flow-data.md\n\nCalculate forecast for rest of current month + next full month.\nReturn JSON with: forecastPeriod, dailyTransactions, alerts, suggestions, summary stats"
+  prompt: "Calculate cash flow forecast using confirmed bill data.\n\nInput data:\n- Today's date: {USER_PROVIDED_DATE}\n- Adjusted starting balance: {FROM_PHASE_1.adjustedBalance}\n- Unpaid bills: {JSON.stringify(FROM_PHASE_1.unpaidBills)}\n- Rescheduled bills: {JSON.stringify(FROM_PHASE_1.rescheduledBills)}\n- User overrides: {USER_PROVIDED_OVERRIDES}\n- Transaction data path: Financial/Cash Flow Forecasts/data/cash-flow-data.md\n\nCalculate forecast for rest of current month + next full month.\nReturn JSON with: forecastPeriod, dailyTransactions, alerts, suggestions, summary stats"
 )
 ```
 
@@ -89,7 +89,7 @@ Simultaneously invoke the `dashboard-updater-agent` using the Task tool:
 ```
 Task(
   subagent_type: "dashboard-updater-agent",
-  prompt: "Update HTML dashboard with latest forecast data.\n\nInput data:\n- Forecast calculation: {JSON.stringify(FROM_PHASE_2)}\n- Dashboard path: forecasts/dashboard.html\n\nUpdate:\n- JavaScript transactions array\n- Chart data\n- Hero stats\n- Alert sections\n- Forecast summary\n\nReturn confirmation message with file path"
+  prompt: "Update HTML dashboard with latest forecast data.\n\nInput data:\n- Forecast calculation: {JSON.stringify(FROM_PHASE_2)}\n- Dashboard path: Financial/Cash Flow Forecasts/forecasts/dashboard.html\n\nUpdate:\n- JavaScript transactions array\n- Chart data\n- Hero stats\n- Alert sections\n- Forecast summary\n\nReturn confirmation message with file path"
 )
 ```
 

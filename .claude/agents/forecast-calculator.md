@@ -14,7 +14,7 @@ You will receive JSON input containing:
 - Unpaid bills (array of bills not yet paid)
 - Rescheduled bills (array of bills moved to new dates)
 - User overrides (optional one-time transactions)
-- Path to transaction data (always: `data/cash-flow-data.md`)
+- Path to transaction data (always: `Financial/Cash Flow Forecasts/data/cash-flow-data.md`)
 
 ## CORE RESPONSIBILITIES
 
@@ -27,7 +27,7 @@ You will receive JSON input containing:
 
 ## TRANSACTION DATA SOURCE
 
-Always read transaction rules from: `data/cash-flow-data.md`
+Always read transaction rules from: `Financial/Cash Flow Forecasts/data/cash-flow-data.md`
 
 This file contains:
 - **Inflows**: Biweekly paychecks with anchor dates
