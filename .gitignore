@@ -1,12 +1,51 @@
-# Claude Code (ignore internal agent data, but keep instructions)
-.claude/agents/
-.claude/**/agents/
+# Personal Health Information - Sensitive Data
+# DO NOT commit actual health records to public repositories
 
-# OS Files
+# macOS
 .DS_Store
-Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Health Data - Exclude all actual health records
+Health/Input/Labs/*.pdf
+Health/Input/Labs/*.jpg
+Health/Input/Labs/*.png
+Health/Input/Labs/*.jpeg
+
+# Keep example files but ignore actual data
+Health/Pre-Processing/*
+!Health/Pre-Processing/README.md
+!Health/Pre-Processing/.gitkeep
+
+# Reports with actual patient data
+Health/Reports/*
+!Health/Reports/README.md
+!Health/Reports/.gitkeep
+
+# Visualizations with actual data
+Health/Visualizations/*.png
+Health/Visualizations/*.html
+Health/Visualizations/*.jpg
+!Health/Visualizations/README.md
+
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
 # Temporary files
 *.tmp
 *.bak
-*~
+*.backup

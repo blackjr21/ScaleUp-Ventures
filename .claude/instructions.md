@@ -1,348 +1,461 @@
-# Claritev PM - Claude Code Instructions
+# Personal Health Tracker - Claude Code Instructions
 
-This repository is a project management system for tracking programs, projects, meetings, and todos. Follow these rules and conventions when working in this repository.
+This repository is a personal health data management system for tracking medical lab results, health metrics, and wellness goals. Follow these rules and conventions when working in this repository.
 
 ---
 
 ## Repository Structure Overview
 
 ```
-Claritev/
-├── MASTER-TODOS.md              # Central list of ALL work - SINGLE SOURCE OF TRUTH
-├── Programs/[Name]/             # Programs with nested projects
-│   ├── program-overview.md
-│   ├── todos.md                # Program-level todos
-│   └── Projects/[Name]/        # Projects within this program
-│       ├── plan.md
-│       ├── status.md
-│       └── todos.md            # Project-specific todos
-├── Projects/[Name]/             # Standalone projects (not in programs)
-│   ├── plan.md
-│   ├── status.md
-│   └── todos.md
-├── Meetings/                    # ALL meetings organized by type
-│   ├── 1-on-1/YYYY-MM-DD-Person-Topic/
-│   ├── Team/YYYY-MM-DD-Team-Topic/
-│   └── General/YYYY-MM-DD-Topic/
-├── Status/
-│   ├── weekly-updates/
-│   └── monthly-reports/
-└── Resources/templates/         # All templates - USE THESE!
+Personal/
+├── README.md                          # Main documentation
+├── HEALTH-GOALS.md                    # Health goals and action items
+├── Health/                            # All health data
+│   ├── Input/
+│   │   ├── Labs/                     # NEW lab PDFs to process (*.pdf)
+│   │   └── Pre-Processing/           # Individual lab results by date
+│   │       └── YYYY-MM-DD-Test-Name.md  # Structured lab data
+│   ├── Reports/                      # Consolidated health summaries
+│   │   ├── Medical-Lab-Summary-KISS.html  # Master HTML summary (UPDATE THIS)
+│   │   └── YYYY-MM-DD-Summary.md    # Other summary reports
+│   ├── Visualizations/               # Charts, graphs, HTML reports
+│   │   └── *.png, *.html            # Visual data representations
+│   └── Scripts/                      # Automation scripts
+│       └── *.py                      # Data processing scripts
+└── .claude/                           # Claude Code configuration
+    ├── instructions.md                # This file
+    └── agents/                        # Custom agent prompts
 ```
 
 ---
 
 ## CRITICAL RULES - ALWAYS FOLLOW
 
-### 1. Todo Format (REQUIRED)
+### 1. Privacy and Security (TOP PRIORITY)
 
-**ALWAYS use this exact format for todos in MASTER-TODOS.md:**
-
-```markdown
-### [Program/Project] Task description
-- **Due:** YYYY-MM-DD (or TBD)
-- **Priority:** High/Medium/Low
-- **Status:** Not Started/In Progress/Blocked/Completed
-- **Notes:** Additional context
-- **Source:** [Path/To/Source/File.md](Path/To/Source/File.md)
-- **Created:** YYYY-MM-DD
-```
-
-**Required Fields:**
-- **Due:** Always include (use "TBD" if unknown)
-- **Priority:** High/Medium/Low
-- **Status:** Not Started/In Progress/Blocked/Completed
-- **Notes:** Context, blockers, or details
-- **Source:** Clickable link to source file (meeting, status report, project todos, etc.)
-- **Created:** Date when task was added to MASTER-TODOS.md (YYYY-MM-DD format)
-
-**Escalation Rule:**
-- Tasks with "Due: TBD" that are 3+ days old (based on Created date) should be escalated
-- Flag these as needing immediate attention to assign due dates
-
-**Todo Sections (in order):**
-1. Due This Week
-2. Due Next Week
-3. Due Later
-4. Backlog
-5. Completed
-
-**Example:**
-```markdown
-## Due This Week
-
-### [Program-Alpha/Project-1] Complete API integration
-- **Due:** 2025-11-24
-- **Priority:** High
-- **Status:** In Progress
-- **Notes:** Waiting on vendor documentation
-- **Source:** [Meetings/1-on-1/2025-11-20-Vendor-Sync.md](Meetings/1-on-1/2025-11-20-Vendor-Sync.md)
-- **Created:** 2025-11-20
-```
-
-**Source Field Guidelines:**
-- Use relative paths from repository root
-- Format: `[Path/To/File.md](Path/To/File.md)`
-- Creates clickable link to jump back to original context
-- For todos from meetings: Link to meeting file
-- For todos rolled up from projects: Link to project todos.md
-- This allows easy navigation back to full context
-
-### 2. MASTER-TODOS.md is the Single Source of Truth
+**NEVER:**
+- ❌ Suggest committing PHI (Protected Health Information) to public repositories
+- ❌ Share or expose sensitive health data
+- ❌ Include real patient names in examples
+- ❌ Post health data to external services without explicit permission
 
 **ALWAYS:**
-- Keep `MASTER-TODOS.md` up to date with ALL work across all programs/projects
-- Use `[Program/Project]` prefix for every task in MASTER-TODOS.md
-- Roll up important tasks from project-level todos to MASTER-TODOS.md
-- Organize by due date sections (Due This Week, Due Next Week, etc.)
+- ✅ Remind user about privacy when handling sensitive data
+- ✅ Use .gitignore to protect actual health records
+- ✅ Keep repository private
+- ✅ Anonymize data in examples
 
-**When asked "what work is due":**
-- Check MASTER-TODOS.md first
-- Look at "Due This Week" section
-- Can also search: `grep -r "Due: 2025-11-" . --include="todos.md"`
+### 2. File Naming Conventions (STRICT)
 
-### 3. Meeting Naming Convention (STRICT)
+**Date format:** YYYY-MM-DD (always)
+- ✅ `2025-11-19-Lipid-Panel.md`
+- ❌ `11-19-2025-Lipid-Panel.md`
+- ❌ `Nov-19-Lipid-Panel.md`
 
-**Format:** `YYYY-MM-DD-Person/Team-Topic`
+**Lab result files:** `YYYY-MM-DD-Test-Name.md`
+- Examples:
+  - `2025-11-19-Comprehensive-Metabolic-Panel.md`
+  - `2025-10-28-Lipid-Panel.md`
+  - `2025-07-15-Complete-Blood-Count.md`
 
-**Location based on type:**
-- 1-on-1: `Meetings/1-on-1/YYYY-MM-DD-Person-Name-Topic/`
-- Team: `Meetings/Team/YYYY-MM-DD-Team-Name-Topic/`
-- General: `Meetings/General/YYYY-MM-DD-Topic/`
+**Summary reports:** `YYYY-MM-DD-Medical-Lab-Summary.md`
+- Located in: `Health/Reports/`
+- Example: `2025-11-19-Medical-Lab-Summary.md`
 
-**Examples:**
-- `Meetings/1-on-1/2025-11-17-John-Smith-Performance-Review/`
-- `Meetings/Team/2025-11-18-Engineering-Sprint-Planning/`
-- `Meetings/General/2025-11-19-Stakeholder-Alignment/`
+### 3. Lab Result Format (REQUIRED)
 
-**Each meeting folder MUST contain:**
-- `transcription.md` - Raw meeting transcription
-- `notes.md` - Structured meeting notes with action items
+**Template structure for individual lab files:**
 
-### 4. Always Use Templates
+```markdown
+# [Test Name]
 
-**Templates are located in:** `Resources/templates/`
+**Test Date:** YYYY-MM-DD
+**Ordering Provider:** Dr. [Name]
+**Lab:** [Lab Name]
+**Fasting:** Yes/No
 
-**Available templates:**
-- `todos-template.md` - For any todos.md file
-- `plan-template.md` - For project plan.md files
-- `status-template.md` - For status.md files
-- `meeting-notes-template.md` - For meeting notes
-- `transcription-template.md` - For meeting transcriptions
+---
 
-**When creating new files, ALWAYS copy from template:**
-```bash
-cp Resources/templates/todos-template.md [destination]/todos.md
+## Results
+
+| Test | Result | Units | Reference Range | Status |
+|------|--------|-------|-----------------|--------|
+| Glucose | 112 | mg/dL | 70-99 | HIGH |
+| Creatinine | 1.26 | mg/dL | 0.76-1.27 | Normal |
+
+---
+
+## Clinical Interpretation
+
+[Any provider notes or interpretations]
+
+---
+
+## Notes
+
+- Relevant context about the test
+- Symptoms at time of test
+- Current medications or supplements
+- Any unusual circumstances
 ```
 
-### 5. File Locations - WHERE to Add Things
+**Status indicators:**
+- `HIGH` - Above reference range
+- `LOW` - Below reference range
+- `CRITICAL` - Dangerously abnormal
+- `Normal` - Within reference range
 
-| What | Where |
-|------|-------|
-| New standalone project | `Projects/[Project-Name]/` |
-| New program project | `Programs/[Program]/Projects/[Project-Name]/` |
-| 1-on-1 meeting | `Meetings/1-on-1/YYYY-MM-DD-Person-Topic/` |
-| Team meeting | `Meetings/Team/YYYY-MM-DD-Team-Topic/` |
-| General meeting | `Meetings/General/YYYY-MM-DD-Topic/` |
-| Weekly status | `Status/weekly-updates/YYYY-MM-DD-*.md` |
-| Monthly report | `Status/monthly-reports/YYYY-MM-DD-*.md` |
-| Central todos | `MASTER-TODOS.md` |
+### 4. Health Goals Format (HEALTH-GOALS.md)
+
+**Structure:**
+1. Current Health Priorities (with action items)
+2. Upcoming Appointments
+3. Lab Testing Schedule
+4. Lifestyle Goals
+5. Provider Communication
+6. Progress Tracking
+
+**Action item format:**
+```markdown
+- [ ] Task description
+- [x] Completed task
+```
+
+**Priority format:**
+```markdown
+### 1. [Health Priority Name]
+- **Status:** Active/Monitoring/Resolved
+- **Latest Result:** [Value and date]
+- **Goal:** [Target value or outcome]
+- **Target Date:** [When to reassess]
+
+**Action Items:**
+- [ ] Specific action to take
+- [ ] Another action
+```
 
 ---
 
 ## Common Workflows - How to Help the User
 
-### When User Asks: "What work is due?"
+### When User Uploads New Lab Results
 
-1. **Check MASTER-TODOS.md** - Look at "Due This Week" section
-2. **Show tasks with due dates** this week or overdue
-3. **Format output clearly** with due dates, priorities, and project context
+1. **Ask for key information:**
+   - Test date
+   - Type of test
+   - Ordering provider
+   - Whether it was fasting
 
-### When User Uploads a Meeting Transcription
+2. **Create structured file:**
+   - Filename: `Health/Pre-Processing/YYYY-MM-DD-Test-Name.md`
+   - Use lab result format template
+   - Extract data into table format
+   - Flag abnormal results
 
-1. **Create meeting folder** in appropriate location (1-on-1, Team, or General)
-2. **Use naming convention:** `YYYY-MM-DD-Person/Team-Topic`
-3. **Create transcription.md** using `Resources/templates/transcription-template.md`
-4. **Create notes.md** using `Resources/templates/meeting-notes-template.md`
-5. **Extract action items** from transcription
-6. **Add action items to:**
-   - Relevant project `todos.md`
-   - `MASTER-TODOS.md` with proper format
-7. **Set due dates and priorities** for action items
+3. **Update Medical-Lab-Summary-KISS.html:**
+   - Location: `Health/Reports/Medical-Lab-Summary-KISS.html`
+   - Add new lab results to appropriate sections
+   - Update "Most Recent Labs" date in header
+   - Update relevant trend tables with new data points
+   - Flag any new abnormal values
+   - Update "Complete Test History" table chronologically
+   - Recalculate trends (worsening, improving, stable)
 
-### When User Creates a New Project
+4. **Update Active Problems section if needed:**
+   - Add new problems if concerning results found
+   - Update action items based on new findings
+   - Modify current medications if changed
 
-1. **Ask:** Is this standalone or part of a program?
-2. **Create folder** in correct location:
-   - Standalone: `Projects/[Name]/`
-   - Program: `Programs/[Program]/Projects/[Name]/`
-3. **Copy templates:**
-   - `plan-template.md` → `plan.md`
-   - `status-template.md` → `status.md`
-   - `todos-template.md` → `todos.md`
-4. **Create Meetings subfolder** if needed
-5. **Help fill in** plan.md with objectives, scope, timeline
-6. **Add initial tasks** to todos.md
-7. **Roll up key tasks** to MASTER-TODOS.md
+### When User Requests Health Summary
 
-### When User Creates a New Program
+1. **Analyze all lab files** in `Health/Pre-Processing/`
+2. **Group by category:**
+   - Metabolic Health (glucose, HbA1c, kidney function)
+   - Lipid Profile (cholesterol, triglycerides)
+   - Blood Counts (CBC, iron studies)
+   - Hormone Panels (thyroid, testosterone)
+   - Specialized Tests (other)
 
-1. **Create program structure:**
-   ```bash
-   mkdir -p Programs/[Name]/{Projects,Meetings,Status}
+3. **Create summary report:**
+   - Location: `Health/Reports/YYYY-MM-DD-Medical-Lab-Summary.md`
+   - Include executive summary
+   - Show latest results for each category
+   - Highlight trends over time
+   - Flag all abnormal findings
+   - Provide clinical context
+
+### When User Asks About Trends
+
+1. **Identify the metric** (e.g., HbA1c, cholesterol, creatinine)
+2. **Search through lab files** for all instances
+3. **Present chronologically:**
    ```
-2. **Create files:**
-   - `program-overview.md` - Program description, goals, stakeholders
-   - `todos.md` - Program-level todos (from template)
-3. **Help document** program overview
-4. **Add program todos** to MASTER-TODOS.md
+   HbA1c Trend:
+   - 2025-10-28: 5.9% (Prediabetes range)
+   - 2025-07-15: 5.7% (Borderline)
+   - 2025-01-08: 5.5% (Normal)
 
-### When User Asks to Roll Up Todos
-
-1. **Find all todos.md files:**
-   ```bash
-   find . -name "todos.md" -type f
+   Trend: Increasing ⚠️ - Requires attention
    ```
-2. **For each project todos.md:**
-   - Identify high-priority and urgent tasks
-   - Copy to MASTER-TODOS.md with `[Program/Project]` prefix
-   - Include all metadata (due date, priority, status, notes)
-3. **Organize in MASTER-TODOS.md** by due date sections
-4. **Remove duplicates** - keep MASTER-TODOS.md clean
 
-### When User Updates Task Status
+4. **Suggest actions** based on trends:
+   - If improving: Acknowledge progress
+   - If worsening: Suggest discussing with provider
+   - If stable: Recommend continued monitoring
 
-1. **Update in project todos.md** - Change status, add notes
-2. **Update in MASTER-TODOS.md** - Keep synchronized
-3. **If completed:**
-   - Move to "Completed" section
-   - Add completion date
-   - Keep in MASTER-TODOS.md for record
+### When User Sets Health Goals
+
+1. **Add to HEALTH-GOALS.md** under appropriate section
+2. **Make goals SMART:**
+   - Specific: "Reduce HbA1c to <5.7%"
+   - Measurable: Exact values
+   - Achievable: Based on current status
+   - Relevant: Related to health conditions
+   - Time-bound: Include target dates
+
+3. **Create action items:**
+   - Break down into concrete steps
+   - Include lifestyle changes
+   - Schedule follow-up tests
+   - Note provider recommendations
+
+4. **Set up tracking:**
+   - Define what to measure
+   - Determine frequency
+   - Note where to record data
+
+### When User Needs Visualization
+
+1. **Check existing visualizations** in `Health/Visualizations/`
+2. **Suggest using Scripts:**
+   - Point to relevant Python script
+   - Offer to help modify script
+   - Explain how to run it
+
+3. **For new visualizations:**
+   - Ask what metric to visualize
+   - Suggest chart type (line graph for trends, bar chart for comparisons)
+   - Help create or modify script
+
+---
+
+## Data Categories - Understanding Health Data
+
+### Metabolic Health
+**Common tests:**
+- Comprehensive Metabolic Panel (CMP)
+- Basic Metabolic Panel (BMP)
+- Hemoglobin A1c (HbA1c)
+- Fasting Glucose
+
+**Key metrics to track:**
+- Glucose levels (diabetes screening)
+- HbA1c (long-term glucose control)
+- Kidney function (creatinine, eGFR)
+- Liver enzymes (AST, ALT)
+- Electrolytes (sodium, potassium)
+
+### Lipid Profile
+**Common tests:**
+- Standard Lipid Panel
+- Advanced Lipid Panel
+- Apolipoprotein B (ApoB)
+- NMR Lipoprofile
+
+**Key metrics:**
+- Total Cholesterol
+- LDL Cholesterol (bad)
+- HDL Cholesterol (good)
+- Triglycerides
+- Non-HDL Cholesterol
+- ApoB (advanced marker)
+
+### Blood Counts
+**Common tests:**
+- Complete Blood Count (CBC)
+- Iron Studies
+- Ferritin
+
+**Key metrics:**
+- Hemoglobin
+- Hematocrit
+- White blood cells
+- Platelets
+- Iron, TIBC
+
+### Hormone Panels
+**Common tests:**
+- Thyroid Panel (TSH, T3, T4)
+- Testosterone (Total, Free)
+- Vitamin D
+- Cortisol
+
+**Key metrics:**
+- TSH (thyroid function)
+- Free T3, Free T4
+- Total and Free Testosterone
+- 25-OH Vitamin D
 
 ---
 
 ## Best Practices - Always Follow
 
-### Priority Levels
-- **High:** Urgent, blocks other work, must be done soon
-- **Medium:** Important but not blocking, scheduled work
-- **Low:** Nice to have, can be deferred
+### When Handling Lab Data
 
-### Status Values
-- **Not Started:** Task hasn't begun
-- **In Progress:** Actively working on it
-- **Blocked:** Waiting on something/someone
-- **Completed:** Done (move to Completed section with date)
+1. **Verify accuracy:**
+   - Double-check values when entering data
+   - Confirm units (mg/dL vs mmol/L)
+   - Verify reference ranges match lab's standards
 
-### Date Format
-- **ALWAYS use:** YYYY-MM-DD format
-- **Never use:** MM/DD/YYYY or other formats
-- **Ensures:** Chronological sorting works correctly
+2. **Preserve context:**
+   - Note if fasting or non-fasting
+   - Record time of day if relevant
+   - Document medications taken
+   - Note any symptoms
 
-### Naming Conventions
-- **Use descriptive names:** Clear and specific
-- **Avoid abbreviations:** Write full names
-- **Use hyphens for spaces:** `My-Project-Name` not `My_Project_Name`
-- **Keep consistent:** Follow existing patterns
+3. **Flag abnormals:**
+   - Clearly mark HIGH or LOW
+   - Note CRITICAL values
+   - Suggest provider follow-up for concerning results
 
-### Todo Management
-- **Always include due dates** - Even if approximate
-- **Update status daily** - Keep todos current
-- **Archive completed items** - Move to Completed section, don't delete
-- **Roll up weekly** - Sync project todos to MASTER-TODOS.md
-- **One source of truth** - MASTER-TODOS.md for all work
+### When Creating Reports
 
----
+1. **Executive summary first:**
+   - Most significant findings at the top
+   - Overall health status
+   - Critical items that need attention
 
-## When User Asks for Status or Reports
+2. **Organize by body system:**
+   - Metabolic health
+   - Cardiovascular (lipids)
+   - Blood counts
+   - Hormones
+   - Other
 
-### For "What's my status?"
-1. **Check MASTER-TODOS.md** - Current work in progress
-2. **Look at Status/** - Recent weekly/monthly updates
-3. **Summarize:**
-   - What's completed this week
-   - What's in progress
-   - What's blocked
-   - What's due soon
+3. **Show trends:**
+   - Compare to previous results
+   - Note improvement or decline
+   - Indicate stability
 
-### For Weekly Status Update
-1. **Create file:** `Status/weekly-updates/YYYY-MM-DD-Weekly-Update.md`
-2. **Use template:** `Resources/templates/status-template.md`
-3. **Fill in:**
-   - Completed items from all projects
-   - In progress items with % complete
-   - Blockers and risks
-   - Planned work for next week
+4. **Clinical context:**
+   - Explain what values mean
+   - Relate to health conditions
+   - Suggest next steps
 
----
+### When Setting Goals
 
-## Error Prevention
+1. **Base on current data:**
+   - Use actual lab values
+   - Consider trends
+   - Set realistic targets
 
-### NEVER Do This:
-- ❌ Create todos without due dates
-- ❌ Use inconsistent date formats
-- ❌ Skip the MASTER-TODOS.md update
-- ❌ Create meetings without proper folder structure
-- ❌ Use wrong naming conventions
-- ❌ Create files without using templates
-- ❌ Forget to add [Program/Project] prefix in MASTER-TODOS.md
+2. **Include provider input:**
+   - Note provider recommendations
+   - Respect medical advice
+   - Don't diagnose or prescribe
 
-### ALWAYS Do This:
-- ✅ Use YYYY-MM-DD date format
-- ✅ Follow todo format exactly
-- ✅ Update MASTER-TODOS.md when adding/updating tasks
-- ✅ Use templates from Resources/templates/
-- ✅ Follow naming conventions strictly
-- ✅ Include all required metadata (due date, priority, status, notes)
-- ✅ Keep MASTER-TODOS.md as single source of truth
+3. **Create actionable steps:**
+   - Specific lifestyle changes
+   - Measurable behaviors
+   - Scheduled follow-ups
 
 ---
 
-## Quick Commands Reference
+## Privacy Reminders
 
-### Find all todos:
-```bash
-find . -name "todos.md" -type f
+**Always remind user when:**
+- Creating files with real health data
+- Suggesting git commits with PHI
+- Exporting or sharing reports
+- Adding visualizations with real values
+
+**Standard privacy reminder:**
+```
+⚠️ Privacy Notice: This file contains personal health information.
+Ensure this repository remains private and is not pushed to public repositories.
 ```
 
-### Search for due dates:
+---
+
+## Quick Reference Commands
+
+### Find all lab results:
 ```bash
-grep -r "Due: 2025-11-" . --include="todos.md"
+ls -la Health/Pre-Processing/
 ```
 
-### List all meetings:
+### Search for specific test:
 ```bash
-ls -la Meetings/*/
+grep -r "Lipid Panel" Health/Pre-Processing/
 ```
 
-### Create new project (standalone):
+### List all summary reports:
 ```bash
-mkdir Projects/[Name]
-cp Resources/templates/plan-template.md Projects/[Name]/plan.md
-cp Resources/templates/status-template.md Projects/[Name]/status.md
-cp Resources/templates/todos-template.md Projects/[Name]/todos.md
+ls -la Health/Reports/
 ```
 
-### Create new meeting folder:
+### View visualizations:
 ```bash
-mkdir Meetings/[Type]/YYYY-MM-DD-Topic
-cp Resources/templates/transcription-template.md Meetings/[Type]/YYYY-MM-DD-Topic/transcription.md
-cp Resources/templates/meeting-notes-template.md Meetings/[Type]/YYYY-MM-DD-Topic/notes.md
+ls -la Health/Visualizations/
 ```
+
+### Find labs by date range:
+```bash
+ls Health/Pre-Processing/ | grep "2025-10"
+```
+
+---
+
+## When User Asks Common Questions
+
+### "What are my latest results?"
+1. Check `Health/Reports/` for most recent summary
+2. If no recent summary, check latest files in `Health/Pre-Processing/`
+3. Present in organized format by category
+
+### "What's my cholesterol trend?"
+1. Search for "Lipid Panel" files
+2. Extract cholesterol values chronologically
+3. Show trend with dates and values
+4. Note if improving, stable, or worsening
+
+### "When are my next labs due?"
+1. Check HEALTH-GOALS.md → Lab Testing Schedule
+2. List upcoming tests with target dates
+3. Note what prep is needed (fasting, etc.)
+
+### "What should I discuss with my doctor?"
+1. Check HEALTH-GOALS.md → Provider Communication
+2. List questions already noted
+3. Suggest adding items based on recent results
+4. Highlight any concerning trends
 
 ---
 
 ## Remember
 
-- **MASTER-TODOS.md** is the single source of truth for all work
-- **Use templates** for every new file
-- **Follow naming conventions** exactly
-- **Keep due dates** in YYYY-MM-DD format
-- **Update status** regularly
-- **Roll up todos** from projects to MASTER-TODOS.md
-- **Extract action items** from meetings to todos
+- **Privacy first** - Always protect health information
+- **Accuracy matters** - Double-check values and units
+- **Context is key** - Include dates, fasting status, medications
+- **Trends over time** - Single values less important than patterns
+- **Provider guidance** - Support medical care, don't replace it
+- **User empowerment** - Help user understand and track their health
 
-When in doubt, check:
-1. README.md for detailed how-to guides
-2. Resources/templates/ for all templates
-3. Existing files for examples of proper format
+This is a personal health tool to:
+- Organize medical data
+- Track trends over time
+- Prepare for provider visits
+- Monitor health goals
+- Maintain continuity of care
+
+NOT to:
+- Diagnose conditions
+- Prescribe treatments
+- Replace medical advice
+- Make clinical decisions
+
+When in doubt, suggest consulting with healthcare provider.
+
+---
+
+**Last Updated:** November 19, 2025

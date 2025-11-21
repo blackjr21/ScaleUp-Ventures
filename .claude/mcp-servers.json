@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "motion": {
+      "command": "node",
+      "args": [
+        "/Users/calvinwilliamsjr/Personal AI Enablement/Tools/Motion Tasks/motion-mcp-server.js"
+      ],
+      "env": {
+        "MOTION_API_KEY": "RZauLFX7bX1bpMdbYSRzwJKLa1AJoKcPszkolFyF9TU=",
+        "WORKSPACE_ID": "Pqpq8CvF4tbLLJG64uMbZ"
+      }
+    },
+    "google-calendar": {
+      "command": "node",
+      "args": [
+        "/Users/calvinwilliamsjr/Personal AI Enablement/Tools/Calendar Merge/System/mcp-google-calendar/build/index.js"
+      ]
+    },
+    "otter-transcript-organizer": {
+      "command": "node",
+      "args": [
+        "/Users/calvinwilliamsjr/Personal AI Enablement/Tools/Otter to ClaudeCode/otter-transcript-organizer/dist/index.js"
+      ]
+    }
+  }
+}
