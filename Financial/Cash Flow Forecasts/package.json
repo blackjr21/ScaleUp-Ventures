@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "Personal cash flow projection system for tracking income, expenses, and maintaining positive account balances.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "node tests/dashboard-visual-test.js",
-    "test:dashboard": "node tests/dashboard-visual-test.js",
-    "test:theme": "node tests/test-theme-toggle.js"
+    "test": "playwright test",
+    "test:e2e": "playwright test tests/e2e/phase1-ui.spec.js",
+    "test:visual": "playwright test tests/e2e/phase1-visual.spec.js",
+    "test:phase1": "playwright test tests/e2e/phase1-ui.spec.js tests/e2e/phase1-visual.spec.js",
+    "test:phase2": "playwright test tests/e2e/phase2-*.spec.js",
+    "test:phase3": "playwright test tests/e2e/phase3-*.spec.js",
+    "test:phase4": "playwright test tests/e2e/phase4-*.spec.js",
+    "test:phase5": "playwright test tests/e2e/phase5-*.spec.js",
+    "screenshots:phase1": "node tests/capture-phase1-screenshots.js",
+    "report": "npx playwright show-report"
   },
   "repository": {
     "type": "git",
