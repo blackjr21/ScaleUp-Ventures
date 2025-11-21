@@ -1,0 +1,19 @@
+# Claude Code (ignore internal agent data, but keep instructions)
+.claude/agents/
+.claude/**/agents/
+
+# Dependencies
+node_modules/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Generated forecasts (optional - uncomment to ignore)
+# forecasts/*.html
+# forecasts/*.md

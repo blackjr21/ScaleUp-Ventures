@@ -1,0 +1,28 @@
+{
+  "name": "financial",
+  "version": "1.0.0",
+  "description": "Personal cash flow projection system for tracking income, expenses, and maintaining positive account balances.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/dashboard-visual-test.js",
+    "test:dashboard": "node tests/dashboard-visual-test.js",
+    "test:theme": "node tests/test-theme-toggle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackjr21/ScaleUp-Ventures.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blackjr21/ScaleUp-Ventures/issues"
+  },
+  "homepage": "https://github.com/blackjr21/ScaleUp-Ventures#readme",
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

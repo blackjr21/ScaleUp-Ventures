@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Flow Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6c757d;
+            --border-color: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --accent-primary: #667eea;
+            --accent-secondary: #764ba2;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+        }
+
+        /* Dark theme class - applied via JavaScript */
+        body.dark-theme {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --accent-primary: #818cf8;
+            --accent-secondary: #a78bfa;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --info: #60a5fa;
+        }
+
+        /* Media query removed - use manual toggle button instead */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            display: none;
+        }
+
+        .emergency-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .emergency-icon {
+            font-size: 1.5rem;
+        }
+
+        .emergency-text {
+            flex: 1;
+            font-size: 1.1rem;
+        }
+
+        .emergency-action {
+            background: white;
+            color: #ef4444;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .emergency-action:hover {
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 24px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+            border-color: var(--accent-primary);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(0);
+        }
+
+        .theme-icon {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover .theme-icon {
+            transform: rotate(20deg);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .glance-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .glance-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glance-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .glance-card h3 {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .glance-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .glance-card.healthy .value {
+            color: var(--success);
+        }
+
+        .glance-card.caution .value {
+            color: var(--warning);
+        }
+
+        .glance-card.danger .value {
+            color: var(--danger);
+        }
+
+        .glance-context {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .trend-indicator {
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .trend-indicator.positive {
+            color: var(--success);
+        }
+
+        .trend-indicator.negative {
+            color: var(--danger);
+        }
+
+        .runway-bar {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .runway-fill {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+            transition: width 0.3s ease;
+        }
+
+        /* Action Center */
+        .action-center {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 3px solid #f59e0b;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        body.dark-theme .action-center {
+            background: linear-gradient(135deg, #78350f, #92400e);
+            border-color: #fbbf24;
+        }
+
+        .action-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .action-header h2 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: #92400e;
+        }
+
+        body.dark-theme .action-header h2 {
+            color: #fbbf24;
+        }
+
+        .action-priority {
+            background: #ef4444;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .action-main {
+            margin-bottom: 1rem;
+        }
+
+        .action-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        body.dark-theme .action-title {
+            color: #fde68a;
+        }
+
+        .action-why {
+            font-size: 1rem;
+            color: #78350f;
+        }
+
+        body.dark-theme .action-why {
+            color: #fde68a;
+        }
+
+        .action-alternatives {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid rgba(120, 53, 15, 0.2);
+        }
+
+        .action-alternatives summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #92400e;
+            list-style-position: outside;
+            margin-bottom: 0.75rem;
+        }
+
+        body.dark-theme .action-alternatives summary {
+            color: #fbbf24;
+        }
+
+        .action-alternatives[open] summary {
+            margin-bottom: 1rem;
+        }
+
+        .alt-option {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #f59e0b;
+        }
+
+        body.dark-theme .alt-option {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .alt-impact {
+            font-size: 0.875rem;
+            color: #78350f;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        body.dark-theme .alt-impact {
+            color: #fcd34d;
+        }
+
+        .alerts-section {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .alerts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .alerts-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .alert-badges {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .alert-badge {
+            background: var(--danger);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .alert-badge.warning {
+            background: var(--warning);
+            color: #1a1a1a;
+        }
+
+        .alert-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid var(--warning);
+        }
+
+        .alert-item.danger {
+            border-left-color: var(--danger);
+        }
+
+        .alert-date {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .alert-details {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .alert-cause {
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .alert-recovery {
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .hero-card-title {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-card-icon {
+            font-size: 1.5rem;
+        }
+
+        .hero-card-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-card.income .hero-card-value {
+            color: var(--success);
+        }
+
+        .hero-card.expense .hero-card-value {
+            color: var(--danger);
+        }
+
+        .hero-card.surplus .hero-card-value {
+            color: var(--info);
+        }
+
+        .spending-gauge {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+            transition: width 0.5s ease;
+        }
+
+        .gauge-marker {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .chart-section {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .chart-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .forecast-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .summary-card h3 {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-card .value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Table Filters */
+        .table-filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .table-container {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        th.amount-col {
+            text-align: right;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td.amount-col {
+            text-align: right;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.875rem;
+        }
+
+        tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        .flag-low {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .flag-neg {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .month-separator {
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            padding: 0.75rem;
+            border: none;
+        }
+
+        .month-separator td {
+            border: none;
+        }
+
+        .positive {
+            color: var(--success);
+        }
+
+        .negative {
+            color: var(--danger);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+
+            .action-title {
+                font-size: 1.25rem;
+            }
+
+            .emergency-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="emergency-banner" id="emergencyBanner">
+        <div class="emergency-content">
+            <span class="emergency-icon">🚨</span>
+            <div class="emergency-text">
+                <strong>URGENT:</strong> Negative balance in <span id="daysUntil">?</span> days
+            </div>
+            <button class="emergency-action" onclick="document.querySelector('.alerts-section').scrollIntoView({behavior: 'smooth'})">
+                See Details
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="theme-icon" id="themeIcon">🌙</span>
+                <span id="themeText">Dark</span>
+            </button>
+            <h1>Cash Flow Dashboard</h1>
+            <p class="subtitle">42-Day Forecast | Nov 20 - Dec 31, 2025</p>
+        </div>
+
+        <div class="glance-summary">
+            <div class="glance-card healthy">
+                <h3>Status</h3>
+                <div class="value">HEALTHY</div>
+                <div class="glance-context">Net positive for month</div>
+            </div>
+            <div class="glance-card caution">
+                <h3>Next 30 Days</h3>
+                <div class="value"><span id="alertCount">9</span> Alerts</div>
+                <div class="glance-context">
+                    <span class="trend-indicator" id="alertTrend">Monitor closely</span>
+                </div>
+            </div>
+            <div class="glance-card" id="runwayCard">
+                <h3>Cash Runway</h3>
+                <div class="value">~<span id="runwayDays">18</span> days</div>
+                <div class="glance-context">
+                    Target: 30 days
+                    <span class="runway-bar">
+                        <span class="runway-fill" id="runwayFill" style="width: 60%"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="glance-card healthy">
+                <h3>Savings Rate</h3>
+                <div class="value">+<span id="savingsRate">22</span>%</div>
+                <div class="glance-context">
+                    <span class="trend-indicator positive">Strong position</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-center" id="actionCenter">
+            <div class="action-header">
+                <h2>⚡ Recommended Action</h2>
+                <span class="action-priority">High Priority</span>
+            </div>
+
+            <div class="action-main">
+                <div class="action-title" id="actionTitle">Transfer $800 by December 6</div>
+                <div class="action-why" id="actionWhy">Prevents all 4 negative days (Dec 7-10)</div>
+            </div>
+
+            <details class="action-alternatives">
+                <summary>Alternative Options (2)</summary>
+                <div class="alt-option">
+                    <strong>Option B:</strong> Defer Sleep Number to Dec 13<br>
+                    <span class="alt-impact">Saves $435, reduces negative days to 2</span>
+                </div>
+                <div class="alt-option">
+                    <strong>Option C:</strong> Request early Acrisure paycheck<br>
+                    <span class="alt-impact">Move $1,000 from Dec 12 to Dec 9</span>
+                </div>
+            </details>
+        </div>
+
+        <div class="alerts-section">
+            <div class="alerts-header">
+                <h2>🚨 Critical Alerts</h2>
+                <div class="alert-badges" id="alertBadges">
+                    <span class="alert-badge">4 CRITICAL</span>
+                    <span class="alert-badge warning">5 warnings</span>
+                </div>
+            </div>
+            <div class="alert-item danger">
+                <div class="alert-date">🔴 Dec 7-10: Negative balance (worst: -$780)</div>
+                <div class="alert-details">
+                    <div class="alert-cause">Cause: Sleep Number payment ($435)</div>
+                    <div class="alert-recovery">Recovery: Dec 11 WakeMed (+$1K), Dec 12 Acrisure (+$4,487)</div>
+                </div>
+            </div>
+            <div class="alert-item">
+                <div class="alert-date">🟡 Dec 4-6: LOW balance period</div>
+                <div class="alert-details">
+                    <div class="alert-cause">Drops to $209 after bills cluster</div>
+                    <div class="alert-recovery">Recovery: Dec 5 Claritev paycheck (+$3,500)</div>
+                </div>
+            </div>
+            <div class="alert-item">
+                <div class="alert-date">🟡 Dec 11: Brief LOW balance</div>
+                <div class="alert-details">
+                    <div class="alert-cause">Recovery in progress from negative period</div>
+                    <div class="alert-recovery">Resolved: Dec 12 Acrisure paycheck (+$4,487)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2>Balance Trend</h2>
+            <canvas id="balanceChart" height="80"></canvas>
+        </div>
+
+        <div class="hero-section">
+            <div class="hero-card income">
+                <div class="hero-card-header">
+                    <span class="hero-card-title">Total Income</span>
+                    <span class="hero-card-icon">💰</span>
+                </div>
+                <div class="hero-card-value" id="totalIncome">$18,004.00</div>
+                <div class="hero-card-subtitle">Total expected deposits (42 days)</div>
+            </div>
+
+            <div class="hero-card expense">
+                <div class="hero-card-header">
+                    <span class="hero-card-title">Total Expenses</span>
+                    <span class="hero-card-icon">💳</span>
+                </div>
+                <div class="hero-card-value" id="totalExpenses">$28,621.43</div>
+                <div class="hero-card-subtitle">Total bills & recurring (42 days)</div>
+                <div class="spending-gauge">
+                    <div class="gauge-fill" id="spendingGaugeFill" style="width: 159%"></div>
+                    <div class="gauge-marker" id="spendingGaugePercent">159% of income</div>
+                </div>
+            </div>
+
+            <div class="hero-card surplus" id="netPositionCard">
+                <div class="hero-card-header">
+                    <span class="hero-card-title">Net Position</span>
+                    <span class="hero-card-icon">📊</span>
+                </div>
+                <div class="hero-card-value" id="netPosition">-$10,617.43</div>
+                <div class="hero-card-subtitle">Forecast period change</div>
+            </div>
+        </div>
+
+        <div class="forecast-summary">
+            <div class="summary-card">
+                <h3>Starting Balance</h3>
+                <div class="value" id="startingBalance">$800</div>
+            </div>
+            <div class="summary-card">
+                <h3>Ending Balance</h3>
+                <div class="value" id="endingBalance">-$9,817.43</div>
+            </div>
+            <div class="summary-card">
+                <h3>Lowest Point</h3>
+                <div class="value negative" id="lowestPoint">-$9,817.43</div>
+            </div>
+            <div class="summary-card">
+                <h3>Days Below $500</h3>
+                <div class="value" id="daysBelowThreshold">40 days</div>
+            </div>
+        </div>
+
+        <div class="table-filters">
+            <button class="filter-btn active" data-filter="all">All Days (42)</button>
+            <button class="filter-btn" data-filter="flagged">Flagged Only (<span id="flaggedCount">0</span>)</button>
+            <button class="filter-btn" data-filter="major">Major Bills >$500 (<span id="majorCount">0</span>)</button>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h2>Daily Transactions</h2>
+            </div>
+            <div id="transactionTable"></div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        // Apply saved theme on page load
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-theme');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light';
+        }
+
+        // Toggle theme when button is clicked
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+
+            if (body.classList.contains('dark-theme')) {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        const transactions = [
+            {date: "2025-11-22", debits: 713.13, credits: 0.00, endBalance: 86.87, flag: "LOW", debitNames: "pliability, Loan (Feb 17, 2022), Loan (Mar 19, 2025)", creditNames: ""},
+            {date: "2025-11-23", debits: 99.21, credits: 0.00, endBalance: -12.34, flag: "NEG", debitNames: "Vitruvian Equipment", creditNames: ""},
+            {date: "2025-11-24", debits: 33.00, credits: 0.00, endBalance: -45.34, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-11-25", debits: 33.00, credits: 0.00, endBalance: -78.34, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-11-26", debits: 177.00, credits: 0.00, endBalance: -255.34, flag: "NEG", debitNames: "The Container Store, NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-11-27", debits: 1552.78, credits: 1000.00, endBalance: -808.12, flag: "NEG", debitNames: "Aven Card, Sofi Loan, NFCU Volvo Loan", creditNames: "WakeMed Paycheck"},
+            {date: "2025-11-28", debits: 3284.28, credits: 1987.00, endBalance: -2105.40, flag: "NEG", debitNames: "MMI, Buffalo Grove HOA, Groceries, Gas, Eating Out, Principal Loan, Savings, Tithe, Debt Payoff, NFCU", creditNames: "Acrisure Paycheck"},
+            {date: "2025-11-29", debits: 19.99, credits: 0.00, endBalance: -2125.39, flag: "NEG", debitNames: "MyFitnessPal", creditNames: ""},
+            {date: "2025-11-30", debits: 489.29, credits: 0.00, endBalance: -2614.68, flag: "NEG", debitNames: "Chaundra Williams, Club Pilates", creditNames: ""},
+            {date: "2025-12-01", debits: 1147.65, credits: 0.00, endBalance: -3762.33, flag: "NEG", debitNames: "Vitruvian Membership, TRANSAMERICA, Apple Card, Supplements, Payment Coordinator, NFCU", creditNames: ""},
+            {date: "2025-12-02", debits: 33.00, credits: 0.00, endBalance: -3795.33, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-12-03", debits: 303.00, credits: 0.00, endBalance: -4098.33, flag: "NEG", debitNames: "SYNCHRONY Bank, SYNCHRONY Credit, Bill Me Later, NFCU", creditNames: ""},
+            {date: "2025-12-04", debits: 582.00, credits: 0.00, endBalance: -4680.33, flag: "NEG", debitNames: "Connell & Gelb, Charleston Management, NFCU", creditNames: ""},
+            {date: "2025-12-05", debits: 4899.24, credits: 3500.00, endBalance: -6079.57, flag: "NEG", debitNames: "LoanCare Mortgage, Savings, Tithe, Debt Payoff, NFCU", creditNames: "Claritev Paycheck"},
+            {date: "2025-12-06", debits: 0.00, credits: 0.00, endBalance: -6079.57, flag: "NEG", debitNames: "", creditNames: ""},
+            {date: "2025-12-07", debits: 434.58, credits: 0.00, endBalance: -6514.15, flag: "NEG", debitNames: "Sleep Number", creditNames: ""},
+            {date: "2025-12-08", debits: 33.00, credits: 0.00, endBalance: -6547.15, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-12-09", debits: 245.00, credits: 0.00, endBalance: -6792.15, flag: "NEG", debitNames: "HexClad Pots, Duke Energy NC, NFCU", creditNames: ""},
+            {date: "2025-12-10", debits: 177.50, credits: 0.00, endBalance: -6969.65, flag: "NEG", debitNames: "Ashley Venture, Netflix, AT&T, NFCU", creditNames: ""},
+            {date: "2025-12-11", debits: 33.00, credits: 1000.00, endBalance: -6002.65, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: "WakeMed Paycheck"},
+            {date: "2025-12-12", debits: 3284.28, credits: 4487.00, endBalance: -4799.93, flag: "NEG", debitNames: "MMI, Buffalo Grove HOA, Groceries, Gas, Eating Out, Principal Loan, Savings, Tithe, Debt Payoff, NFCU", creditNames: "Acrisure Paycheck"},
+            {date: "2025-12-13", debits: 0.00, credits: 0.00, endBalance: -4799.93, flag: "NEG", debitNames: "", creditNames: ""},
+            {date: "2025-12-14", debits: 315.00, credits: 0.00, endBalance: -5114.93, flag: "NEG", debitNames: "SBA EIDL Loan", creditNames: ""},
+            {date: "2025-12-15", debits: 1893.98, credits: 1530.00, endBalance: -5478.91, flag: "NEG", debitNames: "Chaundra Williams, 2nd Mortgage, NC529, NFCU", creditNames: "103 Grandmont Rent"},
+            {date: "2025-12-16", debits: 33.00, credits: 0.00, endBalance: -5511.91, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-12-17", debits: 33.00, credits: 0.00, endBalance: -5544.91, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-12-18", debits: 520.00, credits: 0.00, endBalance: -6064.91, flag: "NEG", debitNames: "Ashley QuickSilver, C3 Baseball, Charleston Mgmt, NFCU", creditNames: ""},
+            {date: "2025-12-19", debits: 1333.00, credits: 3500.00, endBalance: -3897.91, flag: "NEG", debitNames: "Savings, Tithe, Debt Payoff, NFCU", creditNames: "Claritev Paycheck"},
+            {date: "2025-12-20", debits: 418.84, credits: 0.00, endBalance: -4316.75, flag: "NEG", debitNames: "ALLSTATE Insurance, Merry Maids", creditNames: ""},
+            {date: "2025-12-21", debits: 0.00, credits: 0.00, endBalance: -4316.75, flag: "NEG", debitNames: "", creditNames: ""},
+            {date: "2025-12-22", debits: 746.13, credits: 0.00, endBalance: -5062.88, flag: "NEG", debitNames: "pliability, Loan (Feb 17), Loan (Mar 19), NFCU", creditNames: ""},
+            {date: "2025-12-23", debits: 132.21, credits: 0.00, endBalance: -5195.09, flag: "NEG", debitNames: "Vitruvian Equipment, NFCU", creditNames: ""},
+            {date: "2025-12-24", debits: 33.00, credits: 0.00, endBalance: -5228.09, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
+            {date: "2025-12-25", debits: 33.00, credits: 1000.00, endBalance: -4261.09, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: "WakeMed Paycheck"},
+            {date: "2025-12-26", debits: 3428.28, credits: 0.00, endBalance: -7689.37, flag: "NEG", debitNames: "Container Store, MMI, Buffalo Grove, Groceries, Gas, Eating Out, Principal, Savings, Tithe, Debt Payoff, NFCU", creditNames: ""},
+            {date: "2025-12-27", debits: 1519.78, credits: 0.00, endBalance: -9209.15, flag: "NEG", debitNames: "Aven Card, Sofi Loan", creditNames: ""},
+            {date: "2025-12-28", debits: 0.00, credits: 0.00, endBalance: -9209.15, flag: "NEG", debitNames: "", creditNames: ""},
+            {date: "2025-12-29", debits: 52.99, credits: 0.00, endBalance: -9262.14, flag: "NEG", debitNames: "MyFitnessPal, NFCU", creditNames: ""},
+            {date: "2025-12-30", debits: 522.29, credits: 0.00, endBalance: -9784.43, flag: "NEG", debitNames: "Chaundra Williams, Club Pilates, NFCU", creditNames: ""},
+            {date: "2025-12-31", debits: 33.00, credits: 0.00, endBalance: -9817.43, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""}
+        ];
+
+        function formatCurrency(amount) {
+            const formatted = Math.abs(amount).toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            return amount < 0 ? `-$${formatted}` : `$${formatted}`;
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T12:00:00');
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${months[date.getMonth()]} ${date.getDate()} (${days[date.getDay()]})`;
+        }
+
+        // Emergency Banner
+        function checkEmergencyStatus() {
+            const today = new Date();
+            const firstNegative = transactions.find(t => t.flag === 'NEG');
+
+            if (firstNegative) {
+                const negDate = new Date(firstNegative.date + 'T12:00:00');
+                const daysUntil = Math.ceil((negDate - today) / (1000 * 60 * 60 * 24));
+
+                if (daysUntil <= 7 && daysUntil >= 0) {
+                    document.getElementById('emergencyBanner').style.display = 'block';
+                    document.getElementById('daysUntil').textContent = daysUntil;
+                }
+            }
+        }
+
+        // Update Alert Badges
+        function updateAlertBadges() {
+            const negCount = transactions.filter(t => t.flag === 'NEG').length;
+            const lowCount = transactions.filter(t => t.flag === 'LOW').length;
+
+            document.getElementById('alertBadges').innerHTML = `
+                ${negCount > 0 ? `<span class="alert-badge">${negCount} CRITICAL</span>` : ''}
+                ${lowCount > 0 ? `<span class="alert-badge warning">${lowCount} warnings</span>` : ''}
+            `;
+        }
+
+        // Generate Recommended Action
+        function generateRecommendedAction() {
+            const negativeTransactions = transactions.filter(t => t.flag === 'NEG');
+
+            if (negativeTransactions.length === 0) {
+                document.getElementById('actionCenter').style.display = 'none';
+                return;
+            }
+
+            const firstNeg = negativeTransactions[0];
+            const lastNeg = negativeTransactions[negativeTransactions.length - 1];
+            const worstBalance = Math.min(...negativeTransactions.map(t => t.endBalance));
+
+            const bridgeAmount = Math.ceil(Math.abs(worstBalance) / 100) * 100 + 100;
+
+            const firstNegDate = new Date(firstNeg.date + 'T12:00:00');
+            const transferDate = new Date(firstNegDate);
+            transferDate.setDate(transferDate.getDate() - 1);
+            const transferDateStr = transferDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+
+            document.getElementById('actionTitle').textContent =
+                `Transfer $${bridgeAmount.toLocaleString()} by ${transferDateStr}`;
+            document.getElementById('actionWhy').textContent =
+                `Prevents all ${negativeTransactions.length} negative days (${formatDate(firstNeg.date)} - ${formatDate(lastNeg.date)})`;
+        }
+
+        // Update Contextual Metrics
+        function updateContextualMetrics() {
+            const avgDailyExpense = transactions.reduce((sum, t) => sum + t.debits, 0) / transactions.length;
+            const runwayDays = Math.floor(transactions[0].endBalance / avgDailyExpense);
+            document.getElementById('runwayDays').textContent = runwayDays;
+            document.getElementById('runwayFill').style.width = `${Math.min((runwayDays / 30) * 100, 100)}%`;
+
+            const runwayCard = document.getElementById('runwayCard');
+            runwayCard.classList.remove('healthy', 'caution', 'danger');
+            if (runwayDays < 15) {
+                runwayCard.classList.add('danger');
+            } else if (runwayDays < 25) {
+                runwayCard.classList.add('caution');
+            } else {
+                runwayCard.classList.add('healthy');
+            }
+
+            const totalIncome = transactions.reduce((sum, t) => sum + t.credits, 0);
+            const totalExpense = transactions.reduce((sum, t) => sum + t.debits, 0);
+            const savingsRate = Math.round(((totalIncome - totalExpense) / totalIncome) * 100);
+            document.getElementById('savingsRate').textContent = savingsRate;
+        }
+
+        // Update Summary Metrics - Calculate from transaction data
+        function updateSummaryMetrics() {
+            // Calculate total income and expenses from transaction data
+            const totalIncome = transactions.reduce((sum, t) => sum + t.credits, 0);
+            const totalExpenses = transactions.reduce((sum, t) => sum + t.debits, 0);
+
+            // Calculate starting balance from first transaction
+            const firstTxn = transactions[0];
+            const startingBalance = firstTxn.endBalance + firstTxn.debits - firstTxn.credits;
+
+            // Get ending balance from last transaction
+            const lastTxn = transactions[transactions.length - 1];
+            const endingBalance = lastTxn.endBalance;
+
+            // Calculate net position (change over forecast period)
+            const netPosition = endingBalance - startingBalance;
+
+            // Find lowest balance point
+            const lowestBalance = Math.min(...transactions.map(t => t.endBalance));
+
+            // Count days below $500 threshold
+            const daysBelowThreshold = transactions.filter(t => t.endBalance < 500).length;
+
+            // Update Total Income and Total Expenses cards
+            document.getElementById('totalIncome').textContent = formatCurrency(totalIncome);
+            document.getElementById('totalExpenses').textContent = formatCurrency(totalExpenses);
+
+            // Update spending gauge (expenses as % of income)
+            const spendingPercent = totalIncome > 0 ? Math.round((totalExpenses / totalIncome) * 100) : 0;
+            document.getElementById('spendingGaugeFill').style.width = `${Math.min(spendingPercent, 100)}%`;
+            document.getElementById('spendingGaugePercent').textContent = `${spendingPercent}% of income`;
+
+            // Update other summary metrics
+            document.getElementById('startingBalance').textContent = formatCurrency(startingBalance);
+
+            const endingBalanceEl = document.getElementById('endingBalance');
+            endingBalanceEl.textContent = formatCurrency(endingBalance);
+            endingBalanceEl.className = endingBalance >= 0 ? 'value positive' : 'value negative';
+
+            const netPositionEl = document.getElementById('netPosition');
+            netPositionEl.textContent = formatCurrency(netPosition);
+
+            // Update net position card styling
+            const netPositionCard = document.getElementById('netPositionCard');
+            netPositionCard.classList.remove('surplus', 'income', 'expense');
+            if (netPosition >= 0) {
+                netPositionCard.classList.add('surplus');
+            } else {
+                netPositionCard.classList.add('expense');
+            }
+
+            document.getElementById('lowestPoint').textContent = formatCurrency(lowestBalance);
+            document.getElementById('daysBelowThreshold').textContent = `${daysBelowThreshold} days`;
+        }
+
+        // Table Rendering
+        let currentFilter = 'all';
+
+        function renderTable(filter = 'all') {
+            currentFilter = filter;
+            const container = document.getElementById('transactionTable');
+
+            let filtered = transactions;
+            if (filter === 'flagged') {
+                filtered = transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW');
+            } else if (filter === 'major') {
+                filtered = transactions.filter(t => t.debits > 500 || t.credits > 500);
+            }
+
+            document.getElementById('flaggedCount').textContent =
+                transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW').length;
+            document.getElementById('majorCount').textContent =
+                transactions.filter(t => t.debits > 500 || t.credits > 500).length;
+
+            let html = '<table><thead><tr>';
+            html += '<th>Date</th>';
+            html += '<th class="amount-col">Debits</th>';
+            html += '<th>Debit Names</th>';
+            html += '<th class="amount-col">Credits</th>';
+            html += '<th>Credit Names</th>';
+            html += '<th class="amount-col">Net Change</th>';
+            html += '<th class="amount-col">End Balance</th>';
+            html += '<th>Flag</th>';
+            html += '</tr></thead><tbody>';
+
+            let currentMonth = '';
+            filtered.forEach((txn, index) => {
+                const txnMonth = txn.date.substring(0, 7);
+
+                // Initialize currentMonth with the first transaction's month
+                if (index === 0) {
+                    currentMonth = txnMonth;
+                }
+
+                // When month changes, show separator for the month that just ended
+                if (txnMonth !== currentMonth && filter === 'all') {
+                    // Parse year and month to avoid timezone issues
+                    const [year, month] = currentMonth.split('-');
+                    const monthName = new Date(parseInt(year), parseInt(month) - 1, 15).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+                    html += `<tr class="month-separator"><td colspan="8">End of ${monthName}</td></tr>`;
+                    currentMonth = txnMonth;
+                }
+
+                const netChange = txn.credits - txn.debits;
+                const flagClass = txn.flag === 'NEG' ? 'flag-neg' : txn.flag === 'LOW' ? 'flag-low' : '';
+                const balanceClass = txn.endBalance < 0 ? 'negative' : 'positive';
+
+                html += '<tr>';
+                html += `<td>${formatDate(txn.date)}</td>`;
+                html += `<td class="amount-col">${formatCurrency(txn.debits)}</td>`;
+                html += `<td>${txn.debitNames}</td>`;
+                html += `<td class="amount-col">${formatCurrency(txn.credits)}</td>`;
+                html += `<td>${txn.creditNames}</td>`;
+                html += `<td class="amount-col ${netChange >= 0 ? 'positive' : 'negative'}">${formatCurrency(netChange)}</td>`;
+                html += `<td class="amount-col ${balanceClass}">${formatCurrency(txn.endBalance)}</td>`;
+                html += `<td class="${flagClass}">${txn.flag || ''}</td>`;
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // Filter Buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderTable(this.dataset.filter);
+            });
+        });
+
+        // Chart with Annotations
+        const ctx = document.getElementById('balanceChart');
+
+        const annotations = {
+            zeroLine: {
+                type: 'line',
+                yMin: 0,
+                yMax: 0,
+                borderColor: '#dc2626',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                label: {
+                    content: 'Zero Balance',
+                    enabled: true,
+                    position: 'start',
+                    backgroundColor: '#dc2626',
+                    color: 'white',
+                    padding: 4
+                }
+            }
+        };
+
+        transactions.forEach((txn, index) => {
+            if (txn.credits >= 1000) {
+                annotations[`paycheck_${index}`] = {
+                    type: 'point',
+                    xValue: index,
+                    yValue: txn.endBalance,
+                    backgroundColor: '#10b981',
+                    borderColor: '#059669',
+                    borderWidth: 2,
+                    radius: 6
+                };
+            }
+
+            if (txn.debits >= 1000) {
+                annotations[`bill_${index}`] = {
+                    type: 'point',
+                    xValue: index,
+                    yValue: txn.endBalance,
+                    backgroundColor: '#ef4444',
+                    borderColor: '#dc2626',
+                    borderWidth: 2,
+                    radius: 6
+                };
+            }
+        });
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: transactions.map(t => formatDate(t.date)),
+                datasets: [{
+                    label: 'Balance',
+                    data: transactions.map(t => t.endBalance),
+                    borderColor: 'rgb(102, 126, 234)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 2,
+                    pointHoverRadius: 6,
+                    segment: {
+                        borderColor: ctx => {
+                            const current = transactions[ctx.p1.$context.dataIndex];
+                            const previous = transactions[ctx.p0.$context.dataIndex];
+                            if (current.flag === 'NEG' || previous.flag === 'NEG') {
+                                return '#ef4444';
+                            }
+                            if (current.flag === 'LOW' || previous.flag === 'LOW') {
+                                return '#f59e0b';
+                            }
+                            return 'rgb(102, 126, 234)';
+                        }
+                    }
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false },
+                    annotation: { annotations: annotations },
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                return formatDate(transactions[context[0].dataIndex].date);
+                            },
+                            label: function(context) {
+                                const txn = transactions[context.dataIndex];
+                                const lines = ['Balance: ' + formatCurrency(txn.endBalance)];
+
+                                if (txn.credits > 0) {
+                                    lines.push('💰 +' + formatCurrency(txn.credits) +
+                                              (txn.creditNames ? ' (' + txn.creditNames + ')' : ''));
+                                }
+                                if (txn.debits > 0) {
+                                    lines.push('🏦 -' + formatCurrency(txn.debits) +
+                                              (txn.debits > 500 && txn.debitNames ? ' (' + txn.debitNames + ')' : ''));
+                                }
+
+                                return lines;
+                            }
+                        },
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        cornerRadius: 8
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: function(value) {
+                                return formatCurrency(value);
+                            }
+                        },
+                        grid: {
+                            color: function(context) {
+                                return context.tick.value === 0 ? '#dc2626' : 'rgba(0, 0, 0, 0.1)';
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45,
+                            autoSkip: true,
+                            maxTicksLimit: 20
+                        },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Initialize all features
+        checkEmergencyStatus();
+        updateAlertBadges();
+        generateRecommendedAction();
+        updateContextualMetrics();
+        updateSummaryMetrics();
+        renderTable();
+    </script>
+</body>
+</html>
