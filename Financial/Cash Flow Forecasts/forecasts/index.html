@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Flow Forecasting System</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .landing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            flex: 1;
+        }
+
+        .landing-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .landing-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .landing-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .page-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-card:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px var(--shadow);
+            transform: translateY(-4px);
+        }
+
+        .page-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-card-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .page-card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .page-card-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-card-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .page-card-features li:before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .page-card-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .page-card-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .features-section {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-primary);
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .landing-header h1 {
+                font-size: 2rem;
+            }
+
+            .landing-header p {
+                font-size: 1rem;
+            }
+
+            .page-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <div class="landing-header">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="theme-icon" id="themeIcon">🌙</span>
+                <span id="themeText">Dark</span>
+            </button>
+            <h1>Cash Flow Forecasting System</h1>
+            <p>Comprehensive financial planning and scenario analysis tools</p>
+        </div>
+
+        <div class="page-cards">
+            <a href="dashboard-only.html" class="page-card">
+                <div class="page-card-icon">📊</div>
+                <h2 class="page-card-title">Dashboard</h2>
+                <p class="page-card-description">
+                    View your complete 42-day cash flow forecast with visual insights, alerts, and recommendations.
+                </p>
+                <ul class="page-card-features">
+                    <li>Real-time balance projections</li>
+                    <li>Critical alerts and warnings</li>
+                    <li>At-a-glance summary metrics</li>
+                    <li>Interactive balance chart</li>
+                    <li>Detailed daily transactions table</li>
+                </ul>
+                <div class="page-card-cta">
+                    View Dashboard →
+                </div>
+            </a>
+
+            <a href="scenario-planner.html" class="page-card">
+                <div class="page-card-icon">🎯</div>
+                <h2 class="page-card-title">Scenario Planner</h2>
+                <p class="page-card-description">
+                    Explore "what-if" scenarios by toggling expenses on/off to see real-time impact on your cash flow.
+                </p>
+                <ul class="page-card-features">
+                    <li>Interactive expense toggles</li>
+                    <li>Before/after comparison tables</li>
+                    <li>Real-time impact calculations</li>
+                    <li>Preset scenarios (Survival, Aggressive)</li>
+                    <li>Save and load custom scenarios</li>
+                </ul>
+                <div class="page-card-cta">
+                    Open Planner →
+                </div>
+            </a>
+        </div>
+
+        <div class="features-section">
+            <h2>System Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>🔄 Biweekly Calculations</h3>
+                    <p>Accurate modulo-14 date calculations for recurring bills and income sources</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📅 42-Day Forecast</h3>
+                    <p>Extended 6-week projection window for comprehensive cash flow planning</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🎨 Dark/Light Themes</h3>
+                    <p>Persistent theme preferences across all pages with smooth transitions</p>
+                </div>
+                <div class="feature-item">
+                    <h3>💾 LocalStorage Persistence</h3>
+                    <p>Save and reload custom scenarios for ongoing financial planning</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🔍 Smart Filtering</h3>
+                    <p>Filter transactions by status (All, Negative, Low balance) on both pages</p>
+                </div>
+                <div class="feature-item">
+                    <h3>📱 Responsive Design</h3>
+                    <p>Optimized for desktop, tablet, and mobile viewing experiences</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>Architecture</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>📦 Modular JavaScript</h3>
+                    <p>Separated into shared modules (constants, theme, data) and scenario-specific modules (engine, calculator, manager)</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🎨 Shared Styles</h3>
+                    <p>Centralized CSS with CSS variables for consistent theming across pages</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🧪 Comprehensive Testing</h3>
+                    <p>40+ Playwright E2E tests ensuring reliability across all features and pages</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Cash Flow Forecasting System - Multi-Page Architecture</p>
+        <p>Powered by modular JavaScript, shared CSS, and comprehensive E2E testing</p>
+    </div>
+
+    <!-- Load shared modules -->
+    <script src="js/shared/theme-manager.js"></script>
+</body>
+</html>
