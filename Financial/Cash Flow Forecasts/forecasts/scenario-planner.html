@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario Planner - Cash Flow Forecast</title>
+    <link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+    <button class="show-panel-btn" id="showPanelBtn">Show Scenario Panel</button>
+
+    <aside class="control-panel" id="controlPanel">
+        <div class="panel-header">
+            <div class="panel-title">
+                <h2>Scenario Builder</h2>
+                <button class="toggle-panel-btn" id="togglePanel" title="Hide panel">←</button>
+            </div>
+            <input type="text" class="search-box" id="searchBox" placeholder="Search expenses...">
+        </div>
+
+        <div class="panel-content" id="panelContent">
+            <!-- Categories will be dynamically generated here -->
+        </div>
+
+        <div class="impact-summary" id="impactSummary">
+            <h3>Scenario Impact</h3>
+            <div class="impact-row">
+                <span class="impact-label">Expenses Removed:</span>
+                <span class="impact-value" id="expensesRemoved">$0</span>
+            </div>
+            <div class="impact-row">
+                <span class="impact-label">Ending Balance:</span>
+                <span class="impact-value" id="endingBalanceImpact">$800 → $800</span>
+            </div>
+            <div class="impact-row">
+                <span class="impact-label">Status:</span>
+                <span class="impact-value" id="statusImpact">UNCHANGED</span>
+            </div>
+            <div class="removed-expenses-list" id="removedExpensesList" style="display: none;">
+                <!-- Dynamically populated with removed expenses -->
+            </div>
+        </div>
+
+        <div class="control-buttons">
+            <button class="control-btn" id="resetBtn">Reset to Baseline</button>
+            <button class="control-btn" id="saveBtn">Save Scenario</button>
+            <button class="control-btn preset" id="survivalBtn">Survival Mode</button>
+            <button class="control-btn preset" id="aggressiveBtn">Aggressive Paydown</button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                    <span id="themeText">Dark</span>
+                </button>
+                <h1>Scenario Planner</h1>
+                <p class="subtitle">Compare baseline vs modified cash flow scenarios</p>
+            </div>
+
+            <div class="comparison-header">
+                <div class="comparison-title">
+                    <h2>Before vs After Comparison</h2>
+                    <p class="comparison-subtitle">Toggle expenses to see real-time impact</p>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-section baseline">
+                    <div class="comparison-section-header">
+                        <h3>Baseline Forecast</h3>
+                        <p>All expenses included</p>
+                    </div>
+                    <div class="table-filters">
+                        <button class="filter-btn active" data-filter="all" data-table="baseline">All Days (42)</button>
+                        <button class="filter-btn" data-filter="neg" data-table="baseline">Negative (0)</button>
+                        <button class="filter-btn" data-filter="low" data-table="baseline">Low (<$500) (0)</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="baselineTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th class="amount-col">Credits</th>
+                                    <th class="amount-col">Debits</th>
+                                    <th class="amount-col">Balance</th>
+                                    <th>Flag</th>
+                                </tr>
+                            </thead>
+                            <tbody id="baselineTableBody">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="comparison-section modified">
+                    <div class="comparison-section-header modified-header">
+                        <h3>Modified Forecast</h3>
+                        <p>With expense adjustments</p>
+                    </div>
+                    <div class="table-filters">
+                        <button class="filter-btn active" data-filter="all" data-table="modified">All Days (42)</button>
+                        <button class="filter-btn" data-filter="neg" data-table="modified">Negative (0)</button>
+                        <button class="filter-btn" data-filter="low" data-table="modified">Low (<$500) (0)</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="modifiedTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th class="amount-col">Credits</th>
+                                    <th class="amount-col">Debits</th>
+                                    <th class="amount-col">Balance</th>
+                                    <th>Flag</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modifiedTableBody">
+                                <!-- Dynamically populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load shared modules -->
+    <script src="js/shared/constants.js"></script>
+    <script src="js/shared/theme-manager.js"></script>
+    <script src="js/shared/data-loader.js"></script>
+
+    <!-- Load scenario planner modules -->
+    <script src="js/scenario-planner/transaction-rules.js"></script>
+    <script src="js/scenario-planner/transaction-engine.js"></script>
+    <script src="js/scenario-planner/comparison-calc.js"></script>
+    <script src="js/scenario-planner/scenario-manager.js"></script>
+    <script src="js/scenario-planner/scenario-storage.js"></script>
+
+    <script>
+        // Data structure to hold expense information for UI display
+        const expenseData = {
+            'Monthly Bills': [
+                { id: 'vitruvian-membership', name: 'Vitruvian Membership', amount: 39, schedule: 'Day 1' },
+                { id: 'transamerica', name: 'TRANSAMERICA Insurance', amount: 245.65, schedule: 'Day 1' },
+                { id: 'apple-card', name: 'Apple Card', amount: 30.00, schedule: 'Day 1' },
+                { id: 'supplements', name: 'Supplements', amount: 300, schedule: 'Day 1' },
+                { id: 'payment-coordinator', name: 'Payment Coordinator', amount: 500, schedule: 'Day 1' },
+                { id: 'synchrony-bank', name: 'SYNCHRONY Bank Bill Payment', amount: 58.00, schedule: 'Day 3' },
+                { id: 'synchrony-credit', name: 'SYNCHRONY Credit Card', amount: 87.00, schedule: 'Day 3' },
+                { id: 'bill-me-later', name: 'Bill Me Later', amount: 125.00, schedule: 'Day 3' },
+                { id: 'connell-gelb', name: 'Connell & Gelb', amount: 500, schedule: 'Day 4' },
+                { id: 'loancare-mortgage', name: 'LoanCare Mortgage', amount: 3566.24, schedule: 'Day 5' },
+                { id: 'sleep-number', name: 'Sleep Number', amount: 434.58, schedule: 'Day 7' },
+                { id: 'hexclad', name: 'HexClad Pots', amount: 126, schedule: 'Day 9' },
+                { id: 'duke-energy', name: 'Duke Energy NC', amount: 86.00, schedule: 'Day 9' },
+                { id: 'ashley-venture', name: 'Ashley Venture', amount: 67, schedule: 'Day 10' },
+                { id: 'netflix', name: 'Netflix', amount: 25, schedule: 'Day 10' },
+                { id: 'att', name: 'AT&T', amount: 52.50, schedule: 'Day 10' },
+                { id: 'sba-eidl', name: 'SBA EIDL Loan', amount: 315.00, schedule: 'Day 14' },
+                { id: 'chaundra-1', name: 'Chaundra Williams', amount: 270.29, schedule: 'Day 15' },
+                { id: '2nd-mortgage', name: '2nd Mortgage', amount: 1540.69, schedule: 'Day 15' },
+                { id: 'nc529', name: 'NC529 College Savings', amount: 50.00, schedule: 'Day 15' },
+                { id: 'ashley-quicksilver', name: 'Ashley QuickSilver', amount: 126, schedule: 'Day 18' },
+                { id: 'c3-baseball', name: 'C3 Baseball Training', amount: 312.00, schedule: 'Day 18' },
+                { id: 'allstate', name: 'ALLSTATE Insurance', amount: 243.84, schedule: 'Day 20' },
+                { id: 'merry-maids', name: 'Merry Maids', amount: 175, schedule: 'Day 20' },
+                { id: 'pliability', name: 'pliability', amount: 13.99, schedule: 'Day 22' },
+                { id: 'loan-feb-2022', name: 'Loan (Feb 17, 2022)', amount: 322.60, schedule: 'Day 22' },
+                { id: 'loan-mar-2025', name: 'Loan (Mar 19, 2025)', amount: 376.54, schedule: 'Day 22' },
+                { id: 'vitruvian-equipment', name: 'Vitruvian Equipment', amount: 99.21, schedule: 'Day 23' },
+                { id: 'container-store', name: 'The Container Store', amount: 144, schedule: 'Day 26' },
+                { id: 'aven-card', name: 'Aven Card', amount: 477, schedule: 'Day 27' },
+                { id: 'sofi-loan', name: 'Sofi Loan', amount: 1042.78, schedule: 'Day 27' },
+                { id: 'myfitnesspal', name: 'MyFitnessPal', amount: 19.99, schedule: 'Day 29' },
+                { id: 'chaundra-2', name: 'Chaundra Williams', amount: 270.29, schedule: 'Day 30' },
+                { id: 'club-pilates', name: 'Club Pilates', amount: 219, schedule: 'Day 30' }
+            ],
+            'Biweekly Bills': [
+                { id: 'mmi', name: 'MMI', amount: 852, schedule: 'Every 14 days (Anchor: Aug 8)' },
+                { id: 'charleston-mgmt', name: 'Charleston Management', amount: 49, schedule: 'Every 14 days (Anchor: Apr 24)' },
+                { id: 'buffalo-grove', name: 'Buffalo Grove HOA', amount: 51.28, schedule: 'Every 14 days (Anchor: Sep 5)' },
+                { id: 'groceries', name: 'Groceries', amount: 500, schedule: 'Every 14 days (Anchor: Nov 28)' },
+                { id: 'gas', name: 'Gas', amount: 100, schedule: 'Every 14 days (Anchor: Nov 28)' },
+                { id: 'eating-out', name: 'Eating Out', amount: 250, schedule: 'Every 14 days (Anchor: Nov 28)' },
+                { id: 'principal-loan', name: 'Principal Loan', amount: 198, schedule: 'Every 14 days (Anchor: Nov 14)' }
+            ],
+            'Weekday Recurring': [
+                { id: 'nfcu-volvo', name: 'NFCU Volvo Loan', amount: 33, schedule: 'Every weekday (Mon-Fri)' }
+            ],
+            'Friday Allocations': [
+                { id: 'savings', name: 'Savings', amount: 200, schedule: 'Every Friday' },
+                { id: 'tithe', name: 'Tithe', amount: 100, schedule: 'Every Friday' },
+                { id: 'debt-payoff', name: 'Debt Payoff', amount: 1000, schedule: 'Every Friday' }
+            ]
+        };
+
+        let scenarioManager;
+        let scenarioStorage;
+        let baselineFilter = 'all';
+        let modifiedFilter = 'all';
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2
+            }).format(value);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr + 'T12:00:00');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            return `${weekdays[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;
+        }
+
+        function initializeControlPanel() {
+            const panelContent = document.getElementById('panelContent');
+
+            // Generate categories
+            let html = '';
+            for (const [category, expenses] of Object.entries(expenseData)) {
+                html += `
+                    <details class="expense-category" open>
+                        <summary>
+                            <span>${category} (${expenses.length})</span>
+                            <span class="category-toggle">▶</span>
+                        </summary>
+                        <div class="expense-list">
+                `;
+
+                expenses.forEach(expense => {
+                    html += `
+                        <div class="expense-item" data-expense-id="${expense.id}">
+                            <input type="checkbox"
+                                   class="expense-checkbox"
+                                   id="cb-${expense.id}"
+                                   data-expense-id="${expense.id}"
+                                   checked>
+                            <div class="expense-details">
+                                <label for="cb-${expense.id}" class="expense-name">${expense.name}</label>
+                                <span class="expense-schedule">${expense.schedule}</span>
+                            </div>
+                            <span class="expense-amount">$${expense.amount.toFixed(2)}</span>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </details>
+                `;
+            }
+
+            panelContent.innerHTML = html;
+            setupControlPanelEvents();
+        }
+
+        function setupControlPanelEvents() {
+            // Toggle panel collapse
+            const toggleBtn = document.getElementById('togglePanel');
+            const controlPanel = document.getElementById('controlPanel');
+            const showPanelBtn = document.getElementById('showPanelBtn');
+
+            toggleBtn.addEventListener('click', () => {
+                controlPanel.classList.add('collapsed');
+                showPanelBtn.classList.add('visible');
+            });
+
+            showPanelBtn.addEventListener('click', () => {
+                controlPanel.classList.remove('collapsed');
+                showPanelBtn.classList.remove('visible');
+            });
+
+            // Initialize ScenarioManager
+            scenarioManager = new ScenarioManager(TRANSACTION_RULES, '2025-11-21', 800);
+            scenarioStorage = new ScenarioStorage();
+
+            scenarioManager.addListener((data) => {
+                updateImpactSummary();
+                renderTables();
+            });
+
+            // Checkbox change events
+            const checkboxes = document.querySelectorAll('.expense-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const expenseItem = e.target.closest('.expense-item');
+                    const expenseId = e.target.dataset.expenseId;
+                    const isEnabled = e.target.checked;
+
+                    if (isEnabled) {
+                        expenseItem.classList.remove('disabled');
+                    } else {
+                        expenseItem.classList.add('disabled');
+                    }
+
+                    scenarioManager.toggleExpense(expenseId, isEnabled);
+                });
+            });
+
+            // Search functionality
+            const searchBox = document.getElementById('searchBox');
+            searchBox.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const expenseItems = document.querySelectorAll('.expense-item');
+
+                expenseItems.forEach(item => {
+                    const expenseName = item.querySelector('.expense-name').textContent.toLowerCase();
+                    if (expenseName.includes(searchTerm)) {
+                        item.style.display = 'grid';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Reset button
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                checkboxes.forEach(cb => {
+                    cb.checked = true;
+                    cb.closest('.expense-item').classList.remove('disabled');
+                });
+                scenarioManager.reset();
+            });
+
+            // Save button
+            document.getElementById('saveBtn').addEventListener('click', () => {
+                const scenarioName = prompt('Enter a name for this scenario:');
+                if (scenarioName && scenarioName.trim()) {
+                    const disabledExpenses = scenarioManager.getDisabledExpenses();
+                    const comparison = new ComparisonCalculator(
+                        scenarioManager.getBaselineForecast(),
+                        scenarioManager.getModifiedForecast()
+                    );
+                    const balanceChange = comparison.getEndingBalanceChange();
+
+                    const summary = {
+                        totalRemoved: comparison.getTotalRemoved(),
+                        endingBalance: balanceChange.after,
+                        delta: balanceChange.delta,
+                        expenseCount: disabledExpenses.size
+                    };
+
+                    scenarioStorage.saveScenario(scenarioName.trim(), disabledExpenses, summary);
+                    alert(`Scenario "${scenarioName.trim()}" saved successfully!`);
+                }
+            });
+
+            // Survival Mode preset
+            document.getElementById('survivalBtn').addEventListener('click', () => {
+                applySurvivalMode();
+            });
+
+            // Aggressive Paydown preset
+            document.getElementById('aggressiveBtn').addEventListener('click', () => {
+                applyAggressivePaydown();
+            });
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const filter = e.target.dataset.filter;
+                    const table = e.target.dataset.table;
+
+                    // Update active state
+                    e.target.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    // Update filter and re-render
+                    if (table === 'baseline') {
+                        baselineFilter = filter;
+                    } else {
+                        modifiedFilter = filter;
+                    }
+                    renderTables();
+                });
+            });
+        }
+
+        function updateImpactSummary() {
+            if (!scenarioManager) return;
+
+            const baselineForecast = scenarioManager.getBaselineForecast();
+            const modifiedForecast = scenarioManager.getModifiedForecast();
+            const disabledExpenses = scenarioManager.getDisabledExpenses();
+
+            const comparison = new ComparisonCalculator(baselineForecast, modifiedForecast);
+
+            // Update expenses removed
+            const totalRemoved = comparison.getTotalRemoved();
+            document.getElementById('expensesRemoved').textContent = formatCurrency(totalRemoved);
+
+            // Update ending balance
+            const balanceChange = comparison.getEndingBalanceChange();
+            const deltaClass = balanceChange.improvement ? 'delta-positive' : 'delta-negative';
+            const deltaSymbol = balanceChange.improvement ? '+' : '';
+            document.getElementById('endingBalanceImpact').innerHTML =
+                `${formatCurrency(balanceChange.before)} <span class="arrow-indicator">→</span> ${formatCurrency(balanceChange.after)} <span class="delta-badge ${deltaClass}">${deltaSymbol}${formatCurrency(balanceChange.delta)}</span>`;
+
+            // Update status
+            const statusChange = comparison.getStatusChange();
+            const statusEl = document.getElementById('statusImpact');
+            statusEl.textContent = statusChange.text;
+            statusEl.style.color = statusChange.color;
+
+            // Update removed expenses list
+            const removedList = document.getElementById('removedExpensesList');
+            if (disabledExpenses.size > 0) {
+                const removedExpenses = comparison.getRemovedExpensesList(disabledExpenses, TRANSACTION_RULES);
+                let html = '<div style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.875rem;">Removed Expenses:</div>';
+                removedExpenses.forEach(expense => {
+                    html += `
+                        <div class="removed-expense-item">
+                            <span>${expense.name}</span>
+                            <span>${formatCurrency(expense.amount)}</span>
+                        </div>
+                    `;
+                });
+                removedList.innerHTML = html;
+                removedList.style.display = 'block';
+            } else {
+                removedList.style.display = 'none';
+            }
+        }
+
+        function applySurvivalMode() {
+            const discretionaryIds = ['savings', 'tithe', 'debt-payoff', 'eating-out',
+                                     'club-pilates', 'myfitnesspal', 'pliability',
+                                     'netflix', 'supplements'];
+
+            scenarioManager.disabledExpenses.clear();
+            document.querySelectorAll('.expense-checkbox').forEach(cb => {
+                if (discretionaryIds.includes(cb.dataset.expenseId)) {
+                    cb.checked = false;
+                    cb.closest('.expense-item').classList.add('disabled');
+                    scenarioManager.disabledExpenses.add(cb.dataset.expenseId);
+                } else {
+                    cb.checked = true;
+                    cb.closest('.expense-item').classList.remove('disabled');
+                }
+            });
+
+            scenarioManager.recalculate();
+        }
+
+        function applyAggressivePaydown() {
+            const essentialIds = ['loancare-mortgage', '2nd-mortgage', 'duke-energy', 'att',
+                                 'groceries', 'gas', 'nfcu-volvo', 'debt-payoff'];
+
+            scenarioManager.disabledExpenses.clear();
+            document.querySelectorAll('.expense-checkbox').forEach(cb => {
+                if (essentialIds.includes(cb.dataset.expenseId)) {
+                    cb.checked = true;
+                    cb.closest('.expense-item').classList.remove('disabled');
+                } else {
+                    cb.checked = false;
+                    cb.closest('.expense-item').classList.add('disabled');
+                    scenarioManager.disabledExpenses.add(cb.dataset.expenseId);
+                }
+            });
+
+            scenarioManager.recalculate();
+        }
+
+        function renderTables() {
+            if (!scenarioManager) return;
+
+            const baselineForecast = scenarioManager.getBaselineForecast();
+            const modifiedForecast = scenarioManager.getModifiedForecast();
+
+            renderTable('baseline', baselineForecast, baselineFilter);
+            renderTable('modified', modifiedForecast, modifiedFilter);
+            updateFilterCounts();
+        }
+
+        function renderTable(tableType, forecast, filter) {
+            const tbody = document.getElementById(`${tableType}TableBody`);
+            let html = '';
+
+            const filteredData = forecast.filter(day => {
+                if (filter === 'all') return true;
+                if (filter === 'neg') return day.flag === 'NEG';
+                if (filter === 'low') return day.flag === 'LOW';
+                return true;
+            });
+
+            filteredData.forEach(day => {
+                const flagClass = day.flag === 'NEG' ? 'flag-neg' : day.flag === 'LOW' ? 'flag-low' : '';
+                const flagText = day.flag || '-';
+
+                html += `
+                    <tr>
+                        <td>${formatDate(day.date)}</td>
+                        <td class="amount-col positive">${formatCurrency(day.credits)}</td>
+                        <td class="amount-col negative">${formatCurrency(day.debits)}</td>
+                        <td class="amount-col ${flagClass}">${formatCurrency(day.endBalance)}</td>
+                        <td class="${flagClass}">${flagText}</td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function updateFilterCounts() {
+            if (!scenarioManager) return;
+
+            const baselineForecast = scenarioManager.getBaselineForecast();
+            const modifiedForecast = scenarioManager.getModifiedForecast();
+
+            updateTableFilterCounts('baseline', baselineForecast);
+            updateTableFilterCounts('modified', modifiedForecast);
+        }
+
+        function updateTableFilterCounts(table, forecast) {
+            const allCount = forecast.length;
+            const negCount = forecast.filter(d => d.flag === 'NEG').length;
+            const lowCount = forecast.filter(d => d.flag === 'LOW').length;
+
+            const filters = document.querySelectorAll(`.filter-btn[data-table="${table}"]`);
+            filters.forEach(btn => {
+                const filter = btn.dataset.filter;
+                if (filter === 'all') {
+                    btn.textContent = `All Days (${allCount})`;
+                } else if (filter === 'neg') {
+                    btn.textContent = `Negative (${negCount})`;
+                } else if (filter === 'low') {
+                    btn.textContent = `Low (<$500) (${lowCount})`;
+                }
+            });
+        }
+
+        // Initialize
+        initializeControlPanel();
+        updateImpactSummary();
+        renderTables();
+
+        // Expose for testing
+        window.getScenarioManager = () => scenarioManager;
+        window.getScenarioStorage = () => scenarioStorage;
+    </script>
+</body>
+</html>
