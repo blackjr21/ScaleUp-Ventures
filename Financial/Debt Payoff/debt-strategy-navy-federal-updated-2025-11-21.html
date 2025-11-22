@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Payoff Strategy - Navy Federal Rate Reductions - Nov 21, 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .victory-banner {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .victory-banner h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .victory-banner p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        h1 {
+            color: #2c5282;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #2c5282;
+            font-size: 1.8em;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #4299e1;
+            padding-bottom: 12px;
+        }
+
+        h3 {
+            color: #2c5282;
+            font-size: 1.4em;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .rate-reduction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .rate-card {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #22543d;
+        }
+
+        .rate-card h4 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .rate-comparison {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .old-rate {
+            text-decoration: line-through;
+            opacity: 0.7;
+            color: #fc8181;
+        }
+
+        .new-rate {
+            color: #68d391;
+            font-size: 1.5em;
+        }
+
+        .savings-box {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+
+        .savings-amount {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-card.green {
+            background: linear-gradient(135deg, #38a169 0%, #2c7a4f 100%);
+        }
+
+        .stat-card.red {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+
+        .stat-card.blue {
+            background: linear-gradient(135deg, #4299e1 0%, #2c5282 100%);
+        }
+
+        .stat-card.gold {
+            background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .stat-label {
+            font-size: 0.95em;
+            opacity: 0.95;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .payoff-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95em;
+        }
+
+        .payoff-table thead {
+            background: #2c5282;
+            color: white;
+        }
+
+        .payoff-table th,
+        .payoff-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .payoff-table tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .rate-reduced {
+            background: #c6f6d5;
+            font-weight: bold;
+        }
+
+        .priority-high {
+            background: #fed7d7;
+        }
+
+        .priority-top {
+            background: #fefcbf;
+            font-weight: bold;
+        }
+
+        .milestone-timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .milestone-item {
+            position: relative;
+            padding: 20px 0;
+            border-left: 4px solid #4299e1;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .milestone-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 25px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #4299e1;
+            border: 3px solid white;
+            box-shadow: 0 0 0 4px #4299e1;
+        }
+
+        .milestone-item.major::before {
+            background: #38a169;
+            box-shadow: 0 0 0 4px #38a169;
+        }
+
+        .milestone-date {
+            font-weight: bold;
+            color: #2c5282;
+            font-size: 1.1em;
+        }
+
+        .milestone-description {
+            color: #4a5568;
+            margin-top: 5px;
+        }
+
+        .milestone-celebration {
+            background: #fef5e7;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            color: #744210;
+            font-style: italic;
+        }
+
+        .action-box {
+            background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .action-box h3 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .action-box ul {
+            list-style: none;
+        }
+
+        .action-box li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .action-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .comparison-card.recommended {
+            border-color: #38a169;
+            background: #f0fff4;
+            position: relative;
+        }
+
+        .comparison-card.recommended::after {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #38a169;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .comparison-card h4 {
+            color: #2c5282;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .comparison-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-stat:last-child {
+            border-bottom: none;
+        }
+
+        .pro-con-list {
+            margin: 15px 0;
+        }
+
+        .pro-con-list h5 {
+            margin-bottom: 10px;
+            color: #2c5282;
+        }
+
+        .pro-list li {
+            color: #38a169;
+        }
+
+        .con-list li {
+            color: #e53e3e;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            .rate-reduction-grid {
+                grid-template-columns: 1fr;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            .payoff-table {
+                font-size: 0.85em;
+            }
+            .payoff-table th,
+            .payoff-table td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="victory-banner">
+            <h1>MAJOR VICTORY: Navy Federal Rate Reductions</h1>
+            <p>Saving $162.24/month • $1,946.88/year • ~$9,724 over 5 years</p>
+            <p style="font-size: 1em; margin-top: 10px;">Analysis Date: November 21, 2025</p>
+        </div>
+
+        <h2>Navy Federal Rate Reduction Summary</h2>
+
+        <div class="rate-reduction-grid">
+            <div class="rate-card">
+                <h4>Navy Federal ***129382</h4>
+                <div class="rate-comparison">
+                    <span class="old-rate">16.7%</span>
+                    <span>→</span>
+                    <span class="new-rate">9.9%</span>
+                </div>
+                <p>Balance: $21,961.40</p>
+                <p>Reduction: 6.8 percentage points</p>
+                <div class="savings-box">
+                    <div>Monthly Savings</div>
+                    <div class="savings-amount">$124.56</div>
+                </div>
+            </div>
+
+            <div class="rate-card">
+                <h4>Navy Federal ***065726</h4>
+                <div class="rate-comparison">
+                    <span class="old-rate">14.1%</span>
+                    <span>→</span>
+                    <span class="new-rate">9.9%</span>
+                </div>
+                <p>Balance: $9,953.69</p>
+                <p>Reduction: 4.2 percentage points</p>
+                <div class="savings-box">
+                    <div>Monthly Savings</div>
+                    <div class="savings-amount">$34.87</div>
+                </div>
+            </div>
+
+            <div class="rate-card">
+                <h4>Navy Federal ***566998</h4>
+                <div class="rate-comparison">
+                    <span class="old-rate">12.1%</span>
+                    <span>→</span>
+                    <span class="new-rate">9.9%</span>
+                </div>
+                <p>Balance: $1,531.21</p>
+                <p>Reduction: 2.2 percentage points</p>
+                <div class="savings-box">
+                    <div>Monthly Savings</div>
+                    <div class="savings-amount">$2.81</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Updated Financial Overview</h2>
+
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div class="stat-label">Total Debt</div>
+                <div class="stat-value">$884,472</div>
+                <div>Unsecured: $241,414</div>
+                <div>Mortgages: $643,058</div>
+            </div>
+
+            <div class="stat-card green">
+                <div class="stat-label">Monthly Savings from Rates</div>
+                <div class="stat-value">$162.24</div>
+                <div>Annual: $1,946.88</div>
+                <div>5-Year: ~$9,724</div>
+            </div>
+
+            <div class="stat-card blue">
+                <div class="stat-label">Debt-Free Timeline</div>
+                <div class="stat-value">88 Months</div>
+                <div>April 2033</div>
+                <div style="font-size: 0.9em; margin-top: 5px;">3 months faster than before</div>
+            </div>
+
+            <div class="stat-card gold">
+                <div class="stat-label">Interest Savings</div>
+                <div class="stat-value">$9,724</div>
+                <div>vs. Old Rates</div>
+                <div>On 3 Navy Federal accounts</div>
+            </div>
+        </div>
+
+        <h2>Updated Avalanche Priority Order</h2>
+
+        <p style="margin-bottom: 20px;"><strong>Key Change:</strong> SoFi Personal Loan at 17.89% is now the clear #1 priority among large debts. Navy Federal accounts dropped in priority due to 9.9% uniform rate.</p>
+
+        <table class="payoff-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Account</th>
+                    <th>Balance</th>
+                    <th>APR</th>
+                    <th>Monthly Interest</th>
+                    <th>Status/Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>PayPal Credit - Standard</td>
+                    <td>$375.04</td>
+                    <td>30.14%</td>
+                    <td>$9.42</td>
+                    <td>Highest APR</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Ashley PayPal - Standard</td>
+                    <td>$78.60</td>
+                    <td>30.14%</td>
+                    <td>$1.97</td>
+                    <td>$41 past due</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Marriott Bonvoy Amex</td>
+                    <td>$4,272.01</td>
+                    <td>28.74%</td>
+                    <td>$102.30</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Delta SkyMiles Amex</td>
+                    <td>$2,643.38</td>
+                    <td>28.74%</td>
+                    <td>$63.32</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Capital One VentureOne</td>
+                    <td>$2,330.49</td>
+                    <td>28.74%</td>
+                    <td>$55.83</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Capital One QuicksilverOne</td>
+                    <td>$2,703.14</td>
+                    <td>27.99%</td>
+                    <td>$63.06</td>
+                    <td>-</td>
+                </tr>
+                <tr class="priority-top">
+                    <td>7</td>
+                    <td><strong>SoFi Personal Loan</strong></td>
+                    <td><strong>$40,735.15</strong></td>
+                    <td><strong>17.89%</strong></td>
+                    <td><strong>$606.91</strong></td>
+                    <td><strong>TOP LARGE DEBT PRIORITY</strong></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Navy Federal ***561145</td>
+                    <td>$4,431.10</td>
+                    <td>16.3%</td>
+                    <td>$60.19</td>
+                    <td>MMI program</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Aven Credit Card</td>
+                    <td>$21,819.88</td>
+                    <td>13.49%</td>
+                    <td>$245.21</td>
+                    <td>-</td>
+                </tr>
+                <tr class="rate-reduced">
+                    <td>10</td>
+                    <td>Navy Federal ***129382</td>
+                    <td>$21,961.40</td>
+                    <td>9.9%</td>
+                    <td>$181.08</td>
+                    <td>REDUCED from 16.7%</td>
+                </tr>
+                <tr class="rate-reduced">
+                    <td>11</td>
+                    <td>Navy Federal ***065726</td>
+                    <td>$9,953.69</td>
+                    <td>9.9%</td>
+                    <td>$82.14</td>
+                    <td>REDUCED from 14.1%</td>
+                </tr>
+                <tr class="rate-reduced">
+                    <td>12</td>
+                    <td>Navy Federal ***566998</td>
+                    <td>$1,531.21</td>
+                    <td>9.9%</td>
+                    <td>$12.63</td>
+                    <td>REDUCED from 12.1%</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Synchrony Bank</td>
+                    <td>$2,335.37</td>
+                    <td>6.9%</td>
+                    <td>$13.44</td>
+                    <td>MMI program</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Navy Federal Auto Loan</td>
+                    <td>$23,725.15</td>
+                    <td>5.59%</td>
+                    <td>$110.63</td>
+                    <td>On autopay</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Chase ***125855</td>
+                    <td>$1,359.17</td>
+                    <td>5.3%</td>
+                    <td>$6.00</td>
+                    <td>MMI program</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Promotional Balances - URGENT</h2>
+
+        <table class="payoff-table">
+            <thead>
+                <tr>
+                    <th>Account</th>
+                    <th>Balance</th>
+                    <th>Expires</th>
+                    <th>Days Left</th>
+                    <th>Deferred Interest at Risk</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="priority-high">
+                    <td>PayPal THORUM</td>
+                    <td>$219.87</td>
+                    <td>01/11/26</td>
+                    <td>51</td>
+                    <td>$28.68</td>
+                    <td>CRITICAL</td>
+                </tr>
+                <tr class="priority-high">
+                    <td>PayPal DELTA #1</td>
+                    <td>$324.97</td>
+                    <td>01/11/26</td>
+                    <td>51</td>
+                    <td>$37.43</td>
+                    <td>CRITICAL</td>
+                </tr>
+                <tr class="priority-high">
+                    <td>PayPal DELTA #2</td>
+                    <td>$372.00</td>
+                    <td>02/11/26</td>
+                    <td>82</td>
+                    <td>$40.67</td>
+                    <td>HIGH</td>
+                </tr>
+                <tr class="priority-high">
+                    <td>CareCredit</td>
+                    <td>$1,748.00</td>
+                    <td>02/03/26</td>
+                    <td>74</td>
+                    <td>$75.32</td>
+                    <td>HIGH</td>
+                </tr>
+                <tr class="priority-high">
+                    <td>Container Store</td>
+                    <td>$2,323.15</td>
+                    <td>04/03/26</td>
+                    <td>133</td>
+                    <td>$1,766.89</td>
+                    <td>HIGH - MEGA BOMB</td>
+                </tr>
+                <tr class="priority-high">
+                    <td>Ashley PayPal Promo</td>
+                    <td>$751.62</td>
+                    <td>05/05/26</td>
+                    <td>165</td>
+                    <td>$23.23</td>
+                    <td>MEDIUM</td>
+                </tr>
+                <tr style="font-weight: bold; background: #fed7d7;">
+                    <td>TOTAL</td>
+                    <td>$5,739.61</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>$1,972.22</td>
+                    <td>DEFEND ALL</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Strategy Comparison (Updated with New Rates)</h2>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>Pure Avalanche</h4>
+                <div class="comparison-stat">
+                    <span>Total Interest:</span>
+                    <span><strong>$79,510</strong></span>
+                </div>
+                <div class="comparison-stat">
+                    <span>Debt-Free Date:</span>
+                    <span>April 2033</span>
+                </div>
+                <div class="comparison-stat">
+                    <span>Timeline:</span>
+                    <span>88 months</span>
+                </div>
+                <div class="pro-con-list">
+                    <h5>Pros:</h5>
+                    <ul class="pro-list">
+                        <li>Mathematically optimal</li>
+                        <li>Minimizes interest</li>
+                    </ul>
+                    <h5>Cons:</h5>
+                    <ul class="con-list">
+                        <li>Loses $1,972 in promos</li>
+                        <li>Slower psychological wins</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="comparison-card recommended">
+                <h4>Hybrid Avalanche (Promos First)</h4>
+                <div class="comparison-stat">
+                    <span>Total Interest:</span>
+                    <span style="color: #38a169;"><strong>$77,538</strong></span>
+                </div>
+                <div class="comparison-stat">
+                    <span>Debt-Free Date:</span>
+                    <span style="color: #38a169;">April 2033</span>
+                </div>
+                <div class="comparison-stat">
+                    <span>Timeline:</span>
+                    <span>88 months</span>
+                </div>
+                <div class="comparison-stat">
+                    <span>Year 1 Wins:</span>
+                    <span style="color: #38a169;"><strong>11 accounts closed</strong></span>
+                </div>
+                <div class="pro-con-list">
+                    <h5>Pros:</h5>
+                    <ul class="pro-list">
+                        <li>Saves $1,972 (promos)</li>
+                        <li>Minimizes total interest</li>
+                        <li>11 quick wins in Year 1</li>
+                        <li>Clear 2-phase structure</li>
+                    </ul>
+                    <h5>Cons:</h5>
+                    <ul class="con-list">
+                        <li>Requires discipline in Month 1-6</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="comparison-card">
+                <h4>Pure Snowball</h4>
+                <div class="comparison-stat">
+                    <span>Total Interest:</span>
+                    <span style="color: #e53e3e;"><strong>$97,118</strong></span>
+                </div>
+                <div class="comparison-stat">
+                    <span>Debt-Free Date:</span>
+                    <span>December 2033</span>
+                </div>
+                <div class="comparison-stat">
+                    <span>Timeline:</span>
+                    <span>96 months</span>
+                </div>
+                <div class="comparison-stat">
+                    <span>vs. Hybrid:</span>
+                    <span style="color: #e53e3e;">+$19,580 interest</span>
+                </div>
+                <div class="pro-con-list">
+                    <h5>Pros:</h5>
+                    <ul class="pro-list">
+                        <li>8 accounts in Year 1</li>
+                        <li>Psychological momentum</li>
+                    </ul>
+                    <h5>Cons:</h5>
+                    <ul class="con-list">
+                        <li>Costs $19,580 more</li>
+                        <li>SoFi accrues for 7+ years</li>
+                        <li>8 months slower</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h2>Your Victory Path: Hybrid Avalanche Strategy</h2>
+
+        <h3>Phase 1: Promotional Defense (Months 1-6)</h3>
+
+        <div class="milestone-timeline">
+            <div class="milestone-item">
+                <div class="milestone-date">Month 1 (December 2025)</div>
+                <div class="milestone-description">Pay off PayPal THORUM + PayPal DELTA #1</div>
+                <div class="milestone-celebration">Save $66.11 in deferred interest. First victory!</div>
+            </div>
+
+            <div class="milestone-item">
+                <div class="milestone-date">Month 2 (January 2026)</div>
+                <div class="milestone-description">Pay off PayPal DELTA #2</div>
+                <div class="milestone-celebration">Cumulative savings: $106.78</div>
+            </div>
+
+            <div class="milestone-item">
+                <div class="milestone-date">Month 3 (February 2026)</div>
+                <div class="milestone-description">Pay off CareCredit promotional balance</div>
+                <div class="milestone-celebration">Cumulative savings: $182.10</div>
+            </div>
+
+            <div class="milestone-item major">
+                <div class="milestone-date">Month 5 (April 2026)</div>
+                <div class="milestone-description">Container Store MEGA-BOMB defused!</div>
+                <div class="milestone-celebration">Saved $1,766.89! Biggest risk neutralized!</div>
+            </div>
+
+            <div class="milestone-item major">
+                <div class="milestone-date">Month 6 (May 2026)</div>
+                <div class="milestone-description">Ashley PayPal promo - PHASE 1 COMPLETE!</div>
+                <div class="milestone-celebration">Total saved: $1,972.22. Pivot to avalanche attack!</div>
+            </div>
+        </div>
+
+        <h3>Phase 2: Avalanche Attack (Months 7-88)</h3>
+
+        <div class="milestone-timeline">
+            <div class="milestone-item">
+                <div class="milestone-date">Month 7 (June 2026)</div>
+                <div class="milestone-description">Eliminate PayPal standard balances</div>
+                <div class="milestone-celebration">8 accounts closed total</div>
+            </div>
+
+            <div class="milestone-item major">
+                <div class="milestone-date">Month 12 (November 2026)</div>
+                <div class="milestone-description">YEAR 1 COMPLETE - 11 accounts closed!</div>
+                <div class="milestone-celebration">$1,972 saved + $560/month freed up. Momentum building!</div>
+            </div>
+
+            <div class="milestone-item">
+                <div class="milestone-date">Month 24 (November 2027)</div>
+                <div class="milestone-description">Year 2 Complete - 14 accounts closed</div>
+                <div class="milestone-celebration">$1,200/month freed. Halfway there!</div>
+            </div>
+
+            <div class="milestone-item major">
+                <div class="milestone-date">Month 49 (December 2029)</div>
+                <div class="milestone-description">SOFI PERSONAL LOAN ELIMINATED!</div>
+                <div class="milestone-celebration">MASSIVE VICTORY! $1,042.78/month freed. $606/month interest eliminated. Biggest enemy destroyed!</div>
+            </div>
+
+            <div class="milestone-item">
+                <div class="milestone-date">Month 76 (January 2032)</div>
+                <div class="milestone-description">All Navy Federal credit cards eliminated</div>
+                <div class="milestone-celebration">All 4 Navy Federal CCs gone. Only low-rate debts remain!</div>
+            </div>
+
+            <div class="milestone-item major">
+                <div class="milestone-date">Month 88 (April 2033)</div>
+                <div class="milestone-description">UNSECURED DEBT FREEDOM DAY!</div>
+                <div class="milestone-celebration">ALL $241,414 in unsecured debt ELIMINATED! $4,898.57/month FREED! 7.3 years of discipline rewarded! LIFE-CHANGING MOMENT!</div>
+            </div>
+        </div>
+
+        <h2>Your Next 3 Actions</h2>
+
+        <div class="action-box">
+            <h3>This Week:</h3>
+            <ul>
+                <li>Pay Ashley PayPal minimum ($92) to prevent additional late fees</li>
+                <li>Verify Navy Federal rate reductions on next statements (confirm 9.9% APR)</li>
+                <li>Set up debt tracking spreadsheet with all 26 debts and promotional deadlines</li>
+            </ul>
+        </div>
+
+        <div class="action-box" style="background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);">
+            <h3>This Month:</h3>
+            <ul>
+                <li>Allocate $500 extra payment toward first two PayPal promos (THORUM + DELTA 01/11)</li>
+                <li>Build emergency fund from $300 toward $1,000 target</li>
+                <li>Review all account statements to confirm minimum payments and APRs accurate</li>
+            </ul>
+        </div>
+
+        <div class="action-box" style="background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);">
+            <h3>By Month 2:</h3>
+            <ul>
+                <li>Complete first 2 promotional payoffs (save $66.11 in deferred interest)</li>
+                <li>Reach $700-1,000 emergency fund level</li>
+                <li>Establish monthly review routine (15 minutes first week of month)</li>
+            </ul>
+        </div>
+
+        <h2>Key Insights</h2>
+
+        <div style="background: #f7fafc; padding: 30px; border-radius: 8px; border-left: 6px solid #4299e1; margin: 30px 0;">
+            <h3 style="margin-top: 0; color: #2c5282;">What the Navy Federal Rate Reductions Mean:</h3>
+            <ul style="line-height: 2; color: #2d3748;">
+                <li><strong>$162/month extra cash flow</strong> - equivalent to getting a raise without doing anything</li>
+                <li><strong>$9,724 less interest</strong> over 5 years on these 3 accounts alone</li>
+                <li><strong>3 months faster</strong> to debt freedom (April 2033 instead of July 2033)</li>
+                <li><strong>SoFi is now the clear enemy</strong> - at 17.89% with $40,735 balance, it's the top priority after promotional defense</li>
+                <li><strong>Navy Federal accounts dropped in priority</strong> - uniform 9.9% APR ranks below SoFi, Navy Federal ***561145 (16.3%), and Aven (13.49%)</li>
+                <li><strong>MMI program validated</strong> - rate reductions confirm the value of the debt management program</li>
+                <li><strong>Unchanged strategy</strong> - Hybrid Avalanche with Promotional Defense First remains optimal</li>
+            </ul>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #38a169 0%, #2f855a 100%); color: white; padding: 40px; border-radius: 12px; text-align: center; margin-top: 50px;">
+            <h2 style="color: white; border: none; margin: 0 0 20px 0;">You've Got This</h2>
+            <p style="font-size: 1.3em; margin-bottom: 15px;">Debt-Free Date: <strong>April 2033</strong></p>
+            <p style="font-size: 1.1em; margin-bottom: 15px;">Days Until Freedom: <strong>2,678 days</strong></p>
+            <p style="font-size: 1.1em; margin-bottom: 25px;">Monthly Interest Being Eliminated: <strong>$2,231</strong></p>
+            <p style="font-size: 1em; opacity: 0.95;">The best debt payoff strategy is the one you'll actually complete. This plan is designed for both your financial success and emotional sustainability.</p>
+            <p style="font-size: 1.2em; margin-top: 25px; font-weight: bold;">Every payment is progress. Let's do this.</p>
+        </div>
+    </div>
+</body>
+</html>

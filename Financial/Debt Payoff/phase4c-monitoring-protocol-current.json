@@ -1,0 +1,678 @@
+{
+  "protocolDate": "2025-11-21",
+  "strategy": "hybrid_avalanche_promos_first",
+  "monitoringFrequency": {
+    "monthly": "Required - track all payments and progress",
+    "quarterly": "Strategic review and adjustments",
+    "annual": "Comprehensive assessment and recalibration"
+  },
+  "monthlyReview": {
+    "duration": "15-20 minutes",
+    "schedule": "First weekend of each month",
+    "recommendedTime": "Sunday morning with coffee - make it pleasant",
+    "checklist": [
+      {
+        "task": "Update all debt balances",
+        "action": "Log into each account or check statements, record current balance in tracking spreadsheet",
+        "importance": "CRITICAL",
+        "note": "Automated tracking apps can streamline this - YNAB, Mint, etc."
+      },
+      {
+        "task": "Verify all minimum payments posted correctly",
+        "action": "Review bank account/credit card statements to confirm all minimums cleared on time",
+        "importance": "CRITICAL",
+        "lookFor": "Missed payments, late fees, returned payment fees - address immediately"
+      },
+      {
+        "task": "Confirm extra payment applied to target debt",
+        "action": "Verify $500 (or current amount) was applied to correct debt in payoff sequence",
+        "importance": "HIGH",
+        "note": "If promotional phase (months 1-6): Ensure payments going to promotional deadlines in order"
+      },
+      {
+        "task": "Check promotional balance deadlines (months 1-6 only)",
+        "action": "Review remaining promotional balances and time until deadline. Adjust allocation if needed.",
+        "importance": "CRITICAL (months 1-6)",
+        "deadlines": [
+          "PayPal THORUM + DELTA 01/11: January 11, 2026",
+          "PayPal DELTA 02/11: February 11, 2026",
+          "CareCredit: February 3, 2026",
+          "Container Store: April 3, 2026",
+          "Ashley PayPal: May 5, 2026"
+        ]
+      },
+      {
+        "task": "Calculate total debt reduction this month",
+        "action": "Compare total debt this month vs. last month. Calculate reduction (should be ~$10,534 in month 1)",
+        "importance": "HIGH",
+        "psychologicalBenefit": "Visible progress - celebrate this number!"
+      },
+      {
+        "task": "Update debt-free countdown",
+        "action": "Recalculate days/months until unsecured debt freedom based on current progress",
+        "importance": "MEDIUM",
+        "note": "Should decrease by 30-31 days each month if on track"
+      },
+      {
+        "task": "Review upcoming milestones",
+        "action": "Check what milestones are approaching (next account payoff, 6-month mark, 1-year anniversary, etc.)",
+        "importance": "MEDIUM",
+        "psychologicalBenefit": "Anticipation builds motivation"
+      },
+      {
+        "task": "Update visual trackers",
+        "action": "If using visual debt chart, update progress. If accounts closed this month, mark them off!",
+        "importance": "MEDIUM",
+        "psychologicalBenefit": "Physical act of crossing off debt is powerful"
+      },
+      {
+        "task": "Calculate and record snowball size",
+        "action": "Total available attack payment = $500 base + all freed minimum payments from closed accounts",
+        "importance": "MEDIUM",
+        "note": "Watching this grow is motivating - Month 1: $500 → Month 6: $822 → Month 12: $1,150"
+      },
+      {
+        "task": "Check for windfalls or unexpected expenses",
+        "action": "Review the past month - any bonuses, tax refunds, side income? Any emergency expenses?",
+        "importance": "HIGH",
+        "note": "Windfalls: Apply per windfall formula. Emergencies: Adjust plan if needed."
+      },
+      {
+        "task": "Verify MMI payment processed",
+        "action": "Confirm $1,751 MMI payment deducted correctly for the 8 consolidated debts",
+        "importance": "CRITICAL",
+        "note": "MMI program requires consistent payments - cannot miss"
+      },
+      {
+        "task": "Review emergency fund status",
+        "action": "Check emergency fund balance - goal is $1,000 starter fund, then $24,500 full fund",
+        "importance": "HIGH",
+        "action_if_below": "If emergency fund <$1,000, allocate some extra payment to building it until reached"
+      }
+    ],
+    "redFlags": [
+      {
+        "flag": "Missed minimum payment",
+        "action": "Pay IMMEDIATELY to minimize late fee. Call creditor if already late - request fee waiver. Set up autopay if possible.",
+        "consequence": "Late fees, interest rate increases, credit score damage"
+      },
+      {
+        "flag": "Total debt increased instead of decreased",
+        "action": "Investigate: New debt added? Interest accrual higher than payments? Emergency expense on credit card? Address root cause.",
+        "consequence": "Off-track from payoff timeline"
+      },
+      {
+        "flag": "Promotional deadline approaching with insufficient balance",
+        "action": "Reallocate payments immediately. Temporarily reduce extra payment to other debts if needed to defend deadline.",
+        "consequence": "Deferred interest charges (up to $1,766 on Container Store alone)"
+      },
+      {
+        "flag": "Unable to make extra $500 payment this month",
+        "action": "Assess reason. If temporary cash crunch, make minimums only this month. If systemic issue, reassess budget.",
+        "consequence": "Timeline extends but strategy still valid - progress over perfection"
+      }
+    ],
+    "celebrationTriggers": [
+      "Account closed this month → Update visual tracker, add $10 to Freedom Fund jar",
+      "Promotional deadline defended → Calculate deferred interest saved, celebrate that amount",
+      "Snowball grew this month → Note the increase, visualize the acceleration",
+      "On-time payment streak milestone (every 6 months) → Small reward"
+    ]
+  },
+  "quarterlyReview": {
+    "duration": "30-45 minutes",
+    "schedule": "Last weekend of February, May, August, November",
+    "protocol": [
+      {
+        "task": "Comprehensive progress assessment",
+        "action": "Review last 3 months of tracking. Calculate: Total debt reduction, number of accounts closed, snowball growth, on-track percentage.",
+        "questions": [
+          "Are we on pace for May 2033 unsecured debt freedom?",
+          "Have we closed expected number of accounts?",
+          "Is snowball growing as projected?",
+          "Any unexpected setbacks or accelerations?"
+        ]
+      },
+      {
+        "task": "Budget and cash flow review",
+        "action": "Analyze last 3 months of expenses. Identify trends, areas of overspending, opportunities for optimization.",
+        "questions": [
+          "Where did we overspend relative to budget?",
+          "Can we increase extra payment from $500 to $600 or more?",
+          "Any upcoming major expenses to plan for?",
+          "Is emergency fund adequate or growing?"
+        ]
+      },
+      {
+        "task": "Strategy effectiveness evaluation",
+        "action": "Assess whether current strategy (hybrid avalanche with promos first) is working optimally.",
+        "questions": [
+          "Should we adjust extra payment amount?",
+          "Are we defending promotional deadlines successfully?",
+          "Is avalanche sequence still optimal or should we adjust?",
+          "Any new debts added that change the plan?"
+        ]
+      },
+      {
+        "task": "SPS mortgage refinancing check",
+        "action": "Research current investment property mortgage rates. Compare to current 8.375% SPS rate.",
+        "triggerPoints": [
+          "If rates dropped to 7% or below → Get refinance quotes immediately",
+          "If rates dropped to 7-8% → Consider if closing costs justify savings",
+          "If rates at 8%+ → Continue monitoring, no action yet"
+        ]
+      },
+      {
+        "task": "Income optimization review",
+        "action": "Evaluate side hustle performance, career advancement progress, any income increase opportunities.",
+        "questions": [
+          "Is current side hustle profitable and sustainable?",
+          "Should we scale, pivot, or discontinue?",
+          "Any career opportunities on horizon (raise, promotion, job change)?",
+          "Windfall income this quarter (bonus, tax refund, etc.)?"
+        ]
+      },
+      {
+        "task": "Expense optimization review",
+        "action": "Review last quarter's expense reduction initiatives. What worked? What didn't?",
+        "questions": [
+          "Did meal planning reduce grocery spend?",
+          "Did subscription cuts stick or did we re-subscribe?",
+          "Are negotiated rates (internet, phone) still in effect?",
+          "New opportunities to reduce spending?"
+        ]
+      },
+      {
+        "task": "Credit score check",
+        "action": "Pull free credit report (annualcreditreport.com) or check Credit Karma/Mint score.",
+        "lookFor": [
+          "Score improvement as balances decrease",
+          "Credit utilization reduction (target <30%, ideal <10%)",
+          "Any errors or issues to dispute",
+          "Eligibility for balance transfer or consolidation offers"
+        ]
+      },
+      {
+        "task": "Motivation and psychological check-in",
+        "action": "Honest assessment of emotional state regarding debt payoff journey.",
+        "questions": [
+          "How am I feeling about the journey? Motivated or burned out?",
+          "Am I celebrating wins appropriately?",
+          "Do I need to adjust strategy for better psychological sustainability?",
+          "Is family/household aligned and supportive?"
+        ]
+      },
+      {
+        "task": "Milestone planning",
+        "action": "Review upcoming milestones in next quarter and plan celebrations.",
+        "examples": [
+          "Month 6 (April 2026): Promotional defense complete - plan $100 celebration",
+          "Month 12 (November 2026): Year 1 anniversary - plan $300-500 celebration",
+          "Month 52 (March 2030): SoFi elimination - plan major celebration"
+        ]
+      }
+    ],
+    "adjustmentTriggers": [
+      {
+        "trigger": "Consistently ahead of schedule (>10%)",
+        "adjustment": "Consider increasing extra payment or pulling debt-free date forward. Reassess timeline.",
+        "action": "Recalculate with actual progress. Update trackers with new debt-free date."
+      },
+      {
+        "trigger": "Consistently behind schedule (>10%)",
+        "adjustment": "Diagnose cause: Unexpected expenses? Income reduction? Lack of discipline? Address root cause.",
+        "action": "Adjust timeline if needed (be realistic). Recommit to strategy. Identify specific behavioral changes needed."
+      },
+      {
+        "trigger": "New debt added",
+        "adjustment": "Integrate new debt into strategy. Reassess payoff order based on APR and balance.",
+        "action": "Recalculate total debt, timeline, strategy. Update all trackers."
+      },
+      {
+        "trigger": "Significant income increase (>20%)",
+        "adjustment": "Increase extra payment proportionally. Recalculate accelerated timeline.",
+        "action": "Resist lifestyle inflation. Redirect income increase to debt payoff."
+      },
+      {
+        "trigger": "Significant income decrease (>20%)",
+        "adjustment": "Reduce extra payment to preserve cash flow. Switch to minimums-only if necessary.",
+        "action": "Use emergency fund if needed. Reassess budget. Communicate with creditors if at risk of missing payments."
+      }
+    ]
+  },
+  "annualReview": {
+    "duration": "1-2 hours",
+    "schedule": "Anniversary of debt payoff journey start date (November 21 each year)",
+    "guide": [
+      {
+        "section": "Year in Review - Quantitative",
+        "tasks": [
+          "Calculate total debt paid off this year",
+          "Count accounts closed this year",
+          "Calculate total interest paid this year",
+          "Calculate total interest saved this year (vs. baseline)",
+          "Compare actual progress to projected timeline",
+          "Calculate net worth change (debt reduction + any asset growth)"
+        ],
+        "deliverable": "Annual Progress Report with key metrics"
+      },
+      {
+        "section": "Year in Review - Qualitative",
+        "tasks": [
+          "Reflect on biggest wins this year",
+          "Reflect on biggest challenges this year",
+          "Assess stress level change over the year",
+          "Evaluate family/household alignment and support",
+          "Consider life quality: Better or worse? Sustainable?",
+          "Review lessons learned"
+        ],
+        "deliverable": "Written reflection (journal entry or discussion with partner)"
+      },
+      {
+        "section": "Strategy Assessment",
+        "tasks": [
+          "Is hybrid avalanche with promos first still optimal strategy?",
+          "Should we consider switching to pure avalanche or snowball?",
+          "Are there new consolidation/refinancing opportunities?",
+          "Should we sell investment property to accelerate?",
+          "Is extra payment amount optimal or should we increase/decrease?"
+        ],
+        "deliverable": "Decision on strategy for next year"
+      },
+      {
+        "section": "Goal Setting for Next Year",
+        "tasks": [
+          "Set specific debt reduction goal for next 12 months",
+          "Set specific account closure goal for next 12 months",
+          "Set income optimization goal (side hustle, career advancement)",
+          "Set expense optimization goal (specific categories to tackle)",
+          "Set personal goal (skill development, health, relationship)",
+          "Plan major milestones and celebrations for next 12 months"
+        ],
+        "deliverable": "Written goals for next year with specific targets and deadlines"
+      },
+      {
+        "section": "Financial Health Assessment",
+        "tasks": [
+          "Review emergency fund status - is $1,000 starter fund established? Progress toward $24,500?",
+          "Review credit score trend - improving as expected?",
+          "Review retirement contributions - are we sacrificing too much future for debt payoff?",
+          "Review insurance coverage - adequate protection?",
+          "Review estate planning - wills, beneficiaries up to date?",
+          "Calculate debt-to-income ratio - improvement from last year?"
+        ],
+        "deliverable": "Financial health scorecard"
+      },
+      {
+        "section": "Mortgage Strategy Assessment",
+        "tasks": [
+          "LoanCare (4.875%): Still optimal to pay minimums only? Any refinancing opportunity?",
+          "SPS (8.375%): Refinancing rates check - is now the time?",
+          "Investment property: Value assessment, rental income analysis, hold or sell decision",
+          "Post-debt-freedom planning: What will we do with freed $4,898/month in 2033?"
+        ],
+        "deliverable": "Mortgage strategy decision for next year"
+      },
+      {
+        "section": "Motivation and Sustainability Check",
+        "tasks": [
+          "Burnout assessment: Are we sustainable for another year? 5 more years?",
+          "Celebration review: Are we rewarding ourselves appropriately?",
+          "Support system: Do we need more accountability, encouragement, or expertise?",
+          "Mindset: Are we focused on progress (positive) or deprivation (negative)?",
+          "Adjustments: What changes would make this more sustainable?"
+        ],
+        "deliverable": "Sustainability plan for next year"
+      },
+      {
+        "section": "Major Decision Points",
+        "tasks": [
+          "Should we continue current strategy or make major change?",
+          "Sell investment property? (SPS mortgage elimination)",
+          "Pursue balance transfer or consolidation opportunity?",
+          "Major income opportunity (job change, business launch)?",
+          "Major life change impacting finances (kids, education, relocation)?"
+        ],
+        "deliverable": "Major decision(s) for next 12 months"
+      }
+    ],
+    "yearlyMilestones": {
+      "year1": {
+        "targetAccountsClosed": 11,
+        "targetDebtReduction": 15500,
+        "keyAchievement": "Promotional defense complete - $1,972 saved",
+        "celebration": "$300-500 reward"
+      },
+      "year2": {
+        "targetAccountsClosed": 14,
+        "targetDebtReduction": 32000,
+        "keyAchievement": "High-rate credit cards eliminated",
+        "celebration": "$300-500 reward"
+      },
+      "year3": {
+        "targetAccountsClosed": 16,
+        "targetDebtReduction": 55000,
+        "keyAchievement": "Halfway to unsecured debt freedom",
+        "celebration": "$500-750 reward"
+      },
+      "year4": {
+        "targetAccountsClosed": 17,
+        "targetDebtReduction": 125000,
+        "keyAchievement": "SoFi Personal Loan ELIMINATED",
+        "celebration": "$500-1000 reward - MAJOR milestone"
+      },
+      "year5": {
+        "targetAccountsClosed": 20,
+        "targetDebtReduction": 165000,
+        "keyAchievement": "All credit cards eliminated",
+        "celebration": "$300-500 reward"
+      },
+      "year6": {
+        "targetAccountsClosed": 22,
+        "targetDebtReduction": 200000,
+        "keyAchievement": "Final stretch - only low-rate debts remaining",
+        "celebration": "$300-500 reward"
+      },
+      "year7": {
+        "targetAccountsClosed": 24,
+        "targetDebtReduction": 241414,
+        "keyAchievement": "UNSECURED DEBT FREEDOM - May 2033",
+        "celebration": "$2000-3000 MAJOR celebration"
+      }
+    }
+  },
+  "strategyChangeTriggers": [
+    {
+      "trigger": "Promotional deadline missed - deferred interest charged",
+      "assessment": "How much deferred interest was charged? What went wrong?",
+      "action": "Set up automated calendar alerts for all remaining deadlines. Consider autopay for promotional balances. Learn from mistake and prevent recurrence.",
+      "strategyChange": "NO - stay the course, just improve execution"
+    },
+    {
+      "trigger": "Significant income increase (>25% sustained)",
+      "assessment": "Can we dramatically accelerate payoff timeline?",
+      "action": "Recalculate with increased extra payment (e.g., $500 → $1,000+). Update debt-free date projection. Consider lump-sum payments to high-rate debts.",
+      "strategyChange": "ACCELERATION - same strategy, faster execution"
+    },
+    {
+      "trigger": "Significant income decrease (>25% sustained)",
+      "assessment": "Can we maintain minimums + MMI commitment + mortgages?",
+      "action": "Reduce extra payment to preserve cash flow. Use emergency fund if needed. Prioritize: Mortgages > MMI > Essential minimums > Extra payments.",
+      "strategyChange": "DECELERATION - same strategy, slower execution, or switch to minimums-only temporarily"
+    },
+    {
+      "trigger": "Major emergency requires adding new debt",
+      "assessment": "How much new debt? What APR? How does it fit in payoff sequence?",
+      "action": "Integrate new debt into strategy. Reassess timeline. If high APR, may become new priority in avalanche sequence. If low APR, may go to end of list.",
+      "strategyChange": "INTEGRATION - adjust payoff order and timeline"
+    },
+    {
+      "trigger": "SPS mortgage refinancing opportunity (rate drop to <7%)",
+      "assessment": "What are closing costs? What's monthly savings? Payback period?",
+      "action": "Get quotes from 3-5 lenders. Calculate all costs and savings. If payback period <24 months, refinance. Apply monthly savings to unsecured debt.",
+      "strategyChange": "OPTIMIZATION - reduce mortgage cost, accelerate unsecured payoff"
+    },
+    {
+      "trigger": "Investment property sale opportunity (good offer)",
+      "assessment": "What's net proceeds after SPS payoff? What's best use of proceeds?",
+      "action": "Calculate: Sale price - SPS balance - closing costs = net proceeds. Apply 90% to highest-rate unsecured debts (SoFi, Navy Federal CCs). Recalculate timeline - likely 3-4 years acceleration.",
+      "strategyChange": "ACCELERATION - eliminate SPS mortgage + attack unsecured debt with proceeds"
+    },
+    {
+      "trigger": "Balance transfer or consolidation opportunity (0% or <8% APR)",
+      "assessment": "What debts can we consolidate? What's total savings vs. fees?",
+      "action": "Calculate: Interest saved - consolidation fees = net benefit. If net benefit >$1,000, pursue. Common targets: SoFi (17.89%), Navy Federal CCs (12-16.7%).",
+      "strategyChange": "OPTIMIZATION - reduce interest rates, accelerate payoff"
+    },
+    {
+      "trigger": "Unsustainable stress/burnout",
+      "assessment": "Is debt payoff journey causing relationship strain, health issues, or severe quality of life reduction?",
+      "action": "Reduce extra payment amount. Extend timeline. Focus on minimum payments + smaller extra payment ($200-300 instead of $500). Sustainability is more important than speed.",
+      "strategyChange": "DECELERATION - prioritize long-term sustainability over short-term acceleration"
+    },
+    {
+      "trigger": "Windfall (>$10,000)",
+      "assessment": "What's best use: Emergency fund, debt payoff, or combination?",
+      "action": "Apply windfall formula: Emergency fund gap → 10% reward → 90% to current target debt. If eliminates major debt (e.g., SoFi), massive acceleration.",
+      "strategyChange": "ACCELERATION - lump-sum payment shortens timeline"
+    },
+    {
+      "trigger": "Credit score improves to 700+ (from unknown/lower)",
+      "assessment": "Do new refinancing or consolidation options become available?",
+      "action": "Shop for personal loan to consolidate high-rate debts. Check balance transfer offers. Explore SPS mortgage refinancing. Better credit = better options.",
+      "strategyChange": "OPTIMIZATION - leverage improved credit for better rates"
+    },
+    {
+      "trigger": "Reaching Phase 2 (avalanche attack after promotional phase)",
+      "assessment": "Are we ready to pivot from promotional defense to pure avalanche?",
+      "action": "Month 7 (June 2026): Confirm all 6 promos paid off and $1,972 saved. Pivot to highest APR attack (PayPal standard balances, then Amex cards). Snowball should be ~$822/month.",
+      "strategyChange": "PHASE TRANSITION - planned evolution of strategy"
+    },
+    {
+      "trigger": "Unsecured debt freedom achieved (May 2033)",
+      "assessment": "What do we do with freed $4,898.57/month?",
+      "action": "Annual review in 2033 will decide: (1) Attack SPS mortgage aggressively, (2) Attack LoanCare mortgage, (3) Invest in retirement, (4) Balanced approach. Likely best: SPS mortgage elimination (2033-2036), then reassess.",
+      "strategyChange": "PHASE TRANSITION - pivot to mortgage payoff or wealth building"
+    }
+  ],
+  "contingencyPlans": {
+    "jobLoss": {
+      "immediateActions": [
+        "Switch to minimums-only on all debts immediately",
+        "Use emergency fund to cover essential expenses (housing, food, utilities) and minimum debt payments",
+        "File for unemployment benefits immediately",
+        "Review all expenses - cut all non-essentials",
+        "Contact MMI - may have hardship options for debt management plan",
+        "Pause extra debt payments entirely until income stabilizes"
+      ],
+      "cashFlowPriority": [
+        "1. Housing (LoanCare mortgage $3,566.24)",
+        "2. Utilities and food",
+        "3. SPS mortgage ($1,569.33) - if generating rental income, prioritize; if not, consider default options",
+        "4. Auto loan ($648.57) - if needed for job search",
+        "5. MMI payment ($1,751) - contact MMI for hardship plan",
+        "6. Other credit card minimums",
+        "7. SBA EIDL ($315) - contact for hardship deferment if available"
+      ],
+      "incomeReplacement": [
+        "Unemployment benefits (file immediately)",
+        "Severance package (if applicable)",
+        "Emergency fund ($300 current - inadequate, build to $1,000 ASAP)",
+        "Temporary/gig work while job searching (DoorDash, Uber, TaskRabbit)",
+        "Spousal income (if two-income household, lean on partner's income temporarily)"
+      ],
+      "longTermPlan": [
+        "Active job search - treat as full-time job",
+        "Network aggressively - 70% of jobs found through connections",
+        "Consider career pivot if opportunity arises",
+        "Reassess debt strategy once new job secured - update timeline based on lost time"
+      ],
+      "dontDo": [
+        "Don't panic and raid retirement accounts (taxes + penalties)",
+        "Don't add new high-interest debt if avoidable",
+        "Don't ignore creditors - communicate if you'll miss payments",
+        "Don't abandon debt strategy - pause and resume when able"
+      ]
+    },
+    "medicalEmergency": {
+      "immediateActions": [
+        "Use emergency fund to cover medical bills",
+        "If emergency fund insufficient, negotiate payment plan with medical provider BEFORE putting on credit card",
+        "Check if medical bills can be on 0% payment plan (many hospitals offer)",
+        "Temporarily reduce extra debt payment to build emergency fund back up",
+        "If severe financial impact, switch to minimums-only on debts"
+      ],
+      "medicalDebtStrategy": [
+        "NEVER pay medical bills with high-interest credit cards if avoidable",
+        "Negotiate bill with hospital/provider - often 20-50% reduction if cash payment",
+        "Set up payment plan directly with provider (usually 0% interest)",
+        "If medical debt goes to collections, negotiate pay-for-delete",
+        "Medical debt doesn't report to credit for 180 days - use this time to resolve"
+      ],
+      "insuranceReview": [
+        "Review health insurance coverage - adequate?",
+        "Consider higher deductible plan with HSA to reduce premiums",
+        "Ensure adequate coverage to prevent future medical debt",
+        "Review disability insurance - income protection if unable to work"
+      ],
+      "integrationIntoPlan": [
+        "If medical debt added, integrate into payoff strategy",
+        "If on 0% payment plan with provider, treat as lowest priority (pay minimums)",
+        "If on credit card, integrate based on APR into avalanche sequence",
+        "Adjust timeline to account for emergency expense and reduced payments"
+      ]
+    },
+    "carRepair": {
+      "emergencyFundUse": [
+        "If repair <$1,000 and emergency fund adequate, use emergency fund",
+        "If repair >$1,000, get multiple quotes and negotiate",
+        "Consider DIY repair if possible (YouTube, local mechanic guidance)"
+      ],
+      "alternatives": [
+        "Repair financing: Some shops offer 0% financing for 6-12 months",
+        "CareCredit or similar medical/auto credit (check APR)",
+        "Personal loan if significantly lower APR than credit cards",
+        "Credit card ONLY as last resort (adds to existing debt)"
+      ],
+      "preventionStrategy": [
+        "Regular maintenance reduces emergency repairs",
+        "Build car repair sinking fund: $50-100/month separate from debt payoff",
+        "Consider vehicle age and reliability - may be worth upgrading to avoid ongoing repairs"
+      ],
+      "integrationIntoPlan": [
+        "If new debt added, assess APR and integrate into payoff sequence",
+        "If 0% financing, pay minimums and prioritize other debts",
+        "If high APR, may become new priority in avalanche sequence",
+        "Rebuild emergency fund before resuming full extra payments"
+      ]
+    },
+    "unexpectedTaxBill": {
+      "immediateActions": [
+        "File taxes on time even if you can't pay - penalties lower for late payment than late filing",
+        "Set up IRS payment plan (usually 0-6% interest, much lower than credit cards)",
+        "If owe <$50,000, can set up online installment agreement",
+        "Consider Offer in Compromise if severe financial hardship"
+      ],
+      "paymentStrategy": [
+        "IRS payment plan is typically better than credit card debt",
+        "Pay minimum payment to IRS, continue debt payoff strategy",
+        "If tax debt is large, may need to temporarily reduce extra debt payments",
+        "Integrate IRS payment into monthly budget"
+      ],
+      "prevention": [
+        "Adjust W-4 withholding to avoid surprise tax bills",
+        "Make quarterly estimated payments if self-employed",
+        "Review tax strategy annually with accountant",
+        "Consider Tax preparation software or professional for complex returns"
+      ]
+    },
+    "rentalPropertyIssues": {
+      "scenario": "Investment property with SPS mortgage has tenant issues, major repair, or vacancy",
+      "immediateActions": [
+        "Assess impact on cash flow - can you cover SPS mortgage without rental income?",
+        "If vacancy: Market aggressively, consider rent reduction to fill quickly",
+        "If major repair: Get multiple quotes, negotiate, consider DIY if possible",
+        "If tenant non-payment: Eviction process (varies by state)"
+      ],
+      "cashFlowPriority": [
+        "SPS mortgage must be paid ($1,569.33/month) to avoid foreclosure",
+        "If rental income stops, redirect extra debt payment to cover SPS if needed",
+        "Use emergency fund temporarily if needed to cover gap"
+      ],
+      "strategicDecision": [
+        "If property is cash-flow negative or break-even, consider selling",
+        "Selling eliminates $167,717 debt + $1,569/month payment",
+        "Could dramatically accelerate unsecured debt payoff",
+        "Calculate: Equity - closing costs = net proceeds to apply to unsecured debt",
+        "Annual review should assess: Is this property helping or hurting our debt freedom journey?"
+      ]
+    },
+    "identityTheftOrFraud": {
+      "immediateActions": [
+        "File police report immediately",
+        "Contact all three credit bureaus - freeze credit",
+        "Contact affected creditors - dispute fraudulent charges",
+        "File FTC identity theft report (identitytheft.gov)",
+        "Monitor all accounts closely"
+      ],
+      "debtStrategyImpact": [
+        "Fraudulent debt should NOT be paid - dispute and document",
+        "May temporarily derail progress while resolving",
+        "Credit freeze may prevent balance transfers or new credit offers",
+        "Focus on maintaining current accounts while resolving fraud"
+      ],
+      "prevention": [
+        "Monitor credit reports regularly (free annually at annualcreditreport.com)",
+        "Use credit monitoring service (Credit Karma, etc.)",
+        "Freeze credit when not actively applying for new credit",
+        "Use strong passwords and two-factor authentication on all financial accounts"
+      ]
+    }
+  },
+  "trackingTools": {
+    "recommended": [
+      {
+        "tool": "Spreadsheet (Google Sheets or Excel)",
+        "purpose": "Master debt tracker with all balances, APRs, payments, progress",
+        "setup": "Create monthly tab with all 26 debts, automated calculations for totals, snowball, debt-free date",
+        "pros": "Customizable, free, full control, can include all metrics",
+        "cons": "Manual updates required"
+      },
+      {
+        "tool": "You Need A Budget (YNAB)",
+        "purpose": "Comprehensive budgeting and debt tracking with account linking",
+        "setup": "Link all debt accounts, set up debt payoff goals, track progress automatically",
+        "pros": "Automated updates, excellent budgeting tools, debt payoff tracking",
+        "cons": "Subscription cost ($99/year or $14.99/month)"
+      },
+      {
+        "tool": "Mint (free)",
+        "purpose": "Account linking, balance tracking, basic budgeting",
+        "setup": "Link all accounts, set up debt payoff goals",
+        "pros": "Free, automated updates, shows net worth trend",
+        "cons": "Less customization, ads"
+      },
+      {
+        "tool": "Undebt.it (free or premium)",
+        "purpose": "Specialized debt payoff tracking and planning",
+        "setup": "Enter all debts, choose payoff method (avalanche/snowball), track progress",
+        "pros": "Designed specifically for debt payoff, visual progress charts",
+        "cons": "Free version limited, doesn't track overall budget"
+      },
+      {
+        "tool": "Physical visual tracker",
+        "purpose": "Daily motivation and visual progress",
+        "setup": "Print or draw 24-box grid for 24 unsecured debts, hang in visible location",
+        "pros": "Powerful psychological impact, daily reminder, satisfying to cross off",
+        "cons": "Manual updates, not comprehensive"
+      }
+    ],
+    "recommended_combo": "YNAB or spreadsheet for comprehensive tracking + Physical visual tracker for motivation"
+  },
+  "communicationProtocol": {
+    "household": {
+      "frequency": "Monthly",
+      "format": "15-minute family financial meeting",
+      "agenda": [
+        "Review progress this month (debts closed, balances reduced)",
+        "Celebrate wins",
+        "Discuss any challenges or concerns",
+        "Preview next month (upcoming payoffs, milestones)",
+        "Ensure alignment on strategy and budget"
+      ],
+      "importance": "CRITICAL - household debt requires household alignment"
+    },
+    "accountabilityPartner": {
+      "frequency": "Monthly",
+      "format": "15-minute call or text update",
+      "content": "Share tracker screenshot, celebrate wins, discuss any struggles",
+      "importance": "HIGH - external accountability increases success"
+    },
+    "professionalReview": {
+      "frequency": "Quarterly or annually",
+      "provider": "MMI counselor or financial advisor",
+      "purpose": "Expert perspective on strategy effectiveness and optimization opportunities",
+      "importance": "MEDIUM - valuable but not essential"
+    }
+  }
+}

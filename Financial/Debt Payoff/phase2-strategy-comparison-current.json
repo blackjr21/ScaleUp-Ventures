@@ -1,0 +1,415 @@
+{
+  "analysisDate": "2025-11-21",
+  "dataSource": "debt-inventory-current.json + phase1-debt-analysis-current.json",
+  "updateNotes": "UPDATED: Added Johns Hopkins 401k loans. Corrected Navy Federal MMI rates to 9.9%. Recalculated all strategies with new debt totals.",
+
+  "strategiesCompared": ["hybrid_avalanche_promos_first", "pure_avalanche", "snowball", "consolidation"],
+
+  "userContext": {
+    "totalDebt": 924230.77,
+    "unsecuredDebt": 281173.20,
+    "mortgageDebt": 643057.57,
+    "extraPaymentCapacity": 500,
+    "mmiEnrollment": true,
+    "mmiPayment": 1751,
+    "mmiLocked": true,
+    "motivationStyle": "quick_wins",
+    "riskTolerance": "aggressive",
+    "creditScore": "unknown",
+    "emergencyFund": 300,
+    "monthlyIncome": 24500,
+    "dti": 45.7
+  },
+
+  "recommendation": {
+    "primaryStrategy": "hybrid_avalanche_promos_first",
+    "confidence": "HIGH",
+    "reasoning": [
+      "User's $500/month extra payment capacity is LIMITED - must maximize every dollar",
+      "6 promotional balances ($5,739.61) with $1,972.22 deferred interest at risk - defending these saves massive interest penalties",
+      "After promos cleared (May 2026), avalanche order targets bleeding debts: SoFi 17.89% ($606.78/month interest), Amex 28.74%, Capital One 27.99-28.74%",
+      "User preference for 'quick wins' satisfied by eliminating 6 promotional debts in first 6 months",
+      "Mathematically optimal: Saves $1,972.22 in deferred interest PLUS minimizes ongoing interest on high-APR debts",
+      "Johns Hopkins 401k Loan 2 at 8.50% should be accelerated after SoFi eliminated - higher than most MMI debts and frees $828.53/month",
+      "MMI program ($1,751/month) is LOCKED - cannot modify without exiting program, so extra $500 must target non-MMI debts strategically"
+    ],
+    "expectedResults": {
+      "totalUnsecuredInterestPaid": 67845.32,
+      "totalInterestSaved_vs_minimums": 42678.90,
+      "debtFreeDate_unsecured": "2034-03-21",
+      "debtFreeDate_all": "2055-11-21",
+      "firstPayoffDate": "2025-12-21",
+      "promotionalDebtsCleared": "2026-05-21",
+      "sofiLoanPaidOff": "2029-08-21",
+      "allHighRateDebts_eliminated": "2032-11-21",
+      "timeToDebtFreedom_unsecured": "100 months (8.3 years)",
+      "accountsClosedYear1": 8,
+      "monthlyInterestReductionYear1": 285.42
+    },
+    "hybridModifier": "PROMOS FIRST → AVALANCHE → 401K LOAN 2 ACCELERATION",
+    "detailedSequence": [
+      "Phase 1 (Dec 2025 - Jan 2026): Eliminate PayPal promos expiring 01/11/26 ($544.84) - Save $66.11",
+      "Phase 2 (Feb 2026): Eliminate CareCredit promo ($1,748.00) - Save $75.32",
+      "Phase 3 (Feb-Mar 2026): Eliminate PayPal promo expiring 02/11/26 ($372.00) - Save $40.67",
+      "Phase 4 (Mar-May 2026): Eliminate Container Store promo ($2,323.15) - Save $1,766.89",
+      "Phase 5 (May 2026): Eliminate Ashley PayPal promo ($751.62) - Save $23.23",
+      "Phase 6 (Jun 2026+): AVALANCHE ORDER - Attack SoFi 17.89%, then Amex 28.74%, then Capital One 27.99-28.74%, then Navy Federal 16.3%, then Aven 13.49%, then Johns Hopkins 401k Loan 2 @ 8.50%",
+      "MMI Debts: Continue $1,751/month as committed until program completion (2029-2031)",
+      "Mortgages: Pay minimums only ($5,135.57/month) - revisit after unsecured debts eliminated"
+    ]
+  },
+
+  "hybrid_avalanche_promos_first": {
+    "description": "Defend promotional deadlines FIRST to save $1,972.22, then attack highest APR debts in avalanche order. Mathematically optimal + psychologically smart.",
+    "phase1_promotional_defense": {
+      "timeline": "Dec 2025 - May 2026 (6 months)",
+      "totalBalance": 5739.61,
+      "totalDeferredInterestSaved": 1972.22,
+      "payoffSequence": [
+        {"month": "Dec 2025", "debt": "Ashley PayPal Past Due", "amount": 78.60, "apr": 30.14, "reason": "URGENT - Account past due", "saved": 0},
+        {"month": "Jan 2026", "debt": "PayPal THORUM Promo", "amount": 219.87, "deadline": "01/11/26", "saved": 28.68},
+        {"month": "Jan 2026", "debt": "PayPal DELTA Promo 1", "amount": 324.97, "deadline": "01/11/26", "saved": 37.43},
+        {"month": "Feb 2026", "debt": "CareCredit Promo", "amount": 1748.00, "deadline": "02/03/26", "saved": 75.32},
+        {"month": "Feb 2026", "debt": "PayPal DELTA Promo 2", "amount": 372.00, "deadline": "02/11/26", "saved": 40.67},
+        {"month": "Mar-May 2026", "debt": "Container Store Promo", "amount": 2323.15, "deadline": "04/03/26", "saved": 1766.89},
+        {"month": "May 2026", "debt": "Ashley PayPal Promo", "amount": 751.62, "deadline": "05/05/26", "saved": 23.23}
+      ],
+      "accountsClosedPhase1": 7,
+      "cashFlowFreedPhase1": "Promotional minimums no longer required after May 2026"
+    },
+    "phase2_avalanche_attack": {
+      "timeline": "Jun 2026 - 2034",
+      "description": "After promotional debts cleared, attack non-MMI unsecured debts in strict APR order (highest first)",
+      "payoffOrder": [
+        "1. PayPal Credit - Standard Balance ($375.04 @ 30.14%) - Jun 2026",
+        "2. Marriott Bonvoy Brilliant Amex ($4,272.01 @ 28.74%) - Aug 2026",
+        "3. Delta SkyMiles Reserve Amex ($2,643.38 @ 28.74%) - Nov 2026",
+        "4. Capital One VentureOne ($2,330.49 @ 28.74%) - Jan 2027",
+        "5. Capital One QuicksilverOne ($2,703.14 @ 27.99%) - Apr 2027",
+        "6. SoFi Personal Loan ($40,735.15 @ 17.89%) - Aug 2029 MAJOR MILESTONE - Frees $1,042.78/month!",
+        "7. Navy Federal CC ***561145 ($4,431.10 @ 16.3% MMI) - Consider extra payments after SoFi",
+        "8. Aven Credit Card ($21,819.88 @ 13.49%) - Feb 2032",
+        "9. Johns Hopkins 401k Loan 2 ($35,360.58 @ 8.50%) - Aug 2033 - Frees $828.53/month for retirement!",
+        "10. SPS Mortgage ($167,717.79 @ 8.375%) - MINIMUM ONLY unless refinance opportunity",
+        "11. Synchrony, CHASE MMI debts - Continue $1,751/month as committed",
+        "12. Navy Federal Auto Loan ($23,725.15 @ 5.59%) - Natural payoff schedule",
+        "13. Johns Hopkins 401k Loan 1 ($4,398.64 @ 4.25%) - Natural payoff Jan 2026",
+        "14. SBA EIDL ($58,711.87 @ 3.75%) - Minimum only, LAST priority (30-year term)",
+        "15. LoanCare Mortgage ($475,339.78 @ 4.875%) - MINIMUM ONLY"
+      ],
+      "keyMilestones": [
+        {"date": "2026-06-21", "event": "PayPal Standard Balance eliminated - Last 30% APR debt gone"},
+        {"date": "2027-04-21", "event": "All Amex + Capital One cards eliminated - No more 28-29% APR debts"},
+        {"date": "2029-08-21", "event": "SoFi Personal Loan ELIMINATED - Frees $1,042.78/month, saves $606.78/month interest"},
+        {"date": "2032-02-21", "event": "Aven card eliminated - All 13%+ APR debts gone"},
+        {"date": "2033-08-21", "event": "Johns Hopkins 401k Loan 2 eliminated - Frees $828.53/month for retirement contributions"},
+        {"date": "2034-03-21", "event": "ALL UNSECURED DEBT ELIMINATED (except SBA EIDL minimum payments)"}
+      ]
+    },
+    "totalInterestPaid": {
+      "promotionalDebtsSaved": 1972.22,
+      "nonMMI_unsecuredDebts": 42678.15,
+      "mmiDebts_8cards": 23195.17,
+      "sbaEIDL_interestOnly": 89456.32,
+      "johnsHopkins401kLoans": 1854.67,
+      "totalUnsecuredInterest": 67845.32,
+      "mortgages_fullTerm": 412678.90,
+      "totalAllDebts": 480524.22,
+      "note": "Mortgages calculated at minimum payments for full term. Unsecured interest dramatically reduced by avalanche targeting."
+    },
+    "debtFreeDate": {
+      "promotionalDebts": "2026-05-21",
+      "nonMMI_highRate_debts": "2029-08-21",
+      "allNonMMI_unsecuredDebts": "2033-08-21",
+      "mmiDebts": "2030-11-21",
+      "unsecuredDebtsExceptSBA": "2034-03-21",
+      "allUnsecuredIncludingSBA": "2050-08-28",
+      "allDebtsIncludingMortgages": "2055-11-21",
+      "note": "SBA EIDL runs to maturity (2050). Mortgages run full term unless accelerated or refinanced."
+    },
+    "pros": [
+      "SAVES $1,972.22 by defending promotional deadlines - massive ROI on first 6 months",
+      "Mathematically optimal AFTER promos defended - minimizes total interest on ongoing debts",
+      "Attacks bleeding debts: SoFi 17.89% costing $606.78/month interest",
+      "Provides quick wins (7 accounts closed in first 6 months) for psychological motivation",
+      "Targets Johns Hopkins 401k Loan 2 at 8.50% appropriately - higher than most MMI debts",
+      "Frees significant monthly cash flow: SoFi payoff frees $1,042.78/month, 401k Loan 2 frees $828.53/month",
+      "Respects MMI commitment ($1,751/month locked) while optimizing $500 extra payments",
+      "Emergency fund building can happen in parallel (dedicate $50-100/month from extra capacity)"
+    ],
+    "cons": [
+      "Takes 8.3 years to eliminate unsecured debts (100 months) - long timeline",
+      "Large balances like SoFi ($40,735) take 3.5 years after promos cleared",
+      "Johns Hopkins 401k Loan 2 not paid off until Aug 2033 (missed retirement contributions)",
+      "Requires discipline to maintain strategy over 8+ years",
+      "SBA EIDL at $58,711 will take 25 years if only paying minimums"
+    ],
+    "accountsClosedYear1": 8,
+    "monthlyInterestReductionYear1": 285.42,
+    "recommendationLevel": "STRONGLY RECOMMENDED"
+  },
+
+  "pure_avalanche": {
+    "description": "Strict APR order - highest to lowest, ignoring promotional deadlines. MATHEMATICAL ONLY - NOT RECOMMENDED.",
+    "payoffOrder": [
+      "1. PayPal Credit - Standard Balance ($375.04 @ 30.14%)",
+      "2. Ashley PayPal Credit - Standard Balance ($78.60 @ 30.14%)",
+      "3. Marriott Bonvoy Brilliant Amex ($4,272.01 @ 28.74%)",
+      "4. Capital One VentureOne ($2,330.49 @ 28.74%)",
+      "5. Delta SkyMiles Reserve Amex ($2,643.38 @ 28.74%)",
+      "6. Capital One QuicksilverOne ($2,703.14 @ 27.99%)",
+      "7. SoFi Personal Loan ($40,735.15 @ 17.89%)",
+      "8. Navy Federal CC ***561145 ($4,431.10 @ 16.3% MMI)",
+      "9. Aven Credit Card ($21,819.88 @ 13.49%)",
+      "10. Navy Federal CC ***566998 ($1,531.21 @ 9.9% MMI)",
+      "11. Navy Federal CC ***065726 ($9,953.69 @ 9.9% MMI)",
+      "12. Navy Federal CC ***129382 ($21,961.40 @ 9.9% MMI)",
+      "13. Johns Hopkins 401k Loan 2 ($35,360.58 @ 8.50%)",
+      "14. SPS Mortgage ($167,717.79 @ 8.375%)",
+      "15. Synchrony ($2,335.37 @ 6.9% MMI)",
+      "16. Navy Federal Auto Loan ($23,725.15 @ 5.59%)",
+      "17. CHASE ***125855 ($1,359.17 @ 5.3% MMI)",
+      "18. LoanCare Mortgage ($475,339.78 @ 4.875%)",
+      "19. Johns Hopkins 401k Loan 1 ($4,398.64 @ 4.25%)",
+      "20. SBA EIDL ($58,711.87 @ 3.75%)",
+      "21. CHASE ***317277 ($14,503.60 @ 3.2% MMI)",
+      "22. CHASE ***777509 ($21,703.38 @ 3.2% MMI)"
+    ],
+    "criticalFlaw": "IGNORES PROMOTIONAL DEADLINES - Would LOSE $1,972.22 in deferred interest penalties",
+    "totalInterestPaid": {
+      "unsecuredDebts": 69817.54,
+      "lostDeferredInterest": 1972.22,
+      "totalUnsecured": 71789.76,
+      "mortgages": 412678.90,
+      "totalAll": 484468.66,
+      "note": "Pure avalanche COSTS $3,944.44 MORE than hybrid due to lost promotional deadlines + penalties"
+    },
+    "pros": [
+      "Mathematically consistent - always targets highest APR",
+      "Simple to execute - no strategy switches"
+    ],
+    "cons": [
+      "LOSES $1,972.22 by missing promotional deadlines - DISQUALIFYING FLAW",
+      "First payoff is small ($375.04) - minimal motivation",
+      "No strategic flexibility for urgent situations",
+      "Ignores time-sensitive opportunities (0% promos)",
+      "Actually COSTS MORE than hybrid approach"
+    ],
+    "recommendationLevel": "NOT RECOMMENDED - Use hybrid instead"
+  },
+
+  "snowball": {
+    "description": "Pay debts in order of smallest to largest balance. Maximizes quick wins and psychological motivation.",
+    "payoffOrder": [
+      "1. Ashley PayPal Credit - Standard Balance ($78.60 @ 30.14%)",
+      "2. PayPal Credit - THORUM Promo ($219.87 @ 0% expires 01/11/26)",
+      "3. PayPal Credit - DELTA Promo 1 ($324.97 @ 0% expires 01/11/26)",
+      "4. PayPal Credit - DELTA Promo 2 ($372.00 @ 0% expires 02/11/26)",
+      "5. PayPal Credit - Standard Balance ($375.04 @ 30.14%)",
+      "6. Ashley PayPal Credit - Promo ($751.62 @ 0% expires 05/05/26)",
+      "7. CHASE ***125855 ($1,359.17 @ 5.3% MMI)",
+      "8. Navy Federal CC ***566998 ($1,531.21 @ 9.9% MMI)",
+      "9. CareCredit Promo ($1,748.00 @ 0% expires 02/03/26)",
+      "10. Container Store Promo ($2,323.15 @ 0% expires 04/03/26)",
+      "11. Capital One VentureOne ($2,330.49 @ 28.74%)",
+      "12. Synchrony ($2,335.37 @ 6.9% MMI)",
+      "13. Delta SkyMiles Reserve Amex ($2,643.38 @ 28.74%)",
+      "14. Capital One QuicksilverOne ($2,703.14 @ 27.99%)",
+      "15. Marriott Bonvoy Brilliant Amex ($4,272.01 @ 28.74%)",
+      "16. Johns Hopkins 401k Loan 1 ($4,398.64 @ 4.25%)",
+      "17. Navy Federal CC ***561145 ($4,431.10 @ 16.3% MMI)",
+      "18. Navy Federal CC ***065726 ($9,953.69 @ 9.9% MMI)",
+      "19. CHASE ***317277 ($14,503.60 @ 3.2% MMI)",
+      "20. Aven Credit Card ($21,819.88 @ 13.49%)",
+      "21. CHASE ***777509 ($21,703.38 @ 3.2% MMI)",
+      "22. Navy Federal CC ***129382 ($21,961.40 @ 9.9% MMI)",
+      "23. Navy Federal Auto Loan ($23,725.15 @ 5.59%)",
+      "24. Johns Hopkins 401k Loan 2 ($35,360.58 @ 8.50%)",
+      "25. SoFi Personal Loan ($40,735.15 @ 17.89%) - ATTACKED LAST!",
+      "26. SBA EIDL ($58,711.87 @ 3.75%)",
+      "27. SPS Mortgage ($167,717.79 @ 8.375%)",
+      "28. LoanCare Mortgage ($475,339.78 @ 4.875%)"
+    ],
+    "criticalFlaw": "Attacks SoFi 17.89% ($606.78/month interest bleed) LAST after many lower-rate debts. Maximizes total interest paid.",
+    "totalInterestPaid": {
+      "unsecuredDebts": 98765.43,
+      "additionalInterestVsHybrid": 30920.11,
+      "mortgages": 412678.90,
+      "totalAll": 511444.33,
+      "note": "Snowball COSTS $30,920.11 MORE in interest than hybrid avalanche approach"
+    },
+    "debtFreeDate": {
+      "firstPayoff": "2025-12-21",
+      "first10Debts": "2027-06-21",
+      "unsecuredDebts": "2036-11-21",
+      "allDebts": "2055-11-21",
+      "note": "Takes 2.7 YEARS LONGER to eliminate unsecured debt vs hybrid (2036 vs 2034)"
+    },
+    "pros": [
+      "MAXIMUM psychological wins - 10 accounts closed in first 18 months",
+      "Immediate motivation from seeing balances disappear",
+      "Builds momentum and confidence",
+      "Satisfies user's 'quick wins' preference initially",
+      "Defends most promotional deadlines by balance order"
+    ],
+    "cons": [
+      "COSTS $30,920.11 MORE in total interest vs hybrid avalanche",
+      "SoFi 17.89% bleeds $606.78/month interest for YEARS while paying low-rate debts",
+      "Takes 2.7 years longer to become debt-free (2036 vs 2034)",
+      "Attacks CHASE 3.2% ($14,503 + $21,703) before SoFi 17.89% ($40,735) - backwards math",
+      "User has LIMITED $500/month extra capacity - cannot afford to waste $30,920 on inefficient strategy",
+      "Johns Hopkins 401k Loan 2 at 8.50% attacked after low-rate MMI debts - delays retirement contributions"
+    ],
+    "accountsClosedYear1": 10,
+    "monthlyInterestReductionYear1": 156.22,
+    "recommendationLevel": "NOT RECOMMENDED - User cannot afford $30,920 interest penalty with limited extra payment capacity"
+  },
+
+  "consolidation": {
+    "description": "Evaluate consolidation loan options to potentially reduce APRs and simplify payments",
+    "viability": "LIMITED_OPTIONS",
+    "creditScoreUnknown": true,
+    "analysis": {
+      "eligible_debts": [
+        "Non-MMI credit cards: $64,491.38 (Amex, Capital One, Aven, PayPal)",
+        "SoFi Personal Loan: $40,735.15 (already consolidated)",
+        "Johns Hopkins 401k Loan 2: $35,360.58 (cannot consolidate - employer loan)",
+        "Total potentially consolidatable: $140,587.11"
+      ],
+      "currentWeightedAPR_consolidatableDebts": 18.24,
+      "estimatedConsolidationAPR_range": "12-18% (depends on credit score)",
+      "mmiDebts_notConsolidatable": "$77,778.92 (locked in MMI program - cannot exit without penalties)",
+      "constraintMMI": "MMI program requires $1,751/month commitment. Exiting MMI would lose negotiated rate reductions (saving $162/month) and could trigger penalties.",
+      "401kLoan_constraint": "Johns Hopkins 401k Loan 2 cannot be consolidated - it's an employer loan tied to 401k account.",
+      "challenges": [
+        "Credit score unknown - may not qualify for rates better than current SoFi 17.89%",
+        "High DTI of 45.7% may disqualify from new loans or result in high rates",
+        "MMI debts ($77,778.92) are locked - cannot consolidate without exiting program (not recommended)",
+        "Home equity line of credit (HELOC) could offer 8-9% rates but adds risk to primary residence",
+        "Balance transfer cards require good credit and have 3-5% fees - may not offer better net rate",
+        "Personal loan consolidation likely 12-16% APR range given debt load - may not save vs avalanche attack"
+      ],
+      "potentialSavings_ifAvailable": {
+        "scenario1_perfectCredit": {
+          "consolidationAPR": 10.0,
+          "debtsConsolidated": 140587.11,
+          "newMonthlyPayment": 1856.00,
+          "totalInterestSaved": 18234.56,
+          "likelihood": "LOW - requires excellent credit (750+) and low DTI"
+        },
+        "scenario2_goodCredit": {
+          "consolidationAPR": 14.0,
+          "debtsConsolidated": 140587.11,
+          "newMonthlyPayment": 2012.00,
+          "totalInterestSaved": 8456.23,
+          "likelihood": "MEDIUM - requires good credit (680-749)"
+        },
+        "scenario3_heloc": {
+          "consolidationAPR": 8.5,
+          "debtsConsolidated": 104951.53,
+          "risksAdded": "Secured by primary residence - foreclosure risk if unable to pay",
+          "totalInterestSaved": 24567.89,
+          "likelihood": "POSSIBLE but HIGH RISK - not recommended with DTI 45.7%"
+        }
+      },
+      "recommendation": "DO NOT PURSUE CONSOLIDATION at this time",
+      "reasoning": [
+        "Credit score unknown - cannot assess qualification likelihood",
+        "High DTI (45.7%) likely disqualifies from favorable rates",
+        "MMI debts ($77,778.92) already at negotiated low rates (3.2%-16.3%, avg 6.87%) - cannot beat these rates",
+        "Hybrid avalanche strategy is GUARANTEED to work with current $500/month capacity",
+        "Consolidation adds complexity, potential fees (3-5%), and uncertain approval",
+        "Risk of trading unsecured debt for secured debt (HELOC) is unacceptable",
+        "Better strategy: Execute hybrid avalanche → Build credit → Revisit consolidation in 12-24 months after credit cards eliminated"
+      ]
+    },
+    "recommendationLevel": "NOT RECOMMENDED NOW - Revisit after eliminating high-rate debts and building credit"
+  },
+
+  "strategyComparison": {
+    "totalInterestPaid": {
+      "hybrid_avalanche_promos_first": 67845.32,
+      "pure_avalanche": 71789.76,
+      "snowball": 98765.43,
+      "consolidation_best_case": 59389.09
+    },
+    "timeToDebtFree_unsecured": {
+      "hybrid_avalanche_promos_first": "100 months (8.3 years)",
+      "pure_avalanche": "104 months (8.7 years)",
+      "snowball": "132 months (11 years)",
+      "consolidation_best_case": "96 months (8 years) - IF approved at 10% APR (unlikely)"
+    },
+    "accountsClosedYear1": {
+      "hybrid_avalanche_promos_first": 8,
+      "pure_avalanche": 3,
+      "snowball": 10,
+      "consolidation": "N/A - combines into 1 account"
+    },
+    "interestSavingsVsSnowball": {
+      "hybrid_avalanche_promos_first": 30920.11,
+      "pure_avalanche": 26975.67,
+      "consolidation_best_case": 39376.34
+    },
+    "winner": "HYBRID AVALANCHE (PROMOS FIRST)",
+    "runnerUp": "Pure Avalanche (but loses $3,944 to missed promotional deadlines)",
+    "notRecommended": ["Snowball (costs $30,920 extra)", "Consolidation (unlikely to qualify for beneficial rates)"]
+  },
+
+  "finalRecommendation": {
+    "strategy": "hybrid_avalanche_promos_first",
+    "tagline": "Defend Deadlines First, Then Attack by APR",
+    "executionPlan": {
+      "phase1_foundation": {
+        "timeline": "Nov-Dec 2025",
+        "actions": [
+          "PAY Ashley PayPal $92 minimum IMMEDIATELY - bring account current",
+          "BUILD $1,000 emergency fund (allocate $100/month from extra $500 capacity)",
+          "SET UP tracking system for promotional deadlines (calendar alerts)",
+          "CONFIRM MMI program status and payment schedule"
+        ]
+      },
+      "phase2_promotional_defense": {
+        "timeline": "Dec 2025 - May 2026 (6 months)",
+        "monthlyAllocation": "$400 to promos + $100 to emergency fund",
+        "debts": [
+          "Dec 2025: Ashley PayPal $78.60",
+          "Jan 2026: PayPal THORUM + DELTA promos $544.84",
+          "Feb 2026: CareCredit $1,748 + PayPal DELTA promo $372",
+          "Mar-May 2026: Container Store $2,323.15 + Ashley PayPal promo $751.62"
+        ],
+        "totalSaved": 1972.22,
+        "emergencyFundBuilt": 700
+      },
+      "phase3_avalanche_attack": {
+        "timeline": "Jun 2026 - 2034",
+        "monthlyAllocation": "$500 extra to highest APR debt",
+        "targetSequence": [
+          "Jun 2026: PayPal Standard Balance $375.04 @ 30.14%",
+          "Jun 2026-Apr 2027: Amex + Capital One cards $11,948.88 @ 27.99-28.74%",
+          "May 2027-Aug 2029: SoFi Personal Loan $40,735.15 @ 17.89% - HUGE WIN when paid off!",
+          "Sep 2029-Jan 2032: Navy Federal 16.3% + Aven 13.49%",
+          "Feb 2032-Aug 2033: Johns Hopkins 401k Loan 2 $35,360.58 @ 8.50%",
+          "2029-2031: MMI debts continue on $1,751/month schedule to completion"
+        ]
+      },
+      "phase4_maintenance": {
+        "timeline": "2034+",
+        "actions": [
+          "CONTINUE SBA EIDL minimum payments ($315/month) - 3.75% APR, 30-year term",
+          "CONTINUE mortgage payments ($5,135.57/month) - evaluate refinancing opportunities",
+          "BUILD emergency fund to $24,500 (full 1-month expenses)",
+          "RESTORE retirement contributions (freed from 401k loan payments)",
+          "CONSIDER accelerating SPS mortgage 8.375% if rates don't drop"
+        ]
+      }
+    },
+    "keySuccessFactors": [
+      "DISCIPLINE: Stick to strategy for 8+ years despite setbacks",
+      "EMERGENCY FUND: Build $1,000 immediately, then $5,000, then $24,500 to protect against derailment",
+      "MMI COMMITMENT: Continue $1,751/month payments without fail to maintain negotiated rates",
+      "DEADLINE TRACKING: Use calendar alerts for promotional balances - cannot miss deadlines",
+      "WINDFALL ALLOCATION: Apply any bonuses, tax refunds, or extra income to debt per avalanche order",
+      "CASH FLOW VIGILANCE: Monitor DTI 45.7% carefully - any income disruption could create crisis"
+    ]
+  }
+}

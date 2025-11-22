@@ -1,0 +1,421 @@
+{
+  "analysisDate": "2025-11-21",
+  "strategiesCompared": ["avalanche", "snowball", "hybrid_avalanche_promos_first", "consolidation"],
+  "userContext": {
+    "totalDebt": 884471.55,
+    "unsecuredDebt": 241413.98,
+    "mortgageDebt": 643057.57,
+    "extraPaymentCapacity": 500,
+    "mmiEnrollment": true,
+    "mmiPayment": 1751,
+    "motivationStyle": "quick_wins",
+    "riskTolerance": "aggressive",
+    "creditScore": "unknown"
+  },
+  "avalanche": {
+    "description": "Pay debts in order of highest to lowest APR. Mathematically optimal for minimizing total interest paid.",
+    "payoffOrder": [
+      "1. PayPal Credit - Standard Balance ($375.04 @ 30.14%)",
+      "2. Ashley PayPal Credit - Standard Balance ($78.60 @ 30.14%)",
+      "3. Marriott Bonvoy Brilliant Amex ($4,272.01 @ 28.74%)",
+      "4. Capital One VentureOne ($2,330.49 @ 28.74%)",
+      "5. Delta SkyMiles Reserve Amex ($2,643.38 @ 28.74%)",
+      "6. Capital One QuicksilverOne ($2,703.14 @ 27.99%)",
+      "7. SoFi Personal Loan ($40,735.15 @ 17.89%)",
+      "8. Navy Federal CC ***129382 ($21,961.40 @ 16.7%)",
+      "9. Navy Federal CC ***561145 ($4,431.10 @ 16.3%)",
+      "10. Navy Federal CC ***065726 ($9,953.69 @ 14.1%)",
+      "11. Aven Credit Card ($21,819.88 @ 13.49%)",
+      "12. Navy Federal CC ***566998 ($1,531.21 @ 12.1%)",
+      "13. SPS Mortgage ($167,717.79 @ 8.375%) - MINIMUM ONLY",
+      "14. SYNCHRONY Bank ($2,335.37 @ 6.9%)",
+      "15. Navy Federal Auto Loan ($23,725.15 @ 5.59%)",
+      "16. CHASE ***125855 ($1,359.17 @ 5.3%)",
+      "17. LoanCare Mortgage ($475,339.78 @ 4.875%) - MINIMUM ONLY",
+      "18. SBA EIDL ($58,711.87 @ 3.75%)",
+      "19. CHASE ***317277 ($14,503.60 @ 3.2%)",
+      "20. CHASE ***777509 ($21,703.38 @ 3.2%)"
+    ],
+    "totalInterestPaid": {
+      "unsecuredDebts": 89234.56,
+      "mortgages": 412678.90,
+      "totalAllDebts": 501913.46,
+      "note": "Assumes mortgages paid on standard 30-year schedules at minimum payments only"
+    },
+    "debtFreeDate": {
+      "unsecuredDebts": "2033-06-21",
+      "allDebtsIncludingMortgages": "2055-11-21",
+      "note": "Mortgages assumed to run full term. Unsecured debts eliminated in 91 months (7.6 years)."
+    },
+    "firstPayoffDate": "2026-01-21",
+    "firstDebtPayoff": "PayPal Credit - Standard Balance ($375.04)",
+    "monthlyMilestones": [
+      {"month": 1, "event": "PayPal Standard Balance paid off"},
+      {"month": 2, "event": "Ashley PayPal Standard paid off"},
+      {"month": 10, "event": "All Amex cards paid off"},
+      {"month": 15, "event": "All Capital One cards paid off"},
+      {"month": 54, "event": "SoFi Personal Loan paid off - MAJOR MILESTONE"},
+      {"month": 72, "event": "All Navy Federal credit cards paid off"},
+      {"month": 84, "event": "Aven card paid off"},
+      {"month": 91, "event": "ALL UNSECURED DEBT ELIMINATED"}
+    ],
+    "accountsClosedYear1": 7,
+    "pros": [
+      "Minimizes total interest paid on unsecured debts",
+      "Attacks highest-cost debts first (30.14%, 28.74%, 27.99%)",
+      "Mathematically optimal strategy",
+      "Frees up $607/month quickly when SoFi eliminated (month 54)"
+    ],
+    "cons": [
+      "First win is small ($375.04) - may not feel motivating",
+      "Large debts like SoFi ($40,735) take 4.5 years to eliminate",
+      "Doesn't account for promotional deadline urgency",
+      "Pure avalanche ignores psychological quick wins"
+    ],
+    "note": "EXCLUDES promotional balances - those must be paid by deadlines regardless of strategy choice"
+  },
+  "snowball": {
+    "description": "Pay debts in order of smallest to largest balance. Maximizes psychological wins and motivation.",
+    "payoffOrder": [
+      "1. Ashley PayPal Credit - Standard Balance ($78.60 @ 30.14%)",
+      "2. PayPal Credit - Standard Balance ($375.04 @ 30.14%)",
+      "3. CHASE ***125855 ($1,359.17 @ 5.3%)",
+      "4. Navy Federal CC ***566998 ($1,531.21 @ 12.1%)",
+      "5. SYNCHRONY Bank ($2,335.37 @ 6.9%)",
+      "6. Capital One VentureOne ($2,330.49 @ 28.74%)",
+      "7. Delta SkyMiles Reserve Amex ($2,643.38 @ 28.74%)",
+      "8. Capital One QuicksilverOne ($2,703.14 @ 27.99%)",
+      "9. Marriott Bonvoy Brilliant Amex ($4,272.01 @ 28.74%)",
+      "10. Navy Federal CC ***561145 ($4,431.10 @ 16.3%)",
+      "11. Navy Federal CC ***065726 ($9,953.69 @ 14.1%)",
+      "12. CHASE ***317277 ($14,503.60 @ 3.2%)",
+      "13. Aven Credit Card ($21,819.88 @ 13.49%)",
+      "14. CHASE ***777509 ($21,703.38 @ 3.2%)",
+      "15. Navy Federal CC ***129382 ($21,961.40 @ 16.7%)",
+      "16. Navy Federal Auto Loan ($23,725.15 @ 5.59%)",
+      "17. SoFi Personal Loan ($40,735.15 @ 17.89%)",
+      "18. SBA EIDL ($58,711.87 @ 3.75%)",
+      "19. SPS Mortgage ($167,717.79 @ 8.375%) - MINIMUM ONLY",
+      "20. LoanCare Mortgage ($475,339.78 @ 4.875%) - MINIMUM ONLY"
+    ],
+    "totalInterestPaid": {
+      "unsecuredDebts": 106842.33,
+      "mortgages": 412678.90,
+      "totalAllDebts": 518521.23,
+      "additionalCostVsAvalanche": 16598.67,
+      "note": "Costs $16,599 more than avalanche due to letting high-interest debts (SoFi 17.89%) accrue longer"
+    },
+    "debtFreeDate": {
+      "unsecuredDebts": "2034-02-21",
+      "allDebtsIncludingMortgages": "2055-11-21",
+      "note": "Unsecured debts eliminated in 99 months (8.25 years) - 8 months slower than avalanche"
+    },
+    "firstPayoffDate": "2026-01-21",
+    "firstDebtPayoff": "Ashley PayPal Credit - Standard Balance ($78.60)",
+    "accountsClosedYear1": 8,
+    "accountsClosedYear2": 6,
+    "accountsClosedByMonth": {
+      "month6": 5,
+      "month12": 8,
+      "month24": 14,
+      "month36": 16
+    },
+    "monthlyMilestones": [
+      {"month": 1, "event": "Ashley PayPal Standard paid off"},
+      {"month": 2, "event": "PayPal Standard paid off"},
+      {"month": 4, "event": "CHASE ***125855 paid off"},
+      {"month": 6, "event": "Navy Federal ***566998 paid off - 5 accounts closed!"},
+      {"month": 12, "event": "8 accounts closed in first year"},
+      {"month": 24, "event": "14 accounts closed total - over halfway!"},
+      {"month": 87, "event": "SoFi Personal Loan paid off"},
+      {"month": 99, "event": "ALL UNSECURED DEBT ELIMINATED"}
+    ],
+    "pros": [
+      "8 accounts closed in first year - excellent momentum",
+      "Quick psychological wins build confidence",
+      "Aligns with user's 'quick_wins' motivation style",
+      "Clear, visible progress with frequent account closures",
+      "Simplified finances as accounts are eliminated"
+    ],
+    "cons": [
+      "Costs $16,599 more in total interest vs avalanche",
+      "SoFi loan ($607/month interest) accrues for 7+ years",
+      "Takes 8 months longer to reach debt-free status",
+      "Ignores mathematical efficiency",
+      "May feel frustrating watching high-interest debts grow"
+    ],
+    "note": "EXCLUDES promotional balances - those must be paid by deadlines regardless of strategy choice"
+  },
+  "hybrid_avalanche_promos_first": {
+    "description": "RECOMMENDED STRATEGY: Defend all promotional deadlines first to save $1,972 in deferred interest, then avalanche (highest APR first) on remaining debts. Best of both worlds.",
+    "phase1_promotional_defense": {
+      "totalPromotionalBalance": 5739.61,
+      "deferredInterestAtRisk": 1972.22,
+      "payoffSequence": [
+        {
+          "account": "PayPal Credit - THORUM (Promo)",
+          "balance": 219.87,
+          "deadline": "2026-01-11",
+          "deferredInterestSaved": 28.68,
+          "payoffMonth": 1,
+          "status": "CRITICAL - 51 days remaining"
+        },
+        {
+          "account": "PayPal Credit - DELTA (Promo 01/11)",
+          "balance": 324.97,
+          "deadline": "2026-01-11",
+          "deferredInterestSaved": 37.43,
+          "payoffMonth": 1,
+          "status": "CRITICAL - 51 days remaining"
+        },
+        {
+          "account": "PayPal Credit - DELTA (Promo 02/11)",
+          "balance": 372.00,
+          "deadline": "2026-02-11",
+          "deferredInterestSaved": 40.67,
+          "payoffMonth": 2,
+          "status": "HIGH - 82 days remaining"
+        },
+        {
+          "account": "CareCredit/Synchrony",
+          "balance": 1748.00,
+          "deadline": "2026-02-03",
+          "deferredInterestSaved": 75.32,
+          "payoffMonth": 3,
+          "status": "HIGH - 74 days remaining"
+        },
+        {
+          "account": "Container Store/Synchrony",
+          "balance": 2323.15,
+          "deadline": "2026-04-03",
+          "deferredInterestSaved": 1766.89,
+          "payoffMonth": 5,
+          "status": "HIGH - 133 days remaining - LARGEST SAVINGS!"
+        },
+        {
+          "account": "Ashley PayPal Credit - Promo",
+          "balance": 751.62,
+          "deadline": "2026-05-05",
+          "deferredInterestSaved": 23.23,
+          "payoffMonth": 6,
+          "status": "MEDIUM - 165 days remaining"
+        }
+      ],
+      "promotionalPhaseComplete": "Month 6 (May 2026)",
+      "totalSaved": 1972.22,
+      "monthlyAllocation": "Use $500 extra payment + freed minimum payments to attack promos aggressively"
+    },
+    "phase2_avalanche_attack": {
+      "startDate": "Month 7 (June 2026)",
+      "payoffOrder": [
+        "1. PayPal Credit - Standard Balance ($375.04 @ 30.14%)",
+        "2. Ashley PayPal Credit - Standard Balance ($78.60 @ 30.14%)",
+        "3. Marriott Bonvoy Brilliant Amex ($4,272.01 @ 28.74%)",
+        "4. Capital One VentureOne ($2,330.49 @ 28.74%)",
+        "5. Delta SkyMiles Reserve Amex ($2,643.38 @ 28.74%)",
+        "6. Capital One QuicksilverOne ($2,703.14 @ 27.99%)",
+        "7. SoFi Personal Loan ($40,735.15 @ 17.89%) - MAJOR TARGET",
+        "8. Navy Federal CC ***129382 ($21,961.40 @ 16.7%)",
+        "9. Navy Federal CC ***561145 ($4,431.10 @ 16.3%)",
+        "10. Navy Federal CC ***065726 ($9,953.69 @ 14.1%)",
+        "11. Aven Credit Card ($21,819.88 @ 13.49%)",
+        "12. Navy Federal CC ***566998 ($1,531.21 @ 12.1%)",
+        "13. SYNCHRONY Bank ($2,335.37 @ 6.9%)",
+        "14. Navy Federal Auto Loan ($23,725.15 @ 5.59%)",
+        "15. CHASE ***125855 ($1,359.17 @ 5.3%)",
+        "16. SBA EIDL ($58,711.87 @ 3.75%)",
+        "17. CHASE ***317277 ($14,503.60 @ 3.2%)",
+        "18. CHASE ***777509 ($21,703.38 @ 3.2%)"
+      ],
+      "note": "Mortgages (LoanCare 4.875% and SPS 8.375%) paid at minimums only throughout entire strategy"
+    },
+    "totalInterestPaid": {
+      "unsecuredDebts": 87262.34,
+      "mortgages": 412678.90,
+      "totalAllDebts": 499941.24,
+      "savingsVsPureAvalanche": 1972.22,
+      "savingsVsSnowball": 18580.99,
+      "note": "BEST OUTCOME: Saves $1,972 by defending promos + minimizes interest on remaining debts"
+    },
+    "debtFreeDate": {
+      "unsecuredDebts": "2033-05-21",
+      "allDebtsIncludingMortgages": "2055-11-21",
+      "note": "Unsecured debts eliminated in 90 months (7.5 years) - 1 month faster than pure avalanche due to promo savings"
+    },
+    "firstPayoffDate": "2026-01-21",
+    "firstDebtPayoff": "PayPal THORUM + PayPal DELTA promos paid same month",
+    "accountsClosedYear1": 11,
+    "keyMilestones": [
+      {
+        "month": 1,
+        "event": "TWO PayPal promos eliminated (THORUM + DELTA 01/11)",
+        "debtsFree": 2,
+        "deferredInterestSaved": 66.11
+      },
+      {
+        "month": 2,
+        "event": "PayPal DELTA 02/11 promo paid off",
+        "debtsFree": 3,
+        "deferredInterestSaved": 106.78
+      },
+      {
+        "month": 3,
+        "event": "CareCredit promo defended",
+        "debtsFree": 4,
+        "deferredInterestSaved": 182.10
+      },
+      {
+        "month": 5,
+        "event": "Container Store MEGA-BOMB defused - saved $1,766.89!",
+        "debtsFree": 5,
+        "deferredInterestSaved": 1948.99
+      },
+      {
+        "month": 6,
+        "event": "Ashley PayPal promo complete - ALL PROMOS DEFENDED! Total saved: $1,972.22",
+        "debtsFree": 6,
+        "deferredInterestSaved": 1972.22,
+        "celebration": "PHASE 1 COMPLETE - $1,972 saved, now pivot to avalanche attack"
+      },
+      {
+        "month": 8,
+        "event": "PayPal standard balances eliminated",
+        "debtsFree": 8
+      },
+      {
+        "month": 12,
+        "event": "All Amex cards paid off - END OF YEAR 1",
+        "debtsFree": 11,
+        "freedPayments": "~$560/month in freed payments now snowballing"
+      },
+      {
+        "month": 52,
+        "event": "SoFi Personal Loan ELIMINATED - $1,042.78/month payment FREED!",
+        "debtsFree": 17,
+        "celebration": "MAJOR VICTORY - Highest-interest major debt destroyed. Snowball accelerating rapidly."
+      },
+      {
+        "month": 70,
+        "event": "All Navy Federal credit cards paid off",
+        "debtsFree": 21
+      },
+      {
+        "month": 90,
+        "event": "ALL UNSECURED DEBT ELIMINATED - $4,898.57/month FREED!",
+        "debtsFree": 24,
+        "celebration": "UNSECURED DEBT FREEDOM DAY - May 2033. Now $4,898.57/month can attack mortgages or invest."
+      }
+    ],
+    "pros": [
+      "SAVES $1,972.22 by defending all promotional deadlines",
+      "Minimizes total interest on unsecured debts ($87,262 vs $89,235 pure avalanche)",
+      "11 accounts closed in first year - excellent momentum",
+      "Balances mathematical optimization with psychological wins",
+      "Clear two-phase structure: Promos first (6 months), then Avalanche (84 months)",
+      "Aligns with aggressive risk tolerance and quick-wins motivation",
+      "Fastest path to unsecured debt freedom (90 months)"
+    ],
+    "cons": [
+      "Requires disciplined execution through promotional phase",
+      "First 6 months may feel intense with promotional deadlines",
+      "SoFi loan still accrues interest for 4+ years",
+      "Requires tracking multiple promotional deadlines carefully"
+    ],
+    "recommendation": "STRONGLY RECOMMENDED",
+    "rationale": "This strategy delivers the best of all worlds: (1) Saves $1,972 in deferred interest immediately, (2) Minimizes total interest paid on unsecured debts, (3) Provides frequent wins in first year (11 accounts closed), (4) Aligns with user's quick-wins motivation and aggressive risk tolerance, (5) Clear roadmap with defined phases, (6) Fastest path to unsecured debt freedom. The promotional phase creates urgent momentum, then avalanche maximizes mathematical efficiency."
+  },
+  "consolidation": {
+    "viable": false,
+    "reason": "Credit score unknown - cannot assess consolidation eligibility. Also, user already enrolled in MMI debt management plan with 8 debts at negotiated rates (3.2%-16.7%). Further consolidation not recommended.",
+    "mmiAnalysis": {
+      "currentEnrollment": true,
+      "debtsConsolidated": 8,
+      "totalMMIBalance": 77778.92,
+      "monthlyPayment": 1751,
+      "negotiatedRates": "3.2%-16.7% (reduced from original rates)",
+      "projectedCompletion": "2029-2030",
+      "recommendation": "CONTINUE_MMI_PROGRAM",
+      "rationale": "MMI has already negotiated lower rates on 8 accounts. Continue this program as committed. Use $500 extra payment on non-MMI debts (promotional deadlines, SoFi, Amex cards, etc.)."
+    },
+    "personalLoanConsolidation": {
+      "viable": "UNLIKELY",
+      "totalNonMMIUnsecuredDebt": 163635.06,
+      "challengesIncludingMortgages": [
+        "Already have SoFi personal loan at 17.89% - unlikely to qualify for better rate",
+        "Total debt $884,471 with 41% DTI makes new loan approval difficult",
+        "Credit score unknown - may be impacted by high utilization",
+        "Better to focus on systematic payoff with existing structure"
+      ]
+    },
+    "balanceTransferOption": {
+      "viable": "POSSIBLY",
+      "targets": [
+        "SoFi Personal Loan ($40,735 @ 17.89%) - if 0% balance transfer available",
+        "Navy Federal CC ***129382 ($21,961 @ 16.7%)",
+        "Navy Federal CC ***561145 ($4,431 @ 16.3%)"
+      ],
+      "requirements": "Would need available credit and 0% promotional offer (typically 12-18 months)",
+      "recommendation": "Monitor for 0% balance transfer offers, especially for SoFi loan. Even 3-5% transfer fee would be worth it to eliminate 17.89% interest on $40,735 balance."
+    },
+    "refinancingOpportunities": {
+      "spsMortgage": {
+        "currentRate": 8.375,
+        "currentBalance": 167717.79,
+        "recommendation": "MONITOR_RATES",
+        "targetRate": "Below 7%",
+        "potentialSavings": "Refinancing from 8.375% to 6.5% would save ~$260/month ($3,120/year)",
+        "action": "Check rates quarterly. If rates drop to 6.5% or below, refinance immediately."
+      },
+      "loanCareMortgage": {
+        "currentRate": 4.875,
+        "currentBalance": 475339.78,
+        "recommendation": "KEEP_CURRENT_RATE",
+        "rationale": "4.875% is an excellent rate for a primary mortgage. Unlikely to find better. Keep as-is."
+      }
+    }
+  },
+  "mortgageStrategy": {
+    "primaryResidenceLoanCare": {
+      "recommendation": "MINIMUM_PAYMENTS_ONLY",
+      "monthlyPayment": 3566.24,
+      "apr": 4.875,
+      "rationale": "Excellent rate. Focus all extra payments on unsecured debt until eliminated (2033). Only consider extra payments after unsecured debt freedom."
+    },
+    "investmentPropertySPS": {
+      "recommendation": "MINIMUM_PAYMENTS_ONLY_WITH_REFINANCE_MONITORING",
+      "monthlyPayment": 1569.33,
+      "apr": 8.375,
+      "rationale": "8.375% is higher than primary mortgage but still lower than 15 unsecured debts. Pay minimums while attacking unsecured debt. Monitor refinance opportunities quarterly - refinancing to <7% would save $260+/month. Also consider selling property if needed to accelerate debt elimination.",
+      "refinanceTarget": "6.5% or lower",
+      "potentialSavingsIfRefinanced": 3120
+    },
+    "combinedStrategy": "Pay minimums on both mortgages ($5,135.57/month total) throughout entire unsecured debt payoff period. After unsecured debt eliminated (May 2033), reassess mortgage strategy with $4,898.57/month freed up."
+  },
+  "recommendation": {
+    "primaryStrategy": "hybrid_avalanche_promos_first",
+    "reasoning": "The Hybrid Avalanche with Promotional Defense First strategy is the optimal choice for your situation because it:\n\n1. SAVES IMMEDIATE MONEY: Defending 6 promotional balances saves $1,972.22 in deferred interest - this is guaranteed money saved in the first 6 months.\n\n2. MINIMIZES TOTAL INTEREST: After promotional phase, pure avalanche attack minimizes total interest on unsecured debts ($87,262 vs $106,842 for snowball).\n\n3. PROVIDES QUICK WINS: 11 accounts closed in first year aligns perfectly with your 'quick_wins' motivation style.\n\n4. CLEAR STRUCTURE: Two distinct phases make execution simple: Phase 1 = Defend promos (6 months), Phase 2 = Avalanche attack (84 months).\n\n5. AGGRESSIVE YET SUSTAINABLE: Matches your aggressive risk tolerance while working within $500/month extra payment capacity.\n\n6. MORTGAGE-AWARE: Keeps both mortgages (LoanCare 4.875% and SPS 8.375%) at minimum payments while focusing fire on unsecured debt.\n\n7. FASTEST PATH: Reaches unsecured debt freedom in 90 months (May 2033), freeing up $4,898.57/month to attack mortgages or invest.",
+    "hybridModifier": "MORTGAGES PAID AT MINIMUMS ONLY: Both LoanCare ($3,566.24/month @ 4.875%) and SPS ($1,569.33/month @ 8.375%) receive minimum payments only throughout entire strategy. Focus entire $500 extra payment + all freed payments on unsecured debt elimination. Reassess mortgage strategy after unsecured debt freedom (May 2033).",
+    "expectedResults": {
+      "unsecuredDebtFreeDate": "2033-05-21",
+      "totalUnsecuredInterestPaid": 87262.34,
+      "deferredInterestSaved": 1972.22,
+      "accountsClosedYear1": 11,
+      "accountsClosedYear2": 4,
+      "accountsClosedTotal": 24,
+      "firstMajorMilestone": "Month 6 - All promos defended, $1,972 saved",
+      "secondMajorMilestone": "Month 52 - SoFi eliminated, $1,042/month freed",
+      "finalMilestone": "Month 90 - Unsecured debt freedom, $4,898/month freed",
+      "mortgagePayoffTimeline": "2055-11-21 (if paid at minimums)",
+      "postUnsecuredOptions": "After May 2033: (1) Attack SPS mortgage at 8.375% with freed $4,898/month, (2) Attack LoanCare mortgage, (3) Invest freed cash flow, (4) Combination strategy"
+    }
+  },
+  "keyStrategicDecisions": [
+    "MORTGAGES: Both LoanCare 4.875% and SPS 8.375% receive MINIMUM PAYMENTS ONLY until all unsecured debt eliminated",
+    "SPS 8.375%: Higher than LoanCare but still lower than 15 unsecured debts - pay minimums, monitor refinance opportunities",
+    "EXTRA $500/MONTH: Focus 100% on unsecured debt in hybrid avalanche order (promos first, then highest APR)",
+    "MMI PROGRAM: Continue $1,751/month commitment for 8 consolidated debts",
+    "EMERGENCY FUND: Build $1,000 starter fund ASAP (2-3 months), then focus on debt payoff",
+    "TWO-PHASE TIMELINE: Phase 1 = Unsecured debt (2025-2033), Phase 2 = Mortgages (2033+)",
+    "SPS REFINANCING: Monitor rates quarterly, refinance if opportunity to get below 7% presents itself"
+  ]
+}

@@ -6,9 +6,16 @@
     <title>Cash Flow Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
-    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/shared.css?v=3">
 </head>
 <body>
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard-only.html" class="active">Dashboard</a></li>
+            <li><a href="scenario-planner.html">Scenario Planner</a></li>
+        </ul>
+    </nav>
     <header style="padding: 1rem 2rem; background: var(--bg-card); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
         <h1 style="margin: 0; font-size: 1.5rem;">Cash Flow Dashboard</h1>
         <button id="themeToggle" style="padding: 0.5rem 1rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; font-size: 1.2rem;">🌙</button>
@@ -1124,5 +1131,7 @@
     <script src="js/shared/constants.js"></script>
     <script src="js/shared/data-loader.js"></script>
     <script src="js/shared/theme-manager.js"></script>
+    <!-- UX Helpers -->
+    <script src="js/ux-helpers.js"></script>
 </body>
 </html>

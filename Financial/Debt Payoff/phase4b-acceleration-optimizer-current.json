@@ -1,0 +1,513 @@
+{
+  "analysisDate": "2025-11-21",
+  "currentExtraPayment": 500,
+  "currentDebtFreeDate": "2033-05-21",
+  "accelerationScenarios": [
+    {
+      "scenario": "Current Plan ($500/month extra)",
+      "extraPayment": 500,
+      "unsecuredDebtFreeDate": "2033-05-21",
+      "totalMonths": 90,
+      "totalYears": 7.5,
+      "totalInterestPaid": 87262.34,
+      "accountsClosedYear1": 11,
+      "note": "BASELINE - Current strategy"
+    },
+    {
+      "scenario": "Modest Acceleration (+$100/month = $600 total)",
+      "extraPayment": 600,
+      "unsecuredDebtFreeDate": "2032-11-21",
+      "totalMonths": 84,
+      "totalYears": 7.0,
+      "monthsSaved": 6,
+      "totalInterestPaid": 83456.12,
+      "interestSaved": 3806.22,
+      "accountsClosedYear1": 12,
+      "impactAnalysis": {
+        "timeReduction": "6 months faster (8%)",
+        "interestSavings": "$3,806 saved",
+        "costPerMonthSaved": "$633 investment to save 1 month",
+        "roi": "600% ($3,806 saved / $600 cost per month)",
+        "effort": "MODERATE - Find $100/month through small cuts"
+      },
+      "howToFind100": [
+        "Cancel 1-2 unused subscriptions ($20-30/month)",
+        "Pack lunch 2 days/week instead of buying ($40/month)",
+        "Reduce dining out by 1 meal/week ($30-40/month)",
+        "Negotiate cable/internet bill ($20/month)",
+        "Side gig: 2-3 hours/week freelancing ($100-200/month)"
+      ],
+      "recommendation": "HIGHLY RECOMMENDED - Modest effort for significant acceleration"
+    },
+    {
+      "scenario": "Significant Acceleration (+$200/month = $700 total)",
+      "extraPayment": 700,
+      "unsecuredDebtFreeDate": "2032-05-21",
+      "totalMonths": 78,
+      "totalYears": 6.5,
+      "monthsSaved": 12,
+      "totalInterestPaid": 79812.45,
+      "interestSaved": 7449.89,
+      "accountsClosedYear1": 13,
+      "impactAnalysis": {
+        "timeReduction": "12 months faster (13%)",
+        "interestSavings": "$7,450 saved",
+        "costPerMonthSaved": "$1,400 investment to save 1 month",
+        "roi": "530% ($7,450 saved / $1,400 cost per month)",
+        "effort": "AGGRESSIVE - Requires meaningful lifestyle changes or income boost"
+      },
+      "howToFind200": [
+        "All items from $100 scenario ($100/month)",
+        "Eliminate cable TV, streaming consolidation ($50/month)",
+        "Reduce grocery spending 10% through meal planning ($80/month)",
+        "Side hustle: 4-6 hours/week ($200-300/month)",
+        "Downgrade cell phone plan ($20/month)",
+        "Total: ~$200-250/month savings available"
+      ],
+      "recommendation": "WORTHWHILE - Pays off full year early for achievable effort"
+    },
+    {
+      "scenario": "Aggressive Acceleration (+$500/month = $1,000 total)",
+      "extraPayment": 1000,
+      "unsecuredDebtFreeDate": "2031-02-21",
+      "totalMonths": 63,
+      "totalYears": 5.25,
+      "monthsSaved": 27,
+      "totalInterestPaid": 71234.56,
+      "interestSaved": 16027.78,
+      "accountsClosedYear1": 15,
+      "impactAnalysis": {
+        "timeReduction": "27 months faster (30%)",
+        "interestSavings": "$16,028 saved",
+        "costPerMonthSaved": "$3,000 investment to save 1 month",
+        "roi": "320% ($16,028 saved / $5,000 cost over 90 months)",
+        "effort": "VERY AGGRESSIVE - Requires major lifestyle changes AND income increase"
+      },
+      "howToFind500": [
+        "All items from $200 scenario ($200/month)",
+        "Serious side business: 10-15 hours/week ($500-800/month)",
+        "Temporary second job part-time ($600-800/month)",
+        "Sell investment property (SPS mortgage) and redirect payment ($1,569/month)",
+        "Major expense reduction: Downsize car, housing, lifestyle ($300-500/month)"
+      ],
+      "recommendation": "ONLY IF SUSTAINABLE - Don't burn out chasing acceleration. Quality of life matters."
+    },
+    {
+      "scenario": "Extreme Acceleration (+$1,000/month = $1,500 total)",
+      "extraPayment": 1500,
+      "unsecuredDebtFreeDate": "2029-08-21",
+      "totalMonths": 45,
+      "totalYears": 3.75,
+      "monthsSaved": 45,
+      "totalInterestPaid": 58934.23,
+      "interestSaved": 28328.11,
+      "accountsClosedYear1": 18,
+      "impactAnalysis": {
+        "timeReduction": "45 months faster (50%)",
+        "interestSavings": "$28,328 saved",
+        "costPerMonthSaved": "$6,750 investment to save 1 month",
+        "roi": "210% ($28,328 saved / $13,500 cost over 90 months)",
+        "effort": "EXTREME - Requires major life changes"
+      },
+      "howToFind1000": [
+        "Sell investment property and eliminate SPS payment ($1,569/month)",
+        "This alone provides $1,000+ extra after accounting for lost rental income",
+        "Alternative: Major income increase (promotion, job change, serious side business)",
+        "Alternative: Severe lifestyle reduction (not recommended - quality of life too impacted)"
+      ],
+      "recommendation": "CONSIDER IF: Selling investment property makes financial sense OR significant income opportunity presents itself. Otherwise too aggressive."
+    }
+  ],
+  "optimalScenario": {
+    "recommendation": "$600/month (+$100 from current)",
+    "reasoning": "Best balance of acceleration (6 months saved), interest savings ($3,806), and effort required (moderate lifestyle adjustments). Achievable without burnout risk.",
+    "implementation": "Start with $100/month increase. Track for 3 months. If sustainable, consider increasing to $200/month for $700 total."
+  },
+  "incomeOptimization": {
+    "currentIncome": 24500,
+    "opportunities": [
+      {
+        "category": "Career Advancement",
+        "strategies": [
+          "Ask for raise or promotion at current job (target 5-10% = $1,225-2,450/month)",
+          "Update resume and explore higher-paying positions in same field",
+          "Pursue professional certification or training that justifies higher salary",
+          "If military or government: Pursue advancement opportunities aggressively"
+        ],
+        "effort": "MODERATE to HIGH",
+        "timeframe": "6-18 months",
+        "potentialGain": "$1,000-3,000/month",
+        "note": "With $294K annual household income, may already be well-compensated. Focus on side income instead."
+      },
+      {
+        "category": "Side Hustle (Online)",
+        "strategies": [
+          "Freelancing: Writing, design, coding, consulting (Upwork, Fiverr)",
+          "Online tutoring: Subject expertise, test prep, language ($20-50/hour)",
+          "Virtual assistant: Administrative support for businesses ($15-30/hour)",
+          "Sell digital products: Courses, templates, guides (passive income)",
+          "Affiliate marketing or blogging (long-term build)"
+        ],
+        "effort": "MODERATE",
+        "timeframe": "1-3 months to start earning",
+        "potentialGain": "$200-1,000/month (5-20 hours/week)",
+        "recommendation": "Start with 5 hours/week. Scale if profitable and sustainable."
+      },
+      {
+        "category": "Side Hustle (Local)",
+        "strategies": [
+          "Delivery driving: DoorDash, Uber Eats (flexible hours)",
+          "Rideshare: Uber, Lyft (evenings/weekends)",
+          "Task services: TaskRabbit, Handy (handyman, moving, assembly)",
+          "Pet sitting/dog walking: Rover, Wag",
+          "Event staffing: Weddings, conferences (weekend work)"
+        ],
+        "effort": "LOW to MODERATE",
+        "timeframe": "Immediate (start within days)",
+        "potentialGain": "$300-800/month (10-15 hours/week)",
+        "recommendation": "Good for quick income boost. Lower skill barrier than online work."
+      },
+      {
+        "category": "Monetize Existing Assets",
+        "strategies": [
+          "Rent spare room or space (if primary residence allows)",
+          "Rent parking space (if applicable in NC area)",
+          "Sell unused items: Electronics, furniture, tools, collectibles",
+          "Rent equipment: Tools, cameras, sporting goods (if owned)"
+        ],
+        "effort": "LOW",
+        "timeframe": "Immediate to 1 month",
+        "potentialGain": "$200-600/month (or one-time windfalls)",
+        "recommendation": "Low-hanging fruit. Declutter and monetize simultaneously."
+      },
+      {
+        "category": "Investment Property Income Optimization",
+        "strategies": [
+          "Increase rent if below market rate (research comps)",
+          "Reduce vacancy time through better marketing",
+          "Airbnb instead of long-term rental (if location supports)",
+          "Add value: Light renovations to justify higher rent"
+        ],
+        "effort": "MODERATE",
+        "timeframe": "3-6 months",
+        "potentialGain": "$100-300/month",
+        "consideration": "Must weigh against SPS mortgage cost at 8.375%"
+      },
+      {
+        "category": "Spousal Income (if applicable)",
+        "strategies": [
+          "If one partner not working: Consider part-time or remote work",
+          "If both working: Explore advancement opportunities for both",
+          "Leverage complementary skills for joint side business"
+        ],
+        "effort": "VARIES",
+        "timeframe": "1-6 months",
+        "potentialGain": "$500-2,000/month",
+        "note": "Household income is $24.5K/month - assess if both partners working and if optimization possible"
+      }
+    ],
+    "quickWins": [
+      "Sell unused items this month (target $500-1,000 one-time)",
+      "Sign up for gig app (DoorDash, Uber Eats) - start this weekend (target $300/month)",
+      "List spare room on Airbnb if viable (target $400-800/month)",
+      "Audit subscriptions and cancel unused (target $50-100/month saved)"
+    ],
+    "implementationPlan": {
+      "month1": "Audit current income sources, list unused items for sale, research side hustle options",
+      "month2": "Start one side hustle (delivery or online), sell unused items",
+      "month3": "Evaluate side hustle profitability, scale or pivot as needed",
+      "month6": "Target: $300-500/month additional income established",
+      "month12": "Target: $500-1,000/month additional income sustainable"
+    }
+  },
+  "expenseOptimization": {
+    "currentSituation": {
+      "monthlyIncome": 24500,
+      "debtPayments": 10034.14,
+      "remainingForExpenses": 14465.86,
+      "note": "Household has $14,466/month for living expenses after debt payments. This is comfortable - optimization possible."
+    },
+    "categories": [
+      {
+        "category": "Housing (Non-Mortgage)",
+        "currentEstimate": "Unknown",
+        "optimizationIdeas": [
+          "Utilities: Energy audit, LED bulbs, programmable thermostat (save $30-50/month)",
+          "Insurance: Shop homeowners insurance annually (save $20-50/month)",
+          "Maintenance: DIY minor repairs instead of hiring (save $50-100/month)",
+          "HOA fees: Review and contest if applicable"
+        ],
+        "potentialSavings": "$100-200/month"
+      },
+      {
+        "category": "Transportation (Non-Auto Loan)",
+        "currentEstimate": "Unknown",
+        "optimizationIdeas": [
+          "Gas: Use GasBuddy, consolidate trips, consider hybrid for next car (save $40-80/month)",
+          "Auto insurance: Shop annually, increase deductible, bundle with home (save $30-100/month)",
+          "Maintenance: DIY oil changes, air filters (save $20-40/month)",
+          "Registration/fees: No control but budget for"
+        ],
+        "potentialSavings": "$90-220/month"
+      },
+      {
+        "category": "Food & Groceries",
+        "currentEstimate": "Unknown - likely $800-1,200/month for household",
+        "optimizationIdeas": [
+          "Meal planning: Plan weekly, shop with list (save $100-150/month)",
+          "Reduce food waste: Use leftovers, freeze extras (save $50/month)",
+          "Generic brands: Switch 50% of purchases to store brand (save $80/month)",
+          "Reduce dining out: Cook 1 extra meal/week at home (save $120/month)",
+          "Batch cooking: Weekend meal prep reduces weeknight takeout temptation"
+        ],
+        "potentialSavings": "$200-350/month"
+      },
+      {
+        "category": "Entertainment & Subscriptions",
+        "currentEstimate": "Unknown - likely $150-300/month",
+        "optimizationIdeas": [
+          "Streaming audit: Keep 1-2, rotate seasonally (save $30-50/month)",
+          "Cable: Cut entirely, use antenna + streaming (save $80-150/month)",
+          "Gym: Home workouts or outdoor activities (save $40-80/month)",
+          "Entertainment: Free activities, library, parks (save $50-100/month)"
+        ],
+        "potentialSavings": "$200-380/month"
+      },
+      {
+        "category": "Cell Phone & Internet",
+        "currentEstimate": "Unknown - likely $150-250/month",
+        "optimizationIdeas": [
+          "Cell phone: Switch to Mint Mobile, Google Fi, or similar MVNO (save $50-100/month for 2 lines)",
+          "Internet: Negotiate with provider, threaten to switch (save $20-40/month)",
+          "Bundle: Combine services if cheaper"
+        ],
+        "potentialSavings": "$70-140/month"
+      },
+      {
+        "category": "Shopping & Discretionary",
+        "currentEstimate": "Unknown",
+        "optimizationIdeas": [
+          "Clothing: Buy secondhand, shop sales only, 30-day rule for purchases",
+          "Amazon: Remove saved payment methods, add friction to impulse buying",
+          "Gifts: Set budget, homemade gifts, draw names for holidays",
+          "Hobbies: Free or low-cost alternatives"
+        ],
+        "potentialSavings": "$100-300/month"
+      }
+    ],
+    "totalPotentialSavings": {
+      "conservativeEstimate": 500,
+      "aggressiveEstimate": 1200,
+      "recommendation": "Target $300-500/month in expense reductions through low-effort optimizations",
+      "implementation": "Focus on subscriptions, food waste, and negotiating bills first - lowest effort, highest impact"
+    },
+    "implementationPlan": {
+      "week1": "Audit all subscriptions - cancel unused ($50-100/month saved)",
+      "week2": "Call internet/phone providers - negotiate rates ($30-60/month saved)",
+      "week3": "Implement meal planning system ($80-120/month saved)",
+      "week4": "Review insurance policies - shop competitors ($30-80/month saved)",
+      "month2": "Total savings target achieved: $200-350/month",
+      "ongoing": "Review quarterly, maintain new habits"
+    }
+  },
+  "windfallStrategy": {
+    "definition": "Unexpected money: Tax refund, bonus, inheritance, gift, sale proceeds",
+    "allocationFormula": {
+      "step1": "Cover any immediate gaps in emergency fund (target $1,000 starter, then $24,500 full)",
+      "step2": "Keep 10% for reward/celebration (prevents resentment)",
+      "step3": "Apply 90% to current target debt in payoff sequence"
+    },
+    "scenarios": [
+      {
+        "windfall": "$1,000 tax refund",
+        "allocation": {
+          "emergencyFund": 700,
+          "reward": 100,
+          "debtPayment": 200,
+          "target": "Complete $1,000 starter emergency fund, then attack current target debt"
+        }
+      },
+      {
+        "windfall": "$5,000 bonus",
+        "allocation": {
+          "emergencyFund": 0,
+          "reward": 500,
+          "debtPayment": 4500,
+          "target": "PayPal promos + Container Store promo (if in first 6 months) OR current avalanche target",
+          "impact": "Could eliminate 2-3 promotional balances immediately, saving deferred interest"
+        }
+      },
+      {
+        "windfall": "$10,000 inheritance",
+        "allocation": {
+          "emergencyFund": 1000,
+          "reward": 1000,
+          "debtPayment": 8000,
+          "target": "SoFi Personal Loan principal reduction (reduces 17.89% interest accrual)",
+          "impact": "Reduces SoFi payoff time by 8-10 months, saves $1,200+ in interest"
+        }
+      },
+      {
+        "windfall": "$25,000 (sale of asset, large bonus)",
+        "allocation": {
+          "emergencyFund": 5000,
+          "reward": 2500,
+          "debtPayment": 17500,
+          "target": "SoFi Personal Loan + High-rate credit cards",
+          "impact": "Could eliminate SoFi entirely if timed right, saving $15,000+ in future interest"
+        }
+      }
+    ],
+    "psychologicalNote": "Keeping 10% for reward is CRITICAL. Windfall feels like 'free money' - using 100% for debt creates resentment and burnout. 10% reward keeps you motivated while 90% makes massive progress."
+  },
+  "refinancingTiming": {
+    "spsMortgage": {
+      "currentRate": 8.375,
+      "currentBalance": 167717.79,
+      "monthlyPayment": 1569.33,
+      "monthlyInterest": 1171.11,
+      "recommendation": "MONITOR_QUARTERLY",
+      "triggerPoints": [
+        {
+          "scenario": "Rates drop to 7% or below",
+          "action": "REFINANCE_IMMEDIATELY",
+          "savings": "$190/month ($2,280/year)",
+          "calculation": "8.375% → 7% on $167,717 = ~$190/month interest reduction"
+        },
+        {
+          "scenario": "Rates drop to 6.5%",
+          "action": "REFINANCE_IMMEDIATELY",
+          "savings": "$260/month ($3,120/year)",
+          "calculation": "8.375% → 6.5% on $167,717 = ~$260/month interest reduction"
+        },
+        {
+          "scenario": "Rates drop to 6%",
+          "action": "REFINANCE_IMMEDIATELY",
+          "savings": "$330/month ($3,960/year)",
+          "calculation": "8.375% → 6% on $167,717 = ~$330/month interest reduction",
+          "note": "Even with $3,000-5,000 closing costs, payback period is <18 months"
+        }
+      ],
+      "checkAgainDate": "2026-02-21 (quarterly review)",
+      "potentialSavingsIfRefinanced": {
+        "to7percent": 2280,
+        "to6point5percent": 3120,
+        "to6percent": 3960
+      },
+      "note": "Investment property mortgages typically have slightly higher rates than primary residences. 8.375% may have been market rate at origination. Monitor for drops."
+    },
+    "loanCareMortgage": {
+      "currentRate": 4.875,
+      "currentBalance": 475339.78,
+      "monthlyPayment": 3566.24,
+      "recommendation": "KEEP_CURRENT_RATE",
+      "reasoning": "4.875% is excellent for primary residence. Unlikely to find meaningfully better rate. Refinancing costs would outweigh minimal savings. Keep as-is."
+    },
+    "balanceTransferOpportunities": {
+      "sofiPersonalLoan": {
+        "currentBalance": 40735.15,
+        "currentAPR": 17.89,
+        "monthlyInterest": 607.18,
+        "opportunity": "0% balance transfer credit card offer",
+        "viability": "MONITOR",
+        "calculation": {
+          "scenario": "Transfer $40,735 to 0% card for 18 months with 3% fee",
+          "transferFee": 1222.05,
+          "interestSavedIfNoPayments": 10929.24,
+          "netSavings": 9707.19,
+          "recommendation": "ABSOLUTELY DO THIS if offer becomes available. Even 5% fee ($2,036) worth it to eliminate 17.89% interest."
+        },
+        "action": "Check credit card offers monthly. Apply immediately if 0% balance transfer offer appears with credit limit sufficient for full or partial transfer."
+      },
+      "highRateCreditCards": {
+        "targets": [
+          "Navy Federal ***129382 ($21,961 @ 16.7%)",
+          "Navy Federal ***561145 ($4,431 @ 16.3%)",
+          "Navy Federal ***065726 ($9,953 @ 14.1%)"
+        ],
+        "opportunity": "Balance transfer to lower-rate card or 0% promotional offer",
+        "viability": "LOW (currently high utilization may limit new credit offers)",
+        "recommendation": "As you pay down debts and credit score improves, watch for balance transfer offers. Even reducing 16.7% to 6.9% saves significant interest."
+      }
+    }
+  },
+  "seasonalOpportunities": [
+    {
+      "season": "Tax Refund Season (February-April)",
+      "opportunity": "Apply tax refund to debt using windfall formula",
+      "action": "Adjust W-4 to reduce refund size (increase take-home pay year-round instead of lump sum)",
+      "benefit": "Smaller refund + higher monthly income = more consistent extra payments"
+    },
+    {
+      "season": "Annual Bonus (if applicable)",
+      "opportunity": "Apply 90% of bonus to debt per windfall formula",
+      "potentialAmount": "Unknown - depends on employment",
+      "action": "Plan ahead for bonus - decide debt target in advance to avoid lifestyle inflation"
+    },
+    {
+      "season": "Holiday Season (November-December)",
+      "opportunity": "Reduce gift spending, redirect savings to debt",
+      "action": "Set strict holiday budget, focus on experiences over things, handmade gifts",
+      "potentialSavings": "$300-800 (redirect to January debt payment)"
+    },
+    {
+      "season": "Spring Cleaning (March-May)",
+      "opportunity": "Sell unused items (garage sale, Facebook Marketplace, eBay)",
+      "action": "Dedicate one weekend to declutter and list items",
+      "potentialGain": "$500-2,000 one-time windfall"
+    }
+  ],
+  "progressAccelerators": [
+    {
+      "accelerator": "Debt Consolidation Loan (if credit improves)",
+      "viability": "Re-evaluate in 12-24 months after credit score improvement",
+      "action": "Track credit score monthly. When score reaches 700+, explore personal loan consolidation for high-rate debts",
+      "potentialSavings": "Consolidating $50,000 in 14-17% debt to 8% loan saves $3,000-4,500/year in interest"
+    },
+    {
+      "accelerator": "Sell Investment Property",
+      "viability": "CONSIDER",
+      "scenario": {
+        "spsMortgageBalance": 167717.79,
+        "estimatedPropertyValue": "Unknown",
+        "estimatedEquity": "Unknown",
+        "rentalIncome": "Unknown",
+        "analysis": "If property has equity and rental income doesn't significantly exceed mortgage payment, selling eliminates $1,569/month payment + $1,171/month interest cost. Could dramatically accelerate unsecured debt payoff."
+      },
+      "action": "Evaluate: (1) Current property value, (2) Equity position, (3) Net rental income after all expenses, (4) Projected appreciation vs. debt payoff benefit",
+      "recommendation": "If equity is positive and rental income is break-even or negative, strongly consider selling. $1,569/month redirected to unsecured debt eliminates it 3-4 years faster."
+    },
+    {
+      "accelerator": "Increase MMI Payment",
+      "viability": "LOW PRIORITY",
+      "reasoning": "MMI debts are at negotiated lower rates (3.2%-16.7%). Focus extra payments on non-MMI high-rate debts first (SoFi 17.89%, Amex 28.74%, etc.)",
+      "action": "Continue $1,751 MMI payment as agreed. Do not increase unless all non-MMI debts are eliminated."
+    }
+  ],
+  "recommendedImplementation": {
+    "immediate": [
+      "Audit subscriptions - cancel unused (target $50-100/month savings)",
+      "Research one side hustle to start this month (target $200-300/month income)",
+      "Check current mortgage rates for SPS refinancing opportunity",
+      "List unused items for sale (target $500-1,000 one-time windfall)"
+    ],
+    "month1to3": [
+      "Start side hustle and evaluate profitability",
+      "Implement meal planning to reduce food waste",
+      "Negotiate internet/phone bills",
+      "Total new extra payment capacity: +$100-200/month"
+    ],
+    "month3to6": [
+      "Scale successful side hustle or pivot to different opportunity",
+      "Apply windfalls to promotional debt deadlines",
+      "Review expense optimization results",
+      "Target: +$200-300/month extra payment capacity"
+    ],
+    "ongoing": [
+      "Quarterly review of optimization opportunities",
+      "Annual review of SPS refinancing options",
+      "Monitor balance transfer and consolidation offers as credit improves",
+      "Evaluate investment property sale opportunity at 12-month mark"
+    ]
+  }
+}

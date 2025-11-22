@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debt Payoff Strategy - Updated Nov 21, 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4a5568;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c5282;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #2c5282;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #4299e1;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #2c5282;
+            font-size: 1.3em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card.green {
+            background: linear-gradient(135deg, #38a169 0%, #2c7a4f 100%);
+        }
+
+        .stat-card.red {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+
+        .stat-card.blue {
+            background: linear-gradient(135deg, #4299e1 0%, #2c5282 100%);
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .alert-box {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .alert-box.warning {
+            background: #fffaf0;
+            border-left-color: #f39c12;
+        }
+
+        .alert-box.success {
+            background: #f0fff4;
+            border-left-color: #38a169;
+        }
+
+        .alert-box.info {
+            background: #ebf8ff;
+            border-left-color: #4299e1;
+        }
+
+        .alert-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        thead {
+            background: #2c5282;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .priority-1 {
+            background: #fff5f5;
+            font-weight: bold;
+        }
+
+        .priority-urgent {
+            background: #fffaf0;
+            font-weight: bold;
+        }
+
+        .timeline-item {
+            border-left: 3px solid #4299e1;
+            padding-left: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background: #4299e1;
+            border-radius: 50%;
+            position: absolute;
+            left: -8px;
+            top: 5px;
+        }
+
+        .timeline-item.milestone:before {
+            background: #e53e3e;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #2c5282;
+            font-size: 1.1em;
+        }
+
+        .action-checklist {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .action-checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .action-checklist li {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-left: 4px solid #38a169;
+            border-radius: 4px;
+        }
+
+        .action-checklist li:before {
+            content: "☐ ";
+            font-size: 1.3em;
+            margin-right: 10px;
+            color: #38a169;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .comparison-card.recommended {
+            border-color: #38a169;
+            background: #f0fff4;
+        }
+
+        .comparison-card h4 {
+            color: #2c5282;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin: 5px 5px 5px 0;
+        }
+
+        .badge.recommended {
+            background: #38a169;
+            color: white;
+        }
+
+        .badge.urgent {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .badge.info {
+            background: #4299e1;
+            color: white;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .stat-card {
+                background: white;
+                color: black;
+                border: 2px solid #ccc;
+            }
+            .stat-value {
+                color: black;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            .stat-value {
+                font-size: 2.5em;
+            }
+            table {
+                font-size: 0.9em;
+            }
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Comprehensive Debt Payoff Strategy</h1>
+        <p class="subtitle">Updated November 21, 2025 - Including Ashley PayPal Credit</p>
+
+        <div class="hero-stats">
+            <div class="stat-card red">
+                <div class="stat-label">Total Debt</div>
+                <div class="stat-value">$241,414</div>
+                <div>Across 24 accounts</div>
+            </div>
+            <div class="stat-card blue">
+                <div class="stat-label">Debt-Free Timeline</div>
+                <div class="stat-value">91 months</div>
+                <div>June 2033</div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-label">Interest Saved</div>
+                <div class="stat-value">$69,598</div>
+                <div>vs. minimums only</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Monthly Payment</div>
+                <div class="stat-value">$5,399</div>
+                <div>$4,899 min + $500 extra</div>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <div class="alert-title">IMMEDIATE ACTION REQUIRED</div>
+            <p><strong>Ashley PayPal Credit is $41 past due</strong> - Pay $92 minimum within 7 days to prevent penalty APR of 34.74% triggering on January 13, 2026.</p>
+            <p style="margin-top: 10px;"><strong>Impact of delay:</strong> Penalty APR would cost an additional $200+ per year in interest.</p>
+        </div>
+
+        <div class="alert-box warning">
+            <div class="alert-title">URGENT: Promotional Deadlines</div>
+            <p><strong>$5,490.61 in balances with $1,971.44 deferred interest at risk</strong></p>
+            <ul style="margin-top: 10px;">
+                <li>01/11/26 (52 days): Calvin PayPal promos - Save $66.11</li>
+                <li>02/03/26 (75 days): CareCredit - Save $75.32</li>
+                <li>02/11/26 (83 days): Calvin PayPal promo - Save $40.67</li>
+                <li>04/03/26 (134 days): Container Store - Save $1,766.89 (BIGGEST)</li>
+                <li>05/05/26 (166 days): Ashley PayPal promo - Save $23.23</li>
+            </ul>
+        </div>
+
+        <h2>Recommended Strategy: Promotional Defense + Avalanche</h2>
+
+        <div class="alert-box info">
+            <div class="alert-title">Why This Strategy Works</div>
+            <ul style="padding-left: 20px;">
+                <li><strong>Saves $1,971 immediately</strong> by defending all promotional deadlines</li>
+                <li><strong>Mathematically optimal</strong> after promos by targeting highest APR debts (SoFi 17.89%)</li>
+                <li><strong>Balances motivation</strong> with short-term wins (promo defense) and long-term optimization</li>
+                <li><strong>Saves $7,287 vs snowball</strong> and finishes 7 months faster</li>
+                <li><strong>Your $500/month extra payment</strong> saves $69,598 in interest and achieves freedom 4.25 years earlier</li>
+            </ul>
+        </div>
+
+        <h2>Strategy Comparison</h2>
+
+        <div class="comparison-table">
+            <div class="comparison-card recommended">
+                <h4>Promotional Defense + Avalanche <span class="badge recommended">RECOMMENDED</span></h4>
+                <p><strong>Debt-Free:</strong> June 2033 (91 months)</p>
+                <p><strong>Total Interest:</strong> $87,235</p>
+                <p><strong>How it works:</strong></p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Phase 1: Defend all promotional deadlines (save $1,971)</li>
+                    <li>Phase 2: Attack highest APR debts first (SoFi 17.89%, then down)</li>
+                    <li>Maximizes interest savings while securing immediate wins</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <h4>Snowball (Smallest First)</h4>
+                <p><strong>Debt-Free:</strong> January 2034 (98 months)</p>
+                <p><strong>Total Interest:</strong> $94,521</p>
+                <p><strong>Difference vs Recommended:</strong></p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Costs $7,287 MORE in interest</li>
+                    <li>Takes 7 months LONGER</li>
+                    <li>Lets SoFi 17.89% bleed $606/month in interest</li>
+                    <li>Provides more quick wins but at a cost</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <h4>Minimum Payments Only</h4>
+                <p><strong>Debt-Free:</strong> August 2037 (142 months)</p>
+                <p><strong>Total Interest:</strong> $156,832</p>
+                <p><strong>Comparison:</strong></p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Your $500 extra payment saves $69,598</li>
+                    <li>Achieves freedom 51 months (4.25 years) earlier</li>
+                    <li>Shows the MASSIVE value of your extra payment commitment</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Ashley PayPal Impact Analysis</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Before</th>
+                    <th>After</th>
+                    <th>Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total Debt</td>
+                    <td>$240,584</td>
+                    <td>$241,414</td>
+                    <td>+$830 (0.34%)</td>
+                </tr>
+                <tr>
+                    <td>Monthly Minimums</td>
+                    <td>$4,807</td>
+                    <td>$4,899</td>
+                    <td>+$92</td>
+                </tr>
+                <tr>
+                    <td>Number of Accounts</td>
+                    <td>22</td>
+                    <td>24</td>
+                    <td>+2</td>
+                </tr>
+                <tr>
+                    <td>Promotional Interest at Risk</td>
+                    <td>$1,948</td>
+                    <td>$1,971</td>
+                    <td>+$23</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert-box success">
+            <div class="alert-title">Strategic Impact: MINIMAL</div>
+            <p>Ashley PayPal Credit adds only $830 to $241K total debt (0.34% increase). This is manageable and doesn't change the core strategy.</p>
+            <p style="margin-top: 10px;"><strong>Priority Sequence:</strong></p>
+            <ol style="padding-left: 20px; margin-top: 5px;">
+                <li>Clear $41 past due immediately (prevent penalty APR)</li>
+                <li>Continue $92 minimum monthly payments</li>
+                <li>Pay promo balance ($751.62) by May 5, 2026 to save $23.23</li>
+                <li>Ashley PayPal Standard ($78.60 @ 30.14%) becomes #1 target in Phase 2 (June 2026)</li>
+            </ol>
+        </div>
+
+        <h2>Your Payoff Priority Order</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Priority</th>
+                    <th>Account</th>
+                    <th>Balance</th>
+                    <th>APR</th>
+                    <th>Monthly Interest</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="priority-urgent">
+                    <td>URGENT</td>
+                    <td>Ashley PayPal (Past Due)</td>
+                    <td>$830</td>
+                    <td>30.14%</td>
+                    <td>$2/mo</td>
+                    <td><span class="badge urgent">PAY $92 NOW</span></td>
+                </tr>
+                <tr class="priority-urgent">
+                    <td>PROMO 1</td>
+                    <td>Calvin PayPal (2 promos)</td>
+                    <td>$545</td>
+                    <td>0%</td>
+                    <td>$0</td>
+                    <td><span class="badge urgent">Due 01/11/26</span></td>
+                </tr>
+                <tr class="priority-urgent">
+                    <td>PROMO 2</td>
+                    <td>CareCredit</td>
+                    <td>$1,748</td>
+                    <td>0%</td>
+                    <td>$0</td>
+                    <td><span class="badge urgent">Due 02/03/26</span></td>
+                </tr>
+                <tr class="priority-urgent">
+                    <td>PROMO 3</td>
+                    <td>Calvin PayPal</td>
+                    <td>$372</td>
+                    <td>0%</td>
+                    <td>$0</td>
+                    <td><span class="badge urgent">Due 02/11/26</span></td>
+                </tr>
+                <tr class="priority-urgent">
+                    <td>PROMO 4</td>
+                    <td>Container Store</td>
+                    <td>$2,323</td>
+                    <td>0%</td>
+                    <td>$0</td>
+                    <td><span class="badge urgent">Due 04/03/26</span></td>
+                </tr>
+                <tr class="priority-urgent">
+                    <td>PROMO 5</td>
+                    <td>Ashley PayPal Promo</td>
+                    <td>$752</td>
+                    <td>0%</td>
+                    <td>$0</td>
+                    <td><span class="badge urgent">Due 05/05/26</span></td>
+                </tr>
+                <tr class="priority-1">
+                    <td>1</td>
+                    <td>Ashley PayPal Standard</td>
+                    <td>$79</td>
+                    <td>30.14%</td>
+                    <td>$2</td>
+                    <td><span class="badge recommended">Phase 2 Start</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Calvin PayPal Standard</td>
+                    <td>$375</td>
+                    <td>30.14%</td>
+                    <td>$9</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Marriott Bonvoy Amex</td>
+                    <td>$4,272</td>
+                    <td>28.74%</td>
+                    <td>$102</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Delta Amex</td>
+                    <td>$2,643</td>
+                    <td>28.74%</td>
+                    <td>$63</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Capital One VentureOne</td>
+                    <td>$2,330</td>
+                    <td>28.74%</td>
+                    <td>$56</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Capital One QuicksilverOne</td>
+                    <td>$2,703</td>
+                    <td>27.99%</td>
+                    <td>$63</td>
+                    <td></td>
+                </tr>
+                <tr class="priority-1">
+                    <td>7</td>
+                    <td>SoFi Personal Loan</td>
+                    <td>$40,735</td>
+                    <td>17.89%</td>
+                    <td>$607</td>
+                    <td><span class="badge info">Highest Impact</span></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Navy Federal 129382</td>
+                    <td>$21,961</td>
+                    <td>16.7%</td>
+                    <td>$305</td>
+                    <td><span class="badge info">MMI</span></td>
+                </tr>
+                <tr>
+                    <td>9-18</td>
+                    <td>Remaining debts...</td>
+                    <td>$163,635</td>
+                    <td>3.2%-16.3%</td>
+                    <td>$1,323</td>
+                    <td>Avalanche order</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Key Milestones Timeline</h2>
+
+        <div class="timeline-item">
+            <div class="timeline-date">Week 1 (November 2025)</div>
+            <p><strong>Pay Ashley PayPal $92 minimum</strong> - Clear past due status, prevent penalty APR</p>
+            <p style="color: #38a169; margin-top: 5px;">Impact: Crisis averted, saves $200+/year in penalty interest</p>
+        </div>
+
+        <div class="timeline-item milestone">
+            <div class="timeline-date">January 11, 2026 (52 days)</div>
+            <p><strong>First Promotional Deadline Defended</strong> - Calvin PayPal THORUM + DELTA 1 paid off ($545)</p>
+            <p style="color: #38a169; margin-top: 5px;">Celebration: Saved $66 in deferred interest - treat yourself to favorite meal</p>
+        </div>
+
+        <div class="timeline-item milestone">
+            <div class="timeline-date">April 3, 2026 (134 days)</div>
+            <p><strong>Container Store Deadline Defended</strong> - $2,323 paid off</p>
+            <p style="color: #38a169; margin-top: 5px;">Celebration: SAVED $1,767 (BIGGEST WIN) - weekend getaway under $300</p>
+        </div>
+
+        <div class="timeline-item milestone">
+            <div class="timeline-date">May 5, 2026 (166 days)</div>
+            <p><strong>All Promotional Deadlines Defended</strong> - Ashley PayPal promo paid off ($752)</p>
+            <p style="color: #38a169; margin-top: 5px;">Milestone: Total saved $1,971 in deferred interest across 6 accounts</p>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-date">June 2026 (7 months)</div>
+            <p><strong>Phase 2 Begins: Avalanche Attack</strong> - Start targeting SoFi Personal Loan (17.89% APR)</p>
+            <p style="margin-top: 5px;">All promotional balances eliminated, now focusing on highest interest debts</p>
+        </div>
+
+        <div class="timeline-item milestone">
+            <div class="timeline-date">December 2029 (49 months)</div>
+            <p><strong>SoFi Personal Loan ELIMINATED</strong> - $40,735 paid off</p>
+            <p style="color: #38a169; margin-top: 5px;">Celebration: $607/month interest bleeding STOPPED - freed $1,043/month payment</p>
+        </div>
+
+        <div class="timeline-item milestone">
+            <div class="timeline-date">June 2030 (55 months)</div>
+            <p><strong>All Credit Cards Paid Off</strong> - Only loans remaining</p>
+            <p style="color: #38a169; margin-top: 5px;">Milestone: High-APR debt eliminated, only low-rate MMI and business loan left</p>
+        </div>
+
+        <div class="timeline-item milestone">
+            <div class="timeline-date">June 2033 (91 months)</div>
+            <p><strong>DEBT FREE</strong> - All 24 debts eliminated</p>
+            <p style="color: #38a169; margin-top: 5px;">CELEBRATION: $5,399/month FREED UP - Life transformation complete!</p>
+        </div>
+
+        <h2>Your Next 3 Actions</h2>
+
+        <div class="action-checklist">
+            <h3>This Week (By November 28, 2025)</h3>
+            <ul>
+                <li><strong>PAY ASHLEY PAYPAL $92 MINIMUM</strong> - Log into account ending 7934, make payment, verify $0 past due</li>
+                <li>Set up calendar reminder for Ashley PayPal payment every month (auto-pay if possible)</li>
+                <li>Verify all other minimum payments are current and on track</li>
+            </ul>
+        </div>
+
+        <div class="action-checklist">
+            <h3>This Month (By December 31, 2025)</h3>
+            <ul>
+                <li>Create calendar reminders for all 5 promotional deadlines (30 days before each)</li>
+                <li>Allocate December's $500 extra payment to building January 11 PayPal deadline fund ($545 needed)</li>
+                <li>Review and print this strategy document - put on refrigerator for daily visibility</li>
+            </ul>
+        </div>
+
+        <div class="action-checklist">
+            <h3>By Month 2 (By January 31, 2026)</h3>
+            <ul>
+                <li>Pay off PayPal THORUM ($220) and PayPal DELTA 1 ($325) by January 11 deadline</li>
+                <li>CELEBRATE: You just saved $66 in deferred interest with first deadline defense</li>
+                <li>Start building CareCredit deadline fund ($1,748 needed by February 3)</li>
+                <li>Update debt tracker: 2 accounts closed, 22 remaining</li>
+            </ul>
+        </div>
+
+        <h2>Motivation & Tracking</h2>
+
+        <div class="alert-box info">
+            <div class="alert-title">Monthly Review Protocol (15 minutes)</div>
+            <ol style="padding-left: 20px;">
+                <li>Log into all 24 accounts, note current balances</li>
+                <li>Verify all minimums were paid on time</li>
+                <li>Confirm extra $500 went to correct target debt</li>
+                <li>Update debt tracker spreadsheet or app</li>
+                <li>Calculate total debt paid down this month</li>
+                <li>Check for any promotional deadlines in next 60 days</li>
+                <li>Celebrate progress: "I eliminated $X of debt this month!"</li>
+            </ol>
+        </div>
+
+        <h3>Recommended Tracking Tools</h3>
+        <ul style="padding-left: 20px;">
+            <li><strong>YNAB (You Need A Budget)</strong> - Excellent for envelope budgeting and debt tracking</li>
+            <li><strong>Excel/Google Sheets</strong> - Create monthly balance tracker with charts</li>
+            <li><strong>Debt payoff chart on refrigerator</strong> - Visual progress tracking (color in as debts are paid)</li>
+            <li><strong>Monthly screenshots</strong> - Take photo of total debt for before/after comparison</li>
+        </ul>
+
+        <h2>Emergency Fund & Contingency</h2>
+
+        <div class="alert-box warning">
+            <div class="alert-title">Current Emergency Fund Status: CRITICAL</div>
+            <p><strong>Current:</strong> $300 (extremely low)</p>
+            <p><strong>Recommended minimum:</strong> $2,000 (1 month essential expenses)</p>
+            <p><strong>Your situation:</strong> With aggressive risk tolerance and MMI program safety net, $300 is acceptable short-term BUT RISKY</p>
+            <p style="margin-top: 15px;"><strong>Recommendation:</strong> Build to $2,000 within 6 months using tax refund, bonuses, or 2-3 months of diverted extra payments if no urgent promotional deadlines at risk.</p>
+        </div>
+
+        <h3>When to PAUSE Extra Payments</h3>
+        <ul style="padding-left: 20px; margin-top: 10px;">
+            <li>Emergency fund drops below $300 (rebuild to $500 first)</li>
+            <li>Job loss or major income reduction (minimums only until stable)</li>
+            <li>Major medical emergency not covered by insurance</li>
+            <li>Critical home/auto repair that can't be deferred</li>
+        </ul>
+
+        <h2>Final Thoughts</h2>
+
+        <div class="alert-box success">
+            <div class="alert-title">You've Got This!</div>
+            <p><strong>Your debt-free date:</strong> June 30, 2033 (2,779 days from now)</p>
+            <p><strong>Your commitment:</strong> $500/month extra payment saves you $69,598 in interest</p>
+            <p style="margin-top: 15px;">Every payment is progress. Every deadline defended is a win. Every high-APR debt eliminated is a bleeding stopped.</p>
+            <p style="margin-top: 10px;"><strong>You're not just paying off debt. You're building financial freedom.</strong></p>
+            <p style="margin-top: 10px;">June 2033, you'll have $5,399/month freed up for savings, investments, travel, or whatever brings you joy. That's what we're working toward.</p>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #f7fafc; border-radius: 8px; text-align: center;">
+            <p style="font-size: 0.9em; color: #718096;">
+                <strong>Document Generated:</strong> November 21, 2025<br>
+                <strong>Strategy:</strong> Promotional Defense + Avalanche<br>
+                <strong>Projected Debt-Free Date:</strong> June 30, 2033<br>
+                <strong>Total Interest Saved vs Minimums Only:</strong> $69,597.89
+            </p>
+        </div>
+    </div>
+</body>
+</html>

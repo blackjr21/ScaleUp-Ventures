@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cash Flow Forecasting System</title>
-    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/shared.css?v=3">
     <style>
         body {
             display: flex;
@@ -188,6 +188,14 @@
     </style>
 </head>
 <body>
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="scenario-planner.html">Scenario Planner</a></li>
+            <li><a href="http://localhost:8000/debt-strategy-complete.html" target="_blank">Debt Strategy</a></li>
+        </ul>
+    </nav>
     <div class="landing-container">
         <div class="landing-header">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -199,7 +207,7 @@
         </div>
 
         <div class="page-cards">
-            <a href="dashboard-only.html" class="page-card">
+            <a href="dashboard.html" class="page-card">
                 <div class="page-card-icon">📊</div>
                 <h2 class="page-card-title">Dashboard</h2>
                 <p class="page-card-description">
@@ -232,6 +240,24 @@
                 </ul>
                 <div class="page-card-cta">
                     Open Planner →
+                </div>
+            </a>
+
+            <a href="http://localhost:8000/debt-strategy-complete.html" target="_blank" class="page-card">
+                <div class="page-card-icon">💳</div>
+                <h2 class="page-card-title">Debt Strategy</h2>
+                <p class="page-card-description">
+                    Optimize your debt payoff strategy with avalanche and snowball methods to minimize interest and accelerate freedom.
+                </p>
+                <ul class="page-card-features">
+                    <li>Avalanche method (highest interest first)</li>
+                    <li>Snowball method (smallest balance first)</li>
+                    <li>Total interest savings comparison</li>
+                    <li>Payoff timeline visualization</li>
+                    <li>Strategic payment recommendations</li>
+                </ul>
+                <div class="page-card-cta">
+                    View Strategy →
                 </div>
             </a>
         </div>
@@ -292,5 +318,7 @@
 
     <!-- Load shared modules -->
     <script src="js/shared/theme-manager.js"></script>
+    <!-- UX Helpers -->
+    <script src="js/ux-helpers.js"></script>
 </body>
 </html>

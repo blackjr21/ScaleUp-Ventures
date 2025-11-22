@@ -334,13 +334,65 @@ Remember: The best debt payoff strategy is the one you'll actually complete. Thi
 
 ---
 
-### PHASE 6: Present Results to User
+### PHASE 6: Generate HTML Visualization
+
+Invoke the `debt-strategy-visualizer` agent to create a clean, visual HTML page from all the JSON analysis files:
+
+```
+Task(
+  subagent_type: "debt-strategy-visualizer",
+  prompt: "Generate HTML visualization from debt strategy analysis files.
+
+Input files location: Financial/Debt Payoff/
+- debt-inventory.json
+- phase1-debt-analysis.json
+- phase3-payoff-roadmap.json
+- phase4a-motivation-plan.json
+- phase4b-acceleration-optimizer.json
+
+Format: full (default)
+Output path: Financial/Debt Payoff/debt-strategy.html
+
+Create clean, minimal, responsive HTML with:
+- Hero stats grid (Total Debt, Timeline, Savings, Freed Cash)
+- Victory path table (snowball order)
+- Major milestones timeline
+- Acceleration scenarios
+- Action checklists
+- Monthly review protocol
+
+No external dependencies, print-friendly, mobile-responsive."
+)
+```
+
+**Expected output**: Confirmation that HTML file was generated successfully with file path.
+
+**Validation**:
+- Verify HTML file was created
+- Confirm file path is accessible
+- Note file size and format used
+
+**Store the output path** (htmlPath) to include in final summary.
+
+---
+
+### PHASE 7: Present Results to User
 
 Present the complete markdown report to the user with this introduction:
 
 "I've created your comprehensive debt payoff strategy using a specialized multi-agent analysis system. Here's your personalized plan:
 
 [PASTE COMPLETE MARKDOWN REPORT]
+
+---
+
+**📊 VISUAL HTML VERSION GENERATED**
+
+I've also created an easy-to-read HTML visualization:
+- **Location**: `Financial/Debt Payoff/debt-strategy.html`
+- **Format**: Full responsive design with color-coded sections
+- **Features**: Print-friendly, mobile-optimized, no external dependencies
+- **Usage**: Open in any web browser for a beautiful visual view of your strategy
 
 ---
 
@@ -358,6 +410,7 @@ Present the complete markdown report to the user with this introduction:
 - "What if I could pay an extra $X per month?" (I can recalculate acceleration)
 - "I'm worried about [specific concern]" (I can address specific fears or obstacles)
 - "Can you help me track my progress?" (I can set up tracking systems)
+- "Regenerate the HTML in [summary/mobile/print] format" (I can create different views)
 
 Your journey to debt freedom starts now. 💪"
 

@@ -1,0 +1,496 @@
+{
+  "analysisDate": "2025-11-21",
+  "dataSource": "debt-inventory-current.json",
+  "updateNotes": "UPDATED: Added Johns Hopkins 401k Loan 1 ($4,398.64 @ 4.25%) and Loan 2 ($35,360.58 @ 8.50%). Corrected Navy Federal MMI rates to 9.9% (down from 12.1-16.7% in prior analysis).",
+
+  "totalDebt": 924230.77,
+  "unsecuredDebt": 281173.20,
+  "mortgageDebt": 643057.57,
+  "totalMinimumPayments": 11185.27,
+  "unsecuredMinimumPayments": 6049.70,
+  "mortgageMinimumPayments": 5135.57,
+  "monthlyIncome": 24500,
+  "debtToIncomeRatio": 45.7,
+  "unsecuredDebtToIncomeRatio": 24.7,
+
+  "emergencyFundStatus": {
+    "currentAmount": 300,
+    "targetAmount": 24500,
+    "percentOfTarget": 1.2,
+    "adequacy": "CRITICALLY_INADEQUATE",
+    "recommendation": "Build to $1,000 starter emergency fund immediately (within 2 months), then $5,000 (10 months), then $24,500 (1 month expenses) as long-term goal",
+    "urgency": "CRITICAL - $300 will not cover even one emergency. This is the #1 risk factor."
+  },
+
+  "weightedAvgAPR": {
+    "allDebts": 6.12,
+    "unsecuredOnly": 10.18,
+    "mortgagesOnly": 5.65,
+    "mmiDebtsOnly": 6.87,
+    "non401kUnsecured": 11.92,
+    "retirement401kLoans": 8.01,
+    "calculation": "Weighted by balance. Navy Federal MMI rates corrected to 9.9%. Johns Hopkins 401k loans added."
+  },
+
+  "highestInterestDebt": {
+    "creditorName": "PayPal Credit - Standard Balance",
+    "balance": 375.04,
+    "apr": 30.14,
+    "minimumPayment": 30.00,
+    "monthlyInterest": 9.42,
+    "accountType": "credit_card",
+    "note": "Highest APR but small balance - part of consolidated PayPal Credit account"
+  },
+
+  "highestInterestUnsecuredNonPromo": {
+    "creditorName": "Ashley PayPal Credit - Standard Balance",
+    "balance": 78.60,
+    "apr": 30.14,
+    "minimumPayment": 92.00,
+    "monthlyInterest": 1.98,
+    "accountType": "credit_card",
+    "note": "Account is $41 past due - URGENT payment needed to avoid penalty APR (34.74%) on new purchases"
+  },
+
+  "highestInterestSignificantDebt": {
+    "creditorName": "SoFi Personal Loan (PA-1468455)",
+    "balance": 40735.15,
+    "apr": 17.89,
+    "minimumPayment": 1042.78,
+    "monthlyInterest": 606.78,
+    "yearlyInterest": 7281.36,
+    "accountType": "personal_loan",
+    "note": "HIGHEST APR among debts >$10,000. Costing $606.78/month in interest alone. TOP PRIORITY after promotional deadlines."
+  },
+
+  "lowestInterestDebt": {
+    "creditorName": "PayPal Credit - THORUM (Promo expires 01/11/26)",
+    "balance": 219.87,
+    "apr": 0.0,
+    "minimumPayment": 30.00,
+    "monthlyInterest": 0.00,
+    "accountType": "credit_card",
+    "note": "Promotional 0% - must pay by 01/11/26 or face $28.68 deferred interest at 30.14% APR"
+  },
+
+  "lowestInterestNonPromo": {
+    "creditorName": "CHASE - CHASE ID 0491 (***317277)",
+    "balance": 14503.60,
+    "apr": 3.2,
+    "minimumPayment": 315.00,
+    "monthlyInterest": 38.68,
+    "accountType": "credit_card",
+    "note": "MMI consolidated rate - tied for lowest with CHASE ***777509. Pay on MMI schedule."
+  },
+
+  "smallestBalanceDebt": {
+    "creditorName": "Ashley PayPal Credit - Standard Balance",
+    "balance": 78.60,
+    "apr": 30.14,
+    "minimumPayment": 92.00,
+    "accountType": "credit_card",
+    "note": "Smallest balance - easy snowball win if not past due"
+  },
+
+  "largestBalanceDebt": {
+    "creditorName": "LoanCare",
+    "balance": 475339.78,
+    "apr": 4.875,
+    "minimumPayment": 3566.24,
+    "accountType": "mortgage",
+    "property": "100 Orchard Peach Road, Garner, NC 27529 (Primary residence)",
+    "note": "Largest debt overall - pay minimums only, focus on unsecured debt"
+  },
+
+  "largestUnsecuredDebt": {
+    "creditorName": "SBA EIDL COVID-19 Loan (6599918202)",
+    "balance": 58711.87,
+    "apr": 3.75,
+    "minimumPayment": 315.00,
+    "accountType": "business_loan",
+    "maturityDate": "2050-08-28",
+    "note": "Largest unsecured balance. LOWEST unsecured APR with 30-year term. Pay minimums only until all other unsecured debts eliminated."
+  },
+
+  "urgentDebts": [
+    {
+      "priority": 1,
+      "creditorName": "Ashley PayPal Credit - Standard Balance",
+      "balance": 78.60,
+      "apr": 30.14,
+      "minimumPayment": 92.00,
+      "urgency": "CRITICAL",
+      "reason": "Account is $41 past due. Risk of penalty APR (34.74%) on new purchases after 01/13/26. Pay $92 IMMEDIATELY.",
+      "action": "Pay $92 minimum payment TODAY to bring account current"
+    },
+    {
+      "priority": 2,
+      "creditorName": "PayPal Credit - THORUM (Promo expires 01/11/26)",
+      "balance": 219.87,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 28.68,
+      "deadline": "2026-01-11",
+      "daysRemaining": 51,
+      "urgency": "CRITICAL",
+      "standardAPR": 30.14,
+      "requiredMonthlyPayment": 110.00,
+      "recommendation": "Pay $219.87 in full by 01/11/26 to save $28.68"
+    },
+    {
+      "priority": 3,
+      "creditorName": "PayPal Credit - DELTA (Promo expires 01/11/26)",
+      "balance": 324.97,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 37.43,
+      "deadline": "2026-01-11",
+      "daysRemaining": 51,
+      "urgency": "CRITICAL",
+      "standardAPR": 30.14,
+      "requiredMonthlyPayment": 163.00,
+      "recommendation": "Pay $324.97 in full by 01/11/26 to save $37.43"
+    },
+    {
+      "priority": 4,
+      "creditorName": "CareCredit/Synchrony (***1609)",
+      "balance": 1748.00,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 75.32,
+      "deadline": "2026-02-03",
+      "daysRemaining": 74,
+      "urgency": "HIGH",
+      "standardAPR": 12.50,
+      "requiredMonthlyPayment": 583.00,
+      "recommendation": "Pay $1,748.00 in full by 02/03/26 to save $75.32"
+    },
+    {
+      "priority": 5,
+      "creditorName": "PayPal Credit - DELTA (Promo expires 02/11/26)",
+      "balance": 372.00,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 40.67,
+      "deadline": "2026-02-11",
+      "daysRemaining": 82,
+      "urgency": "HIGH",
+      "standardAPR": 30.14,
+      "requiredMonthlyPayment": 124.00,
+      "recommendation": "Pay $372.00 in full by 02/11/26 to save $40.67"
+    },
+    {
+      "priority": 6,
+      "creditorName": "Container Store/Synchrony (***2961)",
+      "balance": 2323.15,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 1766.89,
+      "deadline": "2026-04-03",
+      "daysRemaining": 133,
+      "urgency": "HIGH",
+      "standardAPR": 34.99,
+      "requiredMonthlyPayment": 581.00,
+      "recommendation": "Pay $2,323.15 in full by 04/03/26 to save $1,766.89 - LARGEST DEFERRED INTEREST RISK"
+    },
+    {
+      "priority": 7,
+      "creditorName": "Ashley PayPal Credit - Promo (expires 05/05/26)",
+      "balance": 751.62,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 23.23,
+      "deadline": "2026-05-05",
+      "daysRemaining": 165,
+      "urgency": "MEDIUM",
+      "standardAPR": 30.14,
+      "requiredMonthlyPayment": 125.00,
+      "recommendation": "Pay $751.62 in full by 05/05/26 to save $23.23"
+    },
+    {
+      "priority": 8,
+      "creditorName": "SoFi Personal Loan (PA-1468455)",
+      "balance": 40735.15,
+      "apr": 17.89,
+      "monthlyInterest": 606.78,
+      "urgency": "HIGH",
+      "reason": "Highest APR (17.89%) on significant balance - bleeding $606.78/month in interest. Attack immediately after promotional deadlines cleared.",
+      "recommendation": "Focus all extra payments here after promotional balances eliminated"
+    }
+  ],
+
+  "promotionalDebtSummary": {
+    "totalPromotionalBalance": 5739.61,
+    "totalDeferredInterestAtRisk": 1972.22,
+    "accountsWithPromos": 6,
+    "totalRequiredMonthlyToDefendAll": 1686.00,
+    "deadlineTimeline": [
+      {"date": "2026-01-11", "balances": "$544.84 (2 promos)", "atRisk": "$66.11", "days": 51},
+      {"date": "2026-02-03", "balances": "$1,748.00 (1 promo)", "atRisk": "$75.32", "days": 74},
+      {"date": "2026-02-11", "balances": "$372.00 (1 promo)", "atRisk": "$40.67", "days": 82},
+      {"date": "2026-04-03", "balances": "$2,323.15 (1 promo)", "atRisk": "$1,766.89", "days": 133},
+      {"date": "2026-05-05", "balances": "$751.62 (1 promo)", "atRisk": "$23.23", "days": 165}
+    ],
+    "strategy": "Eliminate in order of deadline, starting with PayPal Credit promos expiring 01/11/26. With $500/month extra payment capacity, can eliminate all by May 2026 and save $1,972.22.",
+    "note": "CRITICAL: Must pay $5,739.61 by various deadlines to avoid $1,972.22 in deferred interest charges"
+  },
+
+  "retirement401kLoansAnalysis": {
+    "totalBalance": 39759.22,
+    "totalMonthlyPayment": 1151.13,
+    "debtCount": 2,
+    "weightedAvgAPR": 8.01,
+    "loans": [
+      {
+        "creditorName": "Johns Hopkins 401k Loan 1",
+        "originalAmount": 16471.00,
+        "originationDate": "2022-02-17",
+        "currentBalance": 4398.64,
+        "apr": 4.25,
+        "minimumPayment": 322.60,
+        "paymentsRemaining": 14,
+        "projectedPayoffDate": "2026-01-18",
+        "monthlyInterest": 15.58,
+        "priority": "LOW",
+        "recommendation": "Nearly complete - only 14 payments ($4,398.64) remaining. LOW rate (4.25%). Pay on schedule, do NOT accelerate.",
+        "note": "Payoff in 2 months. After payoff, $322.60/month freed for other debts or retirement contributions."
+      },
+      {
+        "creditorName": "Johns Hopkins 401k Loan 2",
+        "originalAmount": 39825.00,
+        "originationDate": "2025-03-19",
+        "currentBalance": 35360.58,
+        "apr": 8.50,
+        "minimumPayment": 828.53,
+        "paymentsRemaining": 51,
+        "projectedPayoffDate": "2029-02-17",
+        "monthlyInterest": 250.47,
+        "yearlyInterest": 3005.64,
+        "priority": "MEDIUM-HIGH",
+        "recommendation": "CRITICAL CONCERN: 8.50% APR is HIGHER than SPS mortgage (8.375%) and HIGHER than all MMI credit cards (3.2%-16.3%). Consider accelerating after SoFi eliminated.",
+        "note": "Borrowing from retirement = losing market returns (7-10% historically) + paying 8.50% interest. Double cost. Accelerating payoff would free $828.53/month for retirement contributions."
+      }
+    ],
+    "retirementImpact": {
+      "currentLoanBalance": 39759.22,
+      "assumedMarketReturn": 8.0,
+      "opportunityCostPerYear": 3180.74,
+      "interestCostPerYear": 3005.64,
+      "totalAnnualCost": 6186.38,
+      "note": "Each dollar in 401k loans has DOUBLE COST: (1) Not earning market returns ~8%, (2) Paying 8.50% interest on Loan 2. Total cost ~$6,186/year opportunity + interest."
+    },
+    "strategyRecommendation": "Loan 1: Pay on schedule (nearly done). Loan 2: Consider accelerating after SoFi 17.89% eliminated. 8.50% APR makes this higher priority than most MMI debts and even SPS mortgage.",
+    "urgency": "Loan 2 at 8.50% should be targeted after promotional deadlines and SoFi 17.89% eliminated. Freeing $828.53/month would restore retirement contributions 4 years earlier (2025 vs 2029)."
+  },
+
+  "debtsByInterestDesc": [
+    {"creditor": "PayPal Credit - Standard Balance", "balance": 375.04, "apr": 30.14, "type": "credit_card", "category": "non_mmi"},
+    {"creditor": "Ashley PayPal Credit - Standard Balance", "balance": 78.60, "apr": 30.14, "type": "credit_card", "category": "non_mmi", "status": "PAST_DUE"},
+    {"creditor": "Marriott Bonvoy Brilliant Amex", "balance": 4272.01, "apr": 28.74, "type": "credit_card", "category": "non_mmi"},
+    {"creditor": "Capital One VentureOne", "balance": 2330.49, "apr": 28.74, "type": "credit_card", "category": "non_mmi"},
+    {"creditor": "Delta SkyMiles Reserve Amex", "balance": 2643.38, "apr": 28.74, "type": "credit_card", "category": "non_mmi"},
+    {"creditor": "Capital One QuicksilverOne", "balance": 2703.14, "apr": 27.99, "type": "credit_card", "category": "non_mmi"},
+    {"creditor": "SoFi Personal Loan", "balance": 40735.15, "apr": 17.89, "type": "personal_loan", "category": "non_mmi"},
+    {"creditor": "Navy Federal CC ***561145", "balance": 4431.10, "apr": 16.3, "type": "credit_card", "category": "mmi"},
+    {"creditor": "Aven Credit Card", "balance": 21819.88, "apr": 13.49, "type": "credit_card", "category": "non_mmi"},
+    {"creditor": "Navy Federal CC ***566998", "balance": 1531.21, "apr": 9.9, "type": "credit_card", "category": "mmi"},
+    {"creditor": "Navy Federal CC ***065726", "balance": 9953.69, "apr": 9.9, "type": "credit_card", "category": "mmi"},
+    {"creditor": "Navy Federal CC ***129382", "balance": 21961.40, "apr": 9.9, "type": "credit_card", "category": "mmi"},
+    {"creditor": "Johns Hopkins 401k Loan 2", "balance": 35360.58, "apr": 8.5, "type": "401k_loan", "category": "retirement_loan"},
+    {"creditor": "SPS Mortgage", "balance": 167717.79, "apr": 8.375, "type": "mortgage", "category": "secured"},
+    {"creditor": "Synchrony - SYNCHRONY BANK", "balance": 2335.37, "apr": 6.9, "type": "credit_card", "category": "mmi"},
+    {"creditor": "Navy Federal Auto Loan", "balance": 23725.15, "apr": 5.59, "type": "auto_loan", "category": "secured"},
+    {"creditor": "CHASE ***125855", "balance": 1359.17, "apr": 5.3, "type": "credit_card", "category": "mmi"},
+    {"creditor": "LoanCare Mortgage", "balance": 475339.78, "apr": 4.875, "type": "mortgage", "category": "secured"},
+    {"creditor": "Johns Hopkins 401k Loan 1", "balance": 4398.64, "apr": 4.25, "type": "401k_loan", "category": "retirement_loan"},
+    {"creditor": "SBA EIDL COVID-19 Loan", "balance": 58711.87, "apr": 3.75, "type": "business_loan", "category": "business"},
+    {"creditor": "CHASE ***317277", "balance": 14503.60, "apr": 3.2, "type": "credit_card", "category": "mmi"},
+    {"creditor": "CHASE ***777509", "balance": 21703.38, "apr": 3.2, "type": "credit_card", "category": "mmi"},
+    {"creditor": "PayPal Credit - THORUM Promo", "balance": 219.87, "apr": 0.0, "type": "promotional", "category": "promotional"},
+    {"creditor": "PayPal Credit - DELTA Promo 1", "balance": 324.97, "apr": 0.0, "type": "promotional", "category": "promotional"},
+    {"creditor": "PayPal Credit - DELTA Promo 2", "balance": 372.00, "apr": 0.0, "type": "promotional", "category": "promotional"},
+    {"creditor": "Container Store/Synchrony", "balance": 2323.15, "apr": 0.0, "type": "promotional", "category": "promotional"},
+    {"creditor": "CareCredit/Synchrony", "balance": 1748.00, "apr": 0.0, "type": "promotional", "category": "promotional"},
+    {"creditor": "Ashley PayPal Credit - Promo", "balance": 751.62, "apr": 0.0, "type": "promotional", "category": "promotional"}
+  ],
+
+  "debtsByBalanceAsc": [
+    {"creditor": "Ashley PayPal Credit - Standard Balance", "balance": 78.60, "apr": 30.14, "type": "credit_card"},
+    {"creditor": "PayPal Credit - THORUM Promo", "balance": 219.87, "apr": 0.0, "type": "promotional"},
+    {"creditor": "PayPal Credit - DELTA Promo 1", "balance": 324.97, "apr": 0.0, "type": "promotional"},
+    {"creditor": "PayPal Credit - DELTA Promo 2", "balance": 372.00, "apr": 0.0, "type": "promotional"},
+    {"creditor": "PayPal Credit - Standard Balance", "balance": 375.04, "apr": 30.14, "type": "credit_card"},
+    {"creditor": "Ashley PayPal Credit - Promo", "balance": 751.62, "apr": 0.0, "type": "promotional"},
+    {"creditor": "CHASE ***125855", "balance": 1359.17, "apr": 5.3, "type": "credit_card"},
+    {"creditor": "Navy Federal CC ***566998", "balance": 1531.21, "apr": 9.9, "type": "credit_card"},
+    {"creditor": "CareCredit/Synchrony", "balance": 1748.00, "apr": 0.0, "type": "promotional"},
+    {"creditor": "Container Store/Synchrony", "balance": 2323.15, "apr": 0.0, "type": "promotional"},
+    {"creditor": "Capital One VentureOne", "balance": 2330.49, "apr": 28.74, "type": "credit_card"},
+    {"creditor": "Synchrony - SYNCHRONY BANK", "balance": 2335.37, "apr": 6.9, "type": "credit_card"},
+    {"creditor": "Delta SkyMiles Reserve Amex", "balance": 2643.38, "apr": 28.74, "type": "credit_card"},
+    {"creditor": "Capital One QuicksilverOne", "balance": 2703.14, "apr": 27.99, "type": "credit_card"},
+    {"creditor": "Marriott Bonvoy Brilliant Amex", "balance": 4272.01, "apr": 28.74, "type": "credit_card"},
+    {"creditor": "Johns Hopkins 401k Loan 1", "balance": 4398.64, "apr": 4.25, "type": "401k_loan"},
+    {"creditor": "Navy Federal CC ***561145", "balance": 4431.10, "apr": 16.3, "type": "credit_card"},
+    {"creditor": "Navy Federal CC ***065726", "balance": 9953.69, "apr": 9.9, "type": "credit_card"},
+    {"creditor": "CHASE ***317277", "balance": 14503.60, "apr": 3.2, "type": "credit_card"},
+    {"creditor": "Aven Credit Card", "balance": 21819.88, "apr": 13.49, "type": "credit_card"},
+    {"creditor": "CHASE ***777509", "balance": 21703.38, "apr": 3.2, "type": "credit_card"},
+    {"creditor": "Navy Federal CC ***129382", "balance": 21961.40, "apr": 9.9, "type": "credit_card"},
+    {"creditor": "Navy Federal Auto Loan", "balance": 23725.15, "apr": 5.59, "type": "auto_loan"},
+    {"creditor": "Johns Hopkins 401k Loan 2", "balance": 35360.58, "apr": 8.5, "type": "401k_loan"},
+    {"creditor": "SoFi Personal Loan", "balance": 40735.15, "apr": 17.89, "type": "personal_loan"},
+    {"creditor": "SBA EIDL COVID-19 Loan", "balance": 58711.87, "apr": 3.75, "type": "business_loan"},
+    {"creditor": "SPS Mortgage", "balance": 167717.79, "apr": 8.375, "type": "mortgage"},
+    {"creditor": "LoanCare Mortgage", "balance": 475339.78, "apr": 4.875, "type": "mortgage"}
+  ],
+
+  "monthlyInterestCosts": {
+    "totalAllDebts": 4616.88,
+    "unsecuredDebts": 2532.26,
+    "mortgageDebts": 3103.62,
+    "breakdown": {
+      "loanCareMortgage": 1932.51,
+      "spsMortgage": 1171.11,
+      "sofiPersonalLoan": 606.78,
+      "johnsHopkins401kLoan2": 250.47,
+      "navyFederalCC129382_9.9%": 181.22,
+      "avenCard": 245.50,
+      "navyFederalCC065726_9.9%": 82.20,
+      "navyFederalCC561145_16.3%": 60.21,
+      "navyFederalAutoLoan": 110.47,
+      "sbaEIDL": 183.47,
+      "amexCardsTotal_28.74%": 235.95,
+      "capitalOneTotal_combined": 125.78,
+      "paypalCreditStandard_combined": 11.36,
+      "johnsHopkins401kLoan1": 15.58,
+      "chase_mmi_combined": 95.83,
+      "navyFederal566998_mmi_9.9%": 12.64,
+      "synchrony_mmi": 13.44
+    },
+    "note": "Total monthly interest: $4,616.88 (18.8% of income). Unsecured: $2,532.26. Mortgages: $3,103.62."
+  },
+
+  "cashFlowAnalysis": {
+    "monthlyIncome": 24500,
+    "totalDebtPayments": 11185.27,
+    "debtToIncomeRatio": 45.7,
+    "unsecuredDebtPayments": 6049.70,
+    "unsecuredDTI": 24.7,
+    "mortgagePayments": 5135.57,
+    "mortgageDTI": 21.0,
+    "remainingAfterDebtPayments": 13314.73,
+    "extraPaymentCapacity": 500,
+    "mmiCommittedPayment": 1751,
+    "assessment": "ELEVATED_BUT_SUSTAINABLE",
+    "note": "45.7% DTI is HIGH (typical mortgage-only guideline is 28-36%), but with $294K annual income and $13,315 remaining after debt service, household can sustain this level with discipline. CRITICAL: Build emergency fund to protect cash flow.",
+    "riskLevel": "MEDIUM-HIGH",
+    "mitigationRequired": "1) Build $1,000 emergency fund immediately, 2) Eliminate promotional debt bombs to free cash flow, 3) Attack SoFi 17.89% to reduce interest bleeding"
+  },
+
+  "mortgageAnalysis": {
+    "totalMortgageDebt": 643057.57,
+    "totalMonthlyPayment": 5135.57,
+    "totalMonthlyInterest": 3103.62,
+    "primaryResidenceLoanCare": {
+      "balance": 475339.78,
+      "apr": 4.875,
+      "monthlyPayment": 3566.24,
+      "monthlyInterest": 1932.51,
+      "percentOfTotalDebt": 51.4,
+      "recommendation": "MINIMUM_PAYMENTS_ONLY",
+      "rationale": "4.875% is a reasonable rate for a primary mortgage. Focus extra payments on higher-rate unsecured debts. Only consider extra payments after all unsecured debt >5% eliminated.",
+      "property": "100 Orchard Peach Road, Garner, NC 27529",
+      "loanType": "Conventional With PMI"
+    },
+    "investmentPropertySPS": {
+      "balance": 167717.79,
+      "apr": 8.375,
+      "monthlyPayment": 1569.33,
+      "monthlyInterest": 1171.11,
+      "percentOfTotalDebt": 18.1,
+      "recommendation": "MINIMUM_PAYMENTS_BUT_WATCH_RATES",
+      "rationale": "8.375% is higher than primary mortgage but still lower than SoFi (17.89%), Amex cards (28.74%), Capital One (27.99-28.74%), Navy Federal 16.3%, Aven (13.49%), and Johns Hopkins 401k Loan 2 (8.50%). Pay minimums while focusing on these higher-rate unsecured debts. Consider refinancing if rates drop below 7%.",
+      "loanType": "Conventional Without PMI",
+      "investmentPropertyNote": "May also consider selling property to accelerate debt payoff if rental income doesn't cover costs or if appreciation justifies sale."
+    },
+    "combinedStrategy": "Pay minimums on both mortgages ($5,135.57/month total). Focus entire $500 extra payment on unsecured debt elimination in avalanche order. Revisit mortgage strategy after unsecured debts >8.5% eliminated (estimated 2030-2032)."
+  },
+
+  "mmiProgramAnalysis": {
+    "enrolled": true,
+    "monthlyPayment": 1751,
+    "monthlyMinimums": 1711,
+    "overpayment": 40,
+    "debtsInProgram": 8,
+    "totalMMIBalance": 77778.92,
+    "averageMMIRate": 6.87,
+    "projectedPayoffDate": "2029-2031",
+    "debtsInMMI": [
+      {"creditor": "CHASE ***125855", "balance": 1359.17, "apr": 5.3, "payment": 35.00},
+      {"creditor": "SYNCHRONY BANK", "balance": 2335.37, "apr": 6.9, "payment": 58.00},
+      {"creditor": "CHASE ***317277", "balance": 14503.60, "apr": 3.2, "payment": 315.00},
+      {"creditor": "CHASE ***777509", "balance": 21703.38, "apr": 3.2, "payment": 467.00},
+      {"creditor": "Navy Federal ***566998", "balance": 1531.21, "apr": 9.9, "payment": 47.00},
+      {"creditor": "Navy Federal ***065726", "balance": 9953.69, "apr": 9.9, "payment": 248.00},
+      {"creditor": "Navy Federal ***561145", "balance": 4431.10, "apr": 16.3, "payment": 93.00},
+      {"creditor": "Navy Federal ***129382", "balance": 21961.40, "apr": 9.9, "payment": 448.00}
+    ],
+    "rateReductions": [
+      {"creditor": "Navy Federal ***566998", "oldRate": 12.1, "newRate": 9.9, "savingsPerMonth": 2.80},
+      {"creditor": "Navy Federal ***065726", "oldRate": 14.1, "newRate": 9.9, "savingsPerMonth": 34.83},
+      {"creditor": "Navy Federal ***129382", "oldRate": 16.7, "newRate": 9.9, "savingsPerMonth": 124.46}
+    ],
+    "totalMonthlySavingsFromReductions": 162.09,
+    "totalYearlySavingsFromReductions": 1945.08,
+    "recommendation": "Continue MMI program as committed. $1,751/month is LOCKED. Use $500 extra payment on non-MMI high-rate debts (promotional deadlines, SoFi 17.89%, Amex cards 28.74%, then Johns Hopkins 401k Loan 2 at 8.50%).",
+    "note": "Recent Navy Federal rate reductions from MMI negotiation saving $162/month ($1,945/year) in interest. This is working!"
+  },
+
+  "strategicInsights": [
+    "TOTAL DEBT INCREASED: $924,230.77 (from $884,471.55) due to adding $39,759.22 in Johns Hopkins 401k loans",
+    "UNSECURED DEBT: $281,173.20 (30.4% of total debt) requires aggressive avalanche strategy",
+    "MORTGAGE DEBT: $643,057.57 (69.6% of total debt) - pay minimums only while attacking unsecured",
+    "DTI ELEVATED: 45.7% ($11,185/month on $24,500 income) is HIGH but sustainable with $294K annual income",
+    "401K LOAN CONCERN: Johns Hopkins Loan 2 at 8.50% APR = borrowing from retirement + paying high interest = double cost",
+    "401K LOAN 1 STATUS: Nearly complete - only 14 payments ($4,398.64) remaining, payoff Jan 2026. Will free $322.60/month.",
+    "EMERGENCY FUND CRISIS: $300 is dangerously inadequate. Build to $1,000 (2 months), then $5,000 (10 months), then $24,500 long-term.",
+    "PROMOTIONAL DEBT BOMBS: $5,739.61 with $1,972.22 deferred interest at risk. MUST eliminate by deadlines.",
+    "SOFI BLEEDING: $606.78/month interest at 17.89% on $40,735.15. Attack immediately after promotional deadlines.",
+    "MMI RATE WINS: Navy Federal cards reduced to 9.9% (from 12.1-16.7%) saving $162/month ($1,945/year) in interest",
+    "CASH FLOW TIGHT: Only $500/month extra payment capacity requires strategic targeting - no room for waste",
+    "SPS MORTGAGE: 8.375% is higher than LoanCare (4.875%) but lower than 12 unsecured debts - pay minimums for now",
+    "MONTHLY INTEREST COST: $4,616.88/month (18.8% of income) - $2,532 unsecured + $3,104 mortgages"
+  ],
+
+  "riskFactors": [
+    "Emergency fund of $300 is critically low - single emergency could derail entire debt plan",
+    "High DTI of 45.7% leaves minimal margin for income disruption or major expense",
+    "6 promotional balances require strategic timing to defend all deadlines (Jan-May 2026)",
+    "Ashley PayPal Credit $41 past due - risk of penalty APR (34.74%) and additional fees",
+    "SoFi personal loan at 17.89% costing $606.78/month in interest alone - massive interest bleed",
+    "Johns Hopkins 401k Loan 2 at 8.50% has double cost: opportunity cost + interest cost",
+    "Investment property mortgage at 8.375% could be vulnerable if rental income disrupted",
+    "Tight $500/month extra payment capacity leaves little room for setbacks or errors"
+  ],
+
+  "priorityRecommendations": {
+    "immediate": [
+      "1. PAY ASHLEY PAYPAL $92 MINIMUM TODAY - Account past due, avoid penalty APR",
+      "2. BUILD $1,000 EMERGENCY FUND - Critical safety net (target: 2 months)",
+      "3. DEFEND PAYPAL PROMOS - Pay $544.84 total by 01/11/26 (51 days) to save $66.11"
+    ],
+    "shortTerm_1_6months": [
+      "4. ELIMINATE ALL PROMOTIONAL DEBTS - $5,739.61 by May 2026 to save $1,972.22",
+      "5. ATTACK SOFI 17.89% - Focus all $500/month extra after promos cleared (starting Feb 2026)",
+      "6. BUILD EMERGENCY FUND TO $5,000 - Parallel with debt payoff (10% of extra payments)"
+    ],
+    "mediumTerm_6_24months": [
+      "7. ELIMINATE AMEX CARDS 28.74% - $9,948.88 total across 3 cards",
+      "8. ELIMINATE CAPITAL ONE CARDS - $5,033.63 total at 27.99-28.74%",
+      "9. TARGET NAVY FEDERAL 16.3% - $4,431.10 at 16.3% (highest MMI rate)",
+      "10. ACCELERATE JOHNS HOPKINS 401K LOAN 2 - Consider after SoFi eliminated"
+    ],
+    "longTerm_24months+": [
+      "11. CONTINUE MMI PROGRAM - $1,751/month to completion (2029-2031)",
+      "12. ELIMINATE AVEN 13.49% - $21,819.88 after higher-rate debts cleared",
+      "13. PAY MINIMUMS ON SBA EIDL - 3.75% with 30-year term is lowest priority",
+      "14. BUILD EMERGENCY FUND TO $24,500 - Full 1-month expenses safety net",
+      "15. REVISIT MORTGAGE STRATEGY - Consider extra payments on SPS 8.375% after unsecured eliminated"
+    ]
+  }
+}

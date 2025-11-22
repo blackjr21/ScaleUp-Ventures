@@ -1,0 +1,494 @@
+{
+  "metadata": {
+    "generatedDate": "2025-11-21T23:23:33.971Z",
+    "sourceFile": "forecast-2025-11-20.md"
+  },
+  "summary": {
+    "startBalance": 1362,
+    "endBalance": 7142.57,
+    "netChange": 5780.57,
+    "lowestBalance": -492.65,
+    "daysLow": 4,
+    "daysNeg": 4,
+    "forecastPeriod": {
+      "start": "2025-11-21",
+      "end": "2025-12-31"
+    }
+  },
+  "transactions": [
+    {
+      "date": "2025-11-21",
+      "debits": "$33.00",
+      "credits": "$500.00",
+      "netChange": "$467.00",
+      "endBalance": "$1,829.00",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": "Early Acrisure Transfer (+$500.00)"
+    },
+    {
+      "date": "2025-11-22",
+      "debits": "$713.13",
+      "credits": "$0.00",
+      "netChange": "$-713.13",
+      "endBalance": "$1,115.87",
+      "flag": "",
+      "debitDetails": "pliability ($13.99), Loan (Feb 17, 2022) ($322.60)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-11-23",
+      "debits": "$99.21",
+      "credits": "$0.00",
+      "netChange": "$-99.21",
+      "endBalance": "$1,016.66",
+      "flag": "",
+      "debitDetails": "Vitruvian Equipment ($99.21)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-11-24",
+      "debits": "$33.00",
+      "credits": "$0.00",
+      "netChange": "$-33.00",
+      "endBalance": "$983.66",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-11-25",
+      "debits": "$33.00",
+      "credits": "$1,000.00",
+      "netChange": "$967.00",
+      "endBalance": "$1,950.66",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": "Early Acrisure Transfer (+$1000.00)"
+    },
+    {
+      "date": "2025-11-26",
+      "debits": "$177.00",
+      "credits": "$0.00",
+      "netChange": "$-177.00",
+      "endBalance": "$1,773.66",
+      "flag": "",
+      "debitDetails": "The Container Store ($144.00), NFCU Volvo Loan ($3",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-11-27",
+      "debits": "$1,552.78",
+      "credits": "$1,000.00",
+      "netChange": "$-552.78",
+      "endBalance": "$1,220.88",
+      "flag": "",
+      "debitDetails": "Aven Card ($477.00), Sofi Loan ($1042.78), NFCU Vo",
+      "creditDetails": "WakeMed Paycheck (+$1000.00)"
+    },
+    {
+      "date": "2025-11-28",
+      "debits": "$936.28",
+      "credits": "$1,987.00",
+      "netChange": "$1,050.72",
+      "endBalance": "$2,271.60",
+      "flag": "",
+      "debitDetails": "MMI ($852.00), Buffalo Grove HOA ($51.28), NFCU Vo",
+      "creditDetails": "Acrisure Paycheck (+$1987.00 - reduced by early tr"
+    },
+    {
+      "date": "2025-11-29",
+      "debits": "$19.99",
+      "credits": "$0.00",
+      "netChange": "$-19.99",
+      "endBalance": "$2,251.61",
+      "flag": "",
+      "debitDetails": "MyFitnessPal ($19.99)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-11-30",
+      "debits": "$489.29",
+      "credits": "$0.00",
+      "netChange": "$-489.29",
+      "endBalance": "$1,762.32",
+      "flag": "",
+      "debitDetails": "Chaundra Williams ($270.29), Club Pilates ($219.00",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-01",
+      "debits": "$347.65",
+      "credits": "$0.00",
+      "netChange": "$-347.65",
+      "endBalance": "$1,414.67",
+      "flag": "",
+      "debitDetails": "Vitruvian Membership ($39.00), TRANSAMERICA Insura",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-02",
+      "debits": "$33.00",
+      "credits": "$0.00",
+      "netChange": "$-33.00",
+      "endBalance": "$1,381.67",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-03",
+      "debits": "$303.00",
+      "credits": "$0.00",
+      "netChange": "$-303.00",
+      "endBalance": "$1,078.67",
+      "flag": "",
+      "debitDetails": "SYNCHRONY Bank Bill Payment ($58.00), SYNCHRONY Cr",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-04",
+      "debits": "$582.00",
+      "credits": "$0.00",
+      "netChange": "$-582.00",
+      "endBalance": "$496.67",
+      "flag": "LOW",
+      "debitDetails": "Charleston Management ($49.00), Connell & Gelb ($5",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-05",
+      "debits": "$3,599.24",
+      "credits": "$3,500.00",
+      "netChange": "$-99.24",
+      "endBalance": "$397.43",
+      "flag": "LOW",
+      "debitDetails": "LoanCare Mortgage ($3566.24), NFCU Volvo Loan ($33",
+      "creditDetails": "Claritev Paycheck (+$3500.00)"
+    },
+    {
+      "date": "2025-12-06",
+      "debits": "$0.00",
+      "credits": "$0.00",
+      "netChange": "$0.00",
+      "endBalance": "$397.43",
+      "flag": "LOW",
+      "debitDetails": "",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-07",
+      "debits": "$434.58",
+      "credits": "$0.00",
+      "netChange": "$-434.58",
+      "endBalance": "$-37.15",
+      "flag": "NEG",
+      "debitDetails": "Sleep Number ($434.58)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-08",
+      "debits": "$33.00",
+      "credits": "$0.00",
+      "netChange": "$-33.00",
+      "endBalance": "$-70.15",
+      "flag": "NEG",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-09",
+      "debits": "$245.00",
+      "credits": "$0.00",
+      "netChange": "$-245.00",
+      "endBalance": "$-315.15",
+      "flag": "NEG",
+      "debitDetails": "HexClad Pots ($126.00), Duke Energy NC ($86.00), N",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-10",
+      "debits": "$177.50",
+      "credits": "$0.00",
+      "netChange": "$-177.50",
+      "endBalance": "$-492.65",
+      "flag": "NEG",
+      "debitDetails": "Ashley Venture ($67.00), Netflix ($25.00), AT&T ($",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-11",
+      "debits": "$33.00",
+      "credits": "$1,000.00",
+      "netChange": "$967.00",
+      "endBalance": "$474.35",
+      "flag": "LOW",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": "WakeMed Paycheck (+$1000.00)"
+    },
+    {
+      "date": "2025-12-12",
+      "debits": "$936.28",
+      "credits": "$4,487.00",
+      "netChange": "$3,550.72",
+      "endBalance": "$4,025.07",
+      "flag": "",
+      "debitDetails": "MMI ($852.00), Buffalo Grove HOA ($51.28), NFCU Vo",
+      "creditDetails": "Acrisure Paycheck (+$4487.00)"
+    },
+    {
+      "date": "2025-12-13",
+      "debits": "$0.00",
+      "credits": "$0.00",
+      "netChange": "$0.00",
+      "endBalance": "$4,025.07",
+      "flag": "",
+      "debitDetails": "",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-14",
+      "debits": "$315.00",
+      "credits": "$0.00",
+      "netChange": "$-315.00",
+      "endBalance": "$3,710.07",
+      "flag": "",
+      "debitDetails": "SBA EIDL Loan ($315.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-15",
+      "debits": "$1,893.98",
+      "credits": "$1,530.00",
+      "netChange": "$-363.98",
+      "endBalance": "$3,346.09",
+      "flag": "",
+      "debitDetails": "Chaundra Williams ($270.29), 2nd Mortgage ($1540.6",
+      "creditDetails": "103 Grandmont Rent (+$1530.00)"
+    },
+    {
+      "date": "2025-12-16",
+      "debits": "$33.00",
+      "credits": "$0.00",
+      "netChange": "$-33.00",
+      "endBalance": "$3,313.09",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-17",
+      "debits": "$33.00",
+      "credits": "$0.00",
+      "netChange": "$-33.00",
+      "endBalance": "$3,280.09",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-18",
+      "debits": "$520.00",
+      "credits": "$0.00",
+      "netChange": "$-520.00",
+      "endBalance": "$2,760.09",
+      "flag": "",
+      "debitDetails": "Charleston Management ($49.00), Ashley QuickSilver",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-19",
+      "debits": "$33.00",
+      "credits": "$3,500.00",
+      "netChange": "$3,467.00",
+      "endBalance": "$6,227.09",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": "Claritev Paycheck (+$3500.00)"
+    },
+    {
+      "date": "2025-12-20",
+      "debits": "$418.84",
+      "credits": "$0.00",
+      "netChange": "$-418.84",
+      "endBalance": "$5,808.25",
+      "flag": "",
+      "debitDetails": "ALLSTATE Insurance ($243.84), Merry Maids ($175.00",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-21",
+      "debits": "$0.00",
+      "credits": "$0.00",
+      "netChange": "$0.00",
+      "endBalance": "$5,808.25",
+      "flag": "",
+      "debitDetails": "",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-22",
+      "debits": "$746.13",
+      "credits": "$0.00",
+      "netChange": "$-746.13",
+      "endBalance": "$5,062.12",
+      "flag": "",
+      "debitDetails": "pliability ($13.99), Loan (Feb 17, 2022) ($322.60)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-23",
+      "debits": "$132.21",
+      "credits": "$0.00",
+      "netChange": "$-132.21",
+      "endBalance": "$4,929.91",
+      "flag": "",
+      "debitDetails": "Vitruvian Equipment ($99.21), NFCU Volvo Loan ($33",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-24",
+      "debits": "$33.00",
+      "credits": "$0.00",
+      "netChange": "$-33.00",
+      "endBalance": "$4,896.91",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-25",
+      "debits": "$33.00",
+      "credits": "$1,000.00",
+      "netChange": "$967.00",
+      "endBalance": "$5,863.91",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": "WakeMed Paycheck (+$1000.00)"
+    },
+    {
+      "date": "2025-12-26",
+      "debits": "$1,080.28",
+      "credits": "$4,487.00",
+      "netChange": "$3,406.72",
+      "endBalance": "$9,270.63",
+      "flag": "",
+      "debitDetails": "MMI ($852.00), Buffalo Grove HOA ($51.28), The Con",
+      "creditDetails": "Acrisure Paycheck (+$4487.00)"
+    },
+    {
+      "date": "2025-12-27",
+      "debits": "$1,519.78",
+      "credits": "$0.00",
+      "netChange": "$-1,519.78",
+      "endBalance": "$7,750.85",
+      "flag": "",
+      "debitDetails": "Aven Card ($477.00), Sofi Loan ($1042.78)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-28",
+      "debits": "$0.00",
+      "credits": "$0.00",
+      "netChange": "$0.00",
+      "endBalance": "$7,750.85",
+      "flag": "",
+      "debitDetails": "",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-29",
+      "debits": "$52.99",
+      "credits": "$0.00",
+      "netChange": "$-52.99",
+      "endBalance": "$7,697.86",
+      "flag": "",
+      "debitDetails": "MyFitnessPal ($19.99), NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-30",
+      "debits": "$522.29",
+      "credits": "$0.00",
+      "netChange": "$-522.29",
+      "endBalance": "$7,175.57",
+      "flag": "",
+      "debitDetails": "Chaundra Williams ($270.29), Club Pilates ($219.00",
+      "creditDetails": ""
+    },
+    {
+      "date": "2025-12-31",
+      "debits": "$33.00",
+      "credits": "$0.00",
+      "netChange": "$-33.00",
+      "endBalance": "$7,142.57",
+      "flag": "",
+      "debitDetails": "NFCU Volvo Loan ($33.00)",
+      "creditDetails": ""
+    }
+  ],
+  "alerts": [
+    {
+      "date": "2025-12-04",
+      "balance": "$496.67",
+      "type": "LOW",
+      "severity": "warning"
+    },
+    {
+      "date": "2025-12-05",
+      "balance": "$397.43",
+      "type": "LOW",
+      "severity": "warning"
+    },
+    {
+      "date": "2025-12-06",
+      "balance": "$397.43",
+      "type": "LOW",
+      "severity": "warning"
+    },
+    {
+      "date": "2025-12-07",
+      "balance": "$-37.15",
+      "type": "NEGATIVE",
+      "severity": "critical"
+    },
+    {
+      "date": "2025-12-08",
+      "balance": "$-70.15",
+      "type": "NEGATIVE",
+      "severity": "critical"
+    },
+    {
+      "date": "2025-12-09",
+      "balance": "$-315.15",
+      "type": "NEGATIVE",
+      "severity": "critical"
+    },
+    {
+      "date": "2025-12-10",
+      "balance": "$-492.65",
+      "type": "NEGATIVE",
+      "severity": "critical"
+    },
+    {
+      "date": "2025-12-11",
+      "balance": "$474.35",
+      "type": "LOW",
+      "severity": "warning"
+    }
+  ],
+  "suggestions": [
+    {
+      "option": "Option A",
+      "description": "Arrange bridge funding of $992.65 by 2025-12-10. Eliminates all 4 negative balance days and provides $500 buffer. Implementation: Transfer from savings, request advance from employer, or arrange short-term credit line"
+    },
+    {
+      "option": "Option B",
+      "description": "Move LoanCare Mortgage from Dec 5 to Dec 12 (after Claritev paycheck). Shifts $3,566.24 expense to align with income, reduces severity of negative periods. Implementation: Contact LoanCare at least 10 days in advance to request payment date change"
+    },
+    {
+      "option": "Option C",
+      "description": "Pause NFCU Volvo daily payments during negative periods (3 weekdays). Saves $99.00, improves lowest balance by same amount. Implementation: Contact NFCU to request temporary payment suspension or deferment"
+    }
+  ]
+}

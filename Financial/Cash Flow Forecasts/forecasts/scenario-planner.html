@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scenario Planner - Cash Flow Forecast</title>
-    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/shared.css?v=3">
+    <link rel="stylesheet" href="css/scenario-planner.css?v=1">
 </head>
 <body>
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="scenario-planner.html" class="active">Scenario Planner</a></li>
+            <li><a href="http://localhost:8000/debt-strategy-complete.html" target="_blank">Debt Strategy</a></li>
+        </ul>
+    </nav>
     <button class="show-panel-btn" id="showPanelBtn">Show Scenario Panel</button>
 
     <aside class="control-panel" id="controlPanel">
@@ -543,5 +552,7 @@
         window.getScenarioManager = () => scenarioManager;
         window.getScenarioStorage = () => scenarioStorage;
     </script>
+    <!-- UX Helpers -->
+    <script src="js/ux-helpers.js"></script>
 </body>
 </html>

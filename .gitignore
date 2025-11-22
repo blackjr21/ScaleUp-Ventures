@@ -50,3 +50,9 @@ venv/
 *.bak
 *.backup
 .DS_Store
+
+# Financial - Node modules and test artifacts
+Financial/**/node_modules/
+Financial/**/playwright-report/
+Financial/**/test-results/
+Financial/**/.DS_Store

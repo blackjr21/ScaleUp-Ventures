@@ -1,0 +1,526 @@
+{
+  "protocolOverview": {
+    "purpose": "Systematic review and adjustment system to ensure debt payoff stays on track and adapts to life changes",
+    "frequency": "Monthly, Quarterly, and Annual reviews with specific protocols for each",
+    "philosophy": "Proactive monitoring prevents small issues from becoming major setbacks"
+  },
+  "monthlyReview": {
+    "duration": "15-20 minutes",
+    "schedule": "First weekend of each month (after all bills paid)",
+    "location": "Quiet space with access to account info and tracking tools",
+    "checklist": [
+      {
+        "item": "Verify MMI payment cleared",
+        "action": "Check bank account - confirm $1,751 MMI payment posted",
+        "ifNo": "Contact MMI immediately - missed payment can jeopardize program"
+      },
+      {
+        "item": "Verify extra $500 payment applied",
+        "action": "Check that extra payment went to correct target debt",
+        "ifNo": "Make payment immediately if missed, analyze WHY it was missed, set up safeguards"
+      },
+      {
+        "item": "Update debt balances",
+        "action": "Log into each creditor account, record new balance in tracking system",
+        "note": "Watching balances drop is psychologically rewarding"
+      },
+      {
+        "item": "Calculate progress",
+        "action": "Update tracking tool (Undebt.it, spreadsheet, or visual chart)",
+        "metrics": [
+          "Total debt remaining",
+          "Percentage paid off",
+          "Number of debts eliminated",
+          "Months until debt-free"
+        ]
+      },
+      {
+        "item": "Check for milestone achievements",
+        "action": "Did you eliminate a debt this month? Hit a percentage milestone?",
+        "ifYes": "CELEBRATE according to reward system - this is critical for motivation"
+      },
+      {
+        "item": "Review upcoming expenses",
+        "action": "Look ahead to next month - any irregular expenses that might impact extra payment?",
+        "note": "Proactive planning prevents surprises"
+      },
+      {
+        "item": "Assess emergency fund",
+        "action": "Check emergency fund balance - has it been touched? Does it need rebuilding?",
+        "target": "Maintain minimum $1,000 emergency fund throughout journey"
+      },
+      {
+        "item": "Review motivation level",
+        "action": "Honestly assess: How motivated do I feel right now? (Scale 1-10)",
+        "ifLow": "Review psychological support strategies, revisit 'why', connect with accountability partner"
+      },
+      {
+        "item": "Document wins and challenges",
+        "action": "Quick journal entry: What went well? What was hard?",
+        "benefit": "Pattern recognition helps you improve over time"
+      },
+      {
+        "item": "Set intention for next month",
+        "action": "Commit: 'Next month I will make full $500 extra payment to [target debt]'",
+        "benefit": "Clear commitment increases follow-through"
+      }
+    ],
+    "redFlags": [
+      "Missed or late MMI payment",
+      "Didn't make extra $500 payment",
+      "Emergency fund used without rebuilding",
+      "Motivation score below 5",
+      "Same challenges appearing multiple months in a row"
+    ],
+    "outputFormat": "Simple tracker - can be notebook, spreadsheet, or app log"
+  },
+  "quarterlyReview": {
+    "duration": "45-60 minutes",
+    "schedule": "End of March, June, September, December",
+    "location": "Dedicated time block, distraction-free environment",
+    "purpose": "Deeper analysis of trends, strategy effectiveness, and potential optimizations",
+    "protocol": [
+      {
+        "step": "Review 3-month performance",
+        "actions": [
+          "Calculate: How much debt eliminated in past 3 months?",
+          "Did I make all planned payments? If not, how many missed?",
+          "How much interest paid vs. principal in past 3 months?",
+          "Am I on track with projected timeline?"
+        ],
+        "benchmarks": {
+          "excellent": "Made all payments, eliminated at least 1 debt or $6,000+ in principal",
+          "onTrack": "Made 90%+ of planned payments, eliminated $5,000+ in principal",
+          "concern": "Missed payments, eliminated less than $4,000 in principal"
+        }
+      },
+      {
+        "step": "Compare actual vs. projected timeline",
+        "actions": [
+          "Pull up your original roadmap (Phase 3)",
+          "Compare: Where did the plan say I'd be? Where am I actually?",
+          "Calculate variance: Ahead or behind? By how much?"
+        ],
+        "ifAhead": "CELEBRATE! Consider if you can maintain this pace or accelerate further",
+        "ifOnTrack": "Excellent - stay the course",
+        "ifBehind": "Analyze root causes, adjust strategy as needed (see strategy change triggers below)"
+      },
+      {
+        "step": "Analyze expense trends",
+        "actions": [
+          "Review past 3 months of spending",
+          "Identify: Where did extra money come from? Where did it go?",
+          "Spot any lifestyle inflation creeping in?",
+          "New expenses that weren't accounted for?"
+        ],
+        "optimization": "Find 1-2 expense categories to cut further for next quarter"
+      },
+      {
+        "step": "Assess acceleration opportunities",
+        "actions": [
+          "Review Phase 4B acceleration scenarios",
+          "Is there room to increase extra payment by $50-100/month?",
+          "Any income opportunities available now that weren't before?",
+          "Could you do a 3-month acceleration sprint?"
+        ],
+        "question": "What would it take to add just $100 more per month to debt payoff?"
+      },
+      {
+        "step": "Evaluate psychological sustainability",
+        "actions": [
+          "How sustainable does this feel? (Scale 1-10)",
+          "Am I feeling deprived or empowered?",
+          "Is my support system working?",
+          "Do I need to adjust reward system?"
+        ],
+        "adjustments": "If sustainability score below 6, consider temporary intensity reduction or reward system enhancement"
+      },
+      {
+        "step": "Update projections",
+        "actions": [
+          "Based on actual performance, recalculate debt-free date",
+          "Adjust roadmap if needed",
+          "Update tracking tools with new projections"
+        ]
+      },
+      {
+        "step": "Set quarterly goals",
+        "actions": [
+          "Primary goal: How much debt will I eliminate in next 3 months?",
+          "Secondary goal: What milestone will I hit?",
+          "Stretch goal: Can I accelerate beyond baseline plan?"
+        ],
+        "documentation": "Write goals down, share with accountability partner"
+      }
+    ],
+    "outputFormat": "Quarterly report - can be simple document summarizing findings and goals"
+  },
+  "annualReview": {
+    "duration": "90-120 minutes",
+    "schedule": "Anniversary of debt payoff start date (December each year)",
+    "location": "Special time set aside, maybe even take half day off for reflection",
+    "purpose": "Comprehensive assessment of entire year, major strategy adjustments if needed, and celebration",
+    "guide": [
+      {
+        "section": "Year in Review - The Numbers",
+        "activities": [
+          "Calculate total debt eliminated in past year",
+          "Calculate total interest paid vs. projected",
+          "Count number of debts eliminated",
+          "Calculate percentage of total debt eliminated",
+          "Compare: Where did you start vs. where are you now?"
+        ],
+        "celebrate": "THIS IS HUGE. Take time to really appreciate what you've accomplished."
+      },
+      {
+        "section": "Year in Review - The Journey",
+        "reflection": [
+          "What was the hardest month? Why?",
+          "What was the most rewarding milestone?",
+          "What surprised you about this journey?",
+          "How have you grown financially and personally?",
+          "What strategies worked better than expected?",
+          "What strategies didn't work as planned?"
+        ],
+        "documentation": "Write this out - future you will appreciate reading it"
+      },
+      {
+        "section": "Financial Life Changes",
+        "assess": [
+          "Did your income change significantly?",
+          "Did your expenses change significantly?",
+          "Any major life events impact debt payoff?",
+          "Emergency fund status - better or worse than start of year?",
+          "Credit score movement (if tracking)"
+        ],
+        "implications": "Do any of these changes require strategy adjustment?"
+      },
+      {
+        "section": "Strategy Effectiveness Audit",
+        "evaluate": [
+          {
+            "element": "Snowball method",
+            "questions": [
+              "Did eliminating small debts first provide expected motivation?",
+              "Would avalanche method have been better? (Calculate hypothetically)"
+            ]
+          },
+          {
+            "element": "Extra payment consistency",
+            "questions": [
+              "Did I maintain $500 extra payment? What percentage of months?",
+              "Were there months I exceeded $500? What enabled that?"
+            ]
+          },
+          {
+            "element": "Tracking system",
+            "questions": [
+              "Did my tracking system keep me engaged?",
+              "Do I need to change tools or methods?"
+            ]
+          },
+          {
+            "element": "Accountability",
+            "questions": [
+              "Did accountability systems work?",
+              "Do I need more or less external accountability?"
+            ]
+          },
+          {
+            "element": "Motivation and rewards",
+            "questions": [
+              "Did milestone rewards keep me motivated?",
+              "Do I need to adjust reward system for next year?"
+            ]
+          }
+        ]
+      },
+      {
+        "section": "Recalibration for Next Year",
+        "planning": [
+          "Update debt-free projection based on actual performance",
+          "Set annual goal: How much debt will I eliminate this year?",
+          "Identify: What will be DIFFERENT this year from last year?",
+          "Strategy adjustments: Any changes to method, payment amounts, or approach?",
+          "Acceleration opportunities: Can I increase intensity? Should I?"
+        ]
+      },
+      {
+        "section": "Post-Debt Planning (if approaching debt-free)",
+        "questions": [
+          "If debt-free in next 12 months, what will I do with freed $2,251/month?",
+          "Investment goals?",
+          "Savings goals?",
+          "Lifestyle enhancements I want to make?",
+          "How will I avoid falling back into debt?"
+        ],
+        "importance": "Planning prevents post-debt lifestyle inflation and ensures freedom is maintained"
+      }
+    ],
+    "celebration": {
+      "required": true,
+      "suggestion": "Take yourself out for a special celebration dinner or experience",
+      "reasoning": "Completing a full year of debt payoff discipline deserves major recognition"
+    }
+  },
+  "strategyChangeTriggers": {
+    "description": "Specific situations that should prompt immediate strategy review and potential adjustment",
+    "triggers": [
+      {
+        "trigger": "Income decrease >15%",
+        "impact": "May not be able to sustain $500 extra payment",
+        "response": [
+          "Recalculate budget immediately",
+          "Determine new sustainable extra payment amount",
+          "Update debt-free projection",
+          "DO NOT stop extra payments entirely - even $100-200 helps",
+          "Consider temporary side gig to maintain payments"
+        ],
+        "priority": "HIGH"
+      },
+      {
+        "trigger": "Income increase >20%",
+        "impact": "Opportunity to dramatically accelerate payoff",
+        "response": [
+          "Calculate how much of increase can go to debt (recommend 50-80%)",
+          "Update extra payment amount",
+          "Recalculate debt-free date with new payment",
+          "Resist lifestyle inflation - this is accelerator fuel"
+        ],
+        "priority": "MEDIUM"
+      },
+      {
+        "trigger": "Emergency fund depleted",
+        "impact": "Vulnerability to future setbacks increases",
+        "response": [
+          "Temporarily reduce extra payment to $250-300/month",
+          "Use other $200-250/month to rebuild emergency fund to $1,000",
+          "Once emergency fund restored, return to full $500 extra payment",
+          "Typical rebuild time: 2-4 months"
+        ],
+        "priority": "HIGH"
+      },
+      {
+        "trigger": "Major unexpected expense >$2,000",
+        "impact": "May deplete emergency fund and derail payments",
+        "response": [
+          "Use emergency fund first",
+          "If emergency exceeds fund, temporarily pause extra payments for 1-2 months",
+          "Consider: Can you pick up temporary side work to cover without pausing?",
+          "Resume extra payments as soon as emergency is handled",
+          "Rebuild emergency fund over next 3-6 months"
+        ],
+        "priority": "HIGH"
+      },
+      {
+        "trigger": "Missed 2+ consecutive extra payments",
+        "impact": "Pattern of inconsistency threatens entire plan",
+        "response": [
+          "STOP and analyze: Why are payments being missed?",
+          "Budget too tight? Expenses increased? Loss of discipline?",
+          "Address root cause before continuing",
+          "May need to reduce extra payment to more sustainable amount temporarily",
+          "Connect with accountability partner immediately"
+        ],
+        "priority": "CRITICAL"
+      },
+      {
+        "trigger": "Motivation consistently below 5/10 for 3+ months",
+        "impact": "Psychological burnout threatens completion",
+        "response": [
+          "Review psychological support strategies",
+          "Consider temporary intensity reduction (reduce extra payment by $100-200 for 2-3 months)",
+          "Enhance reward system - are you celebrating wins?",
+          "Connect with debt-free community for inspiration",
+          "Revisit your 'why' - why did you start this?",
+          "Consider: Do you need professional support (financial counselor, therapist)?"
+        ],
+        "priority": "HIGH"
+      },
+      {
+        "trigger": "Major life event (marriage, child, relocation, etc.)",
+        "impact": "Financial priorities and capacity may shift dramatically",
+        "response": [
+          "Complete full budget reassessment",
+          "Recalculate debt payoff capacity with new situation",
+          "Adjust extra payment amount if needed",
+          "Update debt-free projection",
+          "Communicate with accountability partner about changes",
+          "Commit to maintaining SOME extra payment even if reduced"
+        ],
+        "priority": "MEDIUM"
+      },
+      {
+        "trigger": "MMI program terms change",
+        "impact": "Foundation of plan may be affected",
+        "response": [
+          "Review new terms immediately",
+          "Recalculate interest costs with any rate changes",
+          "Determine if MMI is still best option or if alternative consolidation is needed",
+          "Update full debt payoff plan with new parameters",
+          "Consult with MMI counselor if unclear"
+        ],
+        "priority": "HIGH"
+      },
+      {
+        "trigger": "Offered balance transfer at 0% APR for 18+ months",
+        "impact": "Could potentially save significant interest",
+        "response": [
+          "Calculate transfer fee (typically 3-5% of balance)",
+          "Verify promotional period length and terms",
+          "Calculate interest savings vs. transfer fee",
+          "Assess: Can you pay off balance before promotional period ends?",
+          "Determine: Will breaking MMI agreement have penalties?",
+          "Decision: Only transfer if NET savings after fees is >$500 AND doesn't jeopardize MMI benefits"
+        ],
+        "priority": "MEDIUM"
+      },
+      {
+        "trigger": "Consistently ahead of projected timeline by 3+ months",
+        "impact": "Opportunity to finish even earlier or reduce intensity",
+        "response": [
+          "CELEBRATE - You're crushing it!",
+          "Calculate new debt-free date based on actual performance",
+          "Decision point: (1) Maintain intensity to finish even earlier, OR (2) Reduce intensity slightly to improve sustainability",
+          "Update all tracking and projections",
+          "Share success with accountability partner"
+        ],
+        "priority": "LOW"
+      },
+      {
+        "trigger": "Consistently behind projected timeline by 3+ months",
+        "impact": "Current strategy not sustainable or effective",
+        "response": [
+          "Identify root cause: Inconsistent payments? Unexpected expenses? Unrealistic initial projection?",
+          "Recalibrate plan with realistic extra payment amount",
+          "Update debt-free projection",
+          "Consider: Do you need to increase income or decrease expenses?",
+          "Adjust expectations and recommit to revised plan",
+          "Connect with accountability partner for support"
+        ],
+        "priority": "MEDIUM"
+      }
+    ]
+  },
+  "contingencyPlans": {
+    "jobLoss": {
+      "immediateActions": [
+        "PAUSE extra debt payments immediately (maintain MMI minimum if possible)",
+        "Contact MMI within 7 days to discuss hardship options",
+        "File for unemployment benefits immediately",
+        "Reduce expenses to bare essentials",
+        "Use emergency fund for essentials only (housing, food, utilities, MMI payment)",
+        "Begin aggressive job search immediately"
+      ],
+      "mmiCommunication": "MMI may have hardship programs - communicate early, don't ghost them",
+      "resumptionPlan": "Once re-employed, assess new income, rebuild small emergency fund ($500), then resume extra payments",
+      "preventionNow": "Build emergency fund to $1,000-2,000 provides buffer for this scenario"
+    },
+    "medicalEmergency": {
+      "immediateActions": [
+        "Focus on health first - debt payoff is secondary to wellbeing",
+        "Use emergency fund for medical costs not covered by insurance",
+        "If emergency fund insufficient, temporarily pause extra payments",
+        "Negotiate payment plans with medical providers (most offer 0% interest plans)",
+        "Explore financial assistance programs at hospital/clinic",
+        "Do NOT put medical expenses on high-interest credit cards if avoidable"
+      ],
+      "debtPayoffAdjustment": "Pause extra payments until medical crisis resolved, then resume",
+      "preventionNow": "Verify health insurance coverage, understand deductibles/out-of-pocket maximums"
+    },
+    "carRepair": {
+      "immediateActions": [
+        "Get 2-3 quotes for repair (prices vary significantly)",
+        "Determine: Is repair cost-effective vs. vehicle value?",
+        "Use emergency fund for repair if needed",
+        "If repair exceeds emergency fund, temporarily reduce extra payment for 1-2 months to cover",
+        "Consider: Can you use alternative transportation temporarily?"
+      ],
+      "threshold": "If repair >$1,500, reassess whether vehicle is worth keeping",
+      "resumptionPlan": "Resume full extra payments within 1-3 months after repair covered",
+      "preventionNow": "Regular maintenance prevents expensive repairs; consider $50/month car maintenance sinking fund"
+    },
+    "housingEmergency": {
+      "examples": "Major repair (HVAC, roof, plumbing), rent increase, need to relocate",
+      "immediateActions": [
+        "Assess urgency and cost",
+        "Use emergency fund first",
+        "If emergency fund insufficient, pause extra payments temporarily",
+        "Explore financing options: 0% credit cards (if available), HELOC (if homeowner), payment plans",
+        "For rent increases: Negotiate with landlord, explore relocation, find roommate"
+      ],
+      "debtPayoffAdjustment": "Pause extra payments for 1-3 months if needed, maintain MMI minimum",
+      "resumptionPlan": "Resume extra payments once housing stabilized"
+    },
+    "relationshipChanges": {
+      "examples": "Divorce, separation, breakup affecting shared finances",
+      "immediateActions": [
+        "Separate finances immediately",
+        "Determine: Which debts are yours vs. shared?",
+        "If debts are shared, negotiate division or payment responsibility",
+        "Update budget to reflect new single-income reality",
+        "Reassess debt payoff capacity and timeline",
+        "Seek legal advice if needed (especially for divorce)"
+      ],
+      "debtPayoffAdjustment": "Complete financial reassessment, likely need to adjust extra payment amount and timeline",
+      "emotionalNote": "Financial stress compounds relationship stress - seek support"
+    }
+  },
+  "monitoringTools": {
+    "recommended": [
+      {
+        "tool": "Undebt.it",
+        "purpose": "Automatic debt payoff tracking and projections",
+        "updateFrequency": "Monthly after payments post"
+      },
+      {
+        "tool": "Google Sheets / Excel",
+        "purpose": "Custom tracking with full control",
+        "updateFrequency": "Monthly"
+      },
+      {
+        "tool": "Physical chart/tracker",
+        "purpose": "Daily visual motivation",
+        "updateFrequency": "Weekly or after major payments"
+      },
+      {
+        "tool": "Calendar with milestones marked",
+        "purpose": "Anticipate and celebrate upcoming wins",
+        "updateFrequency": "Set once, reference regularly"
+      }
+    ],
+    "metricsToTrack": [
+      "Total debt remaining",
+      "Percentage paid off",
+      "Number of debts eliminated",
+      "Months until debt-free",
+      "Total interest paid to date",
+      "Average monthly payment (including extra)",
+      "Motivation level (subjective 1-10 scale)"
+    ]
+  },
+  "reviewCalendar": {
+    "monthly": "First weekend of each month",
+    "quarterly": "Last week of March, June, September, December",
+    "annual": "December (anniversary of debt payoff start)",
+    "tip": "Set recurring calendar reminders for all review types"
+  },
+  "successIndicators": {
+    "youreOnTrack": [
+      "Making all planned payments consistently",
+      "Eliminating debts on or ahead of projected schedule",
+      "Motivation remains 6+ out of 10",
+      "Emergency fund stable or growing",
+      "Celebrating milestone achievements",
+      "Connected with accountability partner regularly"
+    ],
+    "warningSigns": [
+      "Missed 2+ extra payments in past 6 months",
+      "Motivation consistently below 5 out of 10",
+      "Emergency fund repeatedly depleted",
+      "Behind projected timeline by 3+ months",
+      "Not celebrating wins - feeling like it's a grind with no joy"
+    ],
+    "ifWarningSigns": "Stop and do a full quarterly review, even if not scheduled. Adjust strategy before issues compound."
+  }
+}

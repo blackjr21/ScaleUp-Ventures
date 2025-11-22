@@ -1,0 +1,334 @@
+{
+  "analysisDate": "2025-11-21",
+  "updateNotes": "THREE Navy Federal credit cards received rate reductions to 9.9% APR: ***129382 (16.7%→9.9%, balance $21,961.40), ***566998 (12.1%→9.9%, balance $1,531.21), ***065726 (14.1%→9.9%, balance $9,953.69). Total $33,446.30 in balances now at lower rates.",
+
+  "debtSummary": {
+    "totalDebt": 884471.55,
+    "unsecuredDebt": 241413.98,
+    "securedDebt": 643057.57,
+    "totalDebts": 26,
+    "creditCards": 20,
+    "personalLoans": 1,
+    "autoLoans": 1,
+    "businessLoans": 1,
+    "mortgages": 2
+  },
+
+  "focusedAnalysis": {
+    "scope": "unsecured_debt_only",
+    "totalUnsecuredDebt": 241413.98,
+    "totalUnsecuredMinimums": 4329.00,
+    "unsecuredDebts": 24,
+    "mortgagesExcluded": true,
+    "mortgageBalance": 643057.57,
+    "mortgageMinimums": 5135.57,
+    "rationale": "Analysis focuses on unsecured debt elimination strategy. Mortgages ($643,057.57) represent 72.7% of total debt but are secured, long-term obligations with lower rates (4.875% primary, 8.375% investment property). Strategy: pay minimums on mortgages while aggressively attacking unsecured debt."
+  },
+
+  "keyMetrics": {
+    "weightedAvgAPR": 14.23,
+    "weightedAvgAPRPriorToUpdate": 15.87,
+    "rateReductionImpact": 1.64,
+    "debtToIncomeRatio": 41.0,
+    "unsecuredDebtToIncomeRatio": 8.2,
+    "monthlyIncome": 24500,
+    "totalMinimumPayments": 10034.14,
+    "unsecuredMinimumPayments": 4898.57,
+    "extraPaymentCapacity": 500.00,
+    "mmiCommittedPayment": 1751.00,
+    "totalDebtServiceRatio": 0.410,
+    "emergencyFund": 300,
+    "emergencyFundAdequacy": "critically_low",
+    "monthsOfExpensesCovered": 0.03
+  },
+
+  "rateReductionAnalysis": {
+    "affectedDebts": [
+      {
+        "creditor": "Navy Federal (***129382)",
+        "balance": 21961.40,
+        "oldAPR": 16.7,
+        "newAPR": 9.9,
+        "rateReduction": 6.8,
+        "oldMonthlyInterest": 305.61,
+        "newMonthlyInterest": 181.16,
+        "monthlyInterestSavings": 124.45,
+        "annualInterestSavings": 1493.40
+      },
+      {
+        "creditor": "Navy Federal (***566998)",
+        "balance": 1531.21,
+        "oldAPR": 12.1,
+        "newAPR": 9.9,
+        "rateReduction": 2.2,
+        "oldMonthlyInterest": 15.44,
+        "newMonthlyInterest": 12.63,
+        "monthlyInterestSavings": 2.81,
+        "annualInterestSavings": 33.72
+      },
+      {
+        "creditor": "Navy Federal (***065726)",
+        "balance": 9953.69,
+        "oldAPR": 14.1,
+        "newAPR": 9.9,
+        "rateReduction": 4.2,
+        "oldMonthlyInterest": 116.94,
+        "newMonthlyInterest": 82.06,
+        "monthlyInterestSavings": 34.88,
+        "annualInterestSavings": 418.56
+      }
+    ],
+    "totalBalanceAffected": 33446.30,
+    "averageRateReduction": 4.4,
+    "totalMonthlyInterestSavings": 162.14,
+    "totalAnnualInterestSavings": 1945.68,
+    "lifetimeInterestSavingsEstimate": 8500,
+    "impactSummary": "Rate reductions save $162.14/month in interest charges, freeing up additional payment capacity equivalent to 32% of current extra payment budget ($500/month)."
+  },
+
+  "highestInterestDebts": [
+    {
+      "creditor": "PayPal Credit - Standard Balance",
+      "balance": 375.04,
+      "apr": 30.14,
+      "minimumPayment": 30.00,
+      "monthlyInterest": 9.41,
+      "category": "urgent_high_rate"
+    },
+    {
+      "creditor": "Ashley PayPal Credit - Standard Balance",
+      "balance": 78.60,
+      "apr": 30.14,
+      "minimumPayment": 92.00,
+      "monthlyInterest": 1.97,
+      "category": "urgent_high_rate",
+      "pastDue": 41.00
+    },
+    {
+      "creditor": "Capital One VentureOne (***8540)",
+      "balance": 2330.49,
+      "apr": 28.74,
+      "minimumPayment": 71.00,
+      "monthlyInterest": 55.77,
+      "category": "urgent_high_rate"
+    },
+    {
+      "creditor": "Marriott Bonvoy Brilliant Amex (***81009)",
+      "balance": 4272.01,
+      "apr": 28.74,
+      "minimumPayment": 210.22,
+      "monthlyInterest": 102.22,
+      "category": "urgent_high_rate"
+    },
+    {
+      "creditor": "Delta SkyMiles Reserve Amex (***31004)",
+      "balance": 2643.38,
+      "apr": 28.74,
+      "minimumPayment": 79.00,
+      "monthlyInterest": 63.27,
+      "category": "urgent_high_rate"
+    },
+    {
+      "creditor": "Capital One QuicksilverOne (***8289)",
+      "balance": 2703.14,
+      "apr": 27.99,
+      "minimumPayment": 95.00,
+      "monthlyInterest": 63.03,
+      "category": "high_rate"
+    },
+    {
+      "creditor": "SoFi Personal Loan (PA-1468455)",
+      "balance": 40735.15,
+      "apr": 17.89,
+      "minimumPayment": 1042.78,
+      "monthlyInterest": 606.59,
+      "category": "high_rate",
+      "largestInterestCost": true
+    },
+    {
+      "creditor": "Navy Federal (***561145)",
+      "balance": 4431.10,
+      "apr": 16.3,
+      "minimumPayment": 93.00,
+      "monthlyInterest": 60.16,
+      "category": "high_rate"
+    },
+    {
+      "creditor": "Aven Credit Card (***321891)",
+      "balance": 21819.88,
+      "apr": 13.49,
+      "minimumPayment": 465.00,
+      "monthlyInterest": 245.11,
+      "category": "medium_rate"
+    },
+    {
+      "creditor": "Navy Federal (***129382) - RATE REDUCED",
+      "balance": 21961.40,
+      "apr": 9.9,
+      "minimumPayment": 448.00,
+      "monthlyInterest": 181.16,
+      "category": "medium_rate",
+      "rateReduced": true,
+      "oldAPR": 16.7
+    },
+    {
+      "creditor": "Navy Federal (***065726) - RATE REDUCED",
+      "balance": 9953.69,
+      "apr": 9.9,
+      "minimumPayment": 248.00,
+      "monthlyInterest": 82.06,
+      "category": "medium_rate",
+      "rateReduced": true,
+      "oldAPR": 14.1
+    },
+    {
+      "creditor": "Navy Federal (***566998) - RATE REDUCED",
+      "balance": 1531.21,
+      "apr": 9.9,
+      "minimumPayment": 47.00,
+      "monthlyInterest": 12.63,
+      "category": "medium_rate",
+      "rateReduced": true,
+      "oldAPR": 12.1
+    }
+  ],
+
+  "urgentDebts": [
+    {
+      "creditor": "Ashley PayPal Credit - Standard Balance",
+      "balance": 78.60,
+      "apr": 30.14,
+      "minimumPayment": 92.00,
+      "urgencyLevel": "critical",
+      "urgencyReason": "Account $41 past due - pay minimum ASAP to avoid penalty APR (34.74%) triggering on purchases after 01/13/26"
+    },
+    {
+      "creditor": "PayPal Credit - THORUM (Promo expires 01/11/26)",
+      "balance": 219.87,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 28.68,
+      "expirationDate": "2026-01-11",
+      "daysRemaining": 52,
+      "standardAPR": 30.14,
+      "minimumPayment": 30.00,
+      "urgencyLevel": "critical",
+      "urgencyReason": "Only 52 days to save $28.68 deferred interest"
+    },
+    {
+      "creditor": "PayPal Credit - DELTA (expires 01/11/26)",
+      "balance": 324.97,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 37.43,
+      "expirationDate": "2026-01-11",
+      "daysRemaining": 52,
+      "standardAPR": 30.14,
+      "minimumPayment": 30.00,
+      "urgencyLevel": "critical",
+      "urgencyReason": "Only 52 days to save $37.43 deferred interest"
+    },
+    {
+      "creditor": "Container Store/Synchrony (***2961)",
+      "balance": 2323.15,
+      "apr": 0.0,
+      "deferredInterestAtRisk": 1766.89,
+      "expirationDate": "2026-04-03",
+      "daysRemaining": 134,
+      "standardAPR": 34.99,
+      "minimumPayment": 82.00,
+      "urgencyLevel": "critical",
+      "urgencyReason": "Largest deferred interest bomb - $1,766.89 at 34.99% if not paid in full by 04/03/26"
+    },
+    {
+      "creditor": "SoFi Personal Loan",
+      "balance": 40735.15,
+      "apr": 17.89,
+      "monthlyInterest": 606.59,
+      "urgencyLevel": "high",
+      "urgencyReason": "Highest interest cost - $606.59/month bleeding in interest charges"
+    }
+  ],
+
+  "totalPromotionalInterestAtRisk": 1971.44,
+
+  "debtsByInterestDesc": [
+    {"creditor": "PayPal Credit - Standard", "balance": 375.04, "apr": 30.14},
+    {"creditor": "Ashley PayPal - Standard", "balance": 78.60, "apr": 30.14},
+    {"creditor": "Capital One VentureOne", "balance": 2330.49, "apr": 28.74},
+    {"creditor": "Marriott Bonvoy Amex", "balance": 4272.01, "apr": 28.74},
+    {"creditor": "Delta SkyMiles Amex", "balance": 2643.38, "apr": 28.74},
+    {"creditor": "Capital One QuicksilverOne", "balance": 2703.14, "apr": 27.99},
+    {"creditor": "SoFi Personal Loan", "balance": 40735.15, "apr": 17.89},
+    {"creditor": "Navy Federal (***561145)", "balance": 4431.10, "apr": 16.3},
+    {"creditor": "Aven Credit Card", "balance": 21819.88, "apr": 13.49},
+    {"creditor": "Navy Federal (***129382)", "balance": 21961.40, "apr": 9.9},
+    {"creditor": "Navy Federal (***065726)", "balance": 9953.69, "apr": 9.9},
+    {"creditor": "Navy Federal (***566998)", "balance": 1531.21, "apr": 9.9},
+    {"creditor": "SYNCHRONY - MMI", "balance": 2335.37, "apr": 6.9},
+    {"creditor": "Navy Federal Auto Loan", "balance": 23725.15, "apr": 5.59},
+    {"creditor": "CHASE (***125855) - MMI", "balance": 1359.17, "apr": 5.3},
+    {"creditor": "SBA EIDL", "balance": 58711.87, "apr": 3.75},
+    {"creditor": "CHASE (***317277) - MMI", "balance": 14503.60, "apr": 3.2},
+    {"creditor": "CHASE (***777509) - MMI", "balance": 21703.38, "apr": 3.2}
+  ],
+
+  "debtsByBalanceAsc": [
+    {"creditor": "Ashley PayPal - Standard", "balance": 78.60, "apr": 30.14},
+    {"creditor": "PayPal - THORUM (promo)", "balance": 219.87, "apr": 0.0},
+    {"creditor": "PayPal - DELTA 1 (promo)", "balance": 324.97, "apr": 0.0},
+    {"creditor": "PayPal - DELTA 2 (promo)", "balance": 372.00, "apr": 0.0},
+    {"creditor": "PayPal Credit - Standard", "balance": 375.04, "apr": 30.14},
+    {"creditor": "Ashley PayPal - Promo", "balance": 751.62, "apr": 0.0},
+    {"creditor": "CHASE (***125855) - MMI", "balance": 1359.17, "apr": 5.3},
+    {"creditor": "Navy Federal (***566998)", "balance": 1531.21, "apr": 9.9},
+    {"creditor": "CareCredit (promo)", "balance": 1748.00, "apr": 0.0},
+    {"creditor": "Container Store (promo)", "balance": 2323.15, "apr": 0.0},
+    {"creditor": "Capital One VentureOne", "balance": 2330.49, "apr": 28.74},
+    {"creditor": "SYNCHRONY - MMI", "balance": 2335.37, "apr": 6.9},
+    {"creditor": "Delta SkyMiles Amex", "balance": 2643.38, "apr": 28.74},
+    {"creditor": "Capital One QuicksilverOne", "balance": 2703.14, "apr": 27.99},
+    {"creditor": "Marriott Bonvoy Amex", "balance": 4272.01, "apr": 28.74},
+    {"creditor": "Navy Federal (***561145)", "balance": 4431.10, "apr": 16.3},
+    {"creditor": "Navy Federal (***065726)", "balance": 9953.69, "apr": 9.9},
+    {"creditor": "CHASE (***317277) - MMI", "balance": 14503.60, "apr": 3.2},
+    {"creditor": "CHASE (***777509) - MMI", "balance": 21703.38, "apr": 3.2},
+    {"creditor": "Aven Credit Card", "balance": 21819.88, "apr": 13.49},
+    {"creditor": "Navy Federal (***129382)", "balance": 21961.40, "apr": 9.9},
+    {"creditor": "Navy Federal Auto Loan", "balance": 23725.15, "apr": 5.59},
+    {"creditor": "SoFi Personal Loan", "balance": 40735.15, "apr": 17.89},
+    {"creditor": "SBA EIDL", "balance": 58711.87, "apr": 3.75}
+  ],
+
+  "monthlyInterestCosts": {
+    "totalMonthlyInterest": 1898.57,
+    "beforeRateReduction": 2060.71,
+    "interestSavingsPerMonth": 162.14,
+    "largestInterestCosts": [
+      {"creditor": "SoFi Personal Loan", "monthlyInterest": 606.59, "percentOfTotal": 32.0},
+      {"creditor": "Aven Credit Card", "monthlyInterest": 245.11, "percentOfTotal": 12.9},
+      {"creditor": "SBA EIDL", "monthlyInterest": 183.37, "percentOfTotal": 9.7},
+      {"creditor": "Navy Federal (***129382)", "monthlyInterest": 181.16, "percentOfTotal": 9.5},
+      {"creditor": "Marriott Bonvoy Amex", "monthlyInterest": 102.22, "percentOfTotal": 5.4},
+      {"creditor": "Navy Federal (***065726)", "monthlyInterest": 82.06, "percentOfTotal": 4.3}
+    ],
+    "top6InterestCosts": 1400.51,
+    "top6PercentOfTotal": 73.8
+  },
+
+  "criticalInsights": [
+    "RATE REDUCTION VICTORY: Three Navy Federal cards reduced to 9.9% APR saves $162.14/month ($1,945.68/year)",
+    "Weighted average APR dropped from 15.87% to 14.23% - a 1.64 percentage point improvement",
+    "Navy Federal ***129382 saw largest impact: 16.7%→9.9% saves $124.45/month on $21,961.40 balance",
+    "Rate reductions free up equivalent of 32% additional payment capacity ($162.14 vs $500 extra payment)",
+    "Estimated lifetime interest savings from rate reductions: ~$8,500",
+    "AVALANCHE PRIORITY SHIFT: Navy Federal cards moved from positions 2-4 down to positions 10-12 in payoff order",
+    "SoFi Personal Loan ($40,735.15 @ 17.89%) now clearly the #1 priority - costs $606.59/month in interest",
+    "Total unsecured debt: $241,413.98 with $4,898.57 minimum payments",
+    "Current monthly interest cost: $1,898.57 (down from $2,060.71 before rate reduction)",
+    "Total promotional interest at risk: $1,971.44 across 6 balances - highest priority to defend",
+    "Container Store promo: Largest deferred interest bomb ($1,766.89) - must pay $2,323.15 by 04/03/26",
+    "URGENT: Ashley PayPal account $41 past due - pay $92 minimum ASAP to avoid penalty APR",
+    "MMI commitment: $1,751/month covers 8 debts with negotiated rates 3.2%-9.9%",
+    "Extra payment capacity: $500/month available for strategic acceleration",
+    "Debt-to-income ratio: 41.0% total (8.2% unsecured only) - high but sustainable with $294K annual income"
+  ]
+}

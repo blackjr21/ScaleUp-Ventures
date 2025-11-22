@@ -1,0 +1,562 @@
+{
+  "roadmapDate": "2025-11-21",
+  "strategy": "hybrid_avalanche_promos_first",
+  "totalUnsecuredDebt": 241413.98,
+  "mortgageDebt": 643057.57,
+  "extraPayment": 500,
+  "mmiPayment": 1751,
+  "foundationPhase": {
+    "name": "Foundation & Emergency Setup",
+    "duration": "Months 1-2 (November-December 2025)",
+    "objectives": [
+      "Establish $1,000 starter emergency fund",
+      "Set up automated tracking system",
+      "Defend first two promotional deadlines",
+      "Build momentum with quick wins"
+    ],
+    "checklist": [
+      {
+        "task": "Build $1,000 starter emergency fund",
+        "action": "Save $350/month for 3 months or use windfall/tax refund",
+        "priority": "CRITICAL",
+        "deadline": "January 2026",
+        "rationale": "$300 current emergency fund is dangerously low for $10,034/month debt obligations"
+      },
+      {
+        "task": "Set up automated debt tracking spreadsheet",
+        "action": "Create monthly tracker for all 26 debts with balances, APRs, payments, and payoff progress",
+        "priority": "HIGH",
+        "deadline": "Week 1",
+        "rationale": "Essential for monitoring 6 promotional deadlines and overall progress"
+      },
+      {
+        "task": "Pay Ashley PayPal minimum IMMEDIATELY",
+        "action": "Pay $92 minimum to avoid additional late fees and penalty APR",
+        "priority": "URGENT",
+        "deadline": "Within 7 days",
+        "rationale": "Account is $41 past due - prevent further fees and APR penalties"
+      },
+      {
+        "task": "Defend PayPal THORUM + DELTA 01/11 promos",
+        "action": "Allocate $544.84 total ($219.87 + $324.97) by January 11, 2026",
+        "priority": "CRITICAL",
+        "deadline": "January 11, 2026 (51 days)",
+        "rationale": "Save $66.11 in deferred interest on these two promos"
+      },
+      {
+        "task": "Review all promotional balances and deadlines",
+        "action": "Create calendar alerts for all 6 promotional deadlines (01/11, 02/03, 02/11, 04/03, 05/05)",
+        "priority": "HIGH",
+        "deadline": "Week 1",
+        "rationale": "Prevent missing any deadline and triggering $1,972 in deferred interest"
+      },
+      {
+        "task": "Confirm MMI payment is on autopay",
+        "action": "Verify $1,751/month MMI payment is automatically deducted",
+        "priority": "HIGH",
+        "deadline": "Week 1",
+        "rationale": "Ensure MMI program continues without interruption"
+      },
+      {
+        "task": "Research SPS mortgage refinancing options",
+        "action": "Check current rates for investment property mortgages - target <7%",
+        "priority": "MEDIUM",
+        "deadline": "December 2025",
+        "rationale": "8.375% is higher than market - refinancing could save $260/month"
+      }
+    ]
+  },
+  "executionPhase": {
+    "name": "Systematic Debt Elimination",
+    "duration": "Months 1-90 (November 2025 - May 2033)",
+    "phase1_promotional_defense": {
+      "name": "Promotional Defense Phase",
+      "duration": "Months 1-6 (November 2025 - April 2026)",
+      "monthByMonth": [
+        {
+          "month": 1,
+          "date": "December 2025",
+          "minimumPayments": 10034.14,
+          "extraPayment": 500,
+          "totalPaid": 10534.14,
+          "targetDebts": [
+            {
+              "account": "PayPal THORUM Promo",
+              "payment": 219.87,
+              "remainingBalance": 0,
+              "status": "PAID OFF"
+            },
+            {
+              "account": "PayPal DELTA Promo 01/11",
+              "payment": 324.97,
+              "remainingBalance": 0,
+              "status": "PAID OFF"
+            }
+          ],
+          "freedPayment": 60.00,
+          "accountsClosed": 2,
+          "milestone": "TWO PROMOS ELIMINATED - Saved $66.11 deferred interest!",
+          "remainingDebt": 240869.14,
+          "celebrationMoment": "First $66.11 saved! Calendar alerts working. Momentum building."
+        },
+        {
+          "month": 2,
+          "date": "January 2026",
+          "minimumPayments": 9974.14,
+          "extraPayment": 560.00,
+          "totalPaid": 10534.14,
+          "targetDebts": [
+            {
+              "account": "PayPal DELTA Promo 02/11",
+              "payment": 372.00,
+              "remainingBalance": 0,
+              "status": "PAID OFF"
+            }
+          ],
+          "freedPayment": 30.00,
+          "accountsClosed": 3,
+          "milestone": "Third promo defended - $106.78 total saved",
+          "remainingDebt": 240497.14
+        },
+        {
+          "month": 3,
+          "date": "February 2026",
+          "minimumPayments": 9944.14,
+          "extraPayment": 590.00,
+          "totalPaid": 10534.14,
+          "targetDebts": [
+            {
+              "account": "CareCredit Promo",
+              "payment": 1748.00,
+              "remainingBalance": 0,
+              "status": "PAID OFF"
+            }
+          ],
+          "freedPayment": 58.00,
+          "accountsClosed": 4,
+          "milestone": "CareCredit defended - $182.10 total saved",
+          "remainingDebt": 238749.14
+        },
+        {
+          "month": 4,
+          "date": "March 2026",
+          "minimumPayments": 9886.14,
+          "extraPayment": 648.00,
+          "totalPaid": 10534.14,
+          "targetDebts": [
+            {
+              "account": "Container Store Promo",
+              "payment": 648.00,
+              "remainingBalance": 1675.15,
+              "status": "IN PROGRESS"
+            }
+          ],
+          "accountsClosed": 4,
+          "remainingDebt": 238101.14
+        },
+        {
+          "month": 5,
+          "date": "April 2026",
+          "minimumPayments": 9886.14,
+          "extraPayment": 648.00,
+          "totalPaid": 10534.14,
+          "targetDebts": [
+            {
+              "account": "Container Store Promo",
+              "payment": 1675.15,
+              "remainingBalance": 0,
+              "status": "PAID OFF"
+            }
+          ],
+          "freedPayment": 82.00,
+          "accountsClosed": 5,
+          "milestone": "MEGA-BOMB DEFUSED! Container Store paid - saved $1,766.89 deferred interest!",
+          "remainingDebt": 236426.00,
+          "celebrationMoment": "MASSIVE WIN! $1,766.89 saved on this one account. Biggest risk neutralized!"
+        },
+        {
+          "month": 6,
+          "date": "May 2026",
+          "minimumPayments": 9804.14,
+          "extraPayment": 730.00,
+          "totalPaid": 10534.14,
+          "targetDebts": [
+            {
+              "account": "Ashley PayPal Promo",
+              "payment": 751.62,
+              "remainingBalance": 0,
+              "status": "PAID OFF"
+            }
+          ],
+          "freedPayment": 92.00,
+          "accountsClosed": 6,
+          "milestone": "PHASE 1 COMPLETE! All 6 promos defended. Total saved: $1,972.22",
+          "remainingDebt": 235674.38,
+          "celebrationMoment": "PROMOTIONAL DEFENSE COMPLETE! $1,972.22 saved. Pivot to avalanche attack on highest APRs."
+        }
+      ],
+      "phaseSummary": {
+        "accountsEliminated": 6,
+        "totalSaved": 1972.22,
+        "freedMonthlyPayments": 322.00,
+        "debtReduction": 5739.61,
+        "remainingDebt": 235674.38
+      }
+    },
+    "phase2_avalanche_attack": {
+      "name": "Avalanche Attack Phase",
+      "duration": "Months 7-90 (June 2026 - May 2033)",
+      "strategy": "Attack highest APR debts first with all available payments (minimums + extra + freed payments)",
+      "availableAttackPayment": {
+        "month7": 822.00,
+        "month12": 1150.00,
+        "month24": 1800.00,
+        "month52": 2850.00,
+        "note": "Snowball grows as each debt is eliminated and payments are freed"
+      },
+      "payoffSequence": [
+        {
+          "order": 1,
+          "account": "PayPal Credit - Standard Balance",
+          "balance": 375.04,
+          "apr": 30.14,
+          "minimumPayment": 30.00,
+          "estimatedPayoffMonth": 7,
+          "freedPayment": 30.00,
+          "note": "First avalanche target - highest APR"
+        },
+        {
+          "order": 2,
+          "account": "Ashley PayPal Credit - Standard Balance",
+          "balance": 78.60,
+          "apr": 30.14,
+          "minimumPayment": 92.00,
+          "estimatedPayoffMonth": 7,
+          "freedPayment": 92.00,
+          "note": "Second highest APR - tied at 30.14%"
+        },
+        {
+          "order": 3,
+          "account": "Marriott Bonvoy Brilliant Amex",
+          "balance": 4272.01,
+          "apr": 28.74,
+          "minimumPayment": 210.22,
+          "estimatedPayoffMonth": 11,
+          "freedPayment": 210.22,
+          "note": "First Amex - 28.74% APR"
+        },
+        {
+          "order": 4,
+          "account": "Capital One VentureOne",
+          "balance": 2330.49,
+          "apr": 28.74,
+          "minimumPayment": 71.00,
+          "estimatedPayoffMonth": 13,
+          "freedPayment": 71.00,
+          "note": "Tied at 28.74%"
+        },
+        {
+          "order": 5,
+          "account": "Delta SkyMiles Reserve Amex",
+          "balance": 2643.38,
+          "apr": 28.74,
+          "minimumPayment": 79.00,
+          "estimatedPayoffMonth": 15,
+          "freedPayment": 79.00,
+          "note": "Third Amex - tied at 28.74%"
+        },
+        {
+          "order": 6,
+          "account": "Capital One QuicksilverOne",
+          "balance": 2703.14,
+          "apr": 27.99,
+          "minimumPayment": 95.00,
+          "estimatedPayoffMonth": 17,
+          "freedPayment": 95.00,
+          "note": "27.99% APR"
+        },
+        {
+          "order": 7,
+          "account": "SoFi Personal Loan",
+          "balance": 40735.15,
+          "apr": 17.89,
+          "minimumPayment": 1042.78,
+          "estimatedPayoffMonth": 52,
+          "freedPayment": 1042.78,
+          "note": "MAJOR TARGET - Highest APR among large debts. $607/month interest cost. HUGE milestone when eliminated!"
+        },
+        {
+          "order": 8,
+          "account": "Navy Federal CC ***129382",
+          "balance": 21961.40,
+          "apr": 16.7,
+          "minimumPayment": 448.00,
+          "estimatedPayoffMonth": 62,
+          "freedPayment": 448.00,
+          "note": "Highest Navy Federal rate"
+        },
+        {
+          "order": 9,
+          "account": "Navy Federal CC ***561145",
+          "balance": 4431.10,
+          "apr": 16.3,
+          "minimumPayment": 93.00,
+          "estimatedPayoffMonth": 64,
+          "freedPayment": 93.00,
+          "note": "Second highest Navy Federal rate"
+        },
+        {
+          "order": 10,
+          "account": "Navy Federal CC ***065726",
+          "balance": 9953.69,
+          "apr": 14.1,
+          "minimumPayment": 248.00,
+          "estimatedPayoffMonth": 68,
+          "freedPayment": 248.00,
+          "note": "Third Navy Federal CC"
+        },
+        {
+          "order": 11,
+          "account": "Aven Credit Card",
+          "balance": 21819.88,
+          "apr": 13.49,
+          "minimumPayment": 465.00,
+          "estimatedPayoffMonth": 75,
+          "freedPayment": 465.00,
+          "note": "13.49% APR"
+        },
+        {
+          "order": 12,
+          "account": "Navy Federal CC ***566998",
+          "balance": 1531.21,
+          "apr": 12.1,
+          "minimumPayment": 47.00,
+          "estimatedPayoffMonth": 76,
+          "freedPayment": 47.00,
+          "note": "Last Navy Federal CC - all 4 eliminated by month 76"
+        },
+        {
+          "order": 13,
+          "account": "SYNCHRONY Bank",
+          "balance": 2335.37,
+          "apr": 6.9,
+          "minimumPayment": 58.00,
+          "estimatedPayoffMonth": 77,
+          "freedPayment": 58.00,
+          "note": "MMI consolidated - 6.9%"
+        },
+        {
+          "order": 14,
+          "account": "Navy Federal Auto Loan",
+          "balance": 23725.15,
+          "apr": 5.59,
+          "minimumPayment": 648.57,
+          "estimatedPayoffMonth": 80,
+          "freedPayment": 648.57,
+          "note": "Auto loan - secured debt"
+        },
+        {
+          "order": 15,
+          "account": "CHASE ***125855",
+          "balance": 1359.17,
+          "apr": 5.3,
+          "minimumPayment": 35.00,
+          "estimatedPayoffMonth": 81,
+          "freedPayment": 35.00,
+          "note": "MMI consolidated - 5.3%"
+        },
+        {
+          "order": 16,
+          "account": "SBA EIDL COVID-19 Loan",
+          "balance": 58711.87,
+          "apr": 3.75,
+          "minimumPayment": 315.00,
+          "estimatedPayoffMonth": 86,
+          "freedPayment": 315.00,
+          "note": "Business loan - 30-year term, lowest rate among unsecured"
+        },
+        {
+          "order": 17,
+          "account": "CHASE ***317277",
+          "balance": 14503.60,
+          "apr": 3.2,
+          "minimumPayment": 315.00,
+          "estimatedPayoffMonth": 88,
+          "freedPayment": 315.00,
+          "note": "MMI consolidated - 3.2%"
+        },
+        {
+          "order": 18,
+          "account": "CHASE ***777509",
+          "balance": 21703.38,
+          "apr": 3.2,
+          "minimumPayment": 467.00,
+          "estimatedPayoffMonth": 90,
+          "freedPayment": 467.00,
+          "note": "FINAL UNSECURED DEBT - MMI consolidated - 3.2%"
+        }
+      ],
+      "keyMilestones": [
+        {
+          "month": 7,
+          "date": "June 2026",
+          "event": "PayPal standard balances eliminated",
+          "accountsClosed": 8,
+          "freedPayments": 122.00
+        },
+        {
+          "month": 12,
+          "date": "November 2026",
+          "event": "YEAR 1 COMPLETE - 11 accounts closed!",
+          "accountsClosed": 11,
+          "freedPayments": 560.00,
+          "debtReduction": 15500.00,
+          "celebrationMoment": "FIRST YEAR ANNIVERSARY - 11 debts eliminated, $1,972 saved in deferred interest, $560/month in freed payments!"
+        },
+        {
+          "month": 24,
+          "date": "November 2027",
+          "event": "YEAR 2 COMPLETE - 14 accounts closed total",
+          "accountsClosed": 14,
+          "freedPayments": 1200.00,
+          "debtReduction": 32000.00
+        },
+        {
+          "month": 36,
+          "date": "November 2028",
+          "event": "YEAR 3 COMPLETE - Halfway through payoff timeline",
+          "accountsClosed": 16,
+          "freedPayments": 1800.00,
+          "debtReduction": 55000.00,
+          "celebrationMoment": "Halfway there! 16 accounts closed. Snowball gaining serious momentum."
+        },
+        {
+          "month": 52,
+          "date": "March 2030",
+          "event": "SOFI PERSONAL LOAN ELIMINATED - $1,042.78/month FREED!",
+          "accountsClosed": 17,
+          "freedPayments": 2850.00,
+          "debtReduction": 125000.00,
+          "celebrationMoment": "MASSIVE VICTORY! Highest-interest major debt destroyed. $607/month interest eliminated. Snowball now $2,850/month!"
+        },
+        {
+          "month": 76,
+          "date": "March 2032",
+          "event": "All Navy Federal credit cards eliminated",
+          "accountsClosed": 21,
+          "freedPayments": 3800.00,
+          "celebrationMoment": "All 4 Navy Federal credit cards gone. Only low-rate debts remaining!"
+        },
+        {
+          "month": 90,
+          "date": "May 2033",
+          "event": "UNSECURED DEBT FREEDOM DAY - ALL 24 UNSECURED DEBTS ELIMINATED!",
+          "accountsClosed": 24,
+          "freedPayments": 4898.57,
+          "debtReduction": 241413.98,
+          "celebrationMoment": "DEBT FREEDOM DAY! $241,413.98 in unsecured debt ELIMINATED. $4,898.57/month FREED. 7.5 years of discipline paid off. Now redirect to mortgages or investments!"
+        }
+      ]
+    },
+    "mortgagePhase": {
+      "name": "Mortgage Strategy (Post-Unsecured Debt Freedom)",
+      "startDate": "June 2033",
+      "availableCashFlow": 4898.57,
+      "options": [
+        {
+          "option": "Attack SPS Investment Property Mortgage",
+          "target": "SPS @ 8.375%",
+          "estimatedBalance": 145000.00,
+          "strategy": "Apply full $4,898.57/month to SPS mortgage principal",
+          "estimatedPayoff": "2036",
+          "totalInterestSaved": 85000.00,
+          "rationale": "Highest mortgage rate - eliminate first to save maximum interest"
+        },
+        {
+          "option": "Attack LoanCare Primary Residence",
+          "target": "LoanCare @ 4.875%",
+          "estimatedBalance": 410000.00,
+          "strategy": "Apply $4,898.57/month to LoanCare after SPS eliminated",
+          "estimatedPayoff": "2045",
+          "rationale": "Lower rate - tackle after SPS eliminated"
+        },
+        {
+          "option": "Balanced Investment Strategy",
+          "allocation": "$2,500/month extra mortgage payments + $2,400/month investments",
+          "estimatedMortgagePayoff": "2048",
+          "rationale": "Balance debt elimination with wealth building. Invest in retirement accounts while making progress on mortgages."
+        },
+        {
+          "option": "Sell Investment Property",
+          "property": "Investment property with SPS mortgage",
+          "scenario": "If rental income doesn't justify 8.375% mortgage cost",
+          "outcome": "Eliminate $167,717 debt + $1,569/month payment immediately",
+          "consideration": "Evaluate property value, equity, rental income, and alternative investment returns"
+        }
+      ],
+      "recommendation": "After unsecured debt freedom (May 2033), evaluate: (1) SPS refinancing opportunity (target <7%), (2) Investment property value and rental income, (3) Retirement savings status. Most likely best strategy: Attack SPS mortgage aggressively (2033-2036), then reassess based on circumstances."
+    }
+  },
+  "emotionalMilestones": [
+    {
+      "milestone": "First Victory",
+      "month": 1,
+      "description": "Two promotional debts eliminated, $66.11 saved",
+      "celebration": "Visual reminder: Put $66.11 in a jar labeled 'Money I Didn't Have to Pay Banks' - watch it grow each month"
+    },
+    {
+      "milestone": "Promotional Defense Complete",
+      "month": 6,
+      "description": "$1,972.22 saved in deferred interest - Phase 1 complete!",
+      "celebration": "Special dinner or small reward - you just saved nearly $2,000 through discipline!"
+    },
+    {
+      "milestone": "One Year Anniversary",
+      "month": 12,
+      "description": "11 accounts closed, visible progress",
+      "celebration": "Reflect on journey. Review before/after. Share success with accountability partner."
+    },
+    {
+      "milestone": "SoFi Loan Destroyed",
+      "month": 52,
+      "description": "$40,735 debt eliminated - highest interest major debt gone!",
+      "celebration": "MAJOR CELEBRATION - This was the biggest interest drag. Plan a meaningful reward!"
+    },
+    {
+      "milestone": "3/4 Complete",
+      "month": 68,
+      "description": "18 of 24 unsecured debts eliminated",
+      "celebration": "Only 6 debts left - all low rates. Finish line in sight!"
+    },
+    {
+      "milestone": "Unsecured Debt Freedom",
+      "month": 90,
+      "description": "ALL unsecured debt eliminated - $241,413.98 conquered!",
+      "celebration": "LIFE-CHANGING MOMENT - Plan major celebration. You're now in top 20% of Americans by net worth trajectory!"
+    }
+  ],
+  "monthlyReviewProtocol": {
+    "frequency": "Monthly",
+    "duration": "15 minutes",
+    "checklist": [
+      "Update debt balances in tracking spreadsheet",
+      "Verify all minimum payments posted correctly",
+      "Confirm extra $500 payment applied to target debt",
+      "Check promotional balance deadlines (first 6 months)",
+      "Calculate total debt reduction for month",
+      "Update debt-free countdown",
+      "Review upcoming milestones"
+    ]
+  },
+  "summaryTimeline": {
+    "startDate": "2025-11-21",
+    "unsecuredDebtFreeDate": "2033-05-21",
+    "totalMonthsUnsecured": 90,
+    "totalYearsUnsecured": 7.5,
+    "accountsEliminated": 24,
+    "totalInterestPaidUnsecured": 87262.34,
+    "deferredInterestSaved": 1972.22,
+    "monthlyPaymentsFreed": 4898.57,
+    "mortgagesStrategy": "Minimum payments only ($5,135.57/month) until unsecured debt eliminated, then reassess in June 2033"
+  }
+}

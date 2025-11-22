@@ -4,431 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cash Flow Dashboard</title>
+    <link rel="stylesheet" href="css/shared.css?v=3">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <style>
-        :root {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --text-primary: #1a1a1a;
-            --text-secondary: #6c757d;
-            --border-color: #dee2e6;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --accent-primary: #667eea;
-            --accent-secondary: #764ba2;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
-        }
-
-        /* Dark theme class - applied via JavaScript */
-        body.dark-theme {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --accent-primary: #818cf8;
-            --accent-secondary: #a78bfa;
-            --success: #34d399;
-            --warning: #fbbf24;
-            --danger: #f87171;
-            --info: #60a5fa;
-        }
-
-        /* Media query removed - use manual toggle button instead */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex;
-        }
-
-        /* Phase 1: Control Panel Styles */
-        .control-panel {
-            width: 350px;
-            min-width: 350px;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            background: var(--bg-card);
-            border-right: 2px solid var(--border-color);
-            overflow-y: auto;
-            transition: margin-left 0.3s ease, opacity 0.3s ease;
-            z-index: 100;
-        }
-
-        .control-panel.collapsed {
-            margin-left: -350px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .panel-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .panel-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .panel-title h2 {
-            font-size: 1.25rem;
             margin: 0;
-        }
-
-        .toggle-panel-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 0.5rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1.25rem;
-            transition: all 0.2s ease;
-        }
-
-        .toggle-panel-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .search-box {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            outline: none;
-        }
-
-        .search-box::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .search-box:focus {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .panel-content {
-            padding: 1rem;
-        }
-
-        .expense-category {
-            margin-bottom: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: var(--bg-secondary);
-        }
-
-        .expense-category summary {
-            padding: 0.75rem 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s ease;
-        }
-
-        .expense-category summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .expense-category summary:hover {
-            background: var(--bg-card);
-        }
-
-        .category-toggle {
-            transition: transform 0.3s ease;
-        }
-
-        .expense-category[open] .category-toggle {
-            transform: rotate(90deg);
-        }
-
-        .expense-list {
-            padding: 0.5rem 1rem 1rem 1rem;
-        }
-
-        .expense-item {
-            display: grid;
-            grid-template-columns: auto 1fr auto auto;
-            gap: 0.75rem;
-            align-items: center;
-            padding: 0.75rem;
-            margin-bottom: 0.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .expense-item:hover {
-            border-color: var(--accent-primary);
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .expense-checkbox {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: var(--accent-primary);
-        }
-
-        .expense-details {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .expense-name {
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .expense-item.disabled .expense-name {
-            text-decoration: line-through;
-            opacity: 0.5;
-        }
-
-        .expense-schedule {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .expense-amount {
-            font-weight: 700;
-            color: var(--danger);
-            font-family: 'SF Mono', Monaco, monospace;
-            white-space: nowrap;
-        }
-
-        .control-buttons {
-            padding: 1rem;
-            border-top: 2px solid var(--border-color);
-            background: var(--bg-secondary);
-            position: sticky;
-            bottom: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .control-btn {
-            padding: 0.75rem;
-            border: 2px solid var(--border-color);
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            font-size: 0.875rem;
-        }
-
-        .control-btn:hover {
-            border-color: var(--accent-primary);
-            background: var(--accent-primary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow);
-        }
-
-        .control-btn.preset {
-            background: linear-gradient(135deg, var(--warning), #f97316);
-            color: white;
-            border-color: var(--warning);
-        }
-
-        .control-btn.preset:hover {
-            background: linear-gradient(135deg, #f97316, var(--warning));
-        }
-
-        .impact-summary {
-            padding: 1rem;
-            margin: 1rem;
-            background: linear-gradient(135deg, var(--success), #059669);
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .impact-summary h3 {
-            margin: 0 0 0.75rem 0;
-            font-size: 1rem;
-        }
-
-        .impact-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-        }
-
-        .impact-label {
-            font-size: 0.875rem;
-        }
-
-        .impact-value {
-            font-weight: 700;
-            font-size: 1.125rem;
-        }
-
-        /* Phase 3: Comparison View Styles */
-        .delta-badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .delta-positive {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
-        .delta-negative {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-        }
-
-        .removed-expenses-list {
-            margin-top: 0.75rem;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .removed-expense-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.25rem 0;
-            font-size: 0.85rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .removed-expense-item:last-child {
-            border-bottom: none;
-        }
-
-        .arrow-indicator {
-            margin: 0 0.5rem;
-            color: var(--success);
-        }
-
-        .main-content {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .show-panel-btn {
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            background: var(--accent-primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            box-shadow: 0 4px 12px var(--shadow);
-            z-index: 1001;
-            display: none;
-            transition: all 0.3s ease;
-        }
-
-        .show-panel-btn:hover {
-            background: var(--accent-secondary);
-            transform: translateY(-2px);
-        }
-
-        .show-panel-btn.visible {
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .control-panel {
-                display: none;
-            }
-        }
-
-        /* Emergency Banner */
-        .emergency-banner {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-            display: none;
-        }
-
-        .emergency-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .emergency-icon {
-            font-size: 1.5rem;
-        }
-
-        .emergency-text {
-            flex: 1;
-            font-size: 1.1rem;
-        }
-
-        .emergency-action {
-            background: white;
-            color: #ef4444;
-            padding: 0.5rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .emergency-action:hover {
-            transform: scale(1.05);
+            font-family: system-ui, -apple-system, sans-serif;
         }
 
         .container {
@@ -437,150 +18,296 @@
             padding: 2rem;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid var(--border-color);
-            position: relative;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 24px;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
+        .page-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px var(--shadow);
+            margin-bottom: 2rem;
         }
 
-        .theme-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--shadow);
-            border-color: var(--accent-primary);
-        }
-
-        .theme-toggle:active {
-            transform: translateY(0);
-        }
-
-        .theme-icon {
-            font-size: 1.25rem;
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle:hover .theme-icon {
-            transform: rotate(20deg);
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .header .subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .glance-summary {
+        .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
+        .summary-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .summary-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .summary-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .summary-card .subtext {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .alerts-section {
+            margin-bottom: 2rem;
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert.critical {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--critical);
+            color: var(--critical);
+        }
+
+        .alert.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+        }
+
+        .alert-icon {
+            font-size: 1.5rem;
+        }
+
+        .transactions-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--bg-hover);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: var(--bg-secondary);
+            position: sticky;
+            top: 60px;
+            z-index: 10;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .negative {
+            color: var(--critical);
+            font-weight: 600;
+        }
+
+        .positive {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .low-balance {
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .last-updated {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .emergency-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .emergency-icon {
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .emergency-text {
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .emergency-action {
+            padding: 0.5rem 1rem;
+            background: white;
+            color: #dc2626;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .emergency-action:hover {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Glance Summary Cards */
+        .glance-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
         .glance-card {
             background: var(--bg-card);
-            padding: 1.5rem;
+            border: 2px solid var(--border-color);
             border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
         .glance-card:hover {
+            border-color: var(--accent-primary);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px var(--shadow);
         }
 
         .glance-card h3 {
+            margin: 0 0 0.5rem 0;
             font-size: 0.875rem;
             color: var(--text-secondary);
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
         }
 
         .glance-card .value {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--text-primary);
+            margin: 0.5rem 0;
         }
 
-        .glance-card.healthy .value {
-            color: var(--success);
+        .glance-card.caution {
+            border-color: var(--warning);
+            background: rgba(245, 158, 11, 0.05);
         }
 
         .glance-card.caution .value {
             color: var(--warning);
         }
 
-        .glance-card.warning .value {
-            color: #ff6b35;
-        }
-
-        .glance-card.danger .value {
-            color: var(--danger);
-        }
-
         .glance-context {
-            font-size: 0.75rem;
+            font-size: 0.875rem;
             color: var(--text-secondary);
             margin-top: 0.5rem;
         }
 
         .trend-indicator {
             display: inline-block;
-            font-weight: 600;
-        }
-
-        .trend-indicator.positive {
-            color: var(--success);
-        }
-
-        .trend-indicator.neutral {
+            font-size: 0.875rem;
             color: var(--text-secondary);
-        }
-
-        .trend-indicator.caution {
-            color: var(--warning);
-        }
-
-        .trend-indicator.negative {
-            color: var(--danger);
         }
 
         .runway-bar {
             display: block;
             width: 100%;
-            height: 4px;
+            height: 6px;
             background: var(--border-color);
-            border-radius: 2px;
+            border-radius: 3px;
             margin-top: 0.5rem;
             overflow: hidden;
         }
@@ -588,23 +315,19 @@
         .runway-fill {
             display: block;
             height: 100%;
-            background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 3px;
             transition: width 0.3s ease;
         }
 
         /* Action Center */
         .action-center {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border: 3px solid #f59e0b;
-            border-radius: 16px;
-            padding: 2rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
-        }
-
-        body.dark-theme .action-center {
-            background: linear-gradient(135deg, #78350f, #92400e);
-            border-color: #fbbf24;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
 
         .action-header {
@@ -615,23 +338,17 @@
         }
 
         .action-header h2 {
-            font-size: 1.5rem;
             margin: 0;
-            color: #92400e;
-        }
-
-        body.dark-theme .action-header h2 {
-            color: #fbbf24;
+            font-size: 1.25rem;
+            font-weight: 600;
         }
 
         .action-priority {
-            background: #ef4444;
-            color: white;
+            background: rgba(255, 255, 255, 0.2);
             padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
         }
 
         .action-main {
@@ -639,91 +356,60 @@
         }
 
         .action-title {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #92400e;
             margin-bottom: 0.5rem;
-        }
-
-        body.dark-theme .action-title {
-            color: #fde68a;
         }
 
         .action-why {
             font-size: 1rem;
-            color: #78350f;
-        }
-
-        body.dark-theme .action-why {
-            color: #fde68a;
+            opacity: 0.9;
         }
 
         .action-alternatives {
-            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
             padding-top: 1rem;
-            border-top: 2px solid rgba(120, 53, 15, 0.2);
+            margin-top: 1rem;
         }
 
         .action-alternatives summary {
             cursor: pointer;
             font-weight: 600;
-            color: #92400e;
-            list-style-position: outside;
-            margin-bottom: 0.75rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        body.dark-theme .action-alternatives summary {
-            color: #fbbf24;
+        .action-alternatives summary::-webkit-details-marker {
+            display: none;
         }
 
-        .action-alternatives[open] summary {
-            margin-bottom: 1rem;
+        .action-alternatives summary::before {
+            content: '▶';
+            display: inline-block;
+            transition: transform 0.2s;
         }
 
-        .alt-option {
-            background: rgba(255, 255, 255, 0.4);
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            border-left: 3px solid #f59e0b;
+        .action-alternatives[open] summary::before {
+            transform: rotate(90deg);
         }
 
-        body.dark-theme .alt-option {
-            background: rgba(0, 0, 0, 0.2);
+        .action-alternatives summary:hover {
+            opacity: 0.8;
         }
 
-        .alt-impact {
-            font-size: 0.875rem;
-            color: #78350f;
-            display: block;
-            margin-top: 0.25rem;
-        }
-
-        body.dark-theme .alt-impact {
-            color: #fcd34d;
-        }
-
-        .alerts-section {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px var(--shadow);
-            margin-bottom: 3rem;
-        }
-
+        /* Enhanced Alerts Section */
         .alerts-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
         .alerts-header h2 {
+            margin: 0;
             font-size: 1.5rem;
-            font-weight: 600;
         }
 
         .alert-badges {
@@ -732,371 +418,61 @@
         }
 
         .alert-badge {
-            background: var(--danger);
+            background: var(--critical);
             color: white;
             padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.875rem;
-            font-weight: 600;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .alert-badge.warning {
             background: var(--warning);
-            color: #1a1a1a;
         }
 
-        .alert-item {
-            background: var(--bg-secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 0.75rem;
-            border-left: 4px solid var(--warning);
-        }
-
-        .alert-item.danger {
-            border-left-color: var(--danger);
-        }
-
-        .alert-date {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .alert-details {
-            margin-top: 0.5rem;
-            padding-left: 1.5rem;
-            font-size: 0.875rem;
-        }
-
-        .alert-cause {
-            color: var(--text-secondary);
-            margin-bottom: 0.25rem;
-        }
-
-        .alert-recovery {
-            color: var(--success);
-            font-weight: 500;
-        }
-
-        .hero-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .hero-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .hero-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px var(--shadow);
-        }
-
-        .hero-card-header {
+        .alerts-list {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
-        .hero-card-title {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-card-icon {
-            font-size: 1.5rem;
-        }
-
-        .hero-card-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-card.income .hero-card-value {
-            color: var(--success);
-        }
-
-        .hero-card.expense .hero-card-value {
-            color: var(--danger);
-        }
-
-        .hero-card.surplus .hero-card-value {
-            color: var(--info);
-        }
-
-        .spending-gauge {
-            width: 100%;
-            height: 8px;
-            background: var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 1rem;
-            position: relative;
-        }
-
-        .gauge-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
-            transition: width 0.5s ease;
-        }
-
-        .gauge-marker {
-            position: absolute;
-            top: -25px;
-            right: 0;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
+        /* Chart Section */
         .chart-section {
             background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px var(--shadow);
-            margin-bottom: 3rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .chart-section h2 {
+            margin: 0 0 1.5rem 0;
             font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
         }
 
-        .forecast-summary {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .summary-card {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .summary-card h3 {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .summary-card .value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        /* Table Filters */
-        .table-filters {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--border-color);
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--accent-primary);
-        }
-
-        .filter-btn.active {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
-
-        .table-container {
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px var(--shadow);
-            overflow: hidden;
-        }
-
-        .table-header {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .table-header h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            background: var(--bg-secondary);
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        th.amount-col {
-            text-align: right;
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        td.amount-col {
-            text-align: right;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-            font-size: 0.875rem;
-        }
-
-        tr:hover {
-            background: var(--bg-secondary);
-        }
-
-        .flag-low {
-            color: var(--warning);
-            font-weight: 600;
-        }
-
-        .flag-neg {
-            color: var(--danger);
-            font-weight: 700;
-        }
-
-        .month-separator {
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            color: white;
-            font-weight: 600;
-            text-align: center;
-            padding: 0.75rem;
-            border: none;
-        }
-
-        .month-separator td {
-            border: none;
-        }
-
-        .positive {
-            color: var(--success);
-        }
-
-        .negative {
-            color: var(--danger);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .hero-section {
-                grid-template-columns: 1fr;
-            }
-
-            table {
-                font-size: 0.75rem;
-            }
-
-            th, td {
-                padding: 0.5rem;
-            }
-
-            .action-title {
-                font-size: 1.25rem;
-            }
-
-            .emergency-content {
-                flex-direction: column;
-                text-align: center;
-            }
+        #balanceChart {
+            max-height: 300px;
         }
     </style>
 </head>
 <body>
-    <button class="show-panel-btn" id="showPanelBtn">Show Scenario Panel</button>
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="scenario-planner.html">Scenario Planner</a></li>
+            <li><a href="http://localhost:8000/debt-strategy-complete.html" target="_blank">Debt Strategy</a></li>
+        </ul>
+    </nav>
 
-    <aside class="control-panel" id="controlPanel">
-        <div class="panel-header">
-            <div class="panel-title">
-                <h2>Scenario Builder</h2>
-                <button class="toggle-panel-btn" id="togglePanel" title="Hide panel">←</button>
-            </div>
-            <input type="text" class="search-box" id="searchBox" placeholder="Search expenses...">
-        </div>
-
-        <div class="panel-content" id="panelContent">
-            <!-- Categories will be dynamically generated here -->
-        </div>
-
-        <div class="impact-summary" id="impactSummary">
-            <h3>Scenario Impact</h3>
-            <div class="impact-row">
-                <span class="impact-label">Expenses Removed:</span>
-                <span class="impact-value" id="expensesRemoved">$0</span>
-            </div>
-            <div class="impact-row">
-                <span class="impact-label">Ending Balance:</span>
-                <span class="impact-value" id="endingBalanceImpact">$800 → $800</span>
-            </div>
-            <div class="impact-row">
-                <span class="impact-label">Status:</span>
-                <span class="impact-value" id="statusImpact">UNCHANGED</span>
-            </div>
-            <div class="removed-expenses-list" id="removedExpensesList" style="display: none;">
-                <!-- Dynamically populated with removed expenses -->
-            </div>
-        </div>
-
-        <div class="control-buttons">
-            <button class="control-btn" id="resetBtn">Reset to Baseline</button>
-            <button class="control-btn" id="saveBtn">Save Scenario</button>
-            <button class="control-btn preset" id="survivalBtn">Survival Mode</button>
-            <button class="control-btn preset" id="aggressiveBtn">Aggressive Paydown</button>
-        </div>
-    </aside>
-
-    <div class="main-content">
-    <div class="emergency-banner" id="emergencyBanner">
+    <!-- Emergency Banner -->
+    <div class="emergency-banner" id="emergencyBanner" style="display: none;">
         <div class="emergency-content">
             <span class="emergency-icon">🚨</span>
             <div class="emergency-text">
-                <strong>URGENT:</strong> Negative balance in <span id="daysUntil">?</span> days
+                <strong>URGENT:</strong> Negative balance in <span id="daysUntil">5</span> days (Dec 5)
             </div>
             <button class="emergency-action" onclick="document.querySelector('.alerts-section').scrollIntoView({behavior: 'smooth'})">
                 See Details
@@ -1105,15 +481,15 @@
     </div>
 
     <div class="container">
-        <div class="header">
+        <div class="page-header">
+            <h1>Cash Flow Dashboard</h1>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                 <span class="theme-icon" id="themeIcon">🌙</span>
                 <span id="themeText">Dark</span>
             </button>
-            <h1>Cash Flow Dashboard</h1>
-            <p class="subtitle">42-Day Forecast | Nov 20 - Dec 31, 2025</p>
         </div>
 
+        <!-- Glance Summary Cards -->
         <div class="glance-summary">
             <div class="glance-card" id="statusCard">
                 <h3>Status</h3>
@@ -1146,6 +522,7 @@
             </div>
         </div>
 
+        <!-- Action Center -->
         <div class="action-center" id="actionCenter">
             <div class="action-header">
                 <h2>⚡ Recommended Action</h2>
@@ -1165,1809 +542,436 @@
             </details>
         </div>
 
+        <div class="summary-grid" id="summaryGrid">
+            <!-- Summary cards will be generated dynamically -->
+        </div>
+
         <div class="alerts-section">
             <div class="alerts-header">
                 <h2>🚨 Critical Alerts</h2>
                 <div class="alert-badges" id="alertBadges">
-                    <span class="alert-badge">4 CRITICAL</span>
-                    <span class="alert-badge warning">5 warnings</span>
+                    <!-- Alert badges will be generated dynamically -->
                 </div>
             </div>
             <div class="alerts-list" id="alertsList">
-                <!-- Alerts will be dynamically generated here -->
+                <!-- Alerts will be generated dynamically -->
             </div>
         </div>
 
         <div class="chart-section">
             <h2>Balance Trend</h2>
-            <canvas id="balanceChart" height="80"></canvas>
+            <canvas id="balanceChart"></canvas>
         </div>
 
-        <div class="hero-section">
-            <div class="hero-card income">
-                <div class="hero-card-header">
-                    <span class="hero-card-title">Total Income</span>
-                    <span class="hero-card-icon">💰</span>
-                </div>
-                <div class="hero-card-value" id="totalIncome">$18,004.00</div>
-                <div class="hero-card-subtitle">Total expected deposits (42 days)</div>
-            </div>
-
-            <div class="hero-card expense">
-                <div class="hero-card-header">
-                    <span class="hero-card-title">Total Expenses</span>
-                    <span class="hero-card-icon">💳</span>
-                </div>
-                <div class="hero-card-value" id="totalExpenses">$28,621.43</div>
-                <div class="hero-card-subtitle">Total bills & recurring (42 days)</div>
-                <div class="spending-gauge">
-                    <div class="gauge-fill" id="spendingGaugeFill" style="width: 159%"></div>
-                    <div class="gauge-marker" id="spendingGaugePercent">159% of income</div>
+        <div class="transactions-section">
+            <div class="section-header">
+                <h2>Forecast</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="negative">Negative Days</button>
+                    <button class="filter-btn" data-filter="low">Low Balance</button>
                 </div>
             </div>
 
-            <div class="hero-card surplus" id="netPositionCard">
-                <div class="hero-card-header">
-                    <span class="hero-card-title">Net Position</span>
-                    <span class="hero-card-icon">📊</span>
-                </div>
-                <div class="hero-card-value" id="netPosition">-$10,617.43</div>
-                <div class="hero-card-subtitle">Forecast period change</div>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionTableBody">
+                    <!-- Transaction rows will be generated dynamically -->
+                </tbody>
+            </table>
         </div>
 
-        <div class="forecast-summary">
-            <div class="summary-card">
-                <h3>Starting Balance</h3>
-                <div class="value" id="startingBalance">$800</div>
-            </div>
-            <div class="summary-card">
-                <h3>Ending Balance</h3>
-                <div class="value" id="endingBalance">-$9,817.43</div>
-            </div>
-            <div class="summary-card">
-                <h3>Lowest Point</h3>
-                <div class="value negative" id="lowestPoint">-$9,817.43</div>
-            </div>
-            <div class="summary-card">
-                <h3>Days Below $500</h3>
-                <div class="value" id="daysBelowThreshold">40 days</div>
-            </div>
-        </div>
-
-        <div class="table-filters">
-            <button class="filter-btn active" data-filter="all">All Days (<span id="totalDaysFilter">42</span>)</button>
-            <button class="filter-btn" data-filter="flagged">Flagged Only (<span id="flaggedCount">0</span>)</button>
-            <button class="filter-btn" data-filter="major">Major Bills >$500 (<span id="majorCount">0</span>)</button>
-        </div>
-
-        <div class="table-container">
-            <div class="table-header">
-                <h2>Daily Transactions</h2>
-            </div>
-            <div id="transactionTable"></div>
+        <div class="last-updated">
+            Last updated: Nov 21, 2025, 12:45 PM
         </div>
     </div>
 
+    <!-- Load shared theme manager -->
+    <script src="js/shared/theme-manager.js"></script>
+
+    <!-- Load forecast data module -->
+    <script src="load-forecast.js?v=7"></script>
+
+    <!-- Load and populate dashboard with real data -->
     <script>
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
-        const body = document.body;
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load forecast data
+            const data = await loadForecastData();
+            console.log('Loaded forecast data:', data);
+            console.log('Transaction count:', data.transactions ? data.transactions.length : 0);
+            console.log('First 3 transactions:', data.transactions ? data.transactions.slice(0, 3) : []);
 
-        // Check for saved theme preference or default to light mode
-        const currentTheme = localStorage.getItem('theme') || 'light';
-
-        // Apply saved theme on page load
-        if (currentTheme === 'dark') {
-            body.classList.add('dark-theme');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light';
-        }
-
-        // Toggle theme when button is clicked
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-
-            if (body.classList.contains('dark-theme')) {
-                themeIcon.textContent = '☀️';
-                themeText.textContent = 'Light';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeIcon.textContent = '🌙';
-                themeText.textContent = 'Dark';
-                localStorage.setItem('theme', 'light');
-            }
+            // Populate all sections with real data
+            populateGlanceCards(data);
+            populateActionCenter(data);
+            populateAlerts(data);
+            populateSummaryCards(data);
+            populateTransactionTable(data);
+            populateBalanceChart(data);
+            updateLastUpdated();
         });
 
-        const transactions = [
-            {date: "2025-11-22", debits: 713.13, credits: 0.00, endBalance: 86.87, flag: "LOW", debitNames: "pliability, Loan (Feb 17, 2022), Loan (Mar 19, 2025)", creditNames: ""},
-            {date: "2025-11-23", debits: 99.21, credits: 0.00, endBalance: -12.34, flag: "NEG", debitNames: "Vitruvian Equipment", creditNames: ""},
-            {date: "2025-11-24", debits: 33.00, credits: 0.00, endBalance: -45.34, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-11-25", debits: 33.00, credits: 0.00, endBalance: -78.34, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-11-26", debits: 177.00, credits: 0.00, endBalance: -255.34, flag: "NEG", debitNames: "The Container Store, NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-11-27", debits: 1552.78, credits: 1000.00, endBalance: -808.12, flag: "NEG", debitNames: "Aven Card, Sofi Loan, NFCU Volvo Loan", creditNames: "WakeMed Paycheck"},
-            {date: "2025-11-28", debits: 3284.28, credits: 1987.00, endBalance: -2105.40, flag: "NEG", debitNames: "MMI, Buffalo Grove HOA, Groceries, Gas, Eating Out, Principal Loan, Savings, Tithe, Debt Payoff, NFCU", creditNames: "Acrisure Paycheck"},
-            {date: "2025-11-29", debits: 19.99, credits: 0.00, endBalance: -2125.39, flag: "NEG", debitNames: "MyFitnessPal", creditNames: ""},
-            {date: "2025-11-30", debits: 489.29, credits: 0.00, endBalance: -2614.68, flag: "NEG", debitNames: "Chaundra Williams, Club Pilates", creditNames: ""},
-            {date: "2025-12-01", debits: 1147.65, credits: 0.00, endBalance: -3762.33, flag: "NEG", debitNames: "Vitruvian Membership, TRANSAMERICA, Apple Card, Supplements, Payment Coordinator, NFCU", creditNames: ""},
-            {date: "2025-12-02", debits: 33.00, credits: 0.00, endBalance: -3795.33, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-12-03", debits: 303.00, credits: 0.00, endBalance: -4098.33, flag: "NEG", debitNames: "SYNCHRONY Bank, SYNCHRONY Credit, Bill Me Later, NFCU", creditNames: ""},
-            {date: "2025-12-04", debits: 582.00, credits: 0.00, endBalance: -4680.33, flag: "NEG", debitNames: "Connell & Gelb, Charleston Management, NFCU", creditNames: ""},
-            {date: "2025-12-05", debits: 4899.24, credits: 3500.00, endBalance: -6079.57, flag: "NEG", debitNames: "LoanCare Mortgage, Savings, Tithe, Debt Payoff, NFCU", creditNames: "Claritev Paycheck"},
-            {date: "2025-12-06", debits: 0.00, credits: 0.00, endBalance: -6079.57, flag: "NEG", debitNames: "", creditNames: ""},
-            {date: "2025-12-07", debits: 434.58, credits: 0.00, endBalance: -6514.15, flag: "NEG", debitNames: "Sleep Number", creditNames: ""},
-            {date: "2025-12-08", debits: 33.00, credits: 0.00, endBalance: -6547.15, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-12-09", debits: 245.00, credits: 0.00, endBalance: -6792.15, flag: "NEG", debitNames: "HexClad Pots, Duke Energy NC, NFCU", creditNames: ""},
-            {date: "2025-12-10", debits: 177.50, credits: 0.00, endBalance: -6969.65, flag: "NEG", debitNames: "Ashley Venture, Netflix, AT&T, NFCU", creditNames: ""},
-            {date: "2025-12-11", debits: 33.00, credits: 1000.00, endBalance: -6002.65, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: "WakeMed Paycheck"},
-            {date: "2025-12-12", debits: 3284.28, credits: 4487.00, endBalance: -4799.93, flag: "NEG", debitNames: "MMI, Buffalo Grove HOA, Groceries, Gas, Eating Out, Principal Loan, Savings, Tithe, Debt Payoff, NFCU", creditNames: "Acrisure Paycheck"},
-            {date: "2025-12-13", debits: 0.00, credits: 0.00, endBalance: -4799.93, flag: "NEG", debitNames: "", creditNames: ""},
-            {date: "2025-12-14", debits: 315.00, credits: 0.00, endBalance: -5114.93, flag: "NEG", debitNames: "SBA EIDL Loan", creditNames: ""},
-            {date: "2025-12-15", debits: 1893.98, credits: 1530.00, endBalance: -5478.91, flag: "NEG", debitNames: "Chaundra Williams, 2nd Mortgage, NC529, NFCU", creditNames: "103 Grandmont Rent"},
-            {date: "2025-12-16", debits: 33.00, credits: 0.00, endBalance: -5511.91, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-12-17", debits: 33.00, credits: 0.00, endBalance: -5544.91, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-12-18", debits: 520.00, credits: 0.00, endBalance: -6064.91, flag: "NEG", debitNames: "Ashley QuickSilver, C3 Baseball, Charleston Mgmt, NFCU", creditNames: ""},
-            {date: "2025-12-19", debits: 1333.00, credits: 3500.00, endBalance: -3897.91, flag: "NEG", debitNames: "Savings, Tithe, Debt Payoff, NFCU", creditNames: "Claritev Paycheck"},
-            {date: "2025-12-20", debits: 418.84, credits: 0.00, endBalance: -4316.75, flag: "NEG", debitNames: "ALLSTATE Insurance, Merry Maids", creditNames: ""},
-            {date: "2025-12-21", debits: 0.00, credits: 0.00, endBalance: -4316.75, flag: "NEG", debitNames: "", creditNames: ""},
-            {date: "2025-12-22", debits: 746.13, credits: 0.00, endBalance: -5062.88, flag: "NEG", debitNames: "pliability, Loan (Feb 17), Loan (Mar 19), NFCU", creditNames: ""},
-            {date: "2025-12-23", debits: 132.21, credits: 0.00, endBalance: -5195.09, flag: "NEG", debitNames: "Vitruvian Equipment, NFCU", creditNames: ""},
-            {date: "2025-12-24", debits: 33.00, credits: 0.00, endBalance: -5228.09, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""},
-            {date: "2025-12-25", debits: 33.00, credits: 1000.00, endBalance: -4261.09, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: "WakeMed Paycheck"},
-            {date: "2025-12-26", debits: 3428.28, credits: 0.00, endBalance: -7689.37, flag: "NEG", debitNames: "Container Store, MMI, Buffalo Grove, Groceries, Gas, Eating Out, Principal, Savings, Tithe, Debt Payoff, NFCU", creditNames: ""},
-            {date: "2025-12-27", debits: 1519.78, credits: 0.00, endBalance: -9209.15, flag: "NEG", debitNames: "Aven Card, Sofi Loan", creditNames: ""},
-            {date: "2025-12-28", debits: 0.00, credits: 0.00, endBalance: -9209.15, flag: "NEG", debitNames: "", creditNames: ""},
-            {date: "2025-12-29", debits: 52.99, credits: 0.00, endBalance: -9262.14, flag: "NEG", debitNames: "MyFitnessPal, NFCU", creditNames: ""},
-            {date: "2025-12-30", debits: 522.29, credits: 0.00, endBalance: -9784.43, flag: "NEG", debitNames: "Chaundra Williams, Club Pilates, NFCU", creditNames: ""},
-            {date: "2025-12-31", debits: 33.00, credits: 0.00, endBalance: -9817.43, flag: "NEG", debitNames: "NFCU Volvo Loan", creditNames: ""}
-        ];
+        function populateGlanceCards(data) {
+            // Calculate status based on ending balance
+            const status = data.endBalance > 0 ? 'HEALTHY' : 'AT RISK';
+            const statusDesc = data.endBalance > 0 ? 'Net positive for month' : 'Action needed';
 
-        function formatCurrency(amount) {
-            const formatted = Math.abs(amount).toLocaleString('en-US', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
+            // Update STATUS card
+            document.getElementById('statusValue').textContent = status;
+            document.getElementById('statusContext').textContent = statusDesc;
+
+            // Update NEXT 30 DAYS card with alert count
+            const alertCount = data.alerts ? data.alerts.length : 0;
+            document.getElementById('alertCount').textContent = alertCount;
+
+            // Calculate runway (days until balance hits zero or end of forecast period)
+            let runway = 30; // Default value
+            if (data.forecastPeriod && data.forecastPeriod.end) {
+                const currentDate = new Date();
+                const endDate = new Date(data.forecastPeriod.end);
+                const daysRemaining = Math.ceil((endDate - currentDate) / (1000 * 60 * 60 * 24));
+                runway = data.endBalance < 0 ? (data.daysNeg || daysRemaining) : daysRemaining;
+            } else if (data.daysNeg) {
+                runway = data.daysNeg;
+            }
+            document.getElementById('runwayDays').textContent = runway;
+
+            // Update runway bar
+            const runwayPercent = Math.min((runway / 30) * 100, 100);
+            document.getElementById('runwayFill').style.width = runwayPercent + '%';
+
+            // Calculate disposable income percentage
+            const totalIncome = data.transactions
+                .filter(t => parseFloat(t.netChange.replace(/[^0-9.-]/g, '')) > 0)
+                .reduce((sum, t) => sum + Math.abs(parseFloat(t.netChange.replace(/[^0-9.-]/g, ''))), 0);
+            const totalExpenses = data.transactions
+                .filter(t => parseFloat(t.netChange.replace(/[^0-9.-]/g, '')) < 0)
+                .reduce((sum, t) => sum + Math.abs(parseFloat(t.netChange.replace(/[^0-9.-]/g, ''))), 0);
+            const disposablePercent = totalIncome > 0 ? Math.round(((totalIncome - totalExpenses) / totalIncome) * 100) : 0;
+            document.getElementById('savingsRate').textContent = Math.abs(disposablePercent);
+            document.getElementById('savingsRateSign').textContent = disposablePercent >= 0 ? '+' : '-';
+        }
+
+        function populateActionCenter(data) {
+            // Find the most critical alert
+            const negativeAlerts = data.alerts.filter(a => a.type === 'NEGATIVE' || a.type === 'NEG');
+            if (negativeAlerts.length > 0) {
+                const firstNegAlert = negativeAlerts[0];
+                // Calculate how much to transfer (approximate from balance)
+                const transferAmount = Math.abs(parseFloat(firstNegAlert.balance.replace(/[^0-9.-]/g, ''))) + 100;
+                document.getElementById('actionTitle').textContent = `Transfer $${transferAmount.toFixed(0)} by ${firstNegAlert.date}`;
+                document.getElementById('actionWhy').textContent = `Prevents negative balance on ${firstNegAlert.date}`;
+            }
+        }
+
+        function populateAlerts(data) {
+            const criticalAlerts = data.alerts.filter(a => a.type === 'NEGATIVE' || a.type === 'NEG');
+            const warningAlerts = data.alerts.filter(a => a.type === 'LOW');
+
+            // Update badge counts - only show CRITICAL badge
+            const alertBadges = document.getElementById('alertBadges');
+            alertBadges.innerHTML = '';
+            if (criticalAlerts.length > 0) {
+                alertBadges.innerHTML += `<span class="alert-badge">${criticalAlerts.length} CRITICAL</span>`;
+            }
+            // Removed WARNING badge per user request
+
+            // Update alerts list
+            const alertsList = document.querySelector('.alerts-list');
+            alertsList.innerHTML = '';
+
+            // Add critical alerts
+            criticalAlerts.slice(0, 1).forEach(alert => {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert critical';
+                alertDiv.innerHTML = `
+                    <div class="alert-icon">🚨</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Critical Alert</div>
+                        <div class="alert-message">Balance will drop below zero on ${alert.date}</div>
+                    </div>
+                `;
+                alertsList.appendChild(alertDiv);
             });
-            return amount < 0 ? `-$${formatted}` : `$${formatted}`;
+
+            // Add warning alerts
+            warningAlerts.slice(0, 1).forEach(alert => {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert warning';
+                alertDiv.innerHTML = `
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Warning</div>
+                        <div class="alert-message">Balance will be ${alert.balance} on ${alert.date}</div>
+                    </div>
+                `;
+                alertsList.appendChild(alertDiv);
+            });
         }
 
-        function formatDate(dateStr) {
-            const date = new Date(dateStr + 'T12:00:00');
-            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            return `${months[date.getMonth()]} ${date.getDate()} (${days[date.getDay()]})`;
-        }
+        function populateSummaryCards(data) {
+            const summaryGrid = document.getElementById('summaryGrid');
+            summaryGrid.innerHTML = ''; // Clear any existing content
 
-        // Update Forecast Subtitle with dynamic date range
-        function updateForecastSubtitle() {
-            if (transactions.length === 0) return;
+            // Calculate Total Income and Expenses
+            const totalIncome = data.transactions
+                .filter(t => parseFloat(t.netChange.replace(/[^0-9.-]/g, '')) > 0)
+                .reduce((sum, t) => sum + parseFloat(t.netChange.replace(/[^0-9.-]/g, '')), 0);
+            const totalExpenses = data.transactions
+                .filter(t => parseFloat(t.netChange.replace(/[^0-9.-]/g, '')) < 0)
+                .reduce((sum, t) => sum + Math.abs(parseFloat(t.netChange.replace(/[^0-9.-]/g, ''))), 0);
 
-            // Get first and last transaction dates
-            const firstDate = new Date(transactions[0].date + 'T12:00:00');
-            const lastDate = new Date(transactions[transactions.length - 1].date + 'T12:00:00');
+            // Find lowest balance date
+            const lowestDate = data.transactions.find(t =>
+                parseFloat(t.endBalance.replace(/[^0-9.-]/g, '')) === data.lowestBalance
+            );
 
-            // Calculate total days
-            const totalDays = transactions.length;
+            // Card 1: Current Balance
+            summaryGrid.innerHTML += `
+                <div class="summary-card">
+                    <h3>Current Balance</h3>
+                    <p class="value">$${data.startBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p class="subtext">As of ${new Date().toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}</p>
+                </div>
+            `;
 
-            // Format dates as "Nov 22 - Dec 31, 2025"
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const firstMonth = months[firstDate.getMonth()];
-            const firstDay = firstDate.getDate();
-            const lastMonth = months[lastDate.getMonth()];
-            const lastDay = lastDate.getDate();
-            const year = lastDate.getFullYear();
+            // Card 2: Lowest Point
+            summaryGrid.innerHTML += `
+                <div class="summary-card">
+                    <h3>Lowest Point</h3>
+                    <p class="value ${data.lowestBalance < 0 ? 'negative' : ''}">$${data.lowestBalance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p class="subtext">On ${lowestDate ? lowestDate.date : 'Unknown'}</p>
+                </div>
+            `;
 
-            const dateRange = `${firstMonth} ${firstDay} - ${lastMonth} ${lastDay}, ${year}`;
-            const subtitle = `${totalDays}-Day Forecast | ${dateRange}`;
+            // Card 3: Total Income
+            summaryGrid.innerHTML += `
+                <div class="summary-card">
+                    <h3>Total Income</h3>
+                    <p class="value positive">+$${totalIncome.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p class="subtext">Next ${data.transactions.length} days</p>
+                </div>
+            `;
 
-            // Update the subtitle element
-            const subtitleElement = document.querySelector('.header .subtitle');
-            if (subtitleElement) {
-                subtitleElement.textContent = subtitle;
-            }
-        }
-
-        // Update Glance Alert Count with actual flagged transactions
-        function updateGlanceAlertCount() {
-            // Count transactions with NEG or LOW flags
-            const alertCount = transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW').length;
-
-            // Update the alert count element
-            const alertCountElement = document.getElementById('alertCount');
-            if (alertCountElement) {
-                alertCountElement.textContent = alertCount;
-            }
-        }
-
-        // Emergency Banner
-        function checkEmergencyStatus() {
-            const today = new Date();
-            const firstNegative = transactions.find(t => t.flag === 'NEG');
-
-            if (firstNegative) {
-                const negDate = new Date(firstNegative.date + 'T12:00:00');
-                const daysUntil = Math.ceil((negDate - today) / (1000 * 60 * 60 * 24));
-
-                if (daysUntil <= 7 && daysUntil >= 0) {
-                    document.getElementById('emergencyBanner').style.display = 'block';
-                    document.getElementById('daysUntil').textContent = daysUntil;
-                }
-            }
-        }
-
-        // Update Alert Badges
-        function updateAlertBadges() {
-            const negCount = transactions.filter(t => t.flag === 'NEG').length;
-            const lowCount = transactions.filter(t => t.flag === 'LOW').length;
-
-            document.getElementById('alertBadges').innerHTML = `
-                ${negCount > 0 ? `<span class="alert-badge">${negCount} CRITICAL</span>` : ''}
-                ${lowCount > 0 ? `<span class="alert-badge warning">${lowCount} warnings</span>` : ''}
+            // Card 4: Total Expenses
+            summaryGrid.innerHTML += `
+                <div class="summary-card">
+                    <h3>Total Expenses</h3>
+                    <p class="value negative">-$${totalExpenses.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                    <p class="subtext">Next ${data.transactions.length} days</p>
+                </div>
             `;
         }
 
-        // Generate Recommended Action
-        function generateRecommendedAction() {
-            const negativeTransactions = transactions.filter(t => t.flag === 'NEG');
+        function populateTransactionTable(data) {
+            const tbody = document.getElementById('transactionTableBody');
+            tbody.innerHTML = '';
 
-            if (negativeTransactions.length === 0) {
-                document.getElementById('actionCenter').style.display = 'none';
-                return;
-            }
+            // Display all transactions
+            data.transactions.forEach((trans, index) => {
+                const row = document.createElement('tr');
+                const netChange = parseFloat(trans.netChange.replace(/[^0-9.-]/g, ''));
+                const endBalance = parseFloat(trans.endBalance.replace(/[^0-9.-]/g, ''));
+                const isNegative = endBalance < 0;
+                const isLow = endBalance > 0 && endBalance < 500;
 
-            const firstNeg = negativeTransactions[0];
-            const lastNeg = negativeTransactions[negativeTransactions.length - 1];
-            const worstBalance = Math.min(...negativeTransactions.map(t => t.endBalance));
-
-            const bridgeAmount = Math.ceil(Math.abs(worstBalance) / 100) * 100 + 100;
-
-            const firstNegDate = new Date(firstNeg.date + 'T12:00:00');
-            const transferDate = new Date(firstNegDate);
-            transferDate.setDate(transferDate.getDate() - 1);
-            const transferDateStr = transferDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-
-            document.getElementById('actionTitle').textContent =
-                `Transfer $${bridgeAmount.toLocaleString()} by ${transferDateStr}`;
-            document.getElementById('actionWhy').textContent =
-                `Prevents all ${negativeTransactions.length} negative days (${formatDate(firstNeg.date)} - ${formatDate(lastNeg.date)})`;
-        }
-
-        // Update Contextual Metrics
-        function updateContextualMetrics() {
-            const avgDailyExpense = transactions.reduce((sum, t) => sum + t.debits, 0) / transactions.length;
-            const runwayDays = Math.floor(transactions[0].endBalance / avgDailyExpense);
-            document.getElementById('runwayDays').textContent = runwayDays;
-            document.getElementById('runwayFill').style.width = `${Math.min((runwayDays / 30) * 100, 100)}%`;
-
-            const runwayCard = document.getElementById('runwayCard');
-            runwayCard.classList.remove('healthy', 'caution', 'danger');
-            if (runwayDays < 15) {
-                runwayCard.classList.add('danger');
-            } else if (runwayDays < 25) {
-                runwayCard.classList.add('caution');
-            } else {
-                runwayCard.classList.add('healthy');
-            }
-
-            const totalIncome = transactions.reduce((sum, t) => sum + t.credits, 0);
-            const totalExpense = transactions.reduce((sum, t) => sum + t.debits, 0);
-            const savingsRate = Math.round(((totalIncome - totalExpense) / totalIncome) * 100);
-            document.getElementById('savingsRate').textContent = Math.abs(savingsRate);
-        }
-
-        // FIX 1 & 2: Update Glance Status (Status Card Value and Context)
-        function updateGlanceStatus() {
-            // Calculate net position (ending balance - starting balance)
-            const firstTxn = transactions[0];
-            const startingBalance = firstTxn.endBalance + firstTxn.debits - firstTxn.credits;
-            const endingBalance = transactions[transactions.length - 1].endBalance;
-            const netPosition = endingBalance - startingBalance;
-
-            const statusCard = document.getElementById('statusCard');
-            const statusValue = document.getElementById('statusValue');
-            const statusContext = document.getElementById('statusContext');
-
-            // Remove all existing status classes
-            statusCard.classList.remove('healthy', 'caution', 'warning', 'danger');
-
-            // Apply status based on NEW net position thresholds
-            if (netPosition >= 1000) {
-                statusValue.textContent = 'HEALTHY';
-                statusContext.textContent = 'Healthy surplus for period';
-                statusCard.classList.add('healthy');
-            } else if (netPosition >= 500) {
-                statusValue.textContent = 'CAUTION';
-                statusContext.textContent = 'Moderate buffer for period';
-                statusCard.classList.add('caution');
-            } else if (netPosition >= 0) {
-                statusValue.textContent = 'AT RISK';
-                statusContext.textContent = 'Minimal buffer for period';
-                statusCard.classList.add('warning');
-            } else {
-                statusValue.textContent = 'CRITICAL';
-                statusContext.textContent = 'Deficit for period';
-                statusCard.classList.add('danger');
-            }
-        }
-
-        // FIX 3: Update Alert Trend Text
-        function updateAlertTrend() {
-            const negCount = transactions.filter(t => t.flag === 'NEG').length;
-            const lowCount = transactions.filter(t => t.flag === 'LOW').length;
-
-            const alertTrendElement = document.getElementById('alertTrend');
-
-            // Remove all existing trend classes
-            alertTrendElement.classList.remove('positive', 'neutral', 'caution', 'negative');
-
-            if (negCount === 0 && lowCount === 0) {
-                alertTrendElement.textContent = 'All clear';
-                alertTrendElement.classList.add('positive');
-            } else if (negCount === 0 && lowCount > 0) {
-                alertTrendElement.textContent = 'Watch carefully';
-                alertTrendElement.classList.add('neutral');
-            } else if (negCount >= 1 && negCount <= 5) {
-                alertTrendElement.textContent = 'Monitor closely';
-                alertTrendElement.classList.add('neutral');
-            } else if (negCount > 5 && negCount <= 15) {
-                alertTrendElement.textContent = 'Needs attention';
-                alertTrendElement.classList.add('caution');
-            } else {
-                alertTrendElement.textContent = 'Urgent action required';
-                alertTrendElement.classList.add('negative');
-            }
-        }
-
-        // FIX 4: Update Disposable Income Context (renamed from Savings Rate)
-        function updateDisposableIncomeContext() {
-            const totalIncome = transactions.reduce((sum, t) => sum + t.credits, 0);
-            const totalExpenses = transactions.reduce((sum, t) => sum + t.debits, 0);
-            const disposableIncome = totalIncome - totalExpenses;
-            const disposablePercent = totalIncome > 0 ? ((disposableIncome / totalIncome) * 100) : 0;
-
-            const savingsCard = document.getElementById('savingsCard');
-            const savingsContext = document.getElementById('savingsContext');
-            const savingsRateSign = document.getElementById('savingsRateSign');
-            const savingsRate = document.getElementById('savingsRate');
-
-            // Remove all existing trend classes
-            savingsContext.classList.remove('positive', 'neutral', 'negative');
-            savingsCard.classList.remove('healthy', 'caution', 'danger');
-
-            // Update sign and value
-            savingsRateSign.textContent = disposablePercent >= 0 ? '+' : '';
-            savingsRate.textContent = Math.abs(Math.round(disposablePercent));
-
-            // Apply NEW disposable income thresholds
-            if (disposablePercent >= 20) {
-                savingsContext.textContent = 'Excellent cushion ↑';
-                savingsContext.classList.add('positive');
-                savingsCard.classList.add('healthy');
-            } else if (disposablePercent >= 10) {
-                savingsContext.textContent = 'Good buffer ↑';
-                savingsContext.classList.add('positive');
-                savingsCard.classList.add('healthy');
-            } else if (disposablePercent >= 0) {
-                savingsContext.textContent = 'Breaking even →';
-                savingsContext.classList.add('neutral');
-            } else if (disposablePercent >= -20) {
-                savingsContext.textContent = 'Limited deficit ↓';
-                savingsContext.classList.add('negative');
-                savingsCard.classList.add('caution');
-            } else {
-                savingsContext.textContent = 'Significant deficit ↓↓';
-                savingsContext.classList.add('negative');
-                savingsCard.classList.add('danger');
-            }
-        }
-
-        // FIX 5: Update Filter Counts
-        function updateFilterCounts() {
-            // Update total days filter count
-            document.getElementById('totalDaysFilter').textContent = transactions.length;
-
-            // Update flagged count (already exists in renderTable, but ensure it's called)
-            const flaggedCount = transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW').length;
-            document.getElementById('flaggedCount').textContent = flaggedCount;
-
-            // Update major bills count
-            const majorCount = transactions.filter(t => t.debits > 500 || t.credits > 500).length;
-            document.getElementById('majorCount').textContent = majorCount;
-        }
-
-        // Update Summary Metrics - Calculate from transaction data
-        function updateSummaryMetrics() {
-            // Calculate total income and expenses from transaction data
-            const totalIncome = transactions.reduce((sum, t) => sum + t.credits, 0);
-            const totalExpenses = transactions.reduce((sum, t) => sum + t.debits, 0);
-
-            // Calculate starting balance from first transaction
-            const firstTxn = transactions[0];
-            const startingBalance = firstTxn.endBalance + firstTxn.debits - firstTxn.credits;
-
-            // Get ending balance from last transaction
-            const lastTxn = transactions[transactions.length - 1];
-            const endingBalance = lastTxn.endBalance;
-
-            // Calculate net position (change over forecast period)
-            const netPosition = endingBalance - startingBalance;
-
-            // Find lowest balance point
-            const lowestBalance = Math.min(...transactions.map(t => t.endBalance));
-
-            // Count days below $500 threshold
-            const daysBelowThreshold = transactions.filter(t => t.endBalance < 500).length;
-
-            // Update Total Income and Total Expenses cards
-            document.getElementById('totalIncome').textContent = formatCurrency(totalIncome);
-            document.getElementById('totalExpenses').textContent = formatCurrency(totalExpenses);
-
-            // Update spending gauge (expenses as % of income)
-            const spendingPercent = totalIncome > 0 ? Math.round((totalExpenses / totalIncome) * 100) : 0;
-            document.getElementById('spendingGaugeFill').style.width = `${Math.min(spendingPercent, 100)}%`;
-            document.getElementById('spendingGaugePercent').textContent = `${spendingPercent}% of income`;
-
-            // Update other summary metrics
-            document.getElementById('startingBalance').textContent = formatCurrency(startingBalance);
-
-            const endingBalanceEl = document.getElementById('endingBalance');
-            endingBalanceEl.textContent = formatCurrency(endingBalance);
-            endingBalanceEl.className = endingBalance >= 0 ? 'value positive' : 'value negative';
-
-            const netPositionEl = document.getElementById('netPosition');
-            netPositionEl.textContent = formatCurrency(netPosition);
-
-            // Update net position card styling
-            const netPositionCard = document.getElementById('netPositionCard');
-            netPositionCard.classList.remove('surplus', 'income', 'expense');
-            if (netPosition >= 0) {
-                netPositionCard.classList.add('surplus');
-            } else {
-                netPositionCard.classList.add('expense');
-            }
-
-            document.getElementById('lowestPoint').textContent = formatCurrency(lowestBalance);
-            document.getElementById('daysBelowThreshold').textContent = `${daysBelowThreshold} days`;
-        }
-
-        // Table Rendering
-        let currentFilter = 'all';
-
-        function renderTable(filter = 'all') {
-            currentFilter = filter;
-            const container = document.getElementById('transactionTable');
-
-            let filtered = transactions;
-            if (filter === 'flagged') {
-                filtered = transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW');
-            } else if (filter === 'major') {
-                filtered = transactions.filter(t => t.debits > 500 || t.credits > 500);
-            }
-
-            document.getElementById('flaggedCount').textContent =
-                transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW').length;
-            document.getElementById('majorCount').textContent =
-                transactions.filter(t => t.debits > 500 || t.credits > 500).length;
-
-            let html = '<table><thead><tr>';
-            html += '<th>Date</th>';
-            html += '<th class="amount-col">Debits</th>';
-            html += '<th>Debit Names</th>';
-            html += '<th class="amount-col">Credits</th>';
-            html += '<th>Credit Names</th>';
-            html += '<th class="amount-col">Net Change</th>';
-            html += '<th class="amount-col">End Balance</th>';
-            html += '<th>Flag</th>';
-            html += '</tr></thead><tbody>';
-
-            let currentMonth = '';
-            filtered.forEach((txn, index) => {
-                const txnMonth = txn.date.substring(0, 7);
-
-                // Initialize currentMonth with the first transaction's month
-                if (index === 0) {
-                    currentMonth = txnMonth;
+                if (isLow || isNegative) {
+                    row.classList.add('low-balance');
                 }
 
-                // When month changes, show separator for the month that just ended
-                if (txnMonth !== currentMonth && filter === 'all') {
-                    // Parse year and month to avoid timezone issues
-                    const [year, month] = currentMonth.split('-');
-                    const monthName = new Date(parseInt(year), parseInt(month) - 1, 15).toLocaleString('en-US', { month: 'long', year: 'numeric' });
-                    html += `<tr class="month-separator"><td colspan="8">End of ${monthName}</td></tr>`;
-                    currentMonth = txnMonth;
+                // Check if there are multiple transactions
+                const debits = trans.debitDetails ? trans.debitDetails.split(',').map(d => d.trim()).filter(d => d) : [];
+                const credits = trans.creditDetails ? trans.creditDetails.split(',').map(c => c.trim()).filter(c => c) : [];
+                const hasMultiple = (debits.length + credits.length) > 1;
+
+                let description = '';
+                let expandIcon = '';
+
+                if (netChange < 0 && debits.length > 0) {
+                    description = debits[0];
+                    if (debits.length > 1) {
+                        expandIcon = ` <span style="color: #666; font-size: 0.9em; cursor: pointer;">+${debits.length - 1} more</span>`;
+                    }
+                } else if (netChange > 0 && credits.length > 0) {
+                    description = credits[0];
+                    if (credits.length > 1) {
+                        expandIcon = ` <span style="color: #666; font-size: 0.9em; cursor: pointer;">+${credits.length - 1} more</span>`;
+                    }
+                } else {
+                    description = 'No transactions';
                 }
 
-                const netChange = txn.credits - txn.debits;
-                const flagClass = txn.flag === 'NEG' ? 'flag-neg' : txn.flag === 'LOW' ? 'flag-low' : '';
-                const balanceClass = txn.endBalance < 0 ? 'negative' : 'positive';
+                const status = isNegative ? '🚨 Negative' : isLow ? '⚠️ Low' : '✓';
 
-                html += '<tr>';
-                html += `<td>${formatDate(txn.date)}</td>`;
-                html += `<td class="amount-col">${formatCurrency(txn.debits)}</td>`;
-                html += `<td>${txn.debitNames}</td>`;
-                html += `<td class="amount-col">${formatCurrency(txn.credits)}</td>`;
-                html += `<td>${txn.creditNames}</td>`;
-                html += `<td class="amount-col ${netChange >= 0 ? 'positive' : 'negative'}">${formatCurrency(netChange)}</td>`;
-                html += `<td class="amount-col ${balanceClass}">${formatCurrency(txn.endBalance)}</td>`;
-                html += `<td class="${flagClass}">${txn.flag || ''}</td>`;
-                html += '</tr>';
-            });
+                row.style.cursor = hasMultiple ? 'pointer' : 'default';
+                row.innerHTML = `
+                    <td>${trans.date}</td>
+                    <td>${description}${expandIcon}</td>
+                    <td class="${netChange < 0 ? 'negative' : 'positive'}">${trans.netChange}</td>
+                    <td class="${endBalance < 0 ? 'negative' : ''}">${trans.endBalance}</td>
+                    <td>${status}</td>
+                `;
 
-            html += '</tbody></table>';
-            container.innerHTML = html;
-        }
+                // Add click handler for expandable rows
+                if (hasMultiple) {
+                    row.addEventListener('click', () => {
+                        const existingDetail = row.nextElementSibling;
+                        if (existingDetail && existingDetail.classList.contains('detail-row')) {
+                            // Collapse - remove detail row
+                            existingDetail.remove();
+                        } else {
+                            // Expand - create detail row
+                            const detailRow = document.createElement('tr');
+                            detailRow.classList.add('detail-row');
+                            detailRow.style.backgroundColor = '#f8f9fa';
 
-        // Filter Buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                renderTable(this.dataset.filter);
-            });
-        });
+                            let detailHtml = '<td colspan="5" style="padding: 15px 20px;"><div style="font-size: 0.95em;">';
 
-        // Chart with Annotations
-        const ctx = document.getElementById('balanceChart');
-
-        const annotations = {
-            zeroLine: {
-                type: 'line',
-                yMin: 0,
-                yMax: 0,
-                borderColor: '#dc2626',
-                borderWidth: 2,
-                borderDash: [5, 5],
-                label: {
-                    content: 'Zero Balance',
-                    enabled: true,
-                    position: 'start',
-                    backgroundColor: '#dc2626',
-                    color: 'white',
-                    padding: 4
-                }
-            }
-        };
-
-        transactions.forEach((txn, index) => {
-            if (txn.credits >= 1000) {
-                annotations[`paycheck_${index}`] = {
-                    type: 'point',
-                    xValue: index,
-                    yValue: txn.endBalance,
-                    backgroundColor: '#10b981',
-                    borderColor: '#059669',
-                    borderWidth: 2,
-                    radius: 6
-                };
-            }
-
-            if (txn.debits >= 1000) {
-                annotations[`bill_${index}`] = {
-                    type: 'point',
-                    xValue: index,
-                    yValue: txn.endBalance,
-                    backgroundColor: '#ef4444',
-                    borderColor: '#dc2626',
-                    borderWidth: 2,
-                    radius: 6
-                };
-            }
-        });
-
-        const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: transactions.map(t => formatDate(t.date)),
-                datasets: [{
-                    label: 'Balance',
-                    data: transactions.map(t => t.endBalance),
-                    borderColor: 'rgb(102, 126, 234)',
-                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                    borderWidth: 3,
-                    tension: 0.3,
-                    fill: true,
-                    pointRadius: 2,
-                    pointHoverRadius: 6,
-                    segment: {
-                        borderColor: ctx => {
-                            const current = transactions[ctx.p1.$context.dataIndex];
-                            const previous = transactions[ctx.p0.$context.dataIndex];
-                            if (current.flag === 'NEG' || previous.flag === 'NEG') {
-                                return '#ef4444';
+                            if (debits.length > 0) {
+                                detailHtml += '<strong>Debits:</strong><ul style="margin: 5px 0; padding-left: 20px;">';
+                                debits.forEach(debit => {
+                                    detailHtml += `<li>${debit}</li>`;
+                                });
+                                detailHtml += '</ul>';
                             }
-                            if (current.flag === 'LOW' || previous.flag === 'LOW') {
-                                return '#f59e0b';
+
+                            if (credits.length > 0) {
+                                detailHtml += '<strong>Credits:</strong><ul style="margin: 5px 0; padding-left: 20px;">';
+                                credits.forEach(credit => {
+                                    detailHtml += `<li>${credit}</li>`;
+                                });
+                                detailHtml += '</ul>';
                             }
-                            return 'rgb(102, 126, 234)';
+
+                            detailHtml += '</div></td>';
+                            detailRow.innerHTML = detailHtml;
+
+                            row.after(detailRow);
                         }
-                    }
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: { display: false },
-                    annotation: { annotations: annotations },
-                    tooltip: {
-                        callbacks: {
-                            title: function(context) {
-                                return formatDate(transactions[context[0].dataIndex].date);
-                            },
-                            label: function(context) {
-                                const txn = transactions[context.dataIndex];
-                                const lines = ['Balance: ' + formatCurrency(txn.endBalance)];
+                    });
+                }
 
-                                if (txn.credits > 0) {
-                                    lines.push('💰 +' + formatCurrency(txn.credits) +
-                                              (txn.creditNames ? ' (' + txn.creditNames + ')' : ''));
-                                }
-                                if (txn.debits > 0) {
-                                    lines.push('🏦 -' + formatCurrency(txn.debits) +
-                                              (txn.debits > 500 && txn.debitNames ? ' (' + txn.debitNames + ')' : ''));
-                                }
+                tbody.appendChild(row);
+            });
+        }
 
-                                return lines;
-                            }
-                        },
-                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                        padding: 12,
-                        cornerRadius: 8
-                    }
+        function populateBalanceChart(data) {
+            const ctx = document.getElementById('balanceChart');
+
+            // Prepare chart data from transactions
+            const chartData = data.transactions.slice(0, 30).map(t => ({
+                date: t.date.replace('2025-', '').replace('2026-', ''),
+                balance: parseFloat(t.endBalance.replace(/[^0-9.-]/g, ''))
+            }));
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartData.map(d => d.date),
+                    datasets: [{
+                        label: 'Balance',
+                        data: chartData.map(d => d.balance),
+                        borderColor: 'rgb(102, 126, 234)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 2,
+                        pointHoverRadius: 6
+                    }]
                 },
-                scales: {
-                    y: {
-                        ticks: {
-                            callback: function(value) {
-                                return formatCurrency(value);
-                            }
-                        },
-                        grid: {
-                            color: function(context) {
-                                return context.tick.value === 0 ? '#dc2626' : 'rgba(0, 0, 0, 0.1)';
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed.y !== null) {
+                                        label += '$' + context.parsed.y.toFixed(2);
+                                    }
+                                    return label;
+                                }
                             }
                         }
                     },
-                    x: {
-                        ticks: {
-                            maxRotation: 45,
-                            minRotation: 45,
-                            autoSkip: true,
-                            maxTicksLimit: 20
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toFixed(0);
+                                }
+                            },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
                         },
-                        grid: { display: false }
-                    }
-                }
-            }
-        });
-
-        // Generate Alternative Options - Dynamic Calculation
-        function generateAlternativeOptions() {
-            const alternatives = [];
-
-            // Strategy 1: Find largest bill to defer
-            const deferOption = findDeferrablePayment();
-            if (deferOption) alternatives.push(deferOption);
-
-            // Strategy 2: Find paycheck to move earlier
-            const paycheckOption = findMovablePaycheck();
-            if (paycheckOption) alternatives.push(paycheckOption);
-
-            // Strategy 3: Calculate spending reduction
-            const spendingOption = calculateSpendingReduction();
-            if (spendingOption) alternatives.push(spendingOption);
-
-            // Update DOM
-            renderAlternativeOptions(alternatives);
-        }
-
-        function findDeferrablePayment() {
-            // Find negative transactions
-            const negativeTransactions = transactions.filter(t => t.flag === 'NEG');
-            if (negativeTransactions.length === 0) return null;
-
-            // Find large bills (>$300) in negative periods
-            const largeBills = [];
-            negativeTransactions.forEach(t => {
-                if (t.debits > 300) {
-                    largeBills.push({
-                        transaction: t,
-                        amount: t.debits,
-                        date: t.date,
-                        names: t.debitNames
-                    });
-                }
-            });
-
-            if (largeBills.length === 0) return null;
-
-            // Sort by amount descending
-            largeBills.sort((a, b) => b.amount - a.amount);
-            const largestBill = largeBills[0];
-
-            // Find next paycheck after this bill
-            const billIndex = transactions.findIndex(t => t.date === largestBill.date);
-            let nextPaycheck = null;
-            for (let i = billIndex + 1; i < transactions.length; i++) {
-                if (transactions[i].credits >= 500) {
-                    nextPaycheck = transactions[i];
-                    break;
-                }
-            }
-
-            if (!nextPaycheck) return null;
-
-            // Calculate new defer date (day after paycheck)
-            const deferToDate = new Date(nextPaycheck.date + 'T12:00:00');
-            deferToDate.setDate(deferToDate.getDate() + 1);
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const deferDateStr = `${months[deferToDate.getMonth()]} ${deferToDate.getDate()}`;
-
-            // Simulate impact - count how many negative days would be eliminated
-            const originalBalance = largestBill.transaction.endBalance;
-            const simulatedBalance = originalBalance + largestBill.amount;
-
-            // Count negative days that would become positive if we defer
-            let negativeDaysEliminated = 0;
-            let currentBalance = simulatedBalance;
-            for (let i = billIndex; i < transactions.length && transactions[i].date <= nextPaycheck.date; i++) {
-                if (i === billIndex) {
-                    // Skip the deferred payment
-                    currentBalance = transactions[i].endBalance + largestBill.amount;
-                } else {
-                    const netChange = transactions[i].credits - transactions[i].debits;
-                    currentBalance += netChange;
-                }
-
-                if (transactions[i].flag === 'NEG' && currentBalance >= 0) {
-                    negativeDaysEliminated++;
-                }
-            }
-
-            // Extract primary bill name
-            const billName = largestBill.names ? largestBill.names.split(',')[0].trim() : 'Large payment';
-
-            return {
-                label: 'B',
-                description: `Defer ${billName} payment ($${Math.round(largestBill.amount)}) to ${deferDateStr}`,
-                impact: `Saves $${Math.round(largestBill.amount)}, improves ${negativeDaysEliminated} negative day${negativeDaysEliminated === 1 ? '' : 's'}`
-            };
-        }
-
-        function findMovablePaycheck() {
-            // Find negative transactions
-            const negativeTransactions = transactions.filter(t => t.flag === 'NEG');
-            if (negativeTransactions.length === 0) return null;
-
-            // Find large paychecks (>$1000)
-            const largePaychecks = [];
-            transactions.forEach((t, index) => {
-                if (t.credits >= 1000) {
-                    largePaychecks.push({
-                        transaction: t,
-                        amount: t.credits,
-                        date: t.date,
-                        names: t.creditNames,
-                        index: index
-                    });
-                }
-            });
-
-            if (largePaychecks.length === 0) return null;
-
-            // Sort by amount descending
-            largePaychecks.sort((a, b) => b.amount - a.amount);
-
-            // Find the first paycheck that occurs AFTER negative periods start
-            let bestPaycheck = null;
-            const firstNegIndex = transactions.findIndex(t => t.flag === 'NEG');
-
-            for (const paycheck of largePaychecks) {
-                if (paycheck.index > firstNegIndex) {
-                    bestPaycheck = paycheck;
-                    break;
-                }
-            }
-
-            if (!bestPaycheck) return null;
-
-            // Find worst negative period before this paycheck
-            let worstBalance = 0;
-            let negativeDaysBeforePaycheck = 0;
-            for (let i = firstNegIndex; i < bestPaycheck.index; i++) {
-                if (transactions[i].flag === 'NEG') {
-                    negativeDaysBeforePaycheck++;
-                    if (transactions[i].endBalance < worstBalance) {
-                        worstBalance = transactions[i].endBalance;
-                    }
-                }
-            }
-
-            // Calculate new move date (just before first negative period)
-            const moveToDate = new Date(transactions[firstNegIndex].date + 'T12:00:00');
-            moveToDate.setDate(moveToDate.getDate() - 1);
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            const moveDateStr = `${months[moveToDate.getMonth()]} ${moveToDate.getDate()}`;
-
-            // Extract paycheck source name
-            const paycheckName = bestPaycheck.names ? bestPaycheck.names.split(' ')[0] : 'Paycheck';
-
-            return {
-                label: 'C',
-                description: `Request early ${paycheckName} paycheck ($${Math.round(bestPaycheck.amount).toLocaleString()}) for ${moveDateStr}`,
-                impact: `Move from ${formatDate(bestPaycheck.date)} to ${moveDateStr}, prevents ${negativeDaysBeforePaycheck} negative day${negativeDaysBeforePaycheck === 1 ? '' : 's'}`
-            };
-        }
-
-        function calculateSpendingReduction() {
-            // Find discretionary spending across the forecast period
-            const discretionaryCategories = ['Groceries', 'Gas', 'Eating Out', 'groceries', 'gas', 'eating out'];
-            let totalDiscretionary = 0;
-            let transactionsWithDiscretionary = 0;
-
-            transactions.forEach(t => {
-                if (t.debitNames) {
-                    const hasDiscretionary = discretionaryCategories.some(cat =>
-                        t.debitNames.toLowerCase().includes(cat.toLowerCase())
-                    );
-                    if (hasDiscretionary) {
-                        // Estimate discretionary portion (assume 30% of that transaction if mixed)
-                        const estimatedDiscretionary = t.debits * 0.3;
-                        totalDiscretionary += estimatedDiscretionary;
-                        transactionsWithDiscretionary++;
+                        x: { grid: { display: false } }
                     }
                 }
             });
-
-            if (totalDiscretionary < 100) return null; // Not enough to make a meaningful option
-
-            // Calculate 25% reduction
-            const reduction = Math.round(totalDiscretionary * 0.25);
-
-            // Estimate impact on ending balance
-            const negativeTransactions = transactions.filter(t => t.flag === 'NEG');
-            const currentEndingBalance = transactions[transactions.length - 1].endBalance;
-            const improvedEndingBalance = currentEndingBalance + reduction;
-
-            return {
-                label: 'D',
-                description: `Reduce discretionary spending by 25%`,
-                impact: `Saves ~$${reduction.toLocaleString()} total, improves ending balance to ${formatCurrency(improvedEndingBalance)}`
-            };
         }
 
-        function renderAlternativeOptions(alternatives) {
-            const container = document.getElementById('alternativeOptionsList');
-            const summary = document.getElementById('alternativeOptionsSummary');
-
-            if (alternatives.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-secondary); padding: 0.5rem;">No alternative options available</p>';
-                summary.textContent = 'Alternative Options (0)';
-                return;
-            }
-
-            // Update summary count
-            summary.textContent = `Alternative Options (${alternatives.length})`;
-
-            // Generate HTML for each alternative
-            let html = '';
-            alternatives.forEach(alt => {
-                html += `
-                    <div class="alt-option">
-                        <strong>Option ${alt.label}:</strong> ${alt.description}<br>
-                        <span class="alt-impact">${alt.impact}</span>
-                    </div>
-                `;
+        function updateLastUpdated() {
+            const now = new Date();
+            const formatted = now.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
             });
-
-            container.innerHTML = html;
+            document.querySelector('.last-updated').textContent = `Last updated: ${formatted}`;
         }
-
-        // Generate Dynamic Alerts
-        function generateDynamicAlerts() {
-            const flaggedTransactions = transactions.filter(t => t.flag === 'NEG' || t.flag === 'LOW');
-
-            if (flaggedTransactions.length === 0) {
-                document.getElementById('alertsList').innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">No alerts - all days looking healthy!</p>';
-                return;
-            }
-
-            // Group consecutive flagged days
-            const alertGroups = [];
-            let currentGroup = null;
-
-            transactions.forEach((txn, index) => {
-                if (txn.flag === 'NEG' || txn.flag === 'LOW') {
-                    if (!currentGroup ||
-                        currentGroup.flag !== txn.flag ||
-                        index - currentGroup.lastIndex > 1) {
-                        // Start a new group
-                        if (currentGroup) alertGroups.push(currentGroup);
-
-                        currentGroup = {
-                            flag: txn.flag,
-                            startDate: txn.date,
-                            endDate: txn.date,
-                            startIndex: index,
-                            lastIndex: index,
-                            worstBalance: txn.endBalance,
-                            worstBalanceDate: txn.date,
-                            transactions: [txn]
-                        };
-                    } else {
-                        // Extend current group
-                        currentGroup.endDate = txn.date;
-                        currentGroup.lastIndex = index;
-                        currentGroup.transactions.push(txn);
-
-                        if (txn.endBalance < currentGroup.worstBalance) {
-                            currentGroup.worstBalance = txn.endBalance;
-                            currentGroup.worstBalanceDate = txn.date;
-                        }
-                    }
-                } else if (currentGroup) {
-                    // Non-flagged day ends the current group
-                    alertGroups.push(currentGroup);
-                    currentGroup = null;
-                }
-            });
-
-            // Don't forget the last group if it exists
-            if (currentGroup) alertGroups.push(currentGroup);
-
-            // Now process each group to find cause and recovery
-            alertGroups.forEach(group => {
-                // Find primary cause - largest debit in or just before this period
-                let primaryCause = null;
-                let maxDebit = 0;
-
-                // Look at transactions in the group and a few days before
-                const searchStart = Math.max(0, group.startIndex - 3);
-                for (let i = searchStart; i <= group.lastIndex; i++) {
-                    const t = transactions[i];
-                    if (t.debits > maxDebit) {
-                        maxDebit = t.debits;
-                        primaryCause = {
-                            amount: t.debits,
-                            names: t.debitNames,
-                            date: t.date
-                        };
-                    }
-                }
-
-                // Find recovery event - next significant credit after the group
-                let recovery = null;
-                for (let i = group.lastIndex + 1; i < transactions.length; i++) {
-                    const t = transactions[i];
-                    if (t.credits >= 500) {
-                        recovery = {
-                            amount: t.credits,
-                            names: t.creditNames,
-                            date: t.date
-                        };
-                        break;
-                    }
-                }
-
-                group.primaryCause = primaryCause;
-                group.recovery = recovery;
-            });
-
-            // Generate HTML for each alert group
-            let html = '';
-            alertGroups.forEach(group => {
-                const isDanger = group.flag === 'NEG';
-                const icon = isDanger ? '🔴' : '🟡';
-                const dangerClass = isDanger ? 'danger' : '';
-
-                // Format date range
-                let dateRange;
-                if (group.startDate === group.endDate) {
-                    dateRange = formatDate(group.startDate);
-                } else {
-                    const start = new Date(group.startDate + 'T12:00:00');
-                    const end = new Date(group.endDate + 'T12:00:00');
-                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-                    if (start.getMonth() === end.getMonth()) {
-                        dateRange = `${months[start.getMonth()]} ${start.getDate()}-${end.getDate()}`;
-                    } else {
-                        dateRange = `${months[start.getMonth()]} ${start.getDate()} - ${months[end.getMonth()]} ${end.getDate()}`;
-                    }
-                }
-
-                // Build description
-                const dayCount = group.transactions.length;
-                const dayWord = dayCount === 1 ? 'day' : 'days';
-                const flagWord = isDanger ? 'Negative balance' : 'LOW balance';
-                const description = `${flagWord} (${dayCount} ${dayWord}, worst: ${formatCurrency(group.worstBalance)})`;
-
-                // Build cause text
-                let causeText = '';
-                if (group.primaryCause) {
-                    const causeDate = formatDate(group.primaryCause.date);
-                    causeText = `${causeDate}: ${group.primaryCause.names || 'Multiple bills'} (${formatCurrency(group.primaryCause.amount)})`;
-                } else {
-                    causeText = 'Multiple expenses';
-                }
-
-                // Build recovery text
-                let recoveryText = '';
-                if (group.recovery) {
-                    const recoveryDate = formatDate(group.recovery.date);
-                    recoveryText = `${recoveryDate}: ${group.recovery.names || 'Income'} (+${formatCurrency(group.recovery.amount)})`;
-                } else {
-                    recoveryText = 'No recovery event found in forecast period';
-                }
-
-                html += `
-                    <div class="alert-item ${dangerClass}">
-                        <div class="alert-date">${icon} ${dateRange}: ${description}</div>
-                        <div class="alert-details">
-                            <div class="alert-cause">Cause: ${causeText}</div>
-                            <div class="alert-recovery">Recovery: ${recoveryText}</div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            document.getElementById('alertsList').innerHTML = html;
-        }
-
-        // Initialize all features
-        updateForecastSubtitle();
-        updateGlanceAlertCount();
-        checkEmergencyStatus();
-        updateAlertBadges();
-        generateRecommendedAction();
-        generateAlternativeOptions();      // NEW: Generate dynamic alternative options
-        updateContextualMetrics();
-        updateSummaryMetrics();
-        generateDynamicAlerts();
-        updateGlanceStatus();              // FIX 1 & 2: Dynamic status and context
-        updateAlertTrend();                // FIX 3: Dynamic alert trend text
-        updateDisposableIncomeContext();   // FIX 4: Dynamic disposable income context
-        updateFilterCounts();              // FIX 5: Dynamic filter counts
-        renderTable();
-
-        // Phase 1: Control Panel Functionality
-
-        // Data structure to hold expense information
-        const expenseData = {
-            'Monthly Bills': [
-                { id: 'vitruvian-membership', name: 'Vitruvian Membership', amount: 39, schedule: 'Day 1' },
-                { id: 'transamerica', name: 'TRANSAMERICA Insurance', amount: 245.65, schedule: 'Day 1' },
-                { id: 'apple-card', name: 'Apple Card', amount: 30.00, schedule: 'Day 1' },
-                { id: 'supplements', name: 'Supplements', amount: 300, schedule: 'Day 1' },
-                { id: 'payment-coordinator', name: 'Payment Coordinator', amount: 500, schedule: 'Day 1' },
-                { id: 'synchrony-bank', name: 'SYNCHRONY Bank Bill Payment', amount: 58.00, schedule: 'Day 3' },
-                { id: 'synchrony-credit', name: 'SYNCHRONY Credit Card', amount: 87.00, schedule: 'Day 3' },
-                { id: 'bill-me-later', name: 'Bill Me Later', amount: 125.00, schedule: 'Day 3' },
-                { id: 'connell-gelb', name: 'Connell & Gelb', amount: 500, schedule: 'Day 4' },
-                { id: 'loancare-mortgage', name: 'LoanCare Mortgage', amount: 3566.24, schedule: 'Day 5' },
-                { id: 'sleep-number', name: 'Sleep Number', amount: 434.58, schedule: 'Day 7' },
-                { id: 'hexclad', name: 'HexClad Pots', amount: 126, schedule: 'Day 9' },
-                { id: 'duke-energy', name: 'Duke Energy NC', amount: 86.00, schedule: 'Day 9' },
-                { id: 'ashley-venture', name: 'Ashley Venture', amount: 67, schedule: 'Day 10' },
-                { id: 'netflix', name: 'Netflix', amount: 25, schedule: 'Day 10' },
-                { id: 'att', name: 'AT&T', amount: 52.50, schedule: 'Day 10' },
-                { id: 'sba-eidl', name: 'SBA EIDL Loan', amount: 315.00, schedule: 'Day 14' },
-                { id: 'chaundra-1', name: 'Chaundra Williams', amount: 270.29, schedule: 'Day 15' },
-                { id: '2nd-mortgage', name: '2nd Mortgage', amount: 1540.69, schedule: 'Day 15' },
-                { id: 'nc529', name: 'NC529 College Savings', amount: 50.00, schedule: 'Day 15' },
-                { id: 'ashley-quicksilver', name: 'Ashley QuickSilver', amount: 126, schedule: 'Day 18' },
-                { id: 'c3-baseball', name: 'C3 Baseball Training', amount: 312.00, schedule: 'Day 18' },
-                { id: 'allstate', name: 'ALLSTATE Insurance', amount: 243.84, schedule: 'Day 20' },
-                { id: 'merry-maids', name: 'Merry Maids', amount: 175, schedule: 'Day 20' },
-                { id: 'pliability', name: 'pliability', amount: 13.99, schedule: 'Day 22' },
-                { id: 'loan-feb-2022', name: 'Loan (Feb 17, 2022)', amount: 322.60, schedule: 'Day 22' },
-                { id: 'loan-mar-2025', name: 'Loan (Mar 19, 2025)', amount: 376.54, schedule: 'Day 22' },
-                { id: 'vitruvian-equipment', name: 'Vitruvian Equipment', amount: 99.21, schedule: 'Day 23' },
-                { id: 'container-store', name: 'The Container Store', amount: 144, schedule: 'Day 26' },
-                { id: 'aven-card', name: 'Aven Card', amount: 477, schedule: 'Day 27' },
-                { id: 'sofi-loan', name: 'Sofi Loan', amount: 1042.78, schedule: 'Day 27' },
-                { id: 'myfitnesspal', name: 'MyFitnessPal', amount: 19.99, schedule: 'Day 29' },
-                { id: 'chaundra-2', name: 'Chaundra Williams', amount: 270.29, schedule: 'Day 30' },
-                { id: 'club-pilates', name: 'Club Pilates', amount: 219, schedule: 'Day 30' }
-            ],
-            'Biweekly Bills': [
-                { id: 'mmi', name: 'MMI', amount: 852, schedule: 'Every 14 days (Anchor: Aug 8)' },
-                { id: 'charleston-mgmt', name: 'Charleston Management', amount: 49, schedule: 'Every 14 days (Anchor: Apr 24)' },
-                { id: 'buffalo-grove', name: 'Buffalo Grove HOA', amount: 51.28, schedule: 'Every 14 days (Anchor: Sep 5)' },
-                { id: 'groceries', name: 'Groceries', amount: 500, schedule: 'Every 14 days (Anchor: Nov 28)' },
-                { id: 'gas', name: 'Gas', amount: 100, schedule: 'Every 14 days (Anchor: Nov 28)' },
-                { id: 'eating-out', name: 'Eating Out', amount: 250, schedule: 'Every 14 days (Anchor: Nov 28)' },
-                { id: 'principal-loan', name: 'Principal Loan', amount: 198, schedule: 'Every 14 days (Anchor: Nov 14)' }
-            ],
-            'Weekday Recurring': [
-                { id: 'nfcu-volvo', name: 'NFCU Volvo Loan', amount: 33, schedule: 'Every weekday (Mon-Fri)' }
-            ],
-            'Friday Allocations': [
-                { id: 'savings', name: 'Savings', amount: 200, schedule: 'Every Friday' },
-                { id: 'tithe', name: 'Tithe', amount: 100, schedule: 'Every Friday' },
-                { id: 'debt-payoff', name: 'Debt Payoff', amount: 1000, schedule: 'Every Friday' }
-            ]
-        };
-
-        // ============================================================================
-        // Phase 2: Parser + Calculation Engine
-        // ============================================================================
-
-        // Transaction Rules Object (parsed from cash-flow-data.md)
-        const TRANSACTION_RULES = {
-            monthlyBills: [
-                { id: 'vitruvian-membership', name: 'Vitruvian Membership', amount: 39, day: 1 },
-                { id: 'transamerica', name: 'TRANSAMERICA Insurance', amount: 245.65, day: 1 },
-                { id: 'apple-card', name: 'Apple Card', amount: 30.00, day: 1 },
-                { id: 'supplements', name: 'Supplements', amount: 300, day: 1 },
-                { id: 'payment-coordinator', name: 'Payment Coordinator', amount: 500, day: 1 },
-                { id: 'synchrony-bank', name: 'SYNCHRONY Bank Bill Payment', amount: 58.00, day: 3 },
-                { id: 'synchrony-credit', name: 'SYNCHRONY Credit Card', amount: 87.00, day: 3 },
-                { id: 'bill-me-later', name: 'Bill Me Later', amount: 125.00, day: 3 },
-                { id: 'connell-gelb', name: 'Connell & Gelb', amount: 500, day: 4 },
-                { id: 'loancare-mortgage', name: 'LoanCare Mortgage', amount: 3566.24, day: 5 },
-                { id: 'sleep-number', name: 'Sleep Number', amount: 434.58, day: 7 },
-                { id: 'hexclad', name: 'HexClad Pots', amount: 126, day: 9 },
-                { id: 'duke-energy', name: 'Duke Energy NC', amount: 86.00, day: 9 },
-                { id: 'ashley-venture', name: 'Ashley Venture', amount: 67, day: 10 },
-                { id: 'netflix', name: 'Netflix', amount: 25, day: 10 },
-                { id: 'att', name: 'AT&T', amount: 52.50, day: 10 },
-                { id: 'sba-eidl', name: 'SBA EIDL Loan', amount: 315.00, day: 14 },
-                { id: 'chaundra-1', name: 'Chaundra Williams', amount: 270.29, day: 15 },
-                { id: '2nd-mortgage', name: '2nd Mortgage', amount: 1540.69, day: 15 },
-                { id: 'nc529', name: 'NC529 College Savings', amount: 50.00, day: 15 },
-                { id: 'ashley-quicksilver', name: 'Ashley QuickSilver', amount: 126, day: 18 },
-                { id: 'c3-baseball', name: 'C3 Baseball Training', amount: 312.00, day: 18 },
-                { id: 'allstate', name: 'ALLSTATE Insurance', amount: 243.84, day: 20 },
-                { id: 'merry-maids', name: 'Merry Maids', amount: 175, day: 20 },
-                { id: 'pliability', name: 'pliability', amount: 13.99, day: 22 },
-                { id: 'loan-feb-2022', name: 'Loan (Feb 17, 2022)', amount: 322.60, day: 22 },
-                { id: 'loan-mar-2025', name: 'Loan (Mar 19, 2025)', amount: 376.54, day: 22 },
-                { id: 'vitruvian-equipment', name: 'Vitruvian Equipment', amount: 99.21, day: 23 },
-                { id: 'container-store', name: 'The Container Store', amount: 144, day: 26 },
-                { id: 'aven-card', name: 'Aven Card', amount: 477, day: 27 },
-                { id: 'sofi-loan', name: 'Sofi Loan', amount: 1042.78, day: 27 },
-                { id: 'myfitnesspal', name: 'MyFitnessPal', amount: 19.99, day: 29 },
-                { id: 'chaundra-2', name: 'Chaundra Williams', amount: 270.29, day: 30 },
-                { id: 'club-pilates', name: 'Club Pilates', amount: 219, day: 30 }
-            ],
-            biweeklyBills: [
-                { id: 'mmi', name: 'MMI', amount: 852, anchor: '2025-08-08' },
-                { id: 'charleston-mgmt', name: 'Charleston Management', amount: 49, anchor: '2025-04-24' },
-                { id: 'buffalo-grove', name: 'Buffalo Grove HOA', amount: 51.28, anchor: '2025-09-05' },
-                { id: 'groceries', name: 'Groceries', amount: 500, anchor: '2025-11-28' },
-                { id: 'gas', name: 'Gas', amount: 100, anchor: '2025-11-28' },
-                { id: 'eating-out', name: 'Eating Out', amount: 250, anchor: '2025-11-28' },
-                { id: 'principal-loan', name: 'Principal Loan', amount: 198, anchor: '2025-11-14' }
-            ],
-            weekdayRecurring: [
-                { id: 'nfcu-volvo', name: 'NFCU Volvo Loan', amount: 33 }
-            ],
-            fridayAllocations: [
-                { id: 'savings', name: 'Savings', amount: 200 },
-                { id: 'tithe', name: 'Tithe', amount: 100 },
-                { id: 'debt-payoff', name: 'Debt Payoff', amount: 1000 }
-            ],
-            biweeklyInflows: [
-                { id: 'acrisure', name: 'Acrisure', amount: 4487, anchor: '2025-08-08' },
-                { id: 'wakemed', name: 'WakeMed', amount: 1000, anchor: '2025-08-07' },
-                { id: 'claritev', name: 'Claritev', amount: 3500, anchor: '2025-12-05' }
-            ],
-            monthlyInflows: [
-                { id: 'grandmont-rent', name: '103 Grandmont Rent', amount: 1530.00, day: 15 }
-            ],
-            oneTimeAdjustments: {
-                '2025-11-28': { acrisureReduction: 1987 }, // Nov 28 Acrisure reduced to $1,987
-                '2025-11-20': { earlyTransfer: 1000 },
-                '2025-11-21': { earlyTransfer: 500 },
-                '2025-11-25': { earlyTransfer: 1000 }
-            }
-        };
-
-        // Transaction Rule Engine Class
-        class TransactionRuleEngine {
-            constructor(rules, startDate, startBalance) {
-                this.rules = rules;
-                this.startDate = new Date(startDate + 'T12:00:00');
-                this.startBalance = startBalance;
-            }
-
-            // Calculate daily forecast for specified number of days
-            calculateDailyForecast(disabledExpenses, numDays = 42) {
-                const forecast = [];
-                let currentBalance = this.startBalance;
-                const currentDate = new Date(this.startDate);
-
-                for (let dayIdx = 0; dayIdx < numDays; dayIdx++) {
-                    const dateStr = this.formatDate(currentDate);
-                    let totalCredits = 0;
-                    let totalDebits = 0;
-                    const creditNames = [];
-                    const debitNames = [];
-
-                    // Process biweekly inflows
-                    this.rules.biweeklyInflows.forEach(inflow => {
-                        if (this.isBiweeklyDue(currentDate, inflow.anchor)) {
-                            // Check for one-time adjustments
-                            const adjustment = this.rules.oneTimeAdjustments[dateStr];
-                            if (inflow.id === 'acrisure' && adjustment && adjustment.acrisureReduction) {
-                                totalCredits += adjustment.acrisureReduction;
-                                creditNames.push(`${inflow.name} (Reduced)`);
-                            } else {
-                                totalCredits += inflow.amount;
-                                creditNames.push(inflow.name);
-                            }
-                        }
-                    });
-
-                    // Process one-time early transfers
-                    const adjustment = this.rules.oneTimeAdjustments[dateStr];
-                    if (adjustment && adjustment.earlyTransfer) {
-                        totalCredits += adjustment.earlyTransfer;
-                        creditNames.push('Early Acrisure Transfer');
-                    }
-
-                    // Process monthly inflows
-                    this.rules.monthlyInflows.forEach(inflow => {
-                        if (currentDate.getDate() === inflow.day) {
-                            totalCredits += inflow.amount;
-                            creditNames.push(inflow.name);
-                        }
-                    });
-
-                    // Process biweekly bills (expenses)
-                    this.rules.biweeklyBills.forEach(bill => {
-                        if (!disabledExpenses.has(bill.id) && this.isBiweeklyDue(currentDate, bill.anchor)) {
-                            totalDebits += bill.amount;
-                            debitNames.push(bill.name);
-                        }
-                    });
-
-                    // Process monthly bills
-                    this.rules.monthlyBills.forEach(bill => {
-                        if (!disabledExpenses.has(bill.id) && currentDate.getDate() === bill.day) {
-                            totalDebits += bill.amount;
-                            debitNames.push(bill.name);
-                        }
-                    });
-
-                    // Process weekday recurring (Mon-Fri)
-                    const dayOfWeek = currentDate.getDay();
-                    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-                        this.rules.weekdayRecurring.forEach(bill => {
-                            if (!disabledExpenses.has(bill.id)) {
-                                totalDebits += bill.amount;
-                                debitNames.push(bill.name);
-                            }
-                        });
-                    }
-
-                    // Process Friday allocations
-                    if (dayOfWeek === 5) {
-                        this.rules.fridayAllocations.forEach(allocation => {
-                            if (!disabledExpenses.has(allocation.id)) {
-                                totalDebits += allocation.amount;
-                                debitNames.push(allocation.name);
-                            }
-                        });
-                    }
-
-                    // Calculate ending balance
-                    const endBalance = currentBalance + totalCredits - totalDebits;
-                    const flag = this.getFlag(endBalance);
-
-                    forecast.push({
-                        date: dateStr,
-                        startBalance: currentBalance,
-                        credits: totalCredits,
-                        debits: totalDebits,
-                        endBalance: endBalance,
-                        flag: flag,
-                        creditNames: creditNames.join(', '),
-                        debitNames: debitNames.join(', ')
-                    });
-
-                    currentBalance = endBalance;
-                    currentDate.setDate(currentDate.getDate() + 1);
-                }
-
-                return forecast;
-            }
-
-            // Check if biweekly transaction is due on given date
-            isBiweeklyDue(date, anchorStr) {
-                const anchor = new Date(anchorStr + 'T12:00:00');
-                const diffTime = date - anchor;
-                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-                return diffDays >= 0 && diffDays % 14 === 0;
-            }
-
-            // Get flag based on balance threshold
-            getFlag(balance) {
-                if (balance < 0) return 'NEG';
-                if (balance < 500) return 'LOW';
-                return '';
-            }
-
-            // Format date as YYYY-MM-DD
-            formatDate(date) {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }
-        }
-
-        // Make classes available globally for testing
-        window.TRANSACTION_RULES = TRANSACTION_RULES;
-        window.TransactionRuleEngine = TransactionRuleEngine;
-
-        // ============================================================================
-        // Phase 3: Comparison View
-        // ============================================================================
-
-        class ComparisonCalculator {
-            constructor(baseline, modified) {
-                this.baseline = baseline;
-                this.modified = modified;
-            }
-
-            getTotalRemoved() {
-                // Calculate total expense reduction over the forecast period
-                const baselineDebits = this.baseline.reduce((sum, day) => sum + day.debits, 0);
-                const modifiedDebits = this.modified.reduce((sum, day) => sum + day.debits, 0);
-                return baselineDebits - modifiedDebits;
-            }
-
-            getEndingBalanceChange() {
-                const baselineEnding = this.baseline[this.baseline.length - 1].endBalance;
-                const modifiedEnding = this.modified[this.modified.length - 1].endBalance;
-                const delta = modifiedEnding - baselineEnding;
-
-                return {
-                    before: baselineEnding,
-                    after: modifiedEnding,
-                    delta: delta,
-                    improvement: delta > 0
-                };
-            }
-
-            getNegativeDaysChange() {
-                const baselineNegDays = this.baseline.filter(d => d.flag === 'NEG').length;
-                const modifiedNegDays = this.modified.filter(d => d.flag === 'NEG').length;
-
-                return {
-                    before: baselineNegDays,
-                    after: modifiedNegDays,
-                    reduction: baselineNegDays - modifiedNegDays
-                };
-            }
-
-            getLowBalanceDaysChange() {
-                const baselineLowDays = this.baseline.filter(d => d.flag === 'LOW').length;
-                const modifiedLowDays = this.modified.filter(d => d.flag === 'LOW').length;
-
-                return {
-                    before: baselineLowDays,
-                    after: modifiedLowDays,
-                    reduction: baselineLowDays - modifiedLowDays
-                };
-            }
-
-            getStatusChange() {
-                const baselineEnding = this.baseline[this.baseline.length - 1].endBalance;
-                const modifiedEnding = this.modified[this.modified.length - 1].endBalance;
-
-                const baselineStatus = baselineEnding < 0 ? 'NEGATIVE' :
-                                      baselineEnding < 500 ? 'LOW' : 'HEALTHY';
-                const modifiedStatus = modifiedEnding < 0 ? 'NEGATIVE' :
-                                      modifiedEnding < 500 ? 'LOW' : 'HEALTHY';
-
-                if (baselineStatus === modifiedStatus) {
-                    return { text: 'UNCHANGED', color: 'var(--text-secondary)' };
-                } else if (baselineStatus === 'NEGATIVE' && modifiedStatus !== 'NEGATIVE') {
-                    return { text: 'NEGATIVE → ' + modifiedStatus, color: 'var(--success)' };
-                } else if (baselineStatus === 'LOW' && modifiedStatus === 'HEALTHY') {
-                    return { text: 'LOW → HEALTHY', color: 'var(--success)' };
-                } else if (modifiedStatus === 'NEGATIVE') {
-                    return { text: baselineStatus + ' → NEGATIVE', color: 'var(--danger)' };
-                } else {
-                    return { text: 'IMPROVED', color: 'var(--info)' };
-                }
-            }
-
-            getRemovedExpensesList(disabledExpenses) {
-                const removed = [];
-
-                // Map expense IDs to display names
-                const allExpenses = [
-                    ...TRANSACTION_RULES.monthlyBills,
-                    ...TRANSACTION_RULES.biweeklyBills,
-                    ...TRANSACTION_RULES.weekdayRecurring,
-                    ...TRANSACTION_RULES.fridayAllocations
-                ];
-
-                disabledExpenses.forEach(expenseId => {
-                    const expense = allExpenses.find(e => e.id === expenseId);
-                    if (expense) {
-                        removed.push({
-                            name: expense.name,
-                            amount: expense.amount
-                        });
-                    }
-                });
-
-                return removed.sort((a, b) => b.amount - a.amount);
-            }
-        }
-
-        // Make available globally for testing
-        window.ComparisonCalculator = ComparisonCalculator;
-
-        // ============================================================================
-        // Phase 4: Real-Time Updates and Event System
-        // ============================================================================
-
-        class ScenarioManager {
-            constructor(rules, startDate, startBalance) {
-                this.engine = new TransactionRuleEngine(rules, startDate, startBalance);
-                this.disabledExpenses = new Set();
-                this.listeners = [];
-                this.baselineForecast = this.engine.calculateDailyForecast(new Set());
-                this.modifiedForecast = this.baselineForecast;
-                this.debounceTimer = null;
-            }
-
-            toggleExpense(expenseId, isEnabled) {
-                if (isEnabled) {
-                    this.disabledExpenses.delete(expenseId);
-                } else {
-                    this.disabledExpenses.add(expenseId);
-                }
-                this.recalculateDebounced();
-            }
-
-            recalculateDebounced() {
-                clearTimeout(this.debounceTimer);
-                this.debounceTimer = setTimeout(() => {
-                    this.recalculate();
-                }, 300);
-            }
-
-            recalculate() {
-                this.modifiedForecast = this.engine.calculateDailyForecast(this.disabledExpenses);
-                this.notifyListeners();
-            }
-
-            addListener(callback) {
-                this.listeners.push(callback);
-            }
-
-            notifyListeners() {
-                this.listeners.forEach(callback => callback({
-                    baseline: this.baselineForecast,
-                    modified: this.modifiedForecast,
-                    disabledExpenses: this.disabledExpenses
-                }));
-            }
-
-            reset() {
-                this.disabledExpenses.clear();
-                this.recalculate();
-            }
-
-            getBaselineForecast() {
-                return this.baselineForecast;
-            }
-
-            getModifiedForecast() {
-                return this.modifiedForecast;
-            }
-
-            getDisabledExpenses() {
-                return this.disabledExpenses;
-            }
-        }
-
-        // Create global scenario manager instance
-        let scenarioManager = null;
-
-        // Make available globally for testing
-        window.ScenarioManager = ScenarioManager;
-
-        // ============================================================================
-        // Phase 5: Scenario Management and Storage
-        // ============================================================================
-
-        class ScenarioStorage {
-            constructor() {
-                this.storageKey = 'cashflow-scenarios';
-            }
-
-            saveScenario(name, disabledExpenses, summary) {
-                const scenarios = this.getAllScenarios();
-                scenarios[name] = {
-                    disabledExpenses: Array.from(disabledExpenses),
-                    summary: summary,
-                    savedAt: new Date().toISOString()
-                };
-                localStorage.setItem(this.storageKey, JSON.stringify(scenarios));
-                return true;
-            }
-
-            loadScenario(name) {
-                const scenarios = this.getAllScenarios();
-                return scenarios[name] || null;
-            }
-
-            deleteScenario(name) {
-                const scenarios = this.getAllScenarios();
-                delete scenarios[name];
-                localStorage.setItem(this.storageKey, JSON.stringify(scenarios));
-                return true;
-            }
-
-            getAllScenarios() {
-                const data = localStorage.getItem(this.storageKey);
-                return data ? JSON.parse(data) : {};
-            }
-
-            scenarioExists(name) {
-                const scenarios = this.getAllScenarios();
-                return name in scenarios;
-            }
-        }
-
-        // Create global storage instance
-        const scenarioStorage = new ScenarioStorage();
-
-        // Make available globally for testing
-        window.ScenarioStorage = ScenarioStorage;
-        window.getScenarioStorage = () => scenarioStorage;
-
-        function initializeControlPanel() {
-            const panelContent = document.getElementById('panelContent');
-
-            // Generate categories
-            let html = '';
-            for (const [category, expenses] of Object.entries(expenseData)) {
-                html += `
-                    <details class="expense-category" open>
-                        <summary>
-                            <span>${category} (${expenses.length})</span>
-                            <span class="category-toggle">▶</span>
-                        </summary>
-                        <div class="expense-list">
-                `;
-
-                expenses.forEach(expense => {
-                    html += `
-                        <div class="expense-item" data-expense-id="${expense.id}">
-                            <input type="checkbox"
-                                   class="expense-checkbox"
-                                   id="cb-${expense.id}"
-                                   data-expense-id="${expense.id}"
-                                   checked>
-                            <div class="expense-details">
-                                <label for="cb-${expense.id}" class="expense-name">${expense.name}</label>
-                                <span class="expense-schedule">${expense.schedule}</span>
-                            </div>
-                            <span class="expense-amount">$${expense.amount.toFixed(2)}</span>
-                        </div>
-                    `;
-                });
-
-                html += `
-                        </div>
-                    </details>
-                `;
-            }
-
-            panelContent.innerHTML = html;
-
-            // Add event listeners
-            setupControlPanelEvents();
-        }
-
-        function setupControlPanelEvents() {
-            // Toggle panel collapse
-            const toggleBtn = document.getElementById('togglePanel');
-            const controlPanel = document.getElementById('controlPanel');
-            const showPanelBtn = document.getElementById('showPanelBtn');
-
-            toggleBtn.addEventListener('click', () => {
-                controlPanel.classList.add('collapsed');
-                showPanelBtn.classList.add('visible');
-            });
-
-            showPanelBtn.addEventListener('click', () => {
-                controlPanel.classList.remove('collapsed');
-                showPanelBtn.classList.remove('visible');
-            });
-
-            // Phase 4: Initialize ScenarioManager
-            scenarioManager = new ScenarioManager(TRANSACTION_RULES, '2025-11-20', 1362);
-            scenarioManager.addListener((data) => {
-                updateImpactSummary();
-            });
-
-            // Checkbox change events
-            const checkboxes = document.querySelectorAll('.expense-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', (e) => {
-                    const expenseItem = e.target.closest('.expense-item');
-                    const expenseId = e.target.dataset.expenseId;
-                    const isEnabled = e.target.checked;
-
-                    if (isEnabled) {
-                        expenseItem.classList.remove('disabled');
-                    } else {
-                        expenseItem.classList.add('disabled');
-                    }
-
-                    // Phase 4: Use ScenarioManager for real-time updates
-                    scenarioManager.toggleExpense(expenseId, isEnabled);
-                });
-            });
-
-            // Search functionality
-            const searchBox = document.getElementById('searchBox');
-            searchBox.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                const expenseItems = document.querySelectorAll('.expense-item');
-
-                expenseItems.forEach(item => {
-                    const expenseName = item.querySelector('.expense-name').textContent.toLowerCase();
-                    if (expenseName.includes(searchTerm)) {
-                        item.style.display = 'grid';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-
-            // Reset button
-            document.getElementById('resetBtn').addEventListener('click', () => {
-                checkboxes.forEach(cb => {
-                    cb.checked = true;
-                    cb.closest('.expense-item').classList.remove('disabled');
-                });
-                // Phase 4: Use ScenarioManager reset
-                scenarioManager.reset();
-            });
-
-            // Phase 5: Save button with scenario storage
-            document.getElementById('saveBtn').addEventListener('click', () => {
-                const scenarioName = prompt('Enter a name for this scenario:');
-                if (scenarioName && scenarioName.trim()) {
-                    const disabledExpenses = scenarioManager.getDisabledExpenses();
-                    const comparison = new ComparisonCalculator(
-                        scenarioManager.getBaselineForecast(),
-                        scenarioManager.getModifiedForecast()
-                    );
-                    const balanceChange = comparison.getEndingBalanceChange();
-
-                    const summary = {
-                        totalRemoved: comparison.getTotalRemoved(),
-                        endingBalance: balanceChange.after,
-                        delta: balanceChange.delta,
-                        expenseCount: disabledExpenses.size
-                    };
-
-                    scenarioStorage.saveScenario(scenarioName.trim(), disabledExpenses, summary);
-                    alert(`Scenario "${scenarioName.trim()}" saved successfully!`);
-                }
-            });
-
-            // Survival Mode preset
-            document.getElementById('survivalBtn').addEventListener('click', () => {
-                applySurvivalMode();
-            });
-
-            // Aggressive Paydown preset
-            document.getElementById('aggressiveBtn').addEventListener('click', () => {
-                applyAggressivePaydown();
-            });
-        }
-
-        function updateImpactSummary() {
-            // Phase 4: Use ScenarioManager for real-time updates
-            if (!scenarioManager) return;
-
-            const baselineForecast = scenarioManager.getBaselineForecast();
-            const modifiedForecast = scenarioManager.getModifiedForecast();
-            const disabledExpenses = scenarioManager.getDisabledExpenses();
-
-            // Use Phase 3 comparison calculator
-            const comparison = new ComparisonCalculator(baselineForecast, modifiedForecast);
-
-            // Update expenses removed
-            const totalRemoved = comparison.getTotalRemoved();
-            document.getElementById('expensesRemoved').textContent = formatCurrency(totalRemoved);
-
-            // Update ending balance with delta badge
-            const balanceChange = comparison.getEndingBalanceChange();
-            const deltaClass = balanceChange.improvement ? 'delta-positive' : 'delta-negative';
-            const deltaSymbol = balanceChange.improvement ? '+' : '';
-            document.getElementById('endingBalanceImpact').innerHTML =
-                `${formatCurrency(balanceChange.before)} <span class="arrow-indicator">→</span> ${formatCurrency(balanceChange.after)} <span class="delta-badge ${deltaClass}">${deltaSymbol}${formatCurrency(balanceChange.delta)}</span>`;
-
-            // Update status
-            const statusChange = comparison.getStatusChange();
-            const statusEl = document.getElementById('statusImpact');
-            statusEl.textContent = statusChange.text;
-            statusEl.style.color = statusChange.color;
-
-            // Update removed expenses list
-            const removedList = document.getElementById('removedExpensesList');
-            if (disabledExpenses.size > 0) {
-                const removedExpenses = comparison.getRemovedExpensesList(disabledExpenses);
-                let html = '<div style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.875rem;">Removed Expenses:</div>';
-                removedExpenses.forEach(expense => {
-                    html += `
-                        <div class="removed-expense-item">
-                            <span>${expense.name}</span>
-                            <span>${formatCurrency(expense.amount)}</span>
-                        </div>
-                    `;
-                });
-                removedList.innerHTML = html;
-                removedList.style.display = 'block';
-            } else {
-                removedList.style.display = 'none';
-            }
-        }
-
-        function applySurvivalMode() {
-            // Uncheck discretionary expenses
-            const discretionaryIds = ['savings', 'tithe', 'debt-payoff', 'eating-out',
-                                     'club-pilates', 'myfitnesspal', 'pliability',
-                                     'netflix', 'supplements'];
-
-            // Phase 4: Batch update via ScenarioManager
-            scenarioManager.disabledExpenses.clear();
-            document.querySelectorAll('.expense-checkbox').forEach(cb => {
-                if (discretionaryIds.includes(cb.dataset.expenseId)) {
-                    cb.checked = false;
-                    cb.closest('.expense-item').classList.add('disabled');
-                    scenarioManager.disabledExpenses.add(cb.dataset.expenseId);
-                } else {
-                    cb.checked = true;
-                    cb.closest('.expense-item').classList.remove('disabled');
-                }
-            });
-
-            scenarioManager.recalculate();
-        }
-
-        function applyAggressivePaydown() {
-            // Keep only essential bills, maximize debt payoff
-            const essentialIds = ['loancare-mortgage', '2nd-mortgage', 'duke-energy', 'att',
-                                 'groceries', 'gas', 'nfcu-volvo', 'debt-payoff'];
-
-            // Phase 4: Batch update via ScenarioManager
-            scenarioManager.disabledExpenses.clear();
-            document.querySelectorAll('.expense-checkbox').forEach(cb => {
-                if (essentialIds.includes(cb.dataset.expenseId)) {
-                    cb.checked = true;
-                    cb.closest('.expense-item').classList.remove('disabled');
-                } else {
-                    cb.checked = false;
-                    cb.closest('.expense-item').classList.add('disabled');
-                    scenarioManager.disabledExpenses.add(cb.dataset.expenseId);
-                }
-            });
-
-            scenarioManager.recalculate();
-        }
-
-        initializeControlPanel();
-
-        // Phase 4: Expose scenarioManager globally for testing
-        window.getScenarioManager = () => scenarioManager;
     </script>
-    </div> <!-- End main-content -->
+
+
+    <!-- Simple filter functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.dataset.filter;
+
+                    // Query table rows dynamically (after they've been populated)
+                    const tableRows = document.querySelectorAll('#transactionTableBody tr:not(.detail-row)');
+
+                    // Show/hide rows based on filter
+                    tableRows.forEach(row => {
+                        if (filter === 'all') {
+                            row.style.display = '';
+                        } else if (filter === 'negative') {
+                            const balanceCell = row.querySelector('td:nth-child(4)');
+                            const isNegative = balanceCell && balanceCell.classList.contains('negative');
+                            row.style.display = isNegative ? '' : 'none';
+                        } else if (filter === 'low') {
+                            const isLow = row.classList.contains('low-balance');
+                            const balanceCell = row.querySelector('td:nth-child(4)');
+                            const isNegative = balanceCell && balanceCell.classList.contains('negative');
+                            // Low balance means low but NOT negative
+                            row.style.display = (isLow && !isNegative) ? '' : 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
