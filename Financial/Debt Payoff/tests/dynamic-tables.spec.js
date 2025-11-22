@@ -3,8 +3,8 @@ const path = require('path');
 const fs = require('fs');
 
 // Test configuration
-const HTML_FILE = path.join(__dirname, '..', 'debt-strategy-final-2025-11-21.html');
-const JSON_FILE = path.join(__dirname, '..', 'debt-inventory-current.json');
+const HTML_FILE = path.join(__dirname, '..', 'dashboards', 'debt-strategy-final-2025-11-21.html');
+const JSON_FILE = path.join(__dirname, '..', 'data', 'debt-inventory-current.json');
 const SCREENSHOT_DIR = path.join(__dirname, '..', 'test-screenshots');
 
 test.describe('Dynamic Debt Dashboard - Monthly Payment Columns', () => {

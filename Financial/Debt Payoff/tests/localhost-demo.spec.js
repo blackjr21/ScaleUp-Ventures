@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const path = require('path');
 
-const LOCALHOST_URL = 'http://localhost:8888/debt-strategy-final-2025-11-21.html';
+const LOCALHOST_URL = 'http://localhost:8888/dashboards/debt-strategy-final-2025-11-21.html';
 const SCREENSHOT_DIR = path.join(__dirname, '..', 'localhost-screenshots');
 
 test.describe('Localhost Demo - Dynamic Dashboard Working', () => {
