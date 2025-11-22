@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial App - Home</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .overview-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px var(--shadow);
+        }
+
+        .metric-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .metric-card .loading {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
+            padding: 2rem;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 6px var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px var(--shadow);
+        }
+
+        .action-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .action-card p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(20deg);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <h1>Financial App</h1>
+            <p>Take control of your finances with powerful cash flow forecasting, scenario planning, and debt payoff strategies.</p>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <div class="overview-metrics">
+            <div class="metric-card current-balance">
+                <h3>Current Balance</h3>
+                <p class="value" id="currentBalance">
+                    <span class="loading">Loading...</span>
+                </p>
+            </div>
+
+            <div class="metric-card scenarios-count">
+                <h3>Active Scenarios</h3>
+                <p class="value" id="scenariosCount">
+                    <span class="loading">Loading...</span>
+                </p>
+            </div>
+
+            <div class="metric-card total-debt">
+                <h3>Total Debt</h3>
+                <p class="value" id="totalDebt">
+                    <span class="loading">Loading...</span>
+                </p>
+            </div>
+
+            <div class="metric-card next-bill">
+                <h3>Next Upcoming Bill</h3>
+                <p class="value" id="nextBill">
+                    <span class="loading">Loading...</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <a href="dashboard.html" class="action-card">
+                <h3>📊 View Cash Flow</h3>
+                <p>See your 60-day forecast with balance projections and upcoming transactions</p>
+            </a>
+
+            <a href="scenario-planner.html" class="action-card">
+                <h3>🎯 Create Scenario</h3>
+                <p>Explore what-if scenarios and compare different financial strategies</p>
+            </a>
+
+            <a href="debt-payoff.html" class="action-card">
+                <h3>💳 Analyze Debt</h3>
+                <p>Get personalized debt payoff strategies with timeline projections</p>
+            </a>
+        </div>
+
+        <div class="footer">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+        </div>
+    </div>
+
+    <!-- Auth check - redirect to login if not authenticated -->
+    <script src="js/shared/auth.js"></script>
+    <script src="js/shared/theme.js"></script>
+    <script>
+        // Check authentication on page load
+        if (!AuthHelper.isAuthenticated()) {
+            window.location.href = '/login.html';
+        }
+    </script>
+    <script>
+        // Load overview metrics
+        async function loadOverviewMetrics() {
+            try {
+                // Fetch current balance from forecast
+                const today = new Date().toISOString().split('T')[0];
+                const forecastResponse = await AuthHelper.apiCall('/api/forecast', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        startDate: today,
+                        startingBalance: 2500 // Default starting balance
+                    })
+                });
+
+                // Display current balance (starting balance from forecast)
+                const currentBalance = forecastResponse.summary.startingBalance;
+                document.getElementById('currentBalance').textContent = `$${currentBalance.toFixed(2)}`;
+
+                // Fetch scenarios count
+                const scenariosResponse = await AuthHelper.apiCall('/api/scenarios');
+                const scenariosCount = scenariosResponse.scenarios.length;
+                document.getElementById('scenariosCount').textContent = scenariosCount;
+
+                // Fetch total debt
+                const debtsResponse = await AuthHelper.apiCall('/api/debts');
+                const totalDebt = debtsResponse.debts.reduce((sum, debt) => {
+                    return sum + (debt.isActive ? debt.balance : 0);
+                }, 0);
+                document.getElementById('totalDebt').textContent = totalDebt > 0 ? `$${totalDebt.toFixed(2)}` : '$0.00';
+
+                // Fetch next upcoming bill
+                const transactionsResponse = await AuthHelper.apiCall('/api/transactions?type=OUTFLOW&limit=1&sortBy=nextOccurrence');
+                if (transactionsResponse.transactions.length > 0) {
+                    const nextBill = transactionsResponse.transactions[0];
+                    document.getElementById('nextBill').innerHTML = `
+                        ${nextBill.name}<br>
+                        <span style="font-size: 1rem; color: var(--text-secondary);">$${nextBill.amount.toFixed(2)}</span>
+                    `;
+                } else {
+                    document.getElementById('nextBill').textContent = 'None';
+                }
+            } catch (error) {
+                console.error('Error loading overview metrics:', error);
+                document.getElementById('errorMessage').textContent = 'Failed to load overview data. Please try again.';
+                document.getElementById('errorMessage').style.display = 'block';
+
+                // Show error state in metrics
+                document.getElementById('currentBalance').textContent = 'Error';
+                document.getElementById('scenariosCount').textContent = 'Error';
+                document.getElementById('totalDebt').textContent = 'Error';
+                document.getElementById('nextBill').textContent = 'Error';
+            }
+        }
+
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            ThemeManager.toggleTheme();
+        });
+
+        // Load metrics on page load
+        document.addEventListener('DOMContentLoaded', loadOverviewMetrics);
+    </script>
+</body>
+</html>

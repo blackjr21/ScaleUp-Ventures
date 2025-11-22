@@ -1,0 +1,11 @@
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › tests/e2e/dashboard.spec.js:51:3 › Cash Flow Dashboard - Feature 5.2 › Dashboard loads forecast and displays chart
+[1A[2K[2/2] [chromium] › tests/e2e/dashboard.spec.js:79:3 › Cash Flow Dashboard - Feature 5.2 › Dashboard allows adding new transaction
+[1A[2K  2 passed (2.6s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

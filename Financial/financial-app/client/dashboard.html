@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Flow Dashboard</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <style>
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .summary-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .summary-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .forecast-table {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .forecast-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .forecast-table th {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+        }
+
+        .forecast-table td {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .forecast-table tbody tr:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        .negative {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .positive {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth check -->
+    <script src="js/shared/auth.js"></script>
+    <script src="js/shared/theme.js"></script>
+    <script>
+        if (!AuthHelper.isAuthenticated()) {
+            window.location.href = '/login.html';
+        }
+    </script>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Cash Flow Dashboard</h1>
+            <div>
+                <button id="themeToggle" class="btn">🌙</button>
+                <button id="logoutBtn" class="btn">Logout</button>
+            </div>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <div class="summary-grid" id="summaryGrid">
+            <div class="loading">Loading forecast...</div>
+        </div>
+
+        <div class="chart-container">
+            <h2>Balance Forecast</h2>
+            <canvas id="balanceChart"></canvas>
+        </div>
+
+        <div class="forecast-table">
+            <h2 style="padding: 1rem;">60-Day Forecast</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Transaction</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="forecastTableBody">
+                    <tr>
+                        <td colspan="5" class="loading">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let chart = null;
+
+        // Theme toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            ThemeManager.toggleTheme();
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            AuthHelper.clearToken();
+            window.location.href = '/login.html';
+        });
+
+        // Load forecast data
+        async function loadForecast() {
+            try {
+                const today = new Date().toISOString().split('T')[0];
+
+                // Call forecast API
+                const forecastData = await AuthHelper.apiCall('/api/forecast', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        startDate: today,
+                        startingBalance: 2500 // Default starting balance
+                    })
+                });
+
+                // Display summary metrics
+                displaySummary(forecastData.summary);
+
+                // Display chart
+                displayChart(forecastData.days);
+
+                // Display forecast table
+                displayForecastTable(forecastData.days);
+
+                // Display alerts if any
+                if (forecastData.alerts && forecastData.alerts.length > 0) {
+                    console.log('Alerts:', forecastData.alerts);
+                }
+            } catch (error) {
+                console.error('Error loading forecast:', error);
+                document.getElementById('errorMessage').textContent = 'Failed to load forecast. Please try again.';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        }
+
+        function displaySummary(summary) {
+            const summaryHTML = `
+                <div class="summary-card">
+                    <h3>Starting Balance</h3>
+                    <p class="value">$${summary.startingBalance.toFixed(2)}</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Ending Balance</h3>
+                    <p class="value ${summary.endingBalance < 0 ? 'negative' : 'positive'}">
+                        $${summary.endingBalance.toFixed(2)}
+                    </p>
+                </div>
+                <div class="summary-card">
+                    <h3>Lowest Balance</h3>
+                    <p class="value ${summary.lowestBalance < 0 ? 'negative' : ''}">
+                        $${summary.lowestBalance.toFixed(2)}
+                    </p>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Inflows</h3>
+                    <p class="value positive">$${summary.totalInflows.toFixed(2)}</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Outflows</h3>
+                    <p class="value negative">$${summary.totalOutflows.toFixed(2)}</p>
+                </div>
+            `;
+            document.getElementById('summaryGrid').innerHTML = summaryHTML;
+        }
+
+        function displayChart(days) {
+            const ctx = document.getElementById('balanceChart').getContext('2d');
+
+            const labels = days.map(d => {
+                const date = new Date(d.date);
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            });
+
+            const balances = days.map(d => d.runningBalance);
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Balance',
+                        data: balances,
+                        borderColor: 'rgb(102, 126, 234)',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 2.5,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function displayForecastTable(days) {
+            const tbody = document.getElementById('forecastTableBody');
+            let html = '';
+
+            days.forEach(day => {
+                day.transactions.forEach(txn => {
+                    const balanceClass = day.runningBalance < 0 ? 'negative' : (day.runningBalance < 500 ? '' : 'positive');
+                    const amountClass = txn.type === 'INFLOW' ? 'positive' : 'negative';
+
+                    html += `
+                        <tr>
+                            <td>${new Date(day.date).toLocaleDateString()}</td>
+                            <td>${txn.name}</td>
+                            <td class="${amountClass}">
+                                ${txn.type === 'INFLOW' ? '+' : '-'}$${txn.amount.toFixed(2)}
+                            </td>
+                            <td class="${balanceClass}">$${day.runningBalance.toFixed(2)}</td>
+                            <td>${day.balanceFlag}</td>
+                        </tr>
+                    `;
+                });
+
+                // If no transactions on this day, show balance only
+                if (day.transactions.length === 0) {
+                    const balanceClass = day.runningBalance < 0 ? 'negative' : (day.runningBalance < 500 ? '' : 'positive');
+                    html += `
+                        <tr>
+                            <td>${new Date(day.date).toLocaleDateString()}</td>
+                            <td colspan="2"><em>No transactions</em></td>
+                            <td class="${balanceClass}">$${day.runningBalance.toFixed(2)}</td>
+                            <td>${day.balanceFlag}</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        // Load forecast on page load
+        document.addEventListener('DOMContentLoaded', loadForecast);
+    </script>
+</body>
+</html>

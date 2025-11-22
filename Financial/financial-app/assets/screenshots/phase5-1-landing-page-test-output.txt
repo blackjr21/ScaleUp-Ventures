@@ -1,0 +1,12 @@
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › tests/e2e/landing-page.spec.js:51:3 › Landing Page - Feature 5.1 › Landing page displays overview metrics
+[1A[2K[2/3] [chromium] › tests/e2e/landing-page.spec.js:99:3 › Landing Page - Feature 5.1 › Landing page redirects to login if no token
+[1A[2K[3/3] [chromium] › tests/e2e/landing-page.spec.js:113:3 › Landing Page - Feature 5.1 › Quick action buttons navigate correctly
+[1A[2K  3 passed (3.4s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

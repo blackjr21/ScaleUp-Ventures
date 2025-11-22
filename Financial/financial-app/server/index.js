@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +13,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve static files from client directory
+app.use(express.static(path.join(__dirname, '../client')));
 
 // Middleware
 const { authenticateToken } = require('./middleware/auth');
@@ -51,15 +55,6 @@ app.get('/api/protected', authenticateToken, (req, res) => {
       userId: req.user.userId,
       username: req.user.username
     },
-    timestamp: new Date().toISOString()
-  });
-});
-
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({
-    error: 'Not Found',
-    message: `Cannot ${req.method} ${req.path}`,
     timestamp: new Date().toISOString()
   });
 });

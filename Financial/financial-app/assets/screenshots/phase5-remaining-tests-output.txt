@@ -1,0 +1,13 @@
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › tests/e2e/auth-pages.spec.js:4:3 › Auth Pages - Features 5.5 › Register page works
+[1A[2K[2/4] [chromium] › tests/e2e/auth-pages.spec.js:11:3 › Auth Pages - Features 5.5 › Login page works
+[1A[2K[3/4] [chromium] › tests/e2e/other-pages.spec.js:18:3 › Other Pages - Features 5.3, 5.4 › Scenario planner page loads
+[1A[2K[4/4] [chromium] › tests/e2e/other-pages.spec.js:26:3 › Other Pages - Features 5.3, 5.4 › Debt payoff page loads
+[1A[2K  4 passed (3.7s)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

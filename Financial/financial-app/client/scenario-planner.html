@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario Planner</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+    <script src="js/shared/auth.js"></script>
+    <script src="js/shared/theme.js"></script>
+    <script>
+        if (!AuthHelper.isAuthenticated()) {
+            window.location.href = '/login.html';
+        }
+    </script>
+
+    <div style="max-width: 1400px; margin: 0 auto; padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1>Scenario Planner</h1>
+            <div>
+                <button id="themeToggle" style="padding: 0.75rem 1.5rem; border: none; border-radius: 8px;">🌙</button>
+                <button id="logoutBtn" style="padding: 0.75rem 1.5rem; border: none; border-radius: 8px;">Logout</button>
+            </div>
+        </div>
+
+        <div id="scenariosContent">
+            <p>Scenario planner - API integration with /api/scenarios</p>
+            <p>This page will allow creating and comparing financial scenarios.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('themeToggle').addEventListener('click', () => ThemeManager.toggleTheme());
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            AuthHelper.clearToken();
+            window.location.href = '/login.html';
+        });
+    </script>
+</body>
+</html>
