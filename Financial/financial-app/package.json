@@ -1,0 +1,47 @@
+{
+  "name": "financial-app",
+  "version": "1.0.0",
+  "description": "Full-stack financial management application with cash flow forecasting, scenario planning, and debt payoff strategies",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:e2e": "playwright test",
+    "dev": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "prisma:studio": "prisma studio"
+  },
+  "keywords": [
+    "financial",
+    "cash-flow",
+    "debt-payoff",
+    "budgeting",
+    "forecasting"
+  ],
+  "author": "Calvin Williams Jr",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.1.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "joi": "^18.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.22.0"
+  }
+}

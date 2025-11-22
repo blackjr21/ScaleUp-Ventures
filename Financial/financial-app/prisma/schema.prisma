@@ -1,0 +1,188 @@
+// Prisma Schema for Financial Management App
+// This is your Prisma schema file, learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// =====================================
+// USERS & AUTHENTICATION
+// =====================================
+
+model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relations
+  transactions   Transaction[]
+  scenarios      Scenario[]
+  debts          Debt[]
+  debtStrategies DebtStrategy[]
+  // settings     UserSetting[]  (Phase 5)
+
+  @@map("users")
+}
+
+// =====================================
+// CASH FLOW TRANSACTIONS
+// =====================================
+
+model Transaction {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  name        String
+  amount      Float
+  type        String    // INFLOW or OUTFLOW
+  frequency   String    // ONE_TIME, MONTHLY, BIWEEKLY, WEEKDAY, FRIDAY
+  dayOfMonth  Int?      // For MONTHLY (1-31)
+  anchorDate  DateTime? // For BIWEEKLY calculations
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  user                    User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scenarioModifications   ScenarioModification[]
+
+  // Indexes
+  @@index([userId, isActive])
+  @@map("transactions")
+}
+
+// =====================================
+// SCENARIO PLANNING (PHASE 3)
+// =====================================
+
+model Scenario {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  name        String
+  description String?
+  isPreset    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  user          User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  modifications ScenarioModification[]
+  results       ScenarioResult[]
+
+  // Indexes
+  @@index([userId, isPreset])
+  @@map("scenarios")
+}
+
+model ScenarioModification {
+  id             Int       @id @default(autoincrement())
+  scenarioId     Int
+  transactionId  Int
+  action         String    // 'exclude', 'modify_amount', 'reschedule'
+  modifiedAmount Float?
+  modifiedDate   DateTime?
+  createdAt      DateTime  @default(now())
+
+  // Relations
+  scenario    Scenario    @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([scenarioId])
+  @@index([transactionId])
+  @@map("scenario_modifications")
+}
+
+model ScenarioResult {
+  id                 Int       @id @default(autoincrement())
+  scenarioId         Int
+  forecastStartDate  DateTime
+  forecastEndDate    DateTime
+  startingBalance    Float
+  endingBalance      Float
+  lowestBalance      Float
+  lowestBalanceDate  DateTime
+  totalSavings       Float
+  dailyBalances      String    // JSON string array
+  calculatedAt       DateTime  @default(now())
+
+  // Relations
+  scenario Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([scenarioId])
+  @@map("scenario_results")
+}
+
+// =====================================
+// DEBT PAYOFF (PHASE 4)
+// =====================================
+
+model Debt {
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  name           String
+  creditor       String
+  balance        Float     // Current balance
+  apr            Float     // Annual Percentage Rate
+  minimumPayment Float
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  // Relations
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  payments DebtPayment[]
+
+  // Indexes
+  @@index([userId, isActive])
+  @@map("debts")
+}
+
+model DebtStrategy {
+  id                  Int      @id @default(autoincrement())
+  userId              Int
+  strategyType        String   // 'avalanche', 'snowball', 'consolidation'
+  extraMonthlyPayment Float
+  totalDebt           Float
+  totalInterestPaid   Float
+  payoffMonths        Int
+  payoffDate          DateTime
+  createdAt           DateTime @default(now())
+
+  // Relations
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  payments DebtPayment[]
+
+  // Indexes
+  @@index([userId, strategyType])
+  @@map("debt_strategies")
+}
+
+model DebtPayment {
+  id               Int      @id @default(autoincrement())
+  strategyId       Int
+  debtId           Int
+  monthNumber      Int
+  paymentDate      DateTime
+  paymentAmount    Float
+  principal        Float
+  interest         Float
+  remainingBalance Float
+
+  // Relations
+  strategy DebtStrategy @relation(fields: [strategyId], references: [id], onDelete: Cascade)
+  debt     Debt         @relation(fields: [debtId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([strategyId])
+  @@index([debtId])
+  @@map("debt_payments")
+}

@@ -1,0 +1,55 @@
+===========================================
+FEATURE 4.3: DEBT CRUD API ENDPOINTS
+===========================================
+
+✓ 15/15 E2E Tests PASSED
+
+API Endpoints Implemented:
+---------------------------
+✓ POST /api/debts - Create new debt
+✓ GET /api/debts - List all debts (with optional includeInactive filter)
+✓ GET /api/debts/:id - Get single debt by ID
+✓ PUT /api/debts/:id - Update debt
+✓ DELETE /api/debts/:id - Soft delete debt (mark as inactive)
+
+Test Coverage:
+--------------
+✓ POST /api/debts - Create Debt (3 tests)
+  - Create with all required fields
+  - Reject without authentication
+  - Validate required fields
+
+✓ GET /api/debts - List All Debts (4 tests)
+  - List active debts only
+  - Include inactive debts when requested
+  - Calculate summary metrics (totalDebt, totalMinimumPayments, totalMonthlyInterest, averageAPR)
+  - Require authentication
+
+✓ GET /api/debts/:id - Get Single Debt (3 tests)
+  - Get debt by ID
+  - Return 404 for non-existent debt
+  - Prevent access to other users' debts (security)
+
+✓ PUT /api/debts/:id - Update Debt (3 tests)
+  - Update balance
+  - Update multiple fields
+  - Return 404 for non-existent debt
+
+✓ DELETE /api/debts/:id - Soft Delete (2 tests)
+  - Mark debt as inactive (soft delete)
+  - Return 404 for non-existent debt
+
+Security Features:
+------------------
+✓ All endpoints require JWT authentication
+✓ Users can only access their own debts
+✓ Soft delete preserves data history
+✓ Input validation for required fields
+
+Summary Metrics Calculated:
+----------------------------
+✓ Total debt across all active debts
+✓ Total minimum payments
+✓ Total monthly interest (via DebtCalculator)
+✓ Weighted average APR (via DebtCalculator)
+✓ Debt count

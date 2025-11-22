@@ -1,0 +1,49 @@
+===========================================
+FEATURE 4.1: DEBT SCHEMA MIGRATION
+===========================================
+
+Migration: 20251122143448_add_debt_models
+
+✓ Created 3 tables:
+  - debts (with userId foreign key)
+  - debt_strategies (with userId foreign key)
+  - debt_payments (with strategyId and debtId foreign keys)
+
+✓ All CASCADE DELETE configured
+✓ Indexes created for optimal queries
+✓ 16/16 unit tests PASSED
+
+Test Results:
+-------------
+PASS tests/unit/debts-schema.test.js
+  Debt Schema - TDD Tests
+    Debt Model
+      ✓ should create a debt with all required fields
+      ✓ should create debt with optional fields omitted
+      ✓ should support soft delete via isActive flag
+      ✓ should cascade delete when user is deleted
+      ✓ should query active debts only
+    DebtStrategy Model
+      ✓ should create avalanche strategy with all fields
+      ✓ should create snowball strategy
+      ✓ should create consolidation strategy
+      ✓ should link strategy to user
+    DebtPayment Model (Monthly Payment Schedule)
+      ✓ should create monthly payment schedule entry
+      ✓ should create multiple months of payment schedule
+      ✓ should link payment to strategy and debt
+      ✓ should cascade delete payments when strategy is deleted
+      ✓ should cascade delete payments when debt is deleted
+    Debt Relationships
+      ✓ should query user with all debts
+      ✓ should query strategy with all payment schedules
+
+Test Suites: 1 passed, 1 total
+Tests:       16 passed, 16 total
+Time:        0.536 s
+
+Database Models:
+---------------
+✓ Debt: id, userId, name, creditor, balance, apr, minimumPayment, isActive
+✓ DebtStrategy: id, userId, strategyType, extraMonthlyPayment, totalDebt, totalInterestPaid, payoffMonths, payoffDate
+✓ DebtPayment: id, strategyId, debtId, monthNumber, paymentDate, paymentAmount, principal, interest, remainingBalance
